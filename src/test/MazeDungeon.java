@@ -6,7 +6,7 @@ public class MazeDungeon {
         // TODO Auto-generated method stub
         System.out.println();
         System.out.println("Commit Di Girolamo");
-        
+        System.out.println("Commit Di Di Marco");
     }
 
 }
