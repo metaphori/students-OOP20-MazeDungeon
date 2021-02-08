@@ -1,5 +1,7 @@
 package gamestructure.game;
 
-public interface GameView {
+import mvc.View;
 
+public interface GameView extends View {
+    
 }
