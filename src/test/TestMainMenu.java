@@ -1,10 +1,13 @@
 package test;
 
+import gamestructure.mainmenu.MainMenuView;
+import gamestructure.mainmenu.MainMenuViewImpl;
+
 public class TestMainMenu {
 
     public static void main(final String[] args) {
-        // TODO Auto-generated method stub
-
+        final MainMenuView window = new MainMenuViewImpl();
+        window.show();
     }
 
 }

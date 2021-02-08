@@ -1,5 +1,7 @@
 package gamestructure.mainmenu;
 
-public interface MainMenuView {
+import mvc.View;
+
+public interface MainMenuView extends View {
 
 }
