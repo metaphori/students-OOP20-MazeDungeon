@@ -1,5 +1,7 @@
 package gamestructure.shop;
 
-public interface ShopView {
+import mvc.View;
+
+public interface ShopView extends View{
 
 }
