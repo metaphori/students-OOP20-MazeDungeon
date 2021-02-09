@@ -1,6 +1,8 @@
 package gamestructure.game;
 
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -22,17 +24,17 @@ public class GameViewImpl implements GameView {
     public GameViewImpl() {
         this.frame = new JFrame();
         this.frame.setResizable(false);
+        this.frame.setTitle("MazeDungeon");
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 
-                                         (int) (screen.getHeight() * HEIGHT_RATIO)));
-        final JPanel mainPanel = new JPanel();
-        this.frame.setContentPane(mainPanel);
-
+        final JPanel backgroundPanel = new JPanel(new GridBagLayout());
+        this.frame.setContentPane(backgroundPanel);
         try {
-            final BufferedImage bg = ImageIO.read(new File("res//images//Room//room.png"));
-            final JLabel picLabel = new JLabel(new ImageIcon(bg));
-            this.frame.add(picLabel);
+            final int height = (int) (screen.getHeight() * HEIGHT_RATIO);
+            final int width = (int) (screen.getWidth() * WIDTH_RATIO);
+            final BufferedImage room = ImageIO.read(new File("resources//images//Room//room.png"));
+            final JLabel picLabel = new JLabel(new ImageIcon(room.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
+            backgroundPanel.add(picLabel);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,6 +43,7 @@ public class GameViewImpl implements GameView {
 
     @Override
     public void show() {
+        this.frame.pack();
         this.frame.setVisible(true);
     }
 
