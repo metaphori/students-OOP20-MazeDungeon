@@ -16,22 +16,23 @@ import javax.swing.JPanel;
 
 public class GameViewImpl implements GameView {
 
-    private static final long serialVersionUID = 1L;
+    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final JFrame frame;
     private static double WIDTH_RATIO = 0.67; 
-    private static double HEIGHT_RATIO = 0.736; 
+    private static double HEIGHT_RATIO = 0.74; 
+    private static double ASPECT_RATIO = 1.6;
 
     public GameViewImpl() {
         this.frame = new JFrame();
         this.frame.setResizable(false);
         this.frame.setTitle("MazeDungeon");
-        final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         final JPanel backgroundPanel = new JPanel(new GridBagLayout());
         this.frame.setContentPane(backgroundPanel);
         try {
             final int height = (int) (screen.getHeight() * HEIGHT_RATIO);
             final int width = (int) (screen.getWidth() * WIDTH_RATIO);
+            //final int width = (int) (height * ASPECT_RATIO);
             final BufferedImage room = ImageIO.read(new File("resources//images//Room//room.png"));
             final JLabel picLabel = new JLabel(new ImageIcon(room.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
             backgroundPanel.add(picLabel);
@@ -44,6 +45,8 @@ public class GameViewImpl implements GameView {
     @Override
     public void show() {
         this.frame.pack();
+        this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2, 
+                               screen.height / 2 - this.frame.getSize().height / 2);
         this.frame.setVisible(true);
     }
 

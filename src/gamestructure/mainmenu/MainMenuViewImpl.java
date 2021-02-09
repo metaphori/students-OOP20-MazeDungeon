@@ -16,13 +16,13 @@ import javax.swing.JPanel;
 public class MainMenuViewImpl implements MainMenuView {
 
     private final JFrame frame = new JFrame();
+    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private static double WIDTH_RATIO = 0.67; 
     private static double HEIGHT_RATIO = 0.736;
 
     public MainMenuViewImpl() {
         BufferedImage img;
         JLabel label;
-        final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 
@@ -44,6 +44,8 @@ public class MainMenuViewImpl implements MainMenuView {
      */
     public void show() {
         this.frame.pack();
+        this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2, 
+                               screen.height / 2 - this.frame.getSize().height / 2);
         this.frame.setVisible(true);
     }
 
