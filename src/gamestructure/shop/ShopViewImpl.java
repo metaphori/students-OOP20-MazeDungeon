@@ -8,8 +8,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 
 
@@ -22,19 +24,24 @@ public class ShopViewImpl  implements ShopView {
 
 
     public ShopViewImpl() {
-        //this.frame = new JFrame();
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        this.frame.setSize(screen);
         this.frame.setResizable(false);
+        final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 
+                                         (int) (screen.getHeight() * HEIGHT_RATIO)));
+        final JPanel mainPanel = new JPanel();
+        this.frame.setContentPane(mainPanel);
 
         try {
-            BufferedImage myPicture = ImageIO.read(new File("res\\images\\MainMenù\\MainMenù.png"));
-            JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+            final BufferedImage myPicture = ImageIO.read(new File("resources\\images\\MainMenu\\MainMenu.png"));
+            final JLabel picLabel = new JLabel(new ImageIcon(myPicture));
             this.frame.add(picLabel);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        final JButton btn = new JButton("PROVA");
+
+        
 
     }
 
@@ -42,6 +49,7 @@ public class ShopViewImpl  implements ShopView {
      * 
      */
     public void show() {
+        this.frame.pack();
         this.frame.setVisible(true);
 
     }
