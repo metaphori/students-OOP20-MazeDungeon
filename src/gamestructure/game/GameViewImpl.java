@@ -23,7 +23,6 @@ public class GameViewImpl implements GameView {
     private Timer timer;
 
     public GameViewImpl() {
-        
         this.frame = new JFrame();
         this.frame.setResizable(false);
         this.frame.setTitle("MazeDungeon");
@@ -61,9 +60,10 @@ public class GameViewImpl implements GameView {
         public int coinX2 = 1000;
 
         GamePanel() {
-            ImageIcon ii = new ImageIcon("resources//images//Objects//Coin//coin.png");
+            ImageIcon ii = new ImageIcon("resources//images//Objects//Coin//coin5.png");
+            ImageIcon ii1 = new ImageIcon("resources//images//Objects//Coin//coin3.png");
             coin1 = ii.getImage();
-            coin2 = ii.getImage();
+            coin2 = ii1.getImage();
             ii = new ImageIcon("resources//images//Room//room.png");
             room = ii.getImage();
         }
