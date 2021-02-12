@@ -16,6 +16,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import core.common.Point2D;
+import core.common.Vector2D;
+
 public class GameViewImpl implements GameView {
 
     private GameController controller;
@@ -61,8 +64,8 @@ public class GameViewImpl implements GameView {
     private class GamePanel extends JPanel implements ActionListener{
         private static final long serialVersionUID = 1L;
         private Image room;
-        private int coinX1 = 800;
-        private int coinY1 = 300;
+        private Point2D position = new Point2D(800, 300);
+        private Vector2D vector = new Vector2D(2, 2);
         private final List<Image> images = new LinkedList<>();
         private int index = 0;
 
@@ -97,14 +100,13 @@ public class GameViewImpl implements GameView {
             g.drawImage(this.coin2, coinX2, 0, null);
             */
 
-            g.drawImage(images.get(index), coinX1, coinY1, null);
+            g.drawImage(images.get(index), position.getX(), position.getY(), null); 
+            Toolkit.getDefaultToolkit().sync();
+            position = position.sum(vector);
             index++;
             if (index == images.size() - 1) {
                 index = 0;
             }
-
-            coinX1 += 0;
-            coinY1 += 0;
         }
 
         @Override

@@ -1,4 +1,4 @@
-package core;
+package core.gameobject.bullet;
 
 public interface BulletFactory {
 

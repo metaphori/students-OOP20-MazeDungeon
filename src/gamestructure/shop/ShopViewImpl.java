@@ -31,7 +31,7 @@ public class ShopViewImpl  implements ShopView {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 
                                          (int) (screen.getHeight() * HEIGHT_RATIO)));
-        
+
         System.out.println(sep);
         final JPanel mainPanel = new JPanel(new GridBagLayout());
         this.frame.setContentPane(mainPanel);
@@ -45,7 +45,6 @@ public class ShopViewImpl  implements ShopView {
         }
         final JButton btn = new JButton("PROVA");
 
-        
 
     }
 

@@ -1,4 +1,4 @@
-package core;
+package core.gameobject.character;
 
 public interface Character {
     void moveUp();
