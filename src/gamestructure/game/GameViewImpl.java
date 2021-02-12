@@ -13,8 +13,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import mvc.Controller;
+
 public class GameViewImpl implements GameView {
 
+    private GameController controller;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final JFrame frame;
     private static double WIDTH_RATIO = 0.67; 
@@ -84,6 +87,11 @@ public class GameViewImpl implements GameView {
             repaint();
         }
 
+    }
+
+    @Override
+    public void setController(final GameController controller) {
+       this.controller = controller;
     }
 
 }
