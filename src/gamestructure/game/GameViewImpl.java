@@ -1,5 +1,6 @@
 package gamestructure.game;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
@@ -13,13 +14,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import mvc.Controller;
+
 public class GameViewImpl implements GameView {
 
+    private GameController controller;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final JFrame frame;
+    private final Color frameColor;
     private static double WIDTH_RATIO = 0.67; 
     private static double HEIGHT_RATIO = 0.74; 
     private static double ASPECT_RATIO = 1.6;
+
     private Timer timer;
 
     public GameViewImpl() {
@@ -27,15 +33,14 @@ public class GameViewImpl implements GameView {
         this.frame.setResizable(false);
         this.frame.setTitle("MazeDungeon");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
-
+        this.frameColor = Color.BLUE;
+        this.frame.setBackground(this.frameColor);
         final GamePanel gamePanel = new GamePanel();
         //gamePanel.setLayout(new GridBagLayout()); //TODO
         this.frame.add(gamePanel);
         timer = new Timer(25, gamePanel);
         timer.start();
-
     }
 
     @Override
@@ -83,7 +88,11 @@ public class GameViewImpl implements GameView {
 
             repaint();
         }
+    }
 
+    @Override
+    public void setController(final GameController controller) {
+       this.controller = controller;
     }
 
     @Override
