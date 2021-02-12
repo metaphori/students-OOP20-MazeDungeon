@@ -57,7 +57,6 @@ public class GameControllerImpl implements GameController {
     }
 
     private void render() {
-        // TODO Auto-generated method stub
-
+        this.view.render();
     }
 }
