@@ -31,7 +31,7 @@ public class GameViewImpl implements GameView {
         this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
 
         final GamePanel gamePanel = new GamePanel();
-        //gamePanel.setLayout(new GridBagLayout()); TODO
+        //gamePanel.setLayout(new GridBagLayout()); //TODO
         this.frame.add(gamePanel);
         timer = new Timer(25, gamePanel);
         timer.start();
@@ -84,6 +84,12 @@ public class GameViewImpl implements GameView {
             repaint();
         }
 
+    }
+
+    @Override
+    public void render() {
+        // TODO Auto-generated method stub
+        
     }
 
 }
