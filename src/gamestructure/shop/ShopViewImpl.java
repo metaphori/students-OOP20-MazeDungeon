@@ -1,6 +1,7 @@
 package gamestructure.shop;
 
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -21,6 +22,7 @@ public class ShopViewImpl  implements ShopView {
     private final JFrame frame = new JFrame();
     private static int WIDTH_RATIO = 1;
     private static int HEIGHT_RATIO = 1;
+    private String sep = File.separator;
 
 
     public ShopViewImpl() {
@@ -29,11 +31,13 @@ public class ShopViewImpl  implements ShopView {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 
                                          (int) (screen.getHeight() * HEIGHT_RATIO)));
-        final JPanel mainPanel = new JPanel();
+        
+        System.out.println(sep);
+        final JPanel mainPanel = new JPanel(new GridBagLayout());
         this.frame.setContentPane(mainPanel);
 
         try {
-            final BufferedImage myPicture = ImageIO.read(new File("resources\\images\\MainMenu\\MainMenu.png"));
+            final BufferedImage myPicture = ImageIO.read(new File("resources"+sep+"images"+sep+"MainMenu"+sep+"MainMenu3.png"));
             final JLabel picLabel = new JLabel(new ImageIcon(myPicture));
             this.frame.add(picLabel);
         } catch (IOException e) {
