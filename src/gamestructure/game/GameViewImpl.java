@@ -38,13 +38,8 @@ public class GameViewImpl implements GameView {
         this.frame.setResizable(false);
         this.frame.setTitle("MazeDungeon");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
-        this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO), (int) (NATIVE_HEIGHT * HEIGHT_RATIO)));
-        //final JLabel lblBackground = new JLabel(new ImageIcon("resources//images//Room//room.png"));
         final GamePanel gamePanel = new GamePanel();
-        //gamePanel.add(lblBackground);
         gamePanel.setSize(this.frame.getSize());
-        //gamePanel.setLayout(new GridBagLayout()); //TODO
         this.frame.add(gamePanel);
         timer = new Timer(PERIOD, gamePanel);
         timer.start();
@@ -52,10 +47,12 @@ public class GameViewImpl implements GameView {
 
     @Override
     public void show() {
-        //this.frame.pack();
-        this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2, 
-                               screen.height / 2 - this.frame.getSize().height / 2);
         this.frame.setVisible(true);
+        this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO), (int) (NATIVE_HEIGHT * HEIGHT_RATIO) + this.frame.getInsets().top));
+        System.out.println("frame: w: " + frame.getWidth() + " h: " + frame.getHeight() + " insets h: " + frame.getInsets().top);
+        //this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
+        this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2,
+                               screen.height / 2 - this.frame.getSize().height / 2);
     }
 
     @Override
@@ -80,6 +77,8 @@ public class GameViewImpl implements GameView {
             images.add(adaptImage(new ImageIcon("resources//images//Objects//Coin//coin6.png")));
             images.add(adaptImage(new ImageIcon("resources//images//Objects//Coin//coin7.png")));
             room = adaptImage(new ImageIcon("resources//images//Room//room.png"));
+            System.out.println("room: w: " + new ImageIcon("resources//images//Room//room.png").getIconWidth()
+                                    + " h: " + new ImageIcon("resources//images//Room//room.png").getIconHeight());
         }
 
         @Override
