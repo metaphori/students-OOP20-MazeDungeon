@@ -51,8 +51,8 @@ public class GameViewImpl implements GameView {
     public void show() {
         this.frame.setVisible(true);
 
-        this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO ),
-                (int) (NATIVE_HEIGHT * HEIGHT_RATIO) + this.frame.getInsets().top));
+        this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO + this.frame.getInsets().right + this.frame.getInsets().left),
+                (int) (NATIVE_HEIGHT * HEIGHT_RATIO) + this.frame.getInsets().top + this.frame.getInsets().bottom));
         gamePanel.setSize(this.frame.getSize());
         System.out.println("frame: w: " + frame.getWidth() + " h: " + frame.getHeight() + " insets h: " + frame.getInsets());
         //this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
