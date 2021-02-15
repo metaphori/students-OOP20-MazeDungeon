@@ -4,7 +4,7 @@ import model.common.Point2D;
 
 public abstract class AbstractGameObject implements GameObject {
 
-    private int id;
+    private final int id;
     private Point2D position;
 
     public AbstractGameObject(final int id, final Point2D position) {
@@ -20,5 +20,12 @@ public abstract class AbstractGameObject implements GameObject {
     @Override
     public Point2D getPosition() {
         return this.position;
+    }
+
+    /**
+     * @param position
+     */
+    public void setPosition(final Point2D position) {
+        this.position = position;
     }
 }

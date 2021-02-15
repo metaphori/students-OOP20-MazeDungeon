@@ -7,5 +7,7 @@ public interface GameObject {
 
     Point2D getPosition();
 
+    void setPosition();
+
     //getBoundingBox();
 }
