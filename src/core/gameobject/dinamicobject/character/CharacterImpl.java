@@ -1,4 +1,4 @@
-package core.gameobject.character;
+package core.gameobject.dinamicobject.character;
 
 
 import core.gameobject.GameObjectImpl;

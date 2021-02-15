@@ -1,4 +1,4 @@
-package core.gameobject.bullet;
+package core.gameobject.dinamicobject.bullet;
 
 import core.gameobject.GameObject;
 

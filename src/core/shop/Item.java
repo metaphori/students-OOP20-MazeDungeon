@@ -1,4 +1,4 @@
-package core;
+package core.shop;
 
 public interface Item {
 
