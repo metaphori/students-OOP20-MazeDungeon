@@ -23,7 +23,6 @@ public class GameControllerImpl implements GameController {
      */
     public void mainLoop() {
         long lastTime = System.currentTimeMillis();
-        view.show();
         while (true) {
             final long current = System.currentTimeMillis();
             final int elapsed = (int) (current - lastTime);
