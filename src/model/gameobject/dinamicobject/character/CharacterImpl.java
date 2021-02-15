@@ -1,9 +1,9 @@
-package core.gameobject.dinamicobject.character;
+package model.gameobject.dinamicobject.character;
 
 
-import core.gameobject.GameObjectImpl;
+import model.gameobject.AbstractGameObject;
 
-public class CharacterImpl extends GameObjectImpl implements Character   {
+public class CharacterImpl extends AbstractGameObject implements Character   {
 
     @Override
     public void moveUp() {

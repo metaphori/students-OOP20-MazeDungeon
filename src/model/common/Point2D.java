@@ -1,4 +1,4 @@
-package core.common;
+package model.common;
 
 public class Point2D implements java.io.Serializable {
 

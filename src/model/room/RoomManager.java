@@ -1,4 +1,4 @@
-package core.room;
+package model.room;
 
 public interface RoomManager {
 

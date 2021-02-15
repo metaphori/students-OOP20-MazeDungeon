@@ -16,8 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import core.common.Point2D;
-import core.common.Vector2D;
+import model.common.Point2D;
+import model.common.Vector2D;
 
 public class GameViewImpl implements GameView {
 

@@ -1,4 +1,4 @@
-package core.common;
+package model.common;
 
 public class Vector2D implements java.io.Serializable {
 
