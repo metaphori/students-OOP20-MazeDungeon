@@ -1,5 +1,6 @@
 package model.gameobject.dinamicobject;
 
+import model.common.Direction;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.AbstractGameObject;
@@ -30,6 +31,6 @@ public abstract class AbstractDinamicObject extends AbstractGameObject {
 
     public abstract void updateState();
 
-    public abstract void move();
+    public abstract void move(Direction direction);
 
 }
