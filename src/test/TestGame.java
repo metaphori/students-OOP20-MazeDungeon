@@ -15,5 +15,4 @@ public class TestGame {
         controller.setup();
         controller.mainLoop();
     }
-
 }

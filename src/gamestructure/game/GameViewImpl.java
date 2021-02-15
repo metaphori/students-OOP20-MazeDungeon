@@ -35,11 +35,11 @@ public class GameViewImpl implements GameView {
 
     public GameViewImpl() {
         this.frame = new JFrame();
-        this.frame.setResizable(false);
+        this.frame.setResizable(true);
         this.frame.setTitle("MazeDungeon");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
-        this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO), (int) (NATIVE_HEIGHT * HEIGHT_RATIO)));
+        this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO), (int) (NATIVE_HEIGHT * HEIGHT_RATIO) + this.frame.getInsets().top));
         //final JLabel lblBackground = new JLabel(new ImageIcon("resources//images//Room//room.png"));
         final GamePanel gamePanel = new GamePanel();
         //gamePanel.add(lblBackground);
@@ -56,6 +56,7 @@ public class GameViewImpl implements GameView {
         this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2, 
                                screen.height / 2 - this.frame.getSize().height / 2);
         this.frame.setVisible(true);
+        //System.out.println(this.frame.getInsets().top);
     }
 
     @Override
@@ -80,6 +81,7 @@ public class GameViewImpl implements GameView {
             images.add(adaptImage(new ImageIcon("resources//images//Objects//Coin//coin6.png")));
             images.add(adaptImage(new ImageIcon("resources//images//Objects//Coin//coin7.png")));
             room = adaptImage(new ImageIcon("resources//images//Room//room.png"));
+
         }
 
         @Override
