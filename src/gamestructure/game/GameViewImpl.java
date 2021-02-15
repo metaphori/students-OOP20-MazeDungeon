@@ -1,5 +1,7 @@
 package gamestructure.game;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
@@ -26,20 +28,20 @@ public class GameViewImpl implements GameView {
     private final JFrame frame;
     private static int NATIVE_WIDTH = 1920;
     private static int NATIVE_HEIGHT = 1080;
-    private static double WIDTH_RATIO = 0.67; 
-    private static double HEIGHT_RATIO = 0.74; 
+    private static double WIDTH_RATIO = 0.666667; 
+    private static double HEIGHT_RATIO = 0.740740; 
     private static double ASPECT_RATIO = 1.6;
     private static final int PERIOD = 75;
-
+    private final GamePanel gamePanel;
     private Timer timer;
 
     public GameViewImpl() {
         this.frame = new JFrame();
-        this.frame.setResizable(true);
+        this.frame.setResizable(false);
         this.frame.setTitle("MazeDungeon");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        final GamePanel gamePanel = new GamePanel();
-        gamePanel.setSize(this.frame.getSize());
+        gamePanel = new GamePanel();
+        //gamePanel.setSize(this.frame.getSize());
         this.frame.add(gamePanel);
         timer = new Timer(PERIOD, gamePanel);
         timer.start();
@@ -49,8 +51,10 @@ public class GameViewImpl implements GameView {
     public void show() {
         this.frame.setVisible(true);
 
-        this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO), (int) (NATIVE_HEIGHT * HEIGHT_RATIO) + this.frame.getInsets().top));
-        System.out.println("frame: w: " + frame.getWidth() + " h: " + frame.getHeight() + " insets h: " + frame.getInsets().top);
+        this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO ),
+                (int) (NATIVE_HEIGHT * HEIGHT_RATIO) + this.frame.getInsets().top));
+        gamePanel.setSize(this.frame.getSize());
+        System.out.println("frame: w: " + frame.getWidth() + " h: " + frame.getHeight() + " insets h: " + frame.getInsets());
         //this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
         this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2,
                                screen.height / 2 - this.frame.getSize().height / 2);
