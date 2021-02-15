@@ -22,9 +22,7 @@ public abstract class AbstractGameObject implements GameObject {
         return this.position;
     }
 
-    /**
-     * @param position
-     */
+    @Override
     public void setPosition(final Point2D position) {
         this.position = position;
     }

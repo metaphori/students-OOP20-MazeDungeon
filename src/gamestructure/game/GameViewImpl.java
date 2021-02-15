@@ -1,10 +1,7 @@
 package gamestructure.game;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -14,7 +11,6 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -33,9 +29,9 @@ public class GameViewImpl implements GameView {
     private static double ASPECT_RATIO = 1.6;
     private static final int PERIOD = 75;
     private final GamePanel gamePanel;
-    private Timer timer;
 
     public GameViewImpl() {
+        final Timer timer;
         this.frame = new JFrame();
         this.frame.setResizable(false);
         this.frame.setTitle("MazeDungeon");
@@ -54,7 +50,6 @@ public class GameViewImpl implements GameView {
         this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO + this.frame.getInsets().right + this.frame.getInsets().left),
                 (int) (NATIVE_HEIGHT * HEIGHT_RATIO) + this.frame.getInsets().top + this.frame.getInsets().bottom));
         gamePanel.setSize(this.frame.getSize());
-        System.out.println("frame: w: " + frame.getWidth() + " h: " + frame.getHeight() + " insets h: " + frame.getInsets());
         //this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
         this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2,
                                screen.height / 2 - this.frame.getSize().height / 2);
@@ -83,10 +78,6 @@ public class GameViewImpl implements GameView {
             images.add(adaptImage(new ImageIcon("resources//images//Objects//Coin//coin6.png")));
             images.add(adaptImage(new ImageIcon("resources//images//Objects//Coin//coin7.png")));
             room = adaptImage(new ImageIcon("resources//images//Room//room.png"));
-
-            System.out.println("room: w: " + new ImageIcon("resources//images//Room//room.png").getIconWidth()
-                                    + " h: " + new ImageIcon("resources//images//Room//room.png").getIconHeight());
-
         }
 
         @Override
