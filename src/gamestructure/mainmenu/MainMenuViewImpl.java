@@ -19,26 +19,36 @@ public class MainMenuViewImpl implements MainMenuView {
 
     private final JFrame frame = new JFrame();
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+    private final JLabel lblBackground = new JLabel(new ImageIcon("resources//images//MainMenu//MainMenu3.png"));
+    private final JLabel lblTitle = new JLabel(new ImageIcon("resources//images//MainMenu//Title.png"));
+    private final JButton btnNewGame = new JButton("", new ImageIcon("resources//images//MainMenu//NewGame.png")); 
+    private final JButton btnExit = new JButton("", new ImageIcon("resources//images//MainMenu//Exit.png")); 
+    private final JButton btnCredits = new JButton("", new ImageIcon("resources//images//MainMenu//Credits.png")); 
     private static double WIDTH_RATIO = 0.67; 
     private static double HEIGHT_RATIO = 0.736;
 
     public MainMenuViewImpl() {
-        final JLabel lblBackground = new JLabel(new ImageIcon("resources//images//MainMenu//MainMenu3.png"));
-        final JButton btnNewGame = new JButton("NEW GAME"); //MΛZΣ DUNGΣӨП
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 
                 (int) (screen.getHeight() * HEIGHT_RATIO)));
         final JPanel mainPanel = new JPanel(new GridBagLayout());
-        btnNewGame.setBounds(160, 350, 300, 30);
-        btnNewGame.setFont(new Font("MS Gothic", Font.BOLD, 30));
-        btnNewGame.setBackground(Color.DARK_GRAY); //Colore del background del bottone
-        btnNewGame.setForeground(new Color(23, 11, 0)); //Colore del testo
-        btnNewGame.setBorder(new LineBorder(Color.BLACK)); //Colore del bordo del bottone
-        btnNewGame.setFocusPainted(false); //Disabilita il paint del focus sul testo del bottone
-        btnNewGame.setLayout(null);
+
+        btnNewGame.setBounds(160, 340, 300, 45);
+        this.configureButton(btnNewGame);
+
+        btnCredits.setBounds(160, 433, 300, 45);
+        this.configureButton(btnCredits);
+
+        btnExit.setBounds(160, 523, 300, 45);
+        this.configureButton(btnExit);
+
+        lblTitle.setLayout(null);
         lblBackground.setLayout(null);
-        lblBackground.add(btnNewGame);
+
+        lblTitle.setBounds(50, 208, 500, 100);
+        lblBackground.add(lblTitle);
+
         mainPanel.add(lblBackground);
         this.frame.setContentPane(mainPanel);
     }
@@ -58,6 +68,14 @@ public class MainMenuViewImpl implements MainMenuView {
      */
     public void hide() {
         this.frame.setVisible(false);
+    }
+
+    private void configureButton(final JButton btn) {
+        btn.setBackground(Color.DARK_GRAY); //Colore del background del bottone
+        btn.setBorder(new LineBorder(Color.BLACK)); //Colore del bordo del bottone
+        btn.setFocusPainted(false); //Disabilita il paint del focus sul testo del bottone
+        btn.setLayout(null);
+        this.lblBackground.add(btn);
     }
 
 }
