@@ -2,34 +2,34 @@ package model.gameobject.dinamicobject;
 
 import model.common.Point2D;
 import model.common.Vector2D;
-import model.gameobject.AbstractGameObject;
 
-public abstract class AbstractDinamicObject extends AbstractGameObject {
-
+public abstract class AbstractDinamicObject implements DinamicObject {
+    private int id;
     private int speed;
-
+    private Point2D position;
     private Vector2D direction;
 
-    public AbstractDinamicObject(final int id, final Point2D position) {
-        super(id, position);
+    public int getID() {
+        return this.id;
     }
 
-    /**
-     * @return speed of the GameObject
-     */
     public int getSpeed() {
         return this.speed;
     }
 
-    /**
-     * @return the direction of the game object
-     */
     public Vector2D getDirection() {
         return this.direction;
     }
 
+    public Point2D getPosition() {
+        return this.position;
+    }
+
+    public void setPosition(Point2D position) {
+        this.position = position;
+    }
+
     public abstract void updateState();
 
-    public abstract void move(Vector2D direction);
-
+    public abstract void move();
 }

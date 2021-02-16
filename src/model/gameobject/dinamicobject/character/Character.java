@@ -1,6 +1,9 @@
 package model.gameobject.dinamicobject.character;
 
-public interface Character {
+import model.gameobject.dinamicobject.DinamicObject;
+
+public interface Character extends DinamicObject {
     void shoot();
-    void takesDamage(double damage);
+
+    void takeDamage(int damage);
 }
