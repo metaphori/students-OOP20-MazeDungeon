@@ -1,45 +1,46 @@
 package model.gameobject.dinamicobject;
 
-import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.simpleobject.SimpleObjectImpl;
 
 public abstract class AbstractDinamicObject extends SimpleObjectImpl implements DinamicObject {
-    private int id;
-    private int speed;
-    private Point2D position;
     private Vector2D direction;
+    private int speed;
 
-    public int getID() {
-        return this.id;
-    }
-
+    /**
+     * @return the speed of the DinamicObject
+     */
+    @Override
     public int getSpeed() {
         return this.speed;
     }
 
-    public void setSpeed(int speed) {
+    /**
+     * @param speed : set speed value as the speed of the DinamicObject
+     */
+    @Override
+    public void setSpeed(final int speed) {
         this.speed = speed;
     }
 
-
+    /**
+     * @return the direction of the DinamicObject
+     */
     public Vector2D getDirection() {
         return this.direction;
     }
 
-    public Point2D getPosition() {
-        return this.position;
-    }
-
+    /**
+     * @param direction : set direction value as the direction of the DinamicObject
+     */
+    @Override
     public void setDirection(final Vector2D direction) {
         this.direction = direction;
     }
 
-    public void setPosition(final Point2D position) {
-        this.position = position;
-    }
-
+    @Override
     public abstract void updateState();
 
+    @Override
     public abstract void move();
 }

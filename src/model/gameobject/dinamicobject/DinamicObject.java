@@ -6,7 +6,7 @@ import model.gameobject.GameObject;
 public interface DinamicObject extends GameObject {
     int getSpeed();
 
-    void setSpeed();
+    void setSpeed(int speed);
 
     Vector2D getDirection();
 
