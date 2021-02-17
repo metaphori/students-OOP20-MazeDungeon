@@ -11,7 +11,7 @@ public class GameControllerImpl implements GameController {
     private static final long PERIOD = 20;
     private final GameView view;
     private final Model model;
-    private final Map<Integer, Rectangle> colliders = new HashMap<>();
+    //private final Map<Integer, Rectangle> colliders = new HashMap<>();
 
     public GameControllerImpl(final GameView view, final Model model) {
         this.view = view;
@@ -64,10 +64,10 @@ public class GameControllerImpl implements GameController {
     private void render() {
         this.view.render();
     }
-
+    /*
     public void addCollider(Sprite sprite) {
         colliders.put(id, rect);
-    }
+    }*/
     
     
 

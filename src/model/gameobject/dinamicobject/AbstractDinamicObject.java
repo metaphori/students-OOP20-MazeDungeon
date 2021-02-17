@@ -2,7 +2,7 @@ package model.gameobject.dinamicobject;
 
 import model.common.Point2D;
 import model.common.Vector2D;
-import model.gameobject.SimpleObjectImpl;
+import model.gameobject.simpleobject.SimpleObjectImpl;
 
 public abstract class AbstractDinamicObject extends SimpleObjectImpl implements DinamicObject {
     private int id;

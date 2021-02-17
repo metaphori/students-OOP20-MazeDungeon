@@ -1,7 +1,6 @@
-package model.gameobject;
+package model.gameobject.simpleobject;
 
 import model.common.Point2D;
-import model.gameobject.simpleobject.SimpleObject;
 
 public class SimpleObjectImpl implements SimpleObject {
 

@@ -1,12 +1,49 @@
 package model.room;
 
-import model.gameobject.dinamicobject.character.Character;
-import model.gameobject.dinamicobject.character.CharacterImpl;
+import java.util.LinkedList;
+import java.util.List;
 
-public class RoomImpl {
+import model.gameobject.dinamicobject.DinamicObject;
+import model.gameobject.simpleobject.SimpleObject;
+import mvc.Model;
 
-    public RoomImpl() {
-        final Character ch = new CharacterImpl();
+public class RoomImpl implements Room {
+
+    private final List<SimpleObject> simpleObjects = new LinkedList<>();
+    private final List<DinamicObject> dinamicObjects = new LinkedList<>();
+    private final RoomManager roomManager;
+    private final Model model;
+
+
+    public RoomImpl(final RoomManager roomManager, final Model model) {
+        super();
+        this.roomManager = roomManager;
+        this.model = model;
+    }
+
+    /**
+     * 
+     */
+    public void update() {
+        for (final DinamicObject obj : dinamicObjects) {
+            obj.updateState();
+        }
+    }
+
+    /**
+     * 
+     * @param obj
+     */
+    public void addDinamicObject(final DinamicObject obj) {
+        dinamicObjects.add(obj);
+    }
+
+    /**
+     * 
+     * @param obj
+     */
+    public void addSimpleObject(final SimpleObject obj) {
+        simpleObjects.add(obj);
     }
 
 }

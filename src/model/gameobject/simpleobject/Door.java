@@ -1,7 +1,5 @@
 package model.gameobject.simpleobject;
 
-import model.gameobject.SimpleObjectImpl;
-
 public class Door extends SimpleObjectImpl {
     private boolean isOpen = false;
 
