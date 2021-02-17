@@ -17,6 +17,11 @@ public abstract class AbstractDinamicObject implements DinamicObject {
         return this.speed;
     }
 
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+
     public Vector2D getDirection() {
         return this.direction;
     }
@@ -25,7 +30,11 @@ public abstract class AbstractDinamicObject implements DinamicObject {
         return this.position;
     }
 
-    public void setPosition(Point2D position) {
+    public void setDirection(final Vector2D direction) {
+        this.direction = direction;
+    }
+
+    public void setPosition(final Point2D position) {
         this.position = position;
     }
 

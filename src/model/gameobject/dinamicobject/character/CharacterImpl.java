@@ -1,31 +1,119 @@
 package model.gameobject.dinamicobject.character;
 
-import model.gameobject.dinamicobject.AbstractDinamicObject;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.HashSet;
+import java.util.Set;
 
-public class CharacterImpl extends AbstractDinamicObject implements Character {
+import model.common.Point2D;
+import model.common.Vector2D;
+import model.gameobject.dinamicobject.AbstractDinamicObject;
+import model.gameobject.dinamicobject.bullet.*;
+import model.room.RoomImpl;
+import model.shop.Item;
+
+
+public class CharacterImpl extends AbstractDinamicObject implements Character, KeyListener {
+
+    private final double MAXLIFE = 4.0;
+    private double life;
+    private Set<Item> items; //contains set di items
+
+    public CharacterImpl() {
+        this.life = MAXLIFE;
+        this.items = new HashSet<>();
+    }
 
     @Override
     public void shoot() {
-        // TODO Auto-generated method stub
-        
+        //cosa devo fare qui?
     }
 
     @Override
-    public void takeDamage(int damage) {
-        // TODO Auto-generated method stub
-        
+    public void takeDamage(final int damage) {
+        this.life = this.life - damage;
     }
 
     @Override
-    public void updateState() {
+    public void updateState() { 
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void move() {
+        super.setSpeed(8);
+        super.setPosition(new Point2D(super.getPosition().getX() + super.getDirection().getX(),
+                               super.getPosition().getY() + super.getDirection().getY()));
+    }
+
+    @Override
+    public void keyPressed(KeyEvent key) {
+        final int keyPressed = key.getKeyCode();
+
+        switch (keyPressed) {
+            case KeyEvent.VK_UP:
+                super.setDirection(new Vector2D(super.getDirection().getX(), 1));
+                this.move();
+                break;
+            case KeyEvent.VK_DOWN:
+                super.setDirection(new Vector2D(super.getDirection().getX(), -1));
+                this.move();
+                break;
+            case KeyEvent.VK_RIGHT:
+                super.setDirection(new Vector2D(1, super.getDirection().getY()));
+                this.move();
+                break;
+            case KeyEvent.VK_LEFT:
+                super.setDirection(new Vector2D(-1, super.getDirection().getY()));
+                this.move();
+                break;
+            case KeyEvent.VK_SPACE:
+                this.shoot();
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent arg0) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void keyTyped(KeyEvent arg0) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public double getLife() {
+        return this.life;
+    }
+
+    @Override
+    public void setLife(final int life) {
+        this.life = life;
+    }
+
+    @Override
+    public Set<Item> getItems() {
+        return this.items;
+    }
+
+    @Override
+    public void setSpeed() {
         // TODO Auto-generated method stub
         
     }
+
+    @Override
+    public void addItem(Item item) {
+        // TODO Auto-generated method stub
+        
+    }
+
+
 
 }
