@@ -12,13 +12,9 @@ public class RoomImpl implements Room {
     private final List<SimpleObject> simpleObjects = new LinkedList<>();
     private final List<DinamicObject> dinamicObjects = new LinkedList<>();
     private final RoomManager roomManager;
-    private final Model model;
 
-
-    public RoomImpl(final RoomManager roomManager, final Model model) {
-        super();
+    public RoomImpl(final RoomManager roomManager) {
         this.roomManager = roomManager;
-        this.model = model;
     }
 
     /**
