@@ -10,6 +10,14 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
     private Point2D position;
     private Vector2D direction;
 
+
+    public AbstractDinamicObject(int id, int speed, Point2D position, Vector2D direction) {
+        this.id = id;
+        this.speed = speed;
+        this.position = position;
+        this.direction = direction;
+    }
+
     public int getID() {
         return this.id;
     }
