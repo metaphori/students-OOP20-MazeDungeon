@@ -2,11 +2,8 @@ package gamestructure.game;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import model.common.Point2D;
-import model.common.Sprite;
 import model.gameobject.GameObject;
 import mvc.Model;
 
@@ -14,14 +11,16 @@ public class GameControllerImpl implements GameController {
     private static final long PERIOD = 15;
     private final GameView view;
     private final Model model;
-    private List<Integer> currentgameObjectsID = new LinkedList<>();
-    //private final Map<Integer, Rectangle> colliders = new HashMap<>();
+    private final List<Integer> lastGameObjectsID = new LinkedList<>();
 
     public GameControllerImpl(final GameView view, final Model model) {
         this.view = view;
         this.model = model;
     }
 
+    /**
+     * 
+     */
     @Override
     public void setup() {
         view.setController(this);
@@ -62,6 +61,7 @@ public class GameControllerImpl implements GameController {
 
     private void updateGame(final double elapsed) {
         this.model.update(elapsed);
+        this.checkDeletedObject();
         this.checkNewGameObjects();
         this.updateSpritePositions();
     }
@@ -69,18 +69,27 @@ public class GameControllerImpl implements GameController {
     private void render() {
         this.view.render();
     }
-    /*
-    public void addCollider(Sprite sprite) {
-        colliders.put(id, rect);
-    }*/
 
     /**
      * 
      */
     private void updateSpritePositions() {
-        for (final Entry<Integer, Sprite> sprite : view.getSprites().entrySet()) {
-            final Point2D position = model.getGameObjectPosition(sprite.getKey());
-            sprite.getValue().setPosition(position);
+        for (final Integer id : this.lastGameObjectsID) {
+            this.view.setSpritePosition(id, model.getGameObjectPosition(id));
+        }
+    }
+
+    private List<Integer> getActualObjectsID() {
+        return this.model.getActualGameObjects().stream().map(obj -> obj.getID()).collect(Collectors.toList());
+    }
+
+    private void checkDeletedObject() {
+        final List<Integer> gameObjectsID = this.getActualObjectsID();
+        for (final Integer id : this.lastGameObjectsID) {
+            if (!gameObjectsID.contains(id)) {
+                final GameObject deletedObject = model.getGameObject(id);
+                this.view.removeSprite(deletedObject.getID());
+            }
         }
     }
 
@@ -88,15 +97,15 @@ public class GameControllerImpl implements GameController {
      * 
      */
     private void checkNewGameObjects() {
-        final List<Integer> gameObjectsID = model.getActualGameObjects().stream().map(obj -> obj.getID()).collect(Collectors.toList());
+        final List<Integer> gameObjectsID = this.getActualObjectsID();
         for (final Integer id : gameObjectsID) {
-            if (!currentgameObjectsID.contains(id)) {
+            if (!lastGameObjectsID.contains(id)) {
                 final GameObject newObject = model.getGameObject(id);
                 view.addSprite(newObject.getID(), newObject.getGameObjectType(), newObject.getPosition());
             }
         }
-        currentgameObjectsID.clear();
-        currentgameObjectsID.addAll(gameObjectsID);
+        lastGameObjectsID.clear();
+        lastGameObjectsID.addAll(gameObjectsID);
     }
 
 

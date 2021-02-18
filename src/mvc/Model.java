@@ -8,7 +8,7 @@ import model.gameobject.GameObject;
 public interface Model {
     Point2D getGameObjectPosition(int id);
 
-    GameObject getGameObject(Integer id);
+    GameObject getGameObject(int id);
 
     List<GameObject> getActualGameObjects();
 

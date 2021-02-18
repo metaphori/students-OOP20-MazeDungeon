@@ -50,6 +50,9 @@ public class GameViewImpl implements GameView {
         timer.start();
     }
 
+    /**
+     * 
+     */
     @Override
     public void show() {
         this.frame.setVisible(true);
@@ -95,6 +98,9 @@ public class GameViewImpl implements GameView {
         }
     }
 
+    /**
+     * @param controller 
+     */
     @Override
     public void setController(final GameController controller) {
        this.controller = controller;
@@ -131,10 +137,19 @@ public class GameViewImpl implements GameView {
     }
 
     /**
-     * @return .
+     * @param id
      */
-    public Map<Integer, Sprite> getSprites() {
-        return sprites;
+    @Override
+    public void setSpritePosition(final int id, final Point2D position) {
+        this.sprites.get(id).setPosition(position);
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void removeSprite(final int id) {
+        this.sprites.remove(id);
     }
 
 }

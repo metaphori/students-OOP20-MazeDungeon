@@ -13,24 +13,17 @@ public class ModelImpl implements Model {
     private final RoomManager roomManager = new RoomManagerImpl();
 
     /**
-     * 
      */
     @Override
     public Point2D getGameObjectPosition(final int id) {
-        for (final GameObject gameObject : roomManager.getCurrentRoom().getCurrentGameObjects()) {
-            if (gameObject.getID() == id) {
-                return gameObject.getPosition();
-            }
-        }
-        return null;
+       return this.getGameObject(id).getPosition();
     }
 
     /**
-     * 
      * @param id
      * @return . 
      */
-    public GameObject getGameObject(final Integer id) {
+    public GameObject getGameObject(final int id) {
         for (final GameObject gameObject : roomManager.getCurrentRoom().getCurrentGameObjects()) {
             if (gameObject.getID() == id) {
                 return gameObject;
@@ -40,7 +33,6 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * 
      * @return .
      */
     public List<GameObject> getActualGameObjects() {
