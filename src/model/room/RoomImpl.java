@@ -45,12 +45,21 @@ public class RoomImpl implements Room {
 
     /**
      * 
-     * @return
+     * @return .
      */
     public List<GameObject> getCurrentGameObjects() {
         final List<GameObject> gameObjects = new LinkedList<>(simpleObjects);
         gameObjects.addAll(dinamicObjects);
         return gameObjects;
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void deleteGameObject(final GameObject gameObject) {
+        simpleObjects.remove(gameObject);
+        dinamicObjects.remove(gameObject);
     }
 
 }

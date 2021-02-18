@@ -15,4 +15,6 @@ public interface Room {
     void addSimpleObject(SimpleObject obj);
 
     List<GameObject> getCurrentGameObjects();
+
+    void deleteGameObject(GameObject gameObject);
 }
