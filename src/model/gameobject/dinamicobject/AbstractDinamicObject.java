@@ -1,5 +1,6 @@
 package model.gameobject.dinamicobject;
 
+import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
@@ -8,8 +9,6 @@ import model.gameobject.simpleobject.SimpleObjectImpl;
 public abstract class AbstractDinamicObject extends SimpleObjectImpl implements DinamicObject {
     private Vector2D direction;
     private int speed;
-
-
 
     public AbstractDinamicObject(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
         super(id, position, gameObjectType);
@@ -47,6 +46,13 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
     @Override
     public void setDirection(final Vector2D direction) {
         this.direction = direction;
+    }
+
+    /**
+     * 
+     */
+    private void setBoundingBoxPosition(final Point2D position) {
+        this.getBoundingBox().move(position);
     }
 
     @Override

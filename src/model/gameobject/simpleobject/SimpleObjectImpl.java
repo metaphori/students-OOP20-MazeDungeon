@@ -1,7 +1,6 @@
 package model.gameobject.simpleobject;
 
-import java.awt.Rectangle;
-
+import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 
@@ -9,7 +8,7 @@ public class SimpleObjectImpl implements SimpleObject {
     private final int id;
     private Point2D position;
     private final GameObjectType gameObjectType;
-    private Rectangle boundingBox;
+    private BoundingBox boundingBox;
 
     public SimpleObjectImpl(final int id, final Point2D position, final GameObjectType gameObjectType) {
         this.id = id;
@@ -53,7 +52,7 @@ public class SimpleObjectImpl implements SimpleObject {
      * 
      */
     @Override
-    public Rectangle getBoundingBox() {
+    public BoundingBox getBoundingBox() {
         return this.boundingBox;
     }
 
@@ -61,16 +60,9 @@ public class SimpleObjectImpl implements SimpleObject {
      * 
      */
     @Override
-    public void setBoundingBox(final Rectangle boundingBox) {
+    public void setBoundingBox(final BoundingBox boundingBox) {
         this.boundingBox = boundingBox;
     }
 
-    /**
-     * 
-     */
-    private void setBoundingBoxPosition(final Point2D position) {
-        //this.boundingBox.x = Math.round(position.getX());
-        //this.boundingBox.y = position.getY();
-    }
 
 }

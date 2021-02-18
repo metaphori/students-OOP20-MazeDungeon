@@ -1,7 +1,6 @@
 package model.gameobject;
 
-import java.awt.Rectangle;
-
+import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 
@@ -14,8 +13,8 @@ public interface GameObject {
 
     GameObjectType getGameObjectType();
 
-    Rectangle getBoundingBox();
+    BoundingBox getBoundingBox();
 
-    void setBoundingBox(Rectangle boundingBox);
+    void setBoundingBox(BoundingBox boundingBox);
 
 }
