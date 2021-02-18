@@ -13,14 +13,26 @@ public class Sprite {
         this.height = height;
     }
 
+    /**
+     * 
+     * @return image
+     */
     public Image getImg() {
         return img;
     }
 
+    /**
+     * 
+     * @return width of the image
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * 
+     * @return heigth of the image
+     */
     public int getHeight() {
         return height;
     }

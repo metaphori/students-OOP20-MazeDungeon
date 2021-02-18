@@ -1,10 +1,21 @@
 package model.gameobject.simpleobject;
 
+import java.awt.Rectangle;
+
+import model.common.GameObjectType;
 import model.common.Point2D;
 
 public class SimpleObjectImpl implements SimpleObject {
-    private int id;
+    private final int id;
     private Point2D position;
+    private final GameObjectType gameObjectType;
+    private Rectangle boundingBox;
+
+    public SimpleObjectImpl(final int id, final Point2D position, final GameObjectType gameObjectType) {
+        this.id = id;
+        this.position = position;
+        this.gameObjectType = gameObjectType;
+    }
 
     /**
      * @return the ID of the object
@@ -28,6 +39,38 @@ public class SimpleObjectImpl implements SimpleObject {
     @Override
     public void setPosition(final Point2D position) {
         this.position = position;
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public GameObjectType getGameObjectType() {
+        return this.gameObjectType;
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public Rectangle getBoundingBox() {
+        return this.boundingBox;
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void setBoundingBox(final Rectangle boundingBox) {
+        this.boundingBox = boundingBox;
+    }
+
+    /**
+     * 
+     */
+    private void setBoundingBoxPosition(final Point2D position) {
+        this.boundingBox.x = position.getX();
+        this.boundingBox.y = position.getY();
     }
 
 }

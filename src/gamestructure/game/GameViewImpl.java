@@ -6,15 +6,20 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import model.common.GameObjectType;
 import model.common.Point2D;
+import model.common.ResourceLoader;
+import model.common.Sprite;
 import model.common.Vector2D;
 
 public class GameViewImpl implements GameView {
@@ -29,6 +34,8 @@ public class GameViewImpl implements GameView {
     private static double ASPECT_RATIO = 1.6;
     private static final int PERIOD = 75;
     private final GamePanel gamePanel;
+    private final Map<Integer, Sprite> sprites = new HashMap<>();
+    private final ResourceLoader resourceLoader = new ResourceLoader();
 
     public GameViewImpl() {
         final Timer timer;
@@ -56,6 +63,9 @@ public class GameViewImpl implements GameView {
 
     }
 
+    /**
+     * 
+     */
     @Override
     public void hide() {
         this.frame.setVisible(false);
@@ -64,33 +74,19 @@ public class GameViewImpl implements GameView {
     private class GamePanel extends JPanel implements ActionListener {
         private static final long serialVersionUID = 1L;
         private final Image room;
-        private Point2D position = new Point2D(800, 300);
-        private final Vector2D vector = new Vector2D(0, 0);
-        private final List<Image> images = new LinkedList<>();
-        private int index = 0;
 
         GamePanel() {
-            images.add(adaptImage(new ImageIcon("resources//images//Objects//Coin//coin1.png")));
-            images.add(adaptImage(new ImageIcon("resources//images//Objects//Coin//coin2.png")));
-            images.add(adaptImage(new ImageIcon("resources//images//Objects//Coin//coin3.png")));
-            images.add(adaptImage(new ImageIcon("resources//images//Objects//Coin//coin4.png")));
-            images.add(adaptImage(new ImageIcon("resources//images//Objects//Coin//coin5.png")));
-            images.add(adaptImage(new ImageIcon("resources//images//Objects//Coin//coin6.png")));
-            images.add(adaptImage(new ImageIcon("resources//images//Objects//Coin//coin7.png")));
-            room = adaptImage(new ImageIcon("resources//images//Room//room.png"));
+            room = adaptImage(new ImageIcon("resources/images/Room/room.png"));
         }
 
         @Override
         protected void paintComponent(final Graphics g) {
             super.paintComponent(g);
             g.drawImage(room, 0, 0, null);
-            g.drawImage(images.get(index), position.getX(), position.getY(), null); 
-            Toolkit.getDefaultToolkit().sync();
-            position = position.sum(vector);
-            index++;
-            if (index == images.size() - 1) {
-                index = 0;
+            for (final Sprite sprite : sprites.values()) {
+                g.drawImage(sprite.getImg(), , , null);
             }
+            Toolkit.getDefaultToolkit().sync();
         }
 
         @Override
@@ -109,18 +105,28 @@ public class GameViewImpl implements GameView {
         // TODO Auto-generated method stub
     }
 
-    private int getNewWidth(int width) {
+    private int getNewWidth(final int width) {
         //return width * (int) screen.getWidth() / NATIVE_WIDTH;
         return width;
     }
 
-    private int getNewHeight(int height) {
+    private int getNewHeight(final int height) {
         //return height * (int) screen.getHeight() / NATIVE_HEIGHT;
         return height;
     }
 
-    private Image adaptImage(ImageIcon img) {
+    private Image adaptImage(final ImageIcon img) {
         return img.getImage().getScaledInstance(getNewWidth(img.getIconWidth()), getNewHeight(img.getIconHeight()), Image.SCALE_SMOOTH);
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void addSprite(final Integer id, final GameObjectType gameObjectType) {
+        final ImageIcon image = new ImageIcon(resourceLoader.getPath(gameObjectType));
+        final Sprite sprite = new Sprite(adaptImage(image), image.getIconWidth(), image.getIconHeight());
+        sprites.put(id, sprite);
     }
 
 }

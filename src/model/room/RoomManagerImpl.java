@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import model.common.Point2D;
+import model.gameobject.dinamicobject.Coin;
 import model.gameobject.dinamicobject.enemy.EnemyFactory;
 import model.gameobject.dinamicobject.enemy.EnemyFactoryImpl;
 
@@ -27,7 +28,10 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     private void createGameMap() {
-
+        //TODO
+        actualRoom = new RoomImpl(this);
+        rooms.put(new Point2D(0, 0), actualRoom);
+        actualRoom.addDinamicObject(new Coin());
     }
 
 }
