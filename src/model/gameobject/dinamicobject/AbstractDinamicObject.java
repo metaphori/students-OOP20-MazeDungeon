@@ -1,5 +1,6 @@
 package model.gameobject.dinamicobject;
 
+import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.simpleobject.SimpleObjectImpl;
 
@@ -7,10 +8,19 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
     private Vector2D direction;
     private int speed;
 
+
+
+    public AbstractDinamicObject(final int id, final int speed, final Point2D position, final Vector2D direction) {
+        super(id, position);
+        this.speed = speed;
+        this.direction = direction;
+    }
+
     /**
      * @return the speed of the DinamicObject
      */
     @Override
+
     public int getSpeed() {
         return this.speed;
     }
