@@ -1,16 +1,17 @@
 package model.gameobject.dinamicobject.bullet;
 
+import model.common.GameObjectType;
+import model.common.Point2D;
+import model.common.Vector2D;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
 
 public class BulletImpl extends AbstractDinamicObject implements Bullet {
 
-    /**
-     * 
-     */
     private double damage;
 
-    public BulletImpl(double damage) {
-       this.damage = damage; 
+    public BulletImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
+        super(id, speed, position, direction, gameObjectType);
+        this.damage = damage; 
     }
 
 
@@ -30,9 +31,8 @@ public class BulletImpl extends AbstractDinamicObject implements Bullet {
     }
 
     @Override
-    public void setSpeed() {
+    public void setDamage(double damage) {
         // TODO Auto-generated method stub
-
     }
 
 }

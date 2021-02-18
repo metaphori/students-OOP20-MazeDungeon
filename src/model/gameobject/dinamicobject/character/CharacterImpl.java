@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.Set;
 
+import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
@@ -19,10 +20,12 @@ public class CharacterImpl extends AbstractDinamicObject implements Character, K
     private double life;
     private Set<Item> items; //contains set di items
 
-    public CharacterImpl() {
+    public CharacterImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
+        super(id, speed, position, direction, gameObjectType);
         this.life = MAXLIFE;
         this.items = new HashSet<>();
     }
+
 
     @Override
     public void shoot() {

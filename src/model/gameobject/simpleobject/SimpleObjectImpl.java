@@ -17,11 +17,6 @@ public class SimpleObjectImpl implements SimpleObject {
         this.gameObjectType = gameObjectType;
     }
 
-    public SimpleObjectImpl(final int id, final Point2D position) {
-        this.id = id;
-        this.position = position;
-    }
-
     /**
      * @return the ID of the object
      */
