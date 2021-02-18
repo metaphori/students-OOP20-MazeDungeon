@@ -69,8 +69,8 @@ public class SimpleObjectImpl implements SimpleObject {
      * 
      */
     private void setBoundingBoxPosition(final Point2D position) {
-        this.boundingBox.x = position.getX();
-        this.boundingBox.y = position.getY();
+        //this.boundingBox.x = Math.round(position.getX());
+        //this.boundingBox.y = position.getY();
     }
 
 }

@@ -1,11 +1,7 @@
 package gamestructure.game;
 
-import java.awt.Rectangle;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
@@ -41,7 +37,7 @@ public class GameControllerImpl implements GameController {
             final long current = System.currentTimeMillis();
             final int elapsed = (int) (current - lastTime);
             processInput();
-            updateGame(elapsed);
+            updateGame(elapsed * 0.001);
             render();
             waitForNextFrame(current);
             lastTime = current;
@@ -64,8 +60,8 @@ public class GameControllerImpl implements GameController {
 
     }
 
-    private void updateGame(final int elapsed) {
-        this.model.update();
+    private void updateGame(final double elapsed) {
+        this.model.update(elapsed);
         this.checkNewGameObjects();
         this.updateSpritePositions();
     }

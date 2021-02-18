@@ -4,5 +4,5 @@ public interface RoomManager {
 
     Room getCurrentRoom();
 
-    void update();
+    void update(double elapsed);
 }

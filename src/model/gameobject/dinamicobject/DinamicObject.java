@@ -12,7 +12,7 @@ public interface DinamicObject extends GameObject {
 
     void setDirection(Vector2D direction);
 
-    void updateState();
+    void updateState(double elapsed);
 
-    void move();
+    void move(double elapsed);
 }

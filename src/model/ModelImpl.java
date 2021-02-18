@@ -48,7 +48,7 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public void update() {
-        this.roomManager.update();
+    public void update(final double elapsed) {
+        this.roomManager.update(elapsed);
     }
 }

@@ -84,7 +84,7 @@ public class GameViewImpl implements GameView {
             super.paintComponent(g);
             g.drawImage(room, 0, 0, null);
             for (final Sprite sprite : sprites.values()) {
-                g.drawImage(sprite.getImg(), sprite.getPosition().getX(), sprite.getPosition().getY(), null);
+                g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
             }
             Toolkit.getDefaultToolkit().sync();
         }

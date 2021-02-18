@@ -12,5 +12,5 @@ public interface Model {
 
     List<GameObject> getActualGameObjects();
 
-    void update();
+    void update(double elapsed);
 }

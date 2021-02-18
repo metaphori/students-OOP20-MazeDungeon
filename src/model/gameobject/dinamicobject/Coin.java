@@ -11,13 +11,13 @@ public class Coin extends AbstractDinamicObject {
     }
 
     @Override
-    public void updateState() {
-        this.move();
+    public void updateState(final double elapsed) {
+        this.move(elapsed);
     }
 
     @Override
-    public void move() {
-        this.setPosition(this.getPosition().sum(this.getDirection()));
+    public void move(final double elapsed) {
+        this.setPosition(this.getPosition().sum(this.getDirection().mul(elapsed)));
     }
 
 }

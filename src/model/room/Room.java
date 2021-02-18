@@ -8,7 +8,7 @@ import model.gameobject.simpleobject.SimpleObject;
 
 public interface Room {
 
-    void update();
+    void update(double elapsed);
 
     void addDinamicObject(DinamicObject obj);
 

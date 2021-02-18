@@ -23,17 +23,17 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     /**
-     * 
+     * @param elapsed the time passed
      */
-    public void update() {
-        actualRoom.update();
+    public void update(final double elapsed) {
+        actualRoom.update(elapsed);
     }
 
     private void createGameMap() {
         //TODO
         actualRoom = new RoomImpl(this);
         rooms.put(new Point2D(0, 0), actualRoom);
-        Coin testObject = new Coin(0, 0, new Point2D(300, 300), new Vector2D(1, 0), GameObjectType.COIN);
+        final Coin testObject = new Coin(0, 0, new Point2D(300, 300), new Vector2D(50, 0), GameObjectType.COIN);
         actualRoom.addDinamicObject(testObject);
     }
 

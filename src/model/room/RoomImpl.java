@@ -18,11 +18,12 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * 
+     * @param elapsed the time passed
      */
-    public void update() {
+    @Override
+    public void update(final double elapsed) {
         for (final DinamicObject obj : dinamicObjects) {
-            obj.updateState();
+            obj.updateState(elapsed);
         }
     }
 
