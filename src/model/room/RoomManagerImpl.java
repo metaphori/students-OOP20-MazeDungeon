@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import model.common.Point2D;
+import model.gameobject.dinamicobject.enemy.EnemyFactory;
+import model.gameobject.dinamicobject.enemy.EnemyFactoryImpl;
 
 public class RoomManagerImpl implements RoomManager {
 
@@ -11,9 +13,10 @@ public class RoomManagerImpl implements RoomManager {
 
     private final Map<Point2D, Room> rooms = new HashMap<>();
     private Room actualRoom;
+    private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
 
     public RoomManagerImpl() {
-        this.createFloor();
+        this.createGameMap();
     }
 
     /**
@@ -23,8 +26,8 @@ public class RoomManagerImpl implements RoomManager {
         actualRoom.update();
     }
 
-    private void createFloor() {
-        
+    private void createGameMap() {
+
     }
 
 }

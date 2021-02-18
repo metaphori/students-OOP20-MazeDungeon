@@ -103,12 +103,6 @@ public class CharacterImpl extends AbstractDinamicObject implements Character, K
     }
 
     @Override
-    public void setSpeed() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
     public void addItem(Item item) {
         // TODO Auto-generated method stub
         
