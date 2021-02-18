@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,8 +23,9 @@ import model.common.Point2D;
 import model.common.ResourceLoader;
 import model.common.Sprite;
 import model.common.Vector2D;
+import input.Command;;
 
-public class GameViewImpl implements GameView {
+public class GameViewImpl implements GameView, KeyListener {
 
     private GameController controller;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -46,6 +49,7 @@ public class GameViewImpl implements GameView {
         gamePanel = new GamePanel();
         //gamePanel.setSize(this.frame.getSize());
         this.frame.add(gamePanel);
+        this.frame.addKeyListener(this);
         timer = new Timer(PERIOD, gamePanel);
         timer.start();
     }
@@ -150,6 +154,23 @@ public class GameViewImpl implements GameView {
     @Override
     public void removeSprite(final int id) {
         this.sprites.remove(id);
+    }
+
+    @Override
+    public void keyPressed(KeyEvent key) {
+        final int keyPressed = key.getKeyCode();
+        this.controller.notifyCommand(keyPressed);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent arg0) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void keyTyped(KeyEvent key) {
+     // TODO Auto-generated method stub
     }
 
 }

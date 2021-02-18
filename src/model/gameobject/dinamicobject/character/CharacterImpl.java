@@ -14,7 +14,7 @@ import model.room.RoomImpl;
 import model.shop.Item;
 
 
-public class CharacterImpl extends AbstractDinamicObject implements Character, KeyListener {
+public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     private final double MAXLIFE = 4.0;
     private double life;
@@ -39,56 +39,17 @@ public class CharacterImpl extends AbstractDinamicObject implements Character, K
 
     @Override
     public void updateState(final double elapsed) { 
-        // TODO Auto-generated method stub
+        //TODO
 
     }
 
-
-    public void move() {
+    @Override
+    public void move(double elapsed) {
         super.setSpeed(8);
         super.setPosition(new Point2D(super.getPosition().getX() + super.getDirection().getX(),
                                super.getPosition().getY() + super.getDirection().getY()));
     }
 
-    @Override
-    public void keyPressed(KeyEvent key) {
-        final int keyPressed = key.getKeyCode();
-
-        switch (keyPressed) {
-            case KeyEvent.VK_UP:
-                super.setDirection(new Vector2D(super.getDirection().getX(), 1));
-                this.move();
-                break;
-            case KeyEvent.VK_DOWN:
-                super.setDirection(new Vector2D(super.getDirection().getX(), -1));
-                this.move();
-                break;
-            case KeyEvent.VK_RIGHT:
-                super.setDirection(new Vector2D(1, super.getDirection().getY()));
-                this.move();
-                break;
-            case KeyEvent.VK_LEFT:
-                super.setDirection(new Vector2D(-1, super.getDirection().getY()));
-                this.move();
-                break;
-            case KeyEvent.VK_SPACE:
-                this.shoot();
-                break;
-            default:
-                break;
-        }
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent arg0) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void keyTyped(KeyEvent arg0) {
-        // TODO Auto-generated method stub
-    }
 
     @Override
     public double getLife() {
@@ -107,8 +68,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character, K
 
     @Override
     public void addItem(Item item) {
-        // TODO Auto-generated method stub
-        
+        this.items.add(item);
     }
 
 

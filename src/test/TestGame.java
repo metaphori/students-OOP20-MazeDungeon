@@ -12,6 +12,7 @@ public class TestGame {
         final GameView view = new GameViewImpl();
         final Model model = new ModelImpl();
         final GameController controller = new GameControllerImpl(view, model);
+        //view.setController(controller);
         controller.setup();
         controller.mainLoop();
     }

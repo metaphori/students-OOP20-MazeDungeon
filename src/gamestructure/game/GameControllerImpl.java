@@ -1,9 +1,13 @@
 package gamestructure.game;
 
+import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.stream.Collectors;
 
+import input.Command;
+import input.CommandImpl;
 import model.gameobject.GameObject;
 import mvc.Model;
 
@@ -12,10 +16,12 @@ public class GameControllerImpl implements GameController {
     private final GameView view;
     private final Model model;
     private final List<Integer> lastGameObjectsID = new LinkedList<>();
+    private ArrayBlockingQueue<Integer> commands;
 
     public GameControllerImpl(final GameView view, final Model model) {
         this.view = view;
         this.model = model;
+        this.commands = new ArrayBlockingQueue<>(100);
     }
 
     /**
@@ -55,8 +61,11 @@ public class GameControllerImpl implements GameController {
     }
 
     private void processInput() {
-        // TODO Auto-generated method stub
-
+        final Integer keyCommand = commands.poll();
+        final Command command = new CommandImpl();
+        if (keyCommand != null) {
+            command.execute(keyCommand);
+        }
     }
 
     private void updateGame(final double elapsed) {
@@ -106,6 +115,14 @@ public class GameControllerImpl implements GameController {
         }
         lastGameObjectsID.clear();
         lastGameObjectsID.addAll(gameObjectsID);
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void notifyCommand(final int keyCommand) {
+        this.commands.add(keyCommand);
     }
 
 

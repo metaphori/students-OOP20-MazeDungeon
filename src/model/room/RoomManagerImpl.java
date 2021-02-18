@@ -9,6 +9,8 @@ import model.common.Vector2D;
 import model.gameobject.dinamicobject.Coin;
 import model.gameobject.dinamicobject.enemy.EnemyFactory;
 import model.gameobject.dinamicobject.enemy.EnemyFactoryImpl;
+import model.gameobject.dinamicobject.character.CharacterImpl;
+import model.gameobject.dinamicobject.character.Character;
 
 public class RoomManagerImpl implements RoomManager {
 
@@ -34,7 +36,10 @@ public class RoomManagerImpl implements RoomManager {
         actualRoom = new RoomImpl(this);
         rooms.put(new Point2D(0, 0), actualRoom);
         final Coin coin1 = new Coin(0, 0, new Point2D(300, 300), new Vector2D(30, 30), GameObjectType.COIN);
+        final Character character = new CharacterImpl(5, 0, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER);
         actualRoom.addDinamicObject(coin1);
+        actualRoom.addDinamicObject(character);
+
         actualRoom.addDinamicObject(new Coin(1, 0, new Point2D(400, 400), new Vector2D(30, 30), GameObjectType.COIN));
         actualRoom.addDinamicObject(new Coin(2, 0, new Point2D(500, 400), new Vector2D(30, 30), GameObjectType.COIN));
         actualRoom.addDinamicObject(new Coin(3, 0, new Point2D(600, 400), new Vector2D(30, 30), GameObjectType.COIN));
