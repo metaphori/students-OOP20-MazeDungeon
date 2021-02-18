@@ -33,7 +33,7 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     }
 
     @Override
-    public abstract void move();
+    public abstract void move(double elapsed);
 
     @Override
     public abstract Bullet shoot();

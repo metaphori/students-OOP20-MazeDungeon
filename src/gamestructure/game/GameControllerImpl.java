@@ -11,7 +11,7 @@ import model.gameobject.GameObject;
 import mvc.Model;
 
 public class GameControllerImpl implements GameController {
-    private static final long PERIOD = 20;
+    private static final long PERIOD = 15;
     private final GameView view;
     private final Model model;
     private List<Integer> currentgameObjectsID = new LinkedList<>();

@@ -38,12 +38,12 @@ public class CharacterImpl extends AbstractDinamicObject implements Character, K
     }
 
     @Override
-    public void updateState() { 
+    public void updateState(final double elapsed) { 
         // TODO Auto-generated method stub
 
     }
 
-    @Override
+
     public void move() {
         super.setSpeed(8);
         super.setPosition(new Point2D(super.getPosition().getX() + super.getDirection().getX(),

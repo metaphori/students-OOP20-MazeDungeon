@@ -33,8 +33,12 @@ public class RoomManagerImpl implements RoomManager {
         //TODO
         actualRoom = new RoomImpl(this);
         rooms.put(new Point2D(0, 0), actualRoom);
-        final Coin testObject = new Coin(0, 0, new Point2D(300, 300), new Vector2D(50, 0), GameObjectType.COIN);
-        actualRoom.addDinamicObject(testObject);
+        final Coin coin1 = new Coin(0, 0, new Point2D(300, 300), new Vector2D(30, 30), GameObjectType.COIN);
+        actualRoom.addDinamicObject(coin1);
+        actualRoom.addDinamicObject(new Coin(1, 0, new Point2D(400, 400), new Vector2D(30, 30), GameObjectType.COIN));
+        actualRoom.addDinamicObject(new Coin(2, 0, new Point2D(500, 400), new Vector2D(30, 30), GameObjectType.COIN));
+        actualRoom.addDinamicObject(new Coin(3, 0, new Point2D(600, 400), new Vector2D(30, 30), GameObjectType.COIN));
+        actualRoom.addDinamicObject(new Coin(4, 0, new Point2D(700, 400), new Vector2D(30, 30), GameObjectType.COIN));
     }
 
     /**

@@ -32,7 +32,7 @@ public class GameViewImpl implements GameView {
     private static double WIDTH_RATIO = 0.666667; 
     private static double HEIGHT_RATIO = 0.740740; 
     private static double ASPECT_RATIO = 1.6;
-    private static final int PERIOD = 20;
+    private static final int PERIOD = 15;
     private final GamePanel gamePanel;
     private final Map<Integer, Sprite> sprites = new HashMap<>();
     private final ResourceLoader resourceLoader = new ResourceLoader();
