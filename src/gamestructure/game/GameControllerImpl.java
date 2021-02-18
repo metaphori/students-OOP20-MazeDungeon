@@ -1,16 +1,24 @@
 package gamestructure.game;
 
 import java.awt.Rectangle;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
+import model.common.Point2D;
 import model.common.Sprite;
+import model.gameobject.GameObject;
 import mvc.Model;
 
 public class GameControllerImpl implements GameController {
     private static final long PERIOD = 20;
     private final GameView view;
     private final Model model;
+    private List<Integer> currentgameObjectsID = new LinkedList<>();
     //private final Map<Integer, Rectangle> colliders = new HashMap<>();
 
     public GameControllerImpl(final GameView view, final Model model) {
@@ -57,8 +65,9 @@ public class GameControllerImpl implements GameController {
     }
 
     private void updateGame(final int elapsed) {
-        // TODO Auto-generated method stub
-
+        this.model.update();
+        this.checkNewGameObjects();
+        this.updateSpritePositions();
     }
 
     private void render() {
@@ -68,7 +77,31 @@ public class GameControllerImpl implements GameController {
     public void addCollider(Sprite sprite) {
         colliders.put(id, rect);
     }*/
-    
-    
+
+    /**
+     * 
+     */
+    private void updateSpritePositions() {
+        for (final Entry<Integer, Sprite> sprite : view.getSprites().entrySet()) {
+            final Point2D position = model.getGameObjectPosition(sprite.getKey());
+            sprite.getValue().setPosition(position);
+        }
+    }
+
+    /**
+     * 
+     */
+    private void checkNewGameObjects() {
+        final List<Integer> gameObjectsID = model.getActualGameObjects().stream().map(obj -> obj.getID()).collect(Collectors.toList());
+        for (final Integer id : gameObjectsID) {
+            if (!currentgameObjectsID.contains(id)) {
+                final GameObject newObject = model.getGameObject(id);
+                view.addSprite(newObject.getID(), newObject.getGameObjectType(), newObject.getPosition());
+            }
+        }
+        currentgameObjectsID.clear();
+        currentgameObjectsID.addAll(gameObjectsID);
+    }
+
 
 }

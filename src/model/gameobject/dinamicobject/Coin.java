@@ -12,14 +12,12 @@ public class Coin extends AbstractDinamicObject {
 
     @Override
     public void updateState() {
-        // TODO Auto-generated method stub
-
+        this.move();
     }
 
     @Override
     public void move() {
-        // TODO Auto-generated method stub
-
+        this.setPosition(this.getPosition().sum(this.getDirection()));
     }
 
 }

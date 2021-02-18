@@ -84,7 +84,7 @@ public class GameViewImpl implements GameView {
             super.paintComponent(g);
             g.drawImage(room, 0, 0, null);
             for (final Sprite sprite : sprites.values()) {
-                g.drawImage(sprite.getImg(), , , null);
+                g.drawImage(sprite.getImg(), sprite.getPosition().getX(), sprite.getPosition().getY(), null);
             }
             Toolkit.getDefaultToolkit().sync();
         }
@@ -123,10 +123,18 @@ public class GameViewImpl implements GameView {
      * 
      */
     @Override
-    public void addSprite(final Integer id, final GameObjectType gameObjectType) {
+    public void addSprite(final Integer id, final GameObjectType gameObjectType, final Point2D position) {
         final ImageIcon image = new ImageIcon(resourceLoader.getPath(gameObjectType));
         final Sprite sprite = new Sprite(adaptImage(image), image.getIconWidth(), image.getIconHeight());
+        sprite.setPosition(position);
         sprites.put(id, sprite);
+    }
+
+    /**
+     * @return .
+     */
+    public Map<Integer, Sprite> getSprites() {
+        return sprites;
     }
 
 }

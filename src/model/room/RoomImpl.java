@@ -3,9 +3,9 @@ package model.room;
 import java.util.LinkedList;
 import java.util.List;
 
+import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.DinamicObject;
 import model.gameobject.simpleobject.SimpleObject;
-import mvc.Model;
 
 public class RoomImpl implements Room {
 
@@ -40,6 +40,16 @@ public class RoomImpl implements Room {
      */
     public void addSimpleObject(final SimpleObject obj) {
         simpleObjects.add(obj);
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public List<GameObject> getCurrentGameObjects() {
+        final List<GameObject> gameObjects = new LinkedList<>(simpleObjects);
+        gameObjects.addAll(dinamicObjects);
+        return gameObjects;
     }
 
 }
