@@ -17,6 +17,7 @@ import javax.swing.border.LineBorder;
 
 public class MainMenuViewImpl implements MainMenuView {
 
+    private final MainMenuController controller = new MainMenuControllerImpl(this);
     private final JFrame frame = new JFrame();
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final JLabel lblBackground = new JLabel(new ImageIcon("resources//images//MainMenu//MainMenu3.png"));
@@ -36,6 +37,10 @@ public class MainMenuViewImpl implements MainMenuView {
 
         btnNewGame.setBounds(160, 340, 300, 45);
         this.configureButton(btnNewGame);
+
+        btnNewGame.addActionListener(e -> {
+            this.controller.newGame();
+        });
 
         btnCredits.setBounds(160, 433, 300, 45);
         this.configureButton(btnCredits);
