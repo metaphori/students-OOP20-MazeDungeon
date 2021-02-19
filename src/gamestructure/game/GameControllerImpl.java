@@ -18,11 +18,14 @@ public class GameControllerImpl implements GameController {
     private final Model model;
     private final List<Integer> lastGameObjectsID = new LinkedList<>();
     private ArrayBlockingQueue<Integer> commands;
+    private final Command command;
 
     public GameControllerImpl(final GameView view, final Model model) {
         this.view = view;
         this.model = model;
+        this.command = new CommandImpl(this.model);
         this.commands = new ArrayBlockingQueue<>(100);
+
     }
 
     /**
@@ -63,9 +66,8 @@ public class GameControllerImpl implements GameController {
 
     private void processInput() {
         final Integer keyCommand = commands.poll();
-        final Command command = new CommandImpl(this.model);
         if (keyCommand != null) {
-            command.execute(keyCommand);
+            this.command.execute(keyCommand);
         }
     }
 
@@ -78,8 +80,7 @@ public class GameControllerImpl implements GameController {
 
     private void render() {
         this.view.render();
-    }
-
+    } 
     /**
      * 
      */
@@ -132,6 +133,11 @@ public class GameControllerImpl implements GameController {
     @Override
     public void setBoundingBox(final int id, final BoundingBox boundingBox) {
         this.model.getGameObject(id).setBoundingBox(boundingBox);
+    }
+
+    @Override
+    public Command getCommand() {
+        return this.command;
     }
 
 

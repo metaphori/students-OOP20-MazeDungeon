@@ -32,7 +32,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     @Override
     public void shoot() {
-        /* cosa devo fare qui ?? */
+        //**// //ROOM MANAGER DEVE METTERE DENTRO LA STANZA IL BULLET CREATO DALLA FACTORY
     }
 
     @Override

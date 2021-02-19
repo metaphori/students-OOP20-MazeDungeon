@@ -11,7 +11,7 @@ public class ResourceLoader {
 
     public ResourceLoader() {
         resources.put(GameObjectType.COIN, imagesPath + "Objects" + sep + "Coin" + sep + "coin4.png");
-        resources.put(GameObjectType.CHARACTER, imagesPath + "Character"+ sep + "Character.png");
+        resources.put(GameObjectType.CHARACTER, imagesPath + "Character" + sep + "Character.png");
     }
 
     /**
