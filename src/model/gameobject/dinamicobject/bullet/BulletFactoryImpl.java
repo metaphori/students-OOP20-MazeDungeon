@@ -1,6 +1,6 @@
 package model.gameobject.dinamicobject.bullet;
 
-import model.common.BulletType;
+
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
@@ -8,22 +8,57 @@ import model.gameobject.dinamicobject.AbstractDinamicObject;
 
 public class BulletFactoryImpl implements BulletFactory {
 
-    /*@Override
-    public Bullet createBullet(final BulletType bulletType, final Point2D initialPosition, final Vector2D direction) {
-        double damage = 0;
-        int speed = 0;
+    /**
+     * constant for speed of each bullet
+     */
+    private final int CHARACTER_BULLET_SPEED = 100;
+    private final int SKELETONSEEKER_BULLET_SPEED = 100;
+    private final int SOUL_BULLET_SPEED = 100;
+    private final int SPROUT_BULLET_SPEED = 100;
+    private final int BOSS_BULLET_SPEED = 100;
+    private final int OLDGUARDIAN_BULLET_SPEED = 100;
+    /**
+     * constant for damage of each bullet
+     */
+    private final int CHARACTER_BULLET_DAMAGE = 100;
+    private final int SKELETONSEEKER_BULLET_DAMAGE = 100;
+    private final int SOUL_BULLET_DAMAGE = 100;
+    private final int SPROUT_BULLET_DAMAGE = 100;
+    private final int BOSS_BULLET_DAMAGE = 100;
+    private final int OLDGUARDIAN_BULLET_DAMAGE = 100;
+    /**
+     * 
+     */
+
+    @Override
+    public Bullet createBullet(final GameObjectType bulletType, final Point2D initialPosition, final Vector2D direction) {
+        Bullet bullet;
 
         switch (bulletType) {
             case CHARACTER_BULLET:
-                damage = 100; // un proiettile sprato contro nemico, toglie tutta la vita del nemico
+                bullet = new BulletImpl(0, CHARACTER_BULLET_SPEED, initialPosition, direction, bulletType, CHARACTER_BULLET_DAMAGE);
                 break;
-            case ENEMY_BULLET:
-                damage = 25; // un bullet di un nemico ha un danno di 25
+            case SKELETONSEEKER_BULLET:
+                bullet = new BulletImpl(0, SKELETONSEEKER_BULLET_SPEED, initialPosition, direction, bulletType, SKELETONSEEKER_BULLET_DAMAGE);
+                break;
+            case SOUL_BULLET:
+                bullet = new BulletImpl(0, SOUL_BULLET_SPEED, initialPosition, direction, bulletType, SOUL_BULLET_DAMAGE);
+                break;
+            case SPROUT_BULLET:
+                bullet = new BulletImpl(0, SPROUT_BULLET_SPEED, initialPosition, direction, bulletType, SPROUT_BULLET_DAMAGE);
+                break;
+            case BOSS_BULLET:
+                bullet = new BulletImpl(0, BOSS_BULLET_SPEED, initialPosition, direction, bulletType, BOSS_BULLET_DAMAGE);
+                break;
+            case OLDGUARDIAN_BULLET:
+                bullet = new BulletImpl(0, OLDGUARDIAN_BULLET_SPEED, initialPosition, direction, bulletType, OLDGUARDIAN_BULLET_DAMAGE);
                 break;
             default:
+                System.out.println("System");
+                bullet = new BulletImpl(0, 0, null, null, null, 0);
                 break;
         }
-        return new BulletImpl(0, speed, initialPosition, direction, GameObjectType.BULLET);
+        return bullet;
     }
 
 
@@ -31,7 +66,7 @@ public class BulletFactoryImpl implements BulletFactory {
 
         private double damage;
 
-        public BulletImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
+        BulletImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final double damage) {
             super(id, speed, position, direction, gameObjectType);
             this.damage = damage;
         }
@@ -41,20 +76,27 @@ public class BulletFactoryImpl implements BulletFactory {
             return this.damage;
         }
 
-        @Override
+      /*  @Override
         public void setDamage(double damage) {
             this.damage = damage;
+        } */
+
+        @Override
+        public void updateState(double elapsed) {
+            // TODO Auto-generated method stub
+
         }
 
         @Override
-        public void updateState() {
+        public void move(double elapsed) {
             // TODO Auto-generated method stub
+
         }
 
         @Override
-        public void move() {
+        public void setDamage(double damage) {
             // TODO Auto-generated method stub
         }
 
-    }*/
+    }
 }

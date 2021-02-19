@@ -35,6 +35,7 @@ public class CommandImpl implements Command {
                 this.model.getRoomManager().getCharacter().moveRight();
                 break;
             case KeyEvent.VK_SPACE:
+
                 System.out.println("SPARA");
                 break;
             case KeyEvent.VK_ESCAPE:

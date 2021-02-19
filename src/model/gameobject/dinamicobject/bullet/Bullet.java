@@ -8,4 +8,6 @@ public interface Bullet extends DinamicObject {
 
     void setDamage(double damage);
 
+
+
 }

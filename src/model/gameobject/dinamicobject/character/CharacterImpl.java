@@ -9,6 +9,7 @@ import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
+import model.gameobject.dinamicobject.DinamicObject;
 import model.gameobject.dinamicobject.bullet.*;
 import model.room.RoomImpl;
 import model.shop.Item;
@@ -19,17 +20,19 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private final double MAXLIFE = 4.0;
     private double life;
     private Set<Item> items; //contains set di items
+    private BulletFactory bulletFactory;
 
     public CharacterImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
         super(id, speed, position, direction, gameObjectType);
         this.life = MAXLIFE;
         this.items = new HashSet<>();
+        this.bulletFactory = new BulletFactoryImpl();
     }
 
 
     @Override
     public void shoot() {
-        //cosa devo fare qui?
+        /* cosa devo fare qui ?? */
     }
 
     @Override
