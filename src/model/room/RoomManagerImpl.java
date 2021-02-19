@@ -19,7 +19,7 @@ public class RoomManagerImpl implements RoomManager {
     private final Map<Point2D, Room> rooms = new HashMap<>();
     private Room actualRoom;
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
-    private final Character character = new CharacterImpl(5, 0, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER);
+    private final Character character = new CharacterImpl(5, 0, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.COIN);
 
     public RoomManagerImpl() {
         this.createGameMap();
