@@ -1,12 +1,15 @@
 package model.gameobject.dinamicobject.enemy;
 
+import model.common.Point2D;
+import model.common.Vector2D;
+
 public interface EnemyFactory {
 
-    Enemy getSprout();
+    Enemy createSprout(int id, int speed, Point2D position, Vector2D direction);
 
-    Enemy getSoul();
+    Enemy createSoul();
 
-    Enemy getSkullSeeker();
+    Enemy createSkeletonSeeker();
 
-    Enemy getBoss();
+    Enemy createBoss();
 }

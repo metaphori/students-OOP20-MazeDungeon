@@ -1,6 +1,5 @@
 package model.gameobject.dinamicobject;
 
-import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;

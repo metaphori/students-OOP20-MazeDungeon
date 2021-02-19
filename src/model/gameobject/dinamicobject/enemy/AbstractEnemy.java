@@ -8,11 +8,11 @@ import model.gameobject.dinamicobject.bullet.Bullet;
 
 public abstract class AbstractEnemy extends AbstractDinamicObject implements Enemy {
 
+    private double life;
+
     public AbstractEnemy(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
         super(id, speed, position, direction, gameObjectType);
     }
-
-    private double life;
 
     /**
      * 
