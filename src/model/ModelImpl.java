@@ -11,7 +11,7 @@ import mvc.Model;
 
 public class ModelImpl implements Model {
     private final RoomManager roomManager = new RoomManagerImpl();
-
+    
     /**
      */
     @Override

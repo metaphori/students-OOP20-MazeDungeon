@@ -39,7 +39,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     @Override
     public void updateState(final double elapsed) { 
-        //TODO
+        //this.move(elapsed);
 
     }
 
@@ -69,6 +69,34 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void addItem(Item item) {
         this.items.add(item);
+    }
+
+
+    @Override
+    public void moveUp() {
+        super.setPosition((new Point2D(super.getPosition().getX() + super.getDirection().getX(),
+                super.getPosition().getY() + super.getDirection().getY())));
+    }
+
+
+    @Override
+    public void moveDown() {
+        // TODO Auto-generated method stub
+        
+    }
+
+
+    @Override
+    public void moveRight() {
+        // TODO Auto-generated method stub
+        
+    }
+
+
+    @Override
+    public void moveLeft() {
+        // TODO Auto-generated method stub
+        
     }
 
 

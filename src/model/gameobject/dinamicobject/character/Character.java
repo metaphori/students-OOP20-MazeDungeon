@@ -17,4 +17,12 @@ public interface Character extends DinamicObject {
     double getLife();
 
     void setLife(int life);
+
+    void moveUp();
+
+    void moveDown();
+
+    void moveRight();
+
+    void moveLeft();
 }
