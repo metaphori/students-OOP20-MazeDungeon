@@ -62,7 +62,7 @@ public class GameControllerImpl implements GameController {
 
     private void processInput() {
         final Integer keyCommand = commands.poll();
-        final Command command = new CommandImpl(this);
+        final Command command = new CommandImpl();
         if (keyCommand != null) {
             command.execute(keyCommand);
         }
