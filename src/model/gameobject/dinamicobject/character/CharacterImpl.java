@@ -74,29 +74,26 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     @Override
     public void moveUp() {
-        super.setPosition((new Point2D(super.getPosition().getX() + super.getDirection().getX(),
-                super.getPosition().getY() + super.getDirection().getY())));
+        this.setPosition(this.getPosition().sum(new Vector2D(0, -1)));
     }
 
 
     @Override
     public void moveDown() {
-        // TODO Auto-generated method stub
-        
+        this.setPosition(this.getPosition().sum(new Vector2D(0, 1)));
     }
 
 
     @Override
     public void moveRight() {
-        // TODO Auto-generated method stub
-        
+        this.setPosition(this.getPosition().sum(new Vector2D(1, 0)));
+
     }
 
 
     @Override
     public void moveLeft() {
-        // TODO Auto-generated method stub
-        
+        this.setPosition(this.getPosition().sum(new Vector2D(-1, 0)));
     }
 
 

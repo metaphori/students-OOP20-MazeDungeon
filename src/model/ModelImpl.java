@@ -11,7 +11,7 @@ import mvc.Model;
 
 public class ModelImpl implements Model {
     private final RoomManager roomManager = new RoomManagerImpl();
-    
+
     /**
      */
     @Override
@@ -42,5 +42,10 @@ public class ModelImpl implements Model {
     @Override
     public void update(final double elapsed) {
         this.roomManager.update(elapsed);
+    }
+
+    @Override
+    public RoomManager getRoomManager() {
+        return this.roomManager;
     }
 }

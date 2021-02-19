@@ -4,6 +4,7 @@ import java.util.List;
 
 import model.common.Point2D;
 import model.gameobject.GameObject;
+import model.room.RoomManager;
 
 public interface Model {
     Point2D getGameObjectPosition(int id);
@@ -13,4 +14,6 @@ public interface Model {
     List<GameObject> getActualGameObjects();
 
     void update(double elapsed);
+
+    RoomManager getRoomManager();
 }

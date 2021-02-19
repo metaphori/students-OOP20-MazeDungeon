@@ -5,6 +5,7 @@ import java.util.List;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.DinamicObject;
 import model.gameobject.simpleobject.SimpleObject;
+import model.gameobject.dinamicobject.character.Character;
 
 public interface Room {
 
@@ -17,4 +18,6 @@ public interface Room {
     List<GameObject> getCurrentGameObjects();
 
     void deleteGameObject(GameObject gameObject);
+
+   
 }

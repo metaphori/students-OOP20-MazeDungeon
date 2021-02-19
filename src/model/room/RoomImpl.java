@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.DinamicObject;
+import model.gameobject.dinamicobject.character.Character;
 import model.gameobject.simpleobject.SimpleObject;
 
 public class RoomImpl implements Room {
@@ -61,5 +62,8 @@ public class RoomImpl implements Room {
         simpleObjects.remove(gameObject);
         dinamicObjects.remove(gameObject);
     }
+
+    
+    
 
 }

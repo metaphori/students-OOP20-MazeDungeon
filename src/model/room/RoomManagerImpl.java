@@ -19,6 +19,7 @@ public class RoomManagerImpl implements RoomManager {
     private final Map<Point2D, Room> rooms = new HashMap<>();
     private Room actualRoom;
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
+    private final Character character = new CharacterImpl(5, 0, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER);
 
     public RoomManagerImpl() {
         this.createGameMap();
@@ -36,7 +37,7 @@ public class RoomManagerImpl implements RoomManager {
         actualRoom = new RoomImpl(this);
         rooms.put(new Point2D(0, 0), actualRoom);
         final Coin coin1 = new Coin(0, 0, new Point2D(300, 300), new Vector2D(30, 30), GameObjectType.COIN);
-        final Character character = new CharacterImpl(5, 0, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER);
+        
         actualRoom.addDinamicObject(coin1);
         actualRoom.addDinamicObject(character);
 
@@ -53,6 +54,11 @@ public class RoomManagerImpl implements RoomManager {
      */
     public Room getCurrentRoom() {
         return actualRoom;
+    }
+    
+    @Override
+    public Character getCharacter() {
+        return this.character;
     }
 
 }
