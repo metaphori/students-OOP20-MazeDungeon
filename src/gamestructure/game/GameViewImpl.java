@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.ResourceLoader;
@@ -138,6 +139,7 @@ public class GameViewImpl implements GameView, KeyListener {
         final Sprite sprite = new Sprite(adaptImage(image), image.getIconWidth(), image.getIconHeight());
         sprite.setPosition(position);
         sprites.put(id, sprite);
+        this.controller.setBoundingBox(id, new BoundingBox(position, image.getIconWidth(), image.getIconHeight()));
     }
 
     /**

@@ -10,14 +10,12 @@ public class Coin extends AbstractDinamicObject {
         super(id, speed, position, direction, gameObjectType);
     }
 
+    /**
+     * 
+     */
     @Override
     public void updateState(final double elapsed) {
         this.move(elapsed);
-    }
-
-    @Override
-    public void move(final double elapsed) {
-        this.setPosition(this.getPosition().sum(this.getDirection().mul(elapsed)));
     }
 
 }

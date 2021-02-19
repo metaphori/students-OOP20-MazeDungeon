@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import input.Command;
 import input.CommandImpl;
+import model.common.BoundingBox;
 import model.gameobject.GameObject;
 import mvc.Model;
 
@@ -123,6 +124,14 @@ public class GameControllerImpl implements GameController {
     @Override
     public void notifyCommand(final int keyCommand) {
         this.commands.add(keyCommand);
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void setBoundingBox(final int id, final BoundingBox boundingBox) {
+        this.model.getGameObject(id).setBoundingBox(boundingBox);
     }
 
 

@@ -26,6 +26,7 @@ public class RoomImpl implements Room {
         for (final DinamicObject obj : dinamicObjects) {
             obj.updateState(elapsed);
         }
+        this.checkCollisions();
     }
 
     /**
@@ -63,7 +64,18 @@ public class RoomImpl implements Room {
         dinamicObjects.remove(gameObject);
     }
 
-    
-    
+    private void checkCollisions() {
+        for (GameObject obj1 : this.getCurrentGameObjects()) {
+            for (GameObject obj2 : this.getCurrentGameObjects()) {
+                if (obj1.getBoundingBox() == null || obj1.getBoundingBox() == null || obj1.equals(obj2)) {
+                    continue;
+                }
+                if (obj1.getBoundingBox().intersectWith(obj2.getBoundingBox())) {
+                    System.out.println("COLLISIONE");
+                }
+            }
+        }
+    }
+
 
 }

@@ -50,13 +50,32 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
     /**
      * 
      */
-    private void setBoundingBoxPosition(final Point2D position) {
-        this.getBoundingBox().move(position);
+    protected void updateBoundingBoxPosition() {
+        if (this.getBoundingBox() != null) {
+            this.getBoundingBox().move(this.getPosition());
+        }
     }
 
+    /**
+     * 
+     */
+    protected void move(final double elapsed) {
+        this.setPosition(this.getPosition().sum(this.getDirection().mul(elapsed)));
+        this.updateBoundingBoxPosition();
+    }
+
+    /*
+     * IL METODO MOVE NON  è DA ASTRARRE. IL METODO MOVE è LO STESSO IDENTICO PER TUTTI GLI OGGETTI ED 
+     * è SEMPRE RICHIAMATO ALL'INTERNO DI UPDATE STATE. 
+     * PER INDICARE LA DIREZIONE ED IL VERSO DELLO SPOSTAMENTO DELL'OGGETTO SI AGISCE SEMPRE E SOLO SUL VETTORE
+     * DIRECTION. 
+     * PREMENDO W, LA COORDINATA Y DEL VETTORE DIRECTION è SETTATA A -1
+     * PREMENDO S, LA COORDINATA Y DEL VETTORE DIRECTION è SETTATA A 1
+     * PREMENDO A, LA COORDINATA X DEL VETTORE DIRECTION è SETTATA A -1
+     * PREMENDO D, LA COORDINATA X DEL VETTORE DIRECTION è SETTATA A 1
+     * 
+     */
+    
     @Override
     public abstract void updateState(double elapsed);
-
-    @Override
-    public abstract void move(double elapsed);
 }

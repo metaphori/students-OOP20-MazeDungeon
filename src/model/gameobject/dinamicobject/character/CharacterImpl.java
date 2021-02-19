@@ -77,26 +77,26 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     @Override
     public void moveUp() {
-        this.setPosition(this.getPosition().sum(new Vector2D(0, -1)));
+        this.setPosition(this.getPosition().sum(new Vector2D(0, -10)));
     }
 
 
     @Override
     public void moveDown() {
-        this.setPosition(this.getPosition().sum(new Vector2D(0, 1)));
+        this.setPosition(this.getPosition().sum(new Vector2D(0, 10)));
     }
 
 
     @Override
     public void moveRight() {
-        this.setPosition(this.getPosition().sum(new Vector2D(1, 0)));
+        this.setPosition(this.getPosition().sum(new Vector2D(10, 0)));
 
     }
 
 
     @Override
     public void moveLeft() {
-        this.setPosition(this.getPosition().sum(new Vector2D(-1, 0)));
+        this.setPosition(this.getPosition().sum(new Vector2D(-10, 0)));
     }
 
 
