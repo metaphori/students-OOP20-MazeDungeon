@@ -55,7 +55,7 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
      * @param position
      */
     public void setPosition(final Point2D position) {
-        this.lastPosition = position;
+        this.lastPosition = this.getPosition();
         super.setPosition(position);
         this.updateBoundingBoxPosition();
     }

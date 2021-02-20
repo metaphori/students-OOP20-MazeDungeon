@@ -102,10 +102,9 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
 
     @Override
-    public void collideWith(GameObject obj2) {
-        
+    public void collideWith(final GameObject obj2) {
+        this.setDirection(new Vector2D(0, 0));
+        this.setPosition(this.getLastPosition());
     }
-
-
 
 }

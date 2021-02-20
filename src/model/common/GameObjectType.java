@@ -7,14 +7,14 @@ public enum GameObjectType {
     CHARACTER,
     ENEMY_SPROUT,
     ENEMY_SOUL,
-    ENEMY_SKULL_SEEKER,
+    ENEMY_SKELETON,
     COIN,
 
     /**
      * bulletType
      */
     CHARACTER_BULLET,
-    SKELETONSEEKER_BULLET,
+    SKELETON_BULLET,
     SOUL_BULLET,
     SPROUT_BULLET,
     BOSS_BULLET,

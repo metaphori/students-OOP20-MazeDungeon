@@ -20,9 +20,11 @@ public class Coin extends AbstractDinamicObject {
         this.move(elapsed);
     }
 
+    /**
+     * 
+     */
     @Override
     public void collideWith(final GameObject obj2) {
-        //this.setPosition(new Point2D(obj2.getPosition().getX() - this.getBoundingBox().getWidth(), this.getPosition().getY()));
         this.setDirection(new Vector2D(0, 0));
         this.setPosition(this.getLastPosition());
     }

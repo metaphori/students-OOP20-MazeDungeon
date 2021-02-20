@@ -48,7 +48,7 @@ public class BoundingBox {
      * @return .
      */
     public boolean intersectWith(final BoundingBox box) {
-        if(box == null) {
+        if (box == null) {
             return false;
         }
         if (this.upperLeft.getX() >= box.bottomRight.getX() || box.upperLeft.getX() >= this.bottomRight.getX()) { 

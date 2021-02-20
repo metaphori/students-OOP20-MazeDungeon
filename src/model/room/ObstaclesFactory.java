@@ -10,7 +10,7 @@ import model.gameobject.simpleobject.SimpleObject;
 import model.gameobject.simpleobject.SimpleObjectImpl;
 
 public class ObstaclesFactory {
-    private static final Point2D UL_CORNER = new Point2D(240, 177);
+    private static final Point2D UL_CORNER = new Point2D(240, 125); //TODO in caso di resize della finestra vanno cambiati!!!!
     private static final Point2D BR_CORNER = new Point2D(1025, 633);
     //TODO id dispenser
 

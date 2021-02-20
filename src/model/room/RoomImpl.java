@@ -19,7 +19,6 @@ public class RoomImpl implements Room {
 
     public RoomImpl(final RoomManager roomManager) {
         this.roomManager = roomManager;
-        //this.setWalls();
     }
 
     //TODO va fatto bene. cosi è solo temporaneo (solo per test)
@@ -27,23 +26,6 @@ public class RoomImpl implements Room {
      * DI CARICARE GLI OSTACOLI. OGNI STANZA INDIPENDENTEMENTE DALLA DISPOSIZIONE DEGLI 
      * OSTACOLI HA GLI STESSI MURI
      */
-    private void setWalls() {
-        final SimpleObject leftWall = new SimpleObjectImpl(101, new Point2D(240, 177), GameObjectType.INVISIBLE_OBJECT);
-        leftWall.setBoundingBox(new BoundingBox(leftWall.getPosition(), 1, 456));
-        this.addSimpleObject(leftWall);
-
-        final SimpleObject rightWall = new SimpleObjectImpl(102, new Point2D(1025, 177), GameObjectType.INVISIBLE_OBJECT);
-        rightWall.setBoundingBox(new BoundingBox(rightWall.getPosition(), 1, 456));
-        this.addSimpleObject(rightWall);
-
-        final SimpleObject topWall = new SimpleObjectImpl(103, new Point2D(240, 177), GameObjectType.INVISIBLE_OBJECT);
-        topWall.setBoundingBox(new BoundingBox(topWall.getPosition(), 785, 1));
-        this.addSimpleObject(topWall);
-
-        final SimpleObject bottomWall = new SimpleObjectImpl(104, new Point2D(240, 633), GameObjectType.INVISIBLE_OBJECT);
-        bottomWall.setBoundingBox(new BoundingBox(bottomWall.getPosition(), 785, 1));
-        this.addSimpleObject(bottomWall);
-    }
 
     /**
      * @param elapsed the time passed
