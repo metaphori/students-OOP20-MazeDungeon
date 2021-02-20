@@ -13,8 +13,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Sprout
      */
     @Override
-    public Enemy createSprout(final int id, final int speed, final Point2D position, final Vector2D direction, final Room room) {
-        return new AbstractEnemy(id, speed, position, direction, GameObjectType.ENEMY_SPROUT, room) {
+    public Enemy createSprout(final int id, final int speed, final Point2D position, final Vector2D direction) {
+        return new AbstractEnemy(id, speed, position, direction, GameObjectType.ENEMY_SPROUT) {
 
             @Override
             public void updateState(final double elapsed) {
@@ -65,7 +65,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      */
     @Override
     public Enemy createSkeletonSeeker(final int id, final int speed, final Point2D position, final Vector2D direction) {
-        return new AbstractEnemy(id, speed, position, direction, GameObjectType.ENEMY_SKULL_SEEKER) {
+        return new AbstractEnemy(id, speed, position, direction, GameObjectType.ENEMY_SKELETON) {
 
             @Override
             public void collideWith(final GameObject obj2) {
