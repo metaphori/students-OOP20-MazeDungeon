@@ -7,6 +7,7 @@ import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.dinamicobject.Coin;
+import model.gameobject.dinamicobject.enemy.Enemy;
 import model.gameobject.dinamicobject.enemy.EnemyFactory;
 import model.gameobject.dinamicobject.enemy.EnemyFactoryImpl;
 import model.gameobject.dinamicobject.character.CharacterImpl;
@@ -39,6 +40,10 @@ public class RoomManagerImpl implements RoomManager {
         character = new CharacterImpl(5, 0, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.COIN, actualRoom);
         final Coin coin1 = new Coin(0, 0, new Point2D(300, 300), new Vector2D(30, 30), GameObjectType.COIN, actualRoom);
 
+        final Enemy enemySoul = this.enemyFactory.createSoul(73, 30, new Point2D(500, 500), new Vector2D(1, 1), this.actualRoom);
+        final Enemy enemySkeletonSeeker = this.enemyFactory.createSkeletonSeeker(74, 20, new Point2D(200, 200), new Vector2D(-1, 1), this.actualRoom);
+        actualRoom.addDinamicObject(enemySkeletonSeeker);
+        actualRoom.addDinamicObject(enemySoul);
         actualRoom.addDinamicObject(coin1);
         actualRoom.addDinamicObject(character);
 
