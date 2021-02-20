@@ -8,9 +8,11 @@ import java.util.Set;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
+import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
 import model.gameobject.dinamicobject.DinamicObject;
 import model.gameobject.dinamicobject.bullet.*;
+import model.room.Room;
 import model.room.RoomImpl;
 import model.shop.Item;
 
@@ -22,8 +24,8 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private Set<Item> items; //contains set di items
     private BulletFactory bulletFactory;
 
-    public CharacterImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
-        super(id, speed, position, direction, gameObjectType);
+    public CharacterImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
+        super(id, speed, position, direction, gameObjectType, room);
         this.life = MAXLIFE;
         this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl();
@@ -78,18 +80,21 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void moveUp() {
         this.setPosition(this.getPosition().sum(new Vector2D(0, -10)));
+        this.updateBoundingBoxPosition();
     }
 
 
     @Override
     public void moveDown() {
         this.setPosition(this.getPosition().sum(new Vector2D(0, 10)));
+        this.updateBoundingBoxPosition();
     }
 
 
     @Override
     public void moveRight() {
         this.setPosition(this.getPosition().sum(new Vector2D(10, 0)));
+        this.updateBoundingBoxPosition();
 
     }
 
@@ -97,6 +102,13 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void moveLeft() {
         this.setPosition(this.getPosition().sum(new Vector2D(-10, 0)));
+        this.updateBoundingBoxPosition();
+    }
+
+
+    @Override
+    public void collideWith(GameObject obj2) {
+        
     }
 
 

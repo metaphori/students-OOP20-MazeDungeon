@@ -27,6 +27,14 @@ public class BoundingBox {
             return bottomRight;
     }
 
+    public double getHeight() {
+        return this.height;
+    }
+    
+    public double getWidth() {
+        return this.width;
+    }
+
     /**
      * @param upperLeft
      */

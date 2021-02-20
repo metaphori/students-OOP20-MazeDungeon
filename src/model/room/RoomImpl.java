@@ -5,7 +5,6 @@ import java.util.List;
 
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.DinamicObject;
-import model.gameobject.dinamicobject.character.Character;
 import model.gameobject.simpleobject.SimpleObject;
 
 public class RoomImpl implements Room {
@@ -71,7 +70,7 @@ public class RoomImpl implements Room {
                     continue;
                 }
                 if (obj1.getBoundingBox().intersectWith(obj2.getBoundingBox())) {
-                    System.out.println("COLLISIONE");
+                    obj1.collideWith(obj2);
                 }
             }
         }

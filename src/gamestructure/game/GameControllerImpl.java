@@ -98,8 +98,7 @@ public class GameControllerImpl implements GameController {
         final List<Integer> gameObjectsID = this.getActualObjectsID();
         for (final Integer id : this.lastGameObjectsID) {
             if (!gameObjectsID.contains(id)) {
-                final GameObject deletedObject = model.getGameObject(id);
-                this.view.removeSprite(deletedObject.getID());
+                this.view.removeSprite(id);
             }
         }
     }

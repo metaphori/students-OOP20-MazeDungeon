@@ -17,4 +17,6 @@ public interface GameObject {
 
     void setBoundingBox(BoundingBox boundingBox);
 
+    void collideWith(GameObject obj2);
+
 }
