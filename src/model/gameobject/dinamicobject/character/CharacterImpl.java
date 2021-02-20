@@ -24,8 +24,8 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private Set<Item> items; //contains set di items
     private BulletFactory bulletFactory;
 
-    public CharacterImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
-        super(id, speed, position, direction, gameObjectType, room);
+    public CharacterImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
+        super(id, speed, position, direction, gameObjectType);
         this.life = MAXLIFE;
         this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl();
@@ -80,29 +80,24 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void moveUp() {
         this.setPosition(this.getPosition().sum(new Vector2D(0, -10)));
-        this.updateBoundingBoxPosition();
     }
 
 
     @Override
     public void moveDown() {
         this.setPosition(this.getPosition().sum(new Vector2D(0, 10)));
-        this.updateBoundingBoxPosition();
     }
 
 
     @Override
     public void moveRight() {
         this.setPosition(this.getPosition().sum(new Vector2D(10, 0)));
-        this.updateBoundingBoxPosition();
-
     }
 
 
     @Override
     public void moveLeft() {
         this.setPosition(this.getPosition().sum(new Vector2D(-10, 0)));
-        this.updateBoundingBoxPosition();
     }
 
 

@@ -18,5 +18,8 @@ public enum GameObjectType {
     SOUL_BULLET,
     SPROUT_BULLET,
     BOSS_BULLET,
-    OLDGUARDIAN_BULLET;
+    OLDGUARDIAN_BULLET,
+    
+    INVISIBLE_OBJECT,
+    ROCK;
 }

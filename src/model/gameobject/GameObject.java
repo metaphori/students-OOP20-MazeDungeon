@@ -3,13 +3,12 @@ package model.gameobject;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
+import model.room.Room;
 
 public interface GameObject {
     int getID();
 
     Point2D getPosition();
-
-    void setPosition(Point2D position);
 
     GameObjectType getGameObjectType();
 
@@ -17,6 +16,6 @@ public interface GameObject {
 
     void setBoundingBox(BoundingBox boundingBox);
 
-    void collideWith(GameObject obj2);
+    void setRoom(Room room);
 
 }

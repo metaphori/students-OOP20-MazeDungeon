@@ -3,17 +3,20 @@ package model.gameobject.dinamicobject;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
+import model.gameobject.GameObject;
 import model.gameobject.simpleobject.SimpleObjectImpl;
 import model.room.Room;
 
 public abstract class AbstractDinamicObject extends SimpleObjectImpl implements DinamicObject {
     private Vector2D direction;
     private int speed;
+    private Point2D lastPosition;
 
-    public AbstractDinamicObject(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
-        super(id, position, gameObjectType, room);
+    public AbstractDinamicObject(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
+        super(id, position, gameObjectType);
         this.speed = speed;
         this.direction = direction;
+        this.lastPosition = this.getPosition();
     }
 
     /**
@@ -49,30 +52,41 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
     }
 
     /**
+     * @param position
+     */
+    public void setPosition(final Point2D position) {
+        this.lastPosition = position;
+        super.setPosition(position);
+        this.updateBoundingBoxPosition();
+    }
+
+    /**
      * 
      */
-    protected void updateBoundingBoxPosition() {
+    private void updateBoundingBoxPosition() {
         if (this.getBoundingBox() != null) {
             this.getBoundingBox().move(this.getPosition());
         }
     }
 
     /**
-     * 
+     * @param elapsed
      */
     protected void move(final double elapsed) {
         this.setPosition(this.getPosition().sum(this.getDirection().mul(this.getDirection().module()).mul(speed).mul(elapsed)));
-        this.updateBoundingBoxPosition();
     }
 
-    /*
-     * IL METODO MOVE NON  è DA ASTRARRE. IL METODO MOVE è LO STESSO IDENTICO PER TUTTI GLI OGGETTI ED 
-     * è SEMPRE RICHIAMATO ALL'INTERNO DI UPDATE STATE. 
-     * PER INDICARE LA DIREZIONE ED IL VERSO DELLO SPOSTAMENTO DELL'OGGETTO SI AGISCE SEMPRE E SOLO SUL VETTORE
-     * DIRECTION. 
+    /**
      * 
+     * @return last position of the object
      */
+    protected Point2D getLastPosition() {
+        return this.lastPosition;
+    }
 
     @Override
     public abstract void updateState(double elapsed);
+
+    @Override
+    public abstract void collideWith(GameObject obj2);
 }

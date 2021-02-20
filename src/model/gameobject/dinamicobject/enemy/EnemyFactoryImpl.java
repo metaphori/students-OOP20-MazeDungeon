@@ -38,8 +38,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Soul
      */
     @Override
-    public Enemy createSoul(final int id, final int speed, final Point2D position, final Vector2D direction, final Room room) {
-        return new AbstractEnemy(id, speed, position, direction, GameObjectType.ENEMY_SOUL, room) {
+    public Enemy createSoul(final int id, final int speed, final Point2D position, final Vector2D direction) {
+        return new AbstractEnemy(id, speed, position, direction, GameObjectType.ENEMY_SOUL) {
 
             @Override
             public void collideWith(final GameObject obj2) {
@@ -64,8 +64,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: SkeletonSeeker
      */
     @Override
-    public Enemy createSkeletonSeeker(final int id, final int speed, final Point2D position, final Vector2D direction, final Room room) {
-        return new AbstractEnemy(id, speed, position, direction, GameObjectType.ENEMY_SKULL_SEEKER, room) {
+    public Enemy createSkeletonSeeker(final int id, final int speed, final Point2D position, final Vector2D direction) {
+        return new AbstractEnemy(id, speed, position, direction, GameObjectType.ENEMY_SKULL_SEEKER) {
 
             @Override
             public void collideWith(final GameObject obj2) {
@@ -90,7 +90,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Boss
      */
     @Override
-    public Enemy createBoss(final int id, final int speed, final Point2D position, final Vector2D direction, final Room room) {
+    public Enemy createBoss(final int id, final int speed, final Point2D position, final Vector2D direction) {
         // TODO Auto-generated method stub
         return null;
     }

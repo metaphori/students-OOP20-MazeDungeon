@@ -6,18 +6,17 @@ import model.common.Point2D;
 import model.gameobject.GameObject;
 import model.room.Room;
 
-public abstract class SimpleObjectImpl implements SimpleObject {
+public class SimpleObjectImpl implements SimpleObject {
     private final int id;
     private Point2D position;
     private final GameObjectType gameObjectType;
     private BoundingBox boundingBox;
     private Room room;
 
-    public SimpleObjectImpl(final int id, final Point2D position, final GameObjectType gameObjectType, final Room room) {
+    public SimpleObjectImpl(final int id, final Point2D position, final GameObjectType gameObjectType) {
         this.id = id;
         this.position = position;
         this.gameObjectType = gameObjectType;
-        this.room = room;
     }
 
     /**
@@ -37,10 +36,10 @@ public abstract class SimpleObjectImpl implements SimpleObject {
     }
 
     /**
-     * @param position : the position where the object will be setted
+     * 
+     * @param position
      */
-    @Override
-    public void setPosition(final Point2D position) {
+    protected void setPosition(final Point2D position) {
         this.position = position;
     }
 
@@ -68,10 +67,20 @@ public abstract class SimpleObjectImpl implements SimpleObject {
         this.boundingBox = boundingBox;
     }
 
+    /**
+     * 
+     * @return .
+     */
     protected Room getRoom() {
         return this.room;
     }
 
-    public abstract void collideWith(GameObject obj2);
+    /**
+     * 
+     */
+    @Override
+    public void setRoom(final Room room) {
+        this.room = room;
+    }
 
 }

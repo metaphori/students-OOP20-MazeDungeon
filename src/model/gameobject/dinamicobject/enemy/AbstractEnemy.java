@@ -11,8 +11,8 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
 
     private double life;
 
-    public AbstractEnemy(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
-        super(id, speed, position, direction, gameObjectType, room);
+    public AbstractEnemy(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
+        super(id, speed, position, direction, gameObjectType);
     }
 
     /**
