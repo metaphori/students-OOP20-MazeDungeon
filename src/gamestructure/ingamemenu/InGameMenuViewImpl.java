@@ -16,6 +16,9 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import gamestructure.ingamemenu.utilities.ImageLoader;
+import gamestructure.ingamemenu.utilities.Images;
+
 public class InGameMenuViewImpl implements InGameMenuView {
     private static int SIZE_IMAGE_ITEM = 100;
     private static double WIDTH_RATIO = 0.67; 
@@ -23,33 +26,28 @@ public class InGameMenuViewImpl implements InGameMenuView {
     private final JFrame frame = new JFrame();
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
-    private final JLabel lblBackgroundMenu = new JLabel(new ImageIcon("resources\\images\\InGameMenu\\ingamemenu.png"));
+    private final ImageLoader  imageIconSources = new ImageLoader();
 
-    private final Image imageResumeMenu = new ImageIcon("resources//images//InGameMenu//resume.png").getImage().getScaledInstance(300, 90, Image.SCALE_SMOOTH);
-    private final Image imageExitMenu = new ImageIcon("resources//images//InGameMenu//exit.png").getImage().getScaledInstance(300, 90, Image.SCALE_SMOOTH);
-    private final Image imageShopMenu = new ImageIcon("resources//images//InGameMenu//shopbtn.png").getImage().getScaledInstance(300, 90, Image.SCALE_SMOOTH);
+    private final JLabel lblBackgroundMenu = new JLabel(imageIconSources.getImage(Images.BACKGROUNDMENU));
+    private final JButton btnResumeMenu = new JButton("", imageIconSources.getImage(Images.BTNRESUME));
+    private final JButton btnExitMenu = new JButton("", imageIconSources.getImage(Images.BTNEXIT)); 
+    private final JButton btnShopMenu = new JButton("", imageIconSources.getImage(Images.BTNSHOP)); 
 
-    //private final JButton btnResumeMenu = new JButton("", new ImageIcon(imageResumeMenu)); 
-    private final JButton btnResumeMenu = new JButton("", new ImageIcon(imageResumeMenu));
-    private final JButton btnExitMenu = new JButton("", new ImageIcon(imageExitMenu)); 
-    private final JButton btnShopMenu = new JButton("", new ImageIcon(imageShopMenu)); 
-    //Dchiarazione componenti shop
-    //Image Item Scaled
-    private final Image imageZeusBolt = new ImageIcon("resources//images//Item//zeusBolt.png").getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
-    private final Image imageArthemideBow = new ImageIcon("resources//images//Item//arthemideBow.png").getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
-    private final Image imageHermesBoots = new ImageIcon("resources//images//Item//hermesBoots.png").getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
-    private final Image imageHealth = new ImageIcon("resources//images//Item//health.png").getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
-    private final Image imageBackToMenu = new ImageIcon("resources//images//InGameMenu//backToMenu.png").getImage().getScaledInstance(250, 60, Image.SCALE_SMOOTH);
+    private final JButton btnArthemideBowItem = new JButton("", imageIconSources.getImage(Images.BTNARTHEMIDEBOW)); 
+    private final JButton btnHermesBootsItem = new JButton("", imageIconSources.getImage(Images.BTNHERMESBOOTS)); 
+    private final JButton btnZeusBoltItem = new JButton("", imageIconSources.getImage(Images.BTNZEUSBOLT)); 
+    private final JButton btnHealthItem = new JButton("", imageIconSources.getImage(Images.BTNHEALTH)); 
 
-    private final JButton btnBackToMenu = new JButton("", new ImageIcon(imageBackToMenu)); 
+    private final JButton btnBackToMenu = new JButton("", imageIconSources.getImage(Images.BTNRETURNMENU)); 
 
-    private final JLabel lblBackgroundShop = new JLabel(new ImageIcon("resources\\images\\InGameMenu\\shop.png"));
+    private final JLabel lblBackgroundShop = new JLabel(imageIconSources.getImage(Images.BACKGROUNDSHOP));
 
     private final JPanel inGameMenuPanel = new JPanel(new GridBagLayout());
     private final JPanel shopPanel = new JPanel(new GridBagLayout());
 
-    private boolean start = false;
+    private boolean start;
 
+    private final InGameMenuControllerImpl controller = new InGameMenuControllerImpl(this);
     public InGameMenuViewImpl() {
 
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,30 +57,21 @@ public class InGameMenuViewImpl implements InGameMenuView {
 
         inGameMenuPanel.add(lblBackgroundMenu);
         shopPanel.add(lblBackgroundShop);
+
+        showInGameMenu();
     }
 
     public void showShop() {
-        JButton btnArthemideBowItem;
-        JButton btnHermesBootsItem;
-        JButton btnZeusBoltItem;
-        JButton btnHealthItem;
-        
         this.frame.remove(inGameMenuPanel);
-
-        btnArthemideBowItem = new JButton("", new ImageIcon(imageArthemideBow)); 
-        btnHermesBootsItem = new JButton("", new ImageIcon(imageHermesBoots)); 
-        btnZeusBoltItem = new JButton("", new ImageIcon(imageZeusBolt)); 
-        btnHealthItem = new JButton("", new ImageIcon(imageHealth)); 
-
-
         this.frame.setContentPane(shopPanel);
-       // shopPanel.add(lblBackgroundShop);
 
-        btnBackToMenu.setBounds((int) (screen.getWidth()/4), (int) (screen.getHeight()/1.5), 250, 60);
+        btnBackToMenu.setBounds((int) (screen.getWidth()/4), (int) (screen.getHeight()/1.5), 300, 90);
         this.configureButton(btnBackToMenu);
         this.lblBackgroundShop.add(btnBackToMenu);
-        
-        
+        btnBackToMenu.addActionListener(e -> {
+            this.controller.openInGameMenu();
+        });
+
         btnArthemideBowItem.setBounds(45, 180, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnArthemideBowItem);
         this.lblBackgroundShop.add(btnArthemideBowItem);
@@ -99,8 +88,7 @@ public class InGameMenuViewImpl implements InGameMenuView {
         this.configureButton(btnHealthItem);
         this.lblBackgroundShop.add(btnHealthItem);
 
-        this.frame.pack();
-        this.frame.setVisible(true);
+       this.show();
     }
     public void showInGameMenu() {
 
@@ -115,19 +103,30 @@ public class InGameMenuViewImpl implements InGameMenuView {
         btnShopMenu.setBounds((int) (screen.getWidth()/4), 433, 300, 90);
         this.configureButton(btnShopMenu);
         this.lblBackgroundMenu.add(btnShopMenu);
+        btnShopMenu.addActionListener(e -> {
+            this.controller.openShop();
+        });
 
         btnExitMenu.setBounds((int) (screen.getWidth()/4), 523, 300, 90);
         this.configureButton(btnExitMenu);
         this.lblBackgroundMenu.add(btnExitMenu);
+        btnExitMenu.addActionListener(e -> {
+            this.controller.exit();
+        });
 
+        if (start) {
+            this.show();
+        }
+    }
+
+    public void show() {
         this.frame.pack();
-        this.frame.setVisible(true);
-
-        if(start == false) {
+        if (start == false) {
             this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2, 
                                  screen.height / 2 - this.frame.getSize().height / 2);
             start = true;
         }
+        this.frame.setVisible(true);
     }
 
     /**
@@ -138,10 +137,15 @@ public class InGameMenuViewImpl implements InGameMenuView {
     }
 
     private void configureButton(final JButton btn) {
+        
         btn.setBackground(new Color(11,23,30,255));
         btn.setBorder(new LineBorder(new Color(11,23,30,255))); //Colore del bordo del bottone
         btn.setFocusPainted(false); //Disabilita il paint del focus sul testo del bottone
 
+
+    }
+
+    public void returnMessage(String messageOuput) {
 
     }
 

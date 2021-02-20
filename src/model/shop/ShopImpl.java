@@ -20,7 +20,7 @@ public class ShopImpl {
      * @return Item with features of ArthemideBow
      */
 
-    public boolean buyItem(final Items i) {
+    public boolean checkItem(final Items i) {
         if(purchasedItems.contains(i)) {
             messageOuput="You already have this item";
             return false;
