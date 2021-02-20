@@ -46,12 +46,12 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     }
 
-    @Override
+    /*@Override
     public void move(double elapsed) {
         super.setSpeed(8);
         super.setPosition(new Point2D(super.getPosition().getX() + super.getDirection().getX(),
                                super.getPosition().getY() + super.getDirection().getY()));
-    }
+    }*/
 
 
     @Override

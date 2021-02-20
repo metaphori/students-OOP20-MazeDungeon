@@ -60,7 +60,7 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
      * 
      */
     protected void move(final double elapsed) {
-        this.setPosition(this.getPosition().sum(this.getDirection().mul(elapsed)));
+        this.setPosition(this.getPosition().sum(this.getDirection().mul(this.getDirection().module()).mul(speed).mul(elapsed)));
         this.updateBoundingBoxPosition();
     }
 
@@ -69,10 +69,6 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
      * è SEMPRE RICHIAMATO ALL'INTERNO DI UPDATE STATE. 
      * PER INDICARE LA DIREZIONE ED IL VERSO DELLO SPOSTAMENTO DELL'OGGETTO SI AGISCE SEMPRE E SOLO SUL VETTORE
      * DIRECTION. 
-     * PREMENDO W, LA COORDINATA Y DEL VETTORE DIRECTION è SETTATA A -1
-     * PREMENDO S, LA COORDINATA Y DEL VETTORE DIRECTION è SETTATA A 1
-     * PREMENDO A, LA COORDINATA X DEL VETTORE DIRECTION è SETTATA A -1
-     * PREMENDO D, LA COORDINATA X DEL VETTORE DIRECTION è SETTATA A 1
      * 
      */
     

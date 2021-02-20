@@ -41,10 +41,10 @@ public class RoomManagerImpl implements RoomManager {
         actualRoom.addDinamicObject(coin1);
         actualRoom.addDinamicObject(character);
 
-        actualRoom.addDinamicObject(new Coin(1, 0, new Point2D(400, 400), new Vector2D(0, 30), GameObjectType.COIN));
-        actualRoom.addDinamicObject(new Coin(2, 0, new Point2D(400, 600), new Vector2D(0, -30), GameObjectType.COIN));
-        actualRoom.addDinamicObject(new Coin(3, 0, new Point2D(500, 400), new Vector2D(0, 30), GameObjectType.COIN));
-        actualRoom.addDinamicObject(new Coin(4, 0, new Point2D(500, 800), new Vector2D(0, -30), GameObjectType.COIN));
+        actualRoom.addDinamicObject(new Coin(1, 60, new Point2D(400, 400), new Vector2D(1, 1), GameObjectType.COIN));
+        actualRoom.addDinamicObject(new Coin(2, 30, new Point2D(400, 600), new Vector2D(0, -1), GameObjectType.COIN));
+        actualRoom.addDinamicObject(new Coin(3, 30, new Point2D(500, 400), new Vector2D(0, 1), GameObjectType.COIN));
+        actualRoom.addDinamicObject(new Coin(4, 60, new Point2D(500, 800), new Vector2D(0, -1), GameObjectType.COIN));
         actualRoom.deleteGameObject(coin1);
     }
     
