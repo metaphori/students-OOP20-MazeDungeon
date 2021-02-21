@@ -34,31 +34,10 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     @Override
     public void shoot() {
-        System.out.println(this.getDirection().getX() + " " + this.getDirection().getY());
-
-        final Vector2D up = new Vector2D(0, 1);
-        final Vector2D down = new Vector2D(0, -1);
-
-        final Vector2D left = new Vector2D(-1, 0);
-        final Vector2D right = new Vector2D(1, 0);
-        Bullet bullet = null;
-        if (this.getDirection().getX() == up.getX() && this.getDirection().getY() == up.getY()) { //sto andando in alto
-             bullet = this.bulletFactory.createCharacterBullet(GameObjectType.CHARACTER_BULLET_UP, new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY() + this.getBoundingBox().getHeight() / 2), this.getDirection(), this.getRoom());
-
-        }else if (this.getDirection().getX() == down.getX() && this.getDirection().getY() == down.getY()  ) {
-            bullet = this.bulletFactory.createCharacterBullet(GameObjectType.CHARACTER_BULLET_DOWN, new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY() + this.getBoundingBox().getHeight() / 2), this.getDirection(), this.getRoom());
-
-        }
-        else if (this.getDirection().getX() == left.getX() && this.getDirection().getY() == left.getY()  ) {
-
-            bullet = this.bulletFactory.createCharacterBullet(GameObjectType.CHARACTER_BULLET_LEFT, new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY() + this.getBoundingBox().getHeight() / 2), this.getDirection(), this.getRoom());
-        }
-        else if (this.getDirection().getX() == right.getX() && this.getDirection().getY() == right.getY()  ) {
-
-            bullet = this.bulletFactory.createCharacterBullet(GameObjectType.CHARACTER_BULLET_RIGHT, new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY() + this.getBoundingBox().getHeight() / 2), this.getDirection(), this.getRoom());
-        }
-        //final Bullet bullet = this.bulletFactory.createCharacterBullet(GameObjectType.CHARACTER_BULLET, new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY() + this.getBoundingBox().getHeight() / 2), this.getDirection(), this.getRoom());
-        //System.out.println("Creo oggetto");
+        //System.out.println(this.getDirection().getX() + " " + this.getDirection().getY());
+        Bullet bullet = this.bulletFactory.createCharacterBullet(GameObjectType.ENEMY_SOUL,
+                    new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2,
+                    this.getPosition().getY() + this.getBoundingBox().getHeight() / 2), this.getDirection(), this.getRoom());
         this.getRoom().addDinamicObject(bullet);
 
     }
