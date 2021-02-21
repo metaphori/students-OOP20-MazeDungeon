@@ -19,5 +19,6 @@ public interface Room {
 
     void deleteGameObject(GameObject gameObject);
 
-   
+    RoomManager getRoomManager();
+
 }

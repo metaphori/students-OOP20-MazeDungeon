@@ -30,12 +30,19 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         this.life = MAXLIFE;
         this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl();
+
     }
 
 
     @Override
     public void shoot() {
         //**// //ROOM MANAGER DEVE METTERE DENTRO LA STANZA IL BULLET CREATO DALLA FACTORY
+        //this.getRoom().addDinamicObject(bulletFactory.createCharacterBullet(super.getGameObjectType(), super.getPosition(), super.getDirection()));
+        //this.getRoom().getRoomManager().getCurrentRoom().addDinamicObject(bulletFactory.createCharacterBullet(super.getGameObjectType(), super.getPosition(), super.getDirection()));
+        final Bullet bullet = this.bulletFactory.createCharacterBullet(GameObjectType.ENEMY_SOUL, this.getPosition(), this.getDirection());
+        //System.out.println("Creo oggetto");
+        this.getRoom().addDinamicObject(bullet);
+
     }
 
     @Override
@@ -93,6 +100,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void moveRight() {
         this.setPosition(this.getPosition().sum(new Vector2D(10, 0)));
+        
     }
 
 

@@ -88,5 +88,10 @@ public class RoomImpl implements Room {
         }
     }
 
+    @Override
+    public RoomManager getRoomManager() {
+        return roomManager;
+    }
+
 
 }

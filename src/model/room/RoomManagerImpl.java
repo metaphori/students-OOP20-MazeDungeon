@@ -8,6 +8,9 @@ import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.dinamicobject.Coin;
+import model.gameobject.dinamicobject.bullet.Bullet;
+import model.gameobject.dinamicobject.bullet.BulletFactory;
+import model.gameobject.dinamicobject.bullet.BulletFactoryImpl;
 import model.gameobject.dinamicobject.enemy.Enemy;
 import model.gameobject.dinamicobject.enemy.EnemyFactory;
 import model.gameobject.dinamicobject.enemy.EnemyFactoryImpl;
@@ -22,6 +25,7 @@ public class RoomManagerImpl implements RoomManager {
     private final Map<Point2D, Room> rooms = new HashMap<>();
     private Room actualRoom;
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
+    private final BulletFactory bulletFactory = new BulletFactoryImpl();
     private Character character;
     private final ObstaclesFactory obstaclesFactory = new ObstaclesFactory();
 
@@ -44,8 +48,10 @@ public class RoomManagerImpl implements RoomManager {
 
         final Enemy enemySoul = this.enemyFactory.createSoul(73, 30, new Point2D(500, 500), new Vector2D(1, 1));
         final Enemy enemySkeletonSeeker = this.enemyFactory.createSkeletonSeeker(74, 20, new Point2D(200, 200), new Vector2D(-1, 1));
+        //final Bullet bullet = this.bulletFactory.createCharacterBullet(GameObjectType.ENEMY_SOUL , new Point2D(0, 0), new Vector2D(1, 1));
         actualRoom.addDinamicObject(enemySkeletonSeeker);
         actualRoom.addDinamicObject(enemySoul);
+        //actualRoom.addDinamicObject(bullet);
         actualRoom.addDinamicObject(character);
 
         Random rnd = new Random();
