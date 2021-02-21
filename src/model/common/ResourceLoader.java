@@ -15,6 +15,12 @@ public class ResourceLoader {
         resources.put(GameObjectType.CHARACTER, imagesPath + "Character" + sep + "Character.png");
         resources.put(GameObjectType.ENEMY_SOUL, imagesPath + "Enemies" + sep + "Soul" + sep + "Soul" + sep + "MoveLeft" + sep + "Soul1.png");
         resources.put(GameObjectType.ENEMY_SKELETON, imagesPath + "Enemies" + sep + "Skeleton_Seeker" + sep + "Skeleton_Seeker" + sep + "Spawn" + sep + "Skeleton9.png");
+
+        /*LOAD BULLET IMAGE*/
+        resources.put(GameObjectType.CHARACTER_BULLET_RIGHT, imagesPath + "Bullets" + sep + "CharacterBulletRight.png");
+        resources.put(GameObjectType.CHARACTER_BULLET_LEFT, imagesPath + "Bullets" + sep + "CharacterBulletLeft.png");
+        resources.put(GameObjectType.CHARACTER_BULLET_UP, imagesPath + "Bullets" + sep + "CharacterBulletUp.png");
+        resources.put(GameObjectType.CHARACTER_BULLET_DOWN, imagesPath + "Bullets" + sep + "CharacterBulletDown.png");
     }
 
     /**

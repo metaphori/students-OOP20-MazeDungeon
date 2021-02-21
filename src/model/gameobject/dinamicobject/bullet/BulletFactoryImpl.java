@@ -36,7 +36,7 @@ public class BulletFactoryImpl implements BulletFactory {
     /**
      * 
      * @param idIterator
-     * @param  
+     * @param 
      */
     public BulletFactoryImpl(final IdIterator idIterator) {
         this.idIterator = idIterator;

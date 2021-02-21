@@ -1,8 +1,10 @@
 package model.room;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import model.common.GameObjectType;
 import model.common.IdIterator;
@@ -28,6 +30,7 @@ public class RoomManagerImpl implements RoomManager {
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl(this.idIterator);
     private Character character;
     private final ObstaclesFactory obstaclesFactory = new ObstaclesFactory(this.idIterator);
+    private final Set<Bullet> bulletSet = new HashSet<>();
 
     public RoomManagerImpl() {
         this.createGameMap();
