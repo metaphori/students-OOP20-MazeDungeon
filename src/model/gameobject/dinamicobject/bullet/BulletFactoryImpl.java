@@ -38,7 +38,7 @@ public class BulletFactoryImpl implements BulletFactory {
             case CHARACTER_BULLET:
                 bullet = new BulletImpl(0, CHARACTER_BULLET_SPEED, initialPosition, direction, bulletType, CHARACTER_BULLET_DAMAGE);
                 break;
-            case SKELETONSEEKER_BULLET:
+            case SKELETON_BULLET:
                 bullet = new BulletImpl(0, SKELETONSEEKER_BULLET_SPEED, initialPosition, direction, bulletType, SKELETONSEEKER_BULLET_DAMAGE);
                 break;
             case SOUL_BULLET:

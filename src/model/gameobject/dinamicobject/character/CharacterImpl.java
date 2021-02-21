@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.Set;
 
+import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
@@ -103,6 +104,13 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     @Override
     public void collideWith(final GameObject obj2) {
+        /*final int footHeight = 15;
+        final Point2D footColliderUL = new Point2D(this.getBoundingBox().getULCorner().getX(), this.getBoundingBox().getBRCorner().getY() - footHeight);
+        final BoundingBox footCollider = new BoundingBox(footColliderUL, this.getBoundingBox().getWidth(), footHeight);
+        if(footCollider.intersectWith(obj2.getBoundingBox())) {
+            this.setDirection(new Vector2D(0, 0));
+            this.setPosition(this.getLastPosition());
+        }*/
         this.setDirection(new Vector2D(0, 0));
         this.setPosition(this.getLastPosition());
     }
