@@ -1,20 +1,14 @@
 package model.gameobject.dinamicobject.character;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.Set;
 
-import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
-import model.gameobject.dinamicobject.DinamicObject;
 import model.gameobject.dinamicobject.bullet.*;
-import model.room.Room;
-import model.room.RoomImpl;
 import model.shop.Item;
 
 
@@ -29,7 +23,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         super(id, speed, position, direction, gameObjectType);
         this.life = MAXLIFE;
         this.items = new HashSet<>();
-        this.bulletFactory = new BulletFactoryImpl();
+        //this.bulletFactory = new BulletFactoryImpl();
 
     }
 
