@@ -5,7 +5,6 @@ import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.simpleobject.SimpleObjectImpl;
-import model.room.Room;
 
 public abstract class AbstractDinamicObject extends SimpleObjectImpl implements DinamicObject {
     private Vector2D direction;

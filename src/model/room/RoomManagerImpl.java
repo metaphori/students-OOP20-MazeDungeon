@@ -46,7 +46,7 @@ public class RoomManagerImpl implements RoomManager {
         rooms.put(new Point2D(0, 0), actualRoom);
         character = new CharacterImpl(0, 0, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.ENEMY_SKELETON);
 
-        final Enemy enemySoul = this.enemyFactory.createSoul(73, 30, new Point2D(500, 500), new Vector2D(1, 1));
+        final Enemy enemySoul = this.enemyFactory.createSoul(73, 90, new Point2D(500, 500), new Vector2D(1, 1));
         final Enemy enemySkeletonSeeker = this.enemyFactory.createSkeletonSeeker(74, 20, new Point2D(200, 200), new Vector2D(-1, 1));
         //final Bullet bullet = this.bulletFactory.createCharacterBullet(GameObjectType.ENEMY_SOUL , new Point2D(0, 0), new Vector2D(1, 1));
         actualRoom.addDinamicObject(enemySkeletonSeeker);
@@ -55,9 +55,9 @@ public class RoomManagerImpl implements RoomManager {
         actualRoom.addDinamicObject(character);
 
         Random rnd = new Random();
-        for (int i = 1; i < 30; i++) {
+        for (int i = 1; i < 2; i++) {
             actualRoom.addDinamicObject(new Coin(i, 50, new Point2D(rnd.nextInt(785) + 240, rnd.nextInt(456) + 177), 
-                                                        new Vector2D(rnd.nextBoolean() ? 1 : -1, rnd.nextBoolean() ? 1 : -1), GameObjectType.COIN));
+                                                        new Vector2D(-1 , 0), GameObjectType.COIN));
         }
         for (SimpleObject obj: obstaclesFactory.getEmptyRoom()) {
             actualRoom.addSimpleObject(obj);

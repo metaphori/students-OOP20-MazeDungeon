@@ -3,9 +3,9 @@ package model.gameobject.dinamicobject.enemy;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
+import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
 import model.gameobject.dinamicobject.bullet.Bullet;
-import model.room.Room;
 
 public abstract class AbstractEnemy extends AbstractDinamicObject implements Enemy {
 
@@ -33,8 +33,24 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
       //TODO
     }
 
-    //@Override
-   // public abstract void move(double elapsed);
+    /**
+     * 
+     */
+    @Override
+    public void collideWith(final GameObject obj2) {
+        switch (obj2.getGameObjectType().getCollisionType()) {
+        case OBSTACLE:
+        case ENTITY:
+            this.setPosition(this.getLastPosition());
+            this.changeRoutine();
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    protected abstract void changeRoutine();
 
     @Override
     public abstract Bullet shoot();

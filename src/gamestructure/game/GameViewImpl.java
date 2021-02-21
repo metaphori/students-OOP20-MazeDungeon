@@ -1,5 +1,6 @@
 package gamestructure.game;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -48,6 +49,7 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.setTitle("MazeDungeon");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gamePanel = new GamePanel();
+        gamePanel.setBackground(new Color(11,19,30));
         //gamePanel.setSize(this.frame.getSize());
         this.frame.add(gamePanel);
         this.frame.addKeyListener(this);

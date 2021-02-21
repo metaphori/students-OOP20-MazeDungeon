@@ -1,11 +1,11 @@
 package model.gameobject.dinamicobject.enemy;
 
+import java.util.Random;
+
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
-import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.bullet.Bullet;
-import model.room.Room;
 
 public class EnemyFactoryImpl implements EnemyFactory {
 
@@ -28,8 +28,9 @@ public class EnemyFactoryImpl implements EnemyFactory {
             }
 
             @Override
-            public void collideWith(final GameObject obj2) {
+            protected void changeRoutine() {
                 // TODO Auto-generated method stub
+
             }
         };
     }
@@ -40,13 +41,6 @@ public class EnemyFactoryImpl implements EnemyFactory {
     @Override
     public Enemy createSoul(final int id, final int speed, final Point2D position, final Vector2D direction) {
         return new AbstractEnemy(id, speed, position, direction, GameObjectType.ENEMY_SOUL) {
-
-            @Override
-            public void collideWith(final GameObject obj2) {
-                // TODO Auto-generated method stub
-
-            }
-
             @Override
             public void updateState(final double elapsed) {
                 this.move(elapsed);
@@ -56,6 +50,14 @@ public class EnemyFactoryImpl implements EnemyFactory {
             public Bullet shoot() {
                 // TODO Auto-generated method stub
                 return null;
+            }
+
+            @Override
+            protected void changeRoutine() {
+                final Random rndFlipDirection = new Random();
+                final double newX = this.getDirection().getX() * (rndFlipDirection.nextBoolean() ? -1 : 1);
+                final double newY = this.getDirection().getY() * (rndFlipDirection.nextBoolean() ? -1 : 1);
+                this.setDirection(new Vector2D(newX, newY));
             }
         };
     }
@@ -68,12 +70,6 @@ public class EnemyFactoryImpl implements EnemyFactory {
         return new AbstractEnemy(id, speed, position, direction, GameObjectType.ENEMY_SKELETON) {
 
             @Override
-            public void collideWith(final GameObject obj2) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
             public void updateState(final double elapsed) {
                 this.move(elapsed);
             }
@@ -82,6 +78,12 @@ public class EnemyFactoryImpl implements EnemyFactory {
             public Bullet shoot() {
                 // TODO Auto-generated method stub
                 return null;
+            }
+
+            @Override
+            protected void changeRoutine() {
+                // TODO Auto-generated method stub
+
             }
         };
     }

@@ -120,7 +120,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
             this.setPosition(this.getLastPosition());
         }*/
         this.setDirection(new Vector2D(0, 0));
-        this.setPosition(this.getLastPosition());
+        //this.setPosition(this.getLastPosition());
     }
 
 }

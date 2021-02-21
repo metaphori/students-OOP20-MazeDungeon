@@ -4,22 +4,33 @@ public enum GameObjectType {
     /**
      * 
      */
-    CHARACTER,
-    ENEMY_SPROUT,
-    ENEMY_SOUL,
-    ENEMY_SKELETON,
-    COIN,
-
+    CHARACTER(CollisionType.ENTITY),
+    ENEMY_SPROUT(CollisionType.ENTITY),
+    ENEMY_SOUL(CollisionType.ENTITY),
+    ENEMY_SKELETON(CollisionType.ENTITY),
+    ENEMY_BOSS(CollisionType.ENTITY),
     /**
      * bulletType
      */
-    CHARACTER_BULLET,
-    SKELETON_BULLET,
-    SOUL_BULLET,
-    SPROUT_BULLET,
-    BOSS_BULLET,
-    OLDGUARDIAN_BULLET,
-    
-    INVISIBLE_OBJECT,
-    ROCK;
+    COIN(CollisionType.INTERACTIVE_ELEMENT),
+    DOOR(CollisionType.INTERACTIVE_ELEMENT),
+    CHARACTER_BULLET(CollisionType.INTERACTIVE_ELEMENT),
+    SKELETON_BULLET(CollisionType.INTERACTIVE_ELEMENT),
+    SOUL_BULLET(CollisionType.INTERACTIVE_ELEMENT),
+    SPROUT_BULLET(CollisionType.INTERACTIVE_ELEMENT),
+    BOSS_BULLET(CollisionType.INTERACTIVE_ELEMENT),
+    OLDGUARDIAN_BULLET(CollisionType.INTERACTIVE_ELEMENT),
+
+    INVISIBLE_OBJECT(CollisionType.OBSTACLE),
+    ROCK(CollisionType.OBSTACLE);
+
+    private final CollisionType collisionType;
+
+    GameObjectType(final CollisionType collisionType) {
+        this.collisionType = collisionType;
+    }
+
+    public CollisionType getCollisionType() {
+        return this.collisionType;
+    }
 }

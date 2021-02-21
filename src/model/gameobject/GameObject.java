@@ -1,6 +1,7 @@
 package model.gameobject;
 
 import model.common.BoundingBox;
+import model.common.CollisionType;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.room.Room;
