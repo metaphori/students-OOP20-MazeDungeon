@@ -5,6 +5,7 @@ import model.common.GameObjectType;
 import model.common.IdIterator;
 import model.common.Point2D;
 import model.common.Vector2D;
+import model.room.Room;
 
 public class BulletFactoryImpl implements BulletFactory {
 
@@ -35,33 +36,34 @@ public class BulletFactoryImpl implements BulletFactory {
     /**
      * 
      * @param idIterator
+     * @param  
      */
     public BulletFactoryImpl(final IdIterator idIterator) {
         this.idIterator = idIterator;
     }
 
     @Override
-    public Bullet createCharacterBullet(final GameObjectType gameObjectType, final Point2D initialPosition, final  Vector2D direction) {
-        return new BulletImpl(this.idIterator.next(), this.CHARACTER_BULLET_SPEED, initialPosition, direction, gameObjectType, this.CHARACTER_BULLET_DAMAGE);
+    public Bullet createCharacterBullet(final GameObjectType gameObjectType, final Point2D initialPosition, final  Vector2D direction, Room room) {
+        return new BulletImpl(this.idIterator.next(), this.CHARACTER_BULLET_SPEED, initialPosition, direction, gameObjectType, this.CHARACTER_BULLET_DAMAGE, room);
     }
     @Override
-    public Bullet createSkeletonBullet(final GameObjectType gameObjectType, final Point2D initialPosition, final Vector2D direction) {
-        return new BulletImpl(this.idIterator.next(), this.SKELETON_BULLET_SPEED, initialPosition, direction, gameObjectType, this.SKELETON_BULLET_DAMAGE);
+    public Bullet createSkeletonBullet(final GameObjectType gameObjectType, final Point2D initialPosition, final Vector2D direction, Room room) {
+        return new BulletImpl(this.idIterator.next(), this.SKELETON_BULLET_SPEED, initialPosition, direction, gameObjectType, this.SKELETON_BULLET_DAMAGE, room);
     }
     @Override
-    public Bullet createSoulBullet(final GameObjectType gameObjectType, final Point2D initialPosition, final Vector2D direction) {
-        return new BulletImpl(this.idIterator.next(), this.SOUL_BULLET_SPEED, initialPosition, direction, gameObjectType, this.SOUL_BULLET_DAMAGE);
+    public Bullet createSoulBullet(final GameObjectType gameObjectType, final Point2D initialPosition, final Vector2D direction, Room room) {
+        return new BulletImpl(this.idIterator.next(), this.SOUL_BULLET_SPEED, initialPosition, direction, gameObjectType, this.SOUL_BULLET_DAMAGE, room);
     }
     @Override
-    public Bullet createSproutBullet(final GameObjectType gameObjectType, final Point2D initialPosition, final Vector2D direction) {
-        return new BulletImpl(this.idIterator.next(), this.SPROUT_BULLET_SPEED, initialPosition, direction, gameObjectType, this.SPROUT_BULLET_DAMAGE);
+    public Bullet createSproutBullet(final GameObjectType gameObjectType, final Point2D initialPosition, final Vector2D direction, Room room) {
+        return new BulletImpl(this.idIterator.next(), this.SPROUT_BULLET_SPEED, initialPosition, direction, gameObjectType, this.SPROUT_BULLET_DAMAGE,room);
     }
     @Override
-    public Bullet createBossBullet(final GameObjectType gameObjectType, final Point2D initialPosition, final Vector2D direction) {
-        return new BulletImpl(this.idIterator.next(), this.BOSS_BULLET_SPEED, initialPosition, direction, gameObjectType, this.BOSS_BULLET_DAMAGE);
+    public Bullet createBossBullet(final GameObjectType gameObjectType, final Point2D initialPosition, final Vector2D direction, Room room) {
+        return new BulletImpl(this.idIterator.next(), this.BOSS_BULLET_SPEED, initialPosition, direction, gameObjectType, this.BOSS_BULLET_DAMAGE, room);
     }
     @Override
-    public Bullet createOldGuardianBullet(final GameObjectType gameObjectType, final Point2D initialPosition, final Vector2D direction) {
-        return new BulletImpl(this.idIterator.next(), this.OLDGUARDIAN_BULLET_SPEED, initialPosition, direction, gameObjectType, this.OLDGUARDIAN_BULLET_DAMAGE);
+    public Bullet createOldGuardianBullet(final GameObjectType gameObjectType, final Point2D initialPosition, final Vector2D direction, Room room) {
+        return new BulletImpl(this.idIterator.next(), this.OLDGUARDIAN_BULLET_SPEED, initialPosition, direction, gameObjectType, this.OLDGUARDIAN_BULLET_DAMAGE, room);
     }
 }
