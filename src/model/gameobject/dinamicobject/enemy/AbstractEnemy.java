@@ -6,14 +6,18 @@ import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
 import model.gameobject.dinamicobject.bullet.Bullet;
+import model.gameobject.dinamicobject.bullet.BulletFactory;
+import model.gameobject.dinamicobject.bullet.BulletFactoryImpl;
 import model.room.Room;
 
 public abstract class AbstractEnemy extends AbstractDinamicObject implements Enemy {
 
     private double life;
+    private final BulletFactory bulletFactory;
 
-    public AbstractEnemy(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, Room room) {
+    public AbstractEnemy(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
         super(id, speed, position, direction, gameObjectType, room);
+        this.bulletFactory = new BulletFactoryImpl(room.getRoomManager().getIdIterator());
     }
 
     /**
@@ -22,6 +26,13 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     @Override
     public double getLife() {
         return this.life;
+    }
+
+    /**
+     * @return the factory of bullet
+     */
+    protected BulletFactory getBulletFactory() {
+        return this.bulletFactory;
     }
 
     @Override

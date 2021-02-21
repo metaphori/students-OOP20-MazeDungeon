@@ -21,7 +21,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Sprout
      */
     @Override
-    public Enemy createSprout(final int speed, final Point2D position, final Vector2D direction,  Room room) {
+    public Enemy createSprout(final int speed, final Point2D position, final Vector2D direction,  final Room room) {
         return new AbstractEnemy(this.idIterator.next(), speed, position, direction, GameObjectType.ENEMY_SPROUT, room) {
 
             @Override
@@ -47,7 +47,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Soul
      */
     @Override
-    public Enemy createSoul(final int speed, final Point2D position, final Vector2D direction, Room room) {
+    public Enemy createSoul(final int speed, final Point2D position, final Vector2D direction, final Room room) {
         return new AbstractEnemy(this.idIterator.next(), speed, position, direction, GameObjectType.ENEMY_SOUL, room) {
             @Override
             public void updateState(final double elapsed) {
@@ -56,7 +56,9 @@ public class EnemyFactoryImpl implements EnemyFactory {
 
             @Override
             public Bullet shoot() {
-                // TODO Auto-generated method stub
+                /*final Bullet bullet = this.getBulletFactory().createSoulBullet(GameObjectType.ENEMY_SOUL, this.getPosition(), this.getDirection(), room);
+                this.getRoom().addDinamicObject(bullet);
+                return bullet;*/
                 return null;
             }
 
@@ -65,7 +67,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 final Random rndFlipDirection = new Random();
                 final double newX = this.getDirection().getX() * (rndFlipDirection.nextBoolean() ? -1 : 1);
                 final double newY = this.getDirection().getY() * (rndFlipDirection.nextBoolean() ? -1 : 1);
-                this.setDirection(new Vector2D(newX, newY));
+                this.setDirection(new Vector2D(newX, newY));;
             }
         };
     }
@@ -74,7 +76,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: SkeletonSeeker
      */
     @Override
-    public Enemy createSkeletonSeeker(final int speed, final Point2D position, final Vector2D direction, Room room) {
+    public Enemy createSkeletonSeeker(final int speed, final Point2D position, final Vector2D direction, final Room room) {
         return new AbstractEnemy(this.idIterator.next(), speed, position, direction, GameObjectType.ENEMY_SKELETON, room) {
 
             @Override

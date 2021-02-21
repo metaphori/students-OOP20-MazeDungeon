@@ -44,6 +44,15 @@ public class Vector2D implements java.io.Serializable {
         }
 
         /**
+         * 
+         * @return the normalized vector
+         */
+        public Vector2D getNormalized() {
+            final double module = this.module();
+            return new Vector2D(x / module, y / module);
+        }
+
+        /**
          * @return the Y of the vector
          */
         public double getY() {
