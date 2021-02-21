@@ -8,13 +8,8 @@ import model.common.Vector2D;
 
 public class BulletFactoryImpl implements BulletFactory {
 
-    private final IdIterator idIterator;
-
-    public BulletFactoryImpl(final IdIterator idIterator) {
-        this.idIterator = idIterator;
-    }
     /**
-     * constant for speed of each bullet
+     * constant for speed of each bullet.
      */
     private final int CHARACTER_BULLET_SPEED = 100;
     private final int SKELETON_BULLET_SPEED = 100;
@@ -23,7 +18,7 @@ public class BulletFactoryImpl implements BulletFactory {
     private final int BOSS_BULLET_SPEED = 100;
     private final int OLDGUARDIAN_BULLET_SPEED = 100;
     /**
-     * constant for damage of each bullet
+     * constant for damage of each bullet.
      */
     private final int CHARACTER_BULLET_DAMAGE = 100;
     private final int SKELETON_BULLET_DAMAGE = 100;
@@ -31,9 +26,20 @@ public class BulletFactoryImpl implements BulletFactory {
     private final int SPROUT_BULLET_DAMAGE = 100;
     private final int BOSS_BULLET_DAMAGE = 100;
     private final int OLDGUARDIAN_BULLET_DAMAGE = 100;
+
+    /**
+     * fields.
+     **/
+    private final IdIterator idIterator;
+
     /**
      * 
+     * @param idIterator
      */
+    public BulletFactoryImpl(final IdIterator idIterator) {
+        this.idIterator = idIterator;
+    }
+
     @Override
     public Bullet createCharacterBullet(final GameObjectType gameObjectType, final Point2D initialPosition, final  Vector2D direction) {
         return new BulletImpl(this.idIterator.next(), this.CHARACTER_BULLET_SPEED, initialPosition, direction, gameObjectType, this.CHARACTER_BULLET_DAMAGE);

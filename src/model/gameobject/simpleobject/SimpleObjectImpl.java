@@ -12,9 +12,10 @@ public class SimpleObjectImpl implements SimpleObject {
     private BoundingBox boundingBox;
     private Room room;
 
-    public SimpleObjectImpl(final int id, final Point2D position, final GameObjectType gameObjectType) {
+    public SimpleObjectImpl(final int id, final Point2D position, final GameObjectType gameObjectType, Room room) {
         this.id = id;
         this.position = position;
+        this.room = room;
         this.gameObjectType = gameObjectType;
     }
 

@@ -5,14 +5,15 @@ import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.simpleobject.SimpleObjectImpl;
+import model.room.Room;
 
 public abstract class AbstractDinamicObject extends SimpleObjectImpl implements DinamicObject {
     private Vector2D direction;
     private int speed;
     private Point2D lastPosition;
 
-    public AbstractDinamicObject(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
-        super(id, position, gameObjectType);
+    public AbstractDinamicObject(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, Room room) {
+        super(id, position, gameObjectType, room);
         this.speed = speed;
         this.direction = direction;
         this.lastPosition = this.getPosition();

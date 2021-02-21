@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class ResourceLoader {
     private final Map<GameObjectType, String> resources = new HashMap<>();
+
     private final String sep = File.separator;
     private final String imagesPath = "resources" + sep + "images" + sep;
 

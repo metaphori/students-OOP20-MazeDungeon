@@ -26,7 +26,6 @@ public class RoomManagerImpl implements RoomManager {
     private final Map<Point2D, Room> rooms = new HashMap<>();
     private Room actualRoom;
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl(this.idIterator);
-    private final BulletFactory bulletFactory = new BulletFactoryImpl(this.idIterator);
     private Character character;
     private final ObstaclesFactory obstaclesFactory = new ObstaclesFactory(this.idIterator);
 
@@ -45,10 +44,9 @@ public class RoomManagerImpl implements RoomManager {
         //TODO
         actualRoom = new RoomImpl(this);
         rooms.put(new Point2D(0, 0), actualRoom);
-        character = new CharacterImpl(this.idIterator.next(), 0, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.ENEMY_SKELETON);
-
-        final Enemy enemySoul = this.enemyFactory.createSoul(90, new Point2D(500, 500), new Vector2D(1, 1));
-        final Enemy enemySkeletonSeeker = this.enemyFactory.createSkeletonSeeker(20, new Point2D(200, 200), new Vector2D(-1, 1));
+        character = new CharacterImpl(this.idIterator.next(), 0, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.ENEMY_SKELETON, this.actualRoom);
+        final Enemy enemySoul = this.enemyFactory.createSoul(this.idIterator.next(), new Point2D(500, 500), new Vector2D(1, 1), this.actualRoom);
+        final Enemy enemySkeletonSeeker = this.enemyFactory.createSkeletonSeeker(this.idIterator.next(), new Point2D(200, 200), new Vector2D(-1, 1), this.actualRoom);
         //final Bullet bullet = this.bulletFactory.createCharacterBullet(GameObjectType.ENEMY_SOUL , new Point2D(0, 0), new Vector2D(1, 1));
         actualRoom.addDinamicObject(enemySkeletonSeeker);
         actualRoom.addDinamicObject(enemySoul);
@@ -58,9 +56,9 @@ public class RoomManagerImpl implements RoomManager {
         Random rnd = new Random();
         for (int i = 1; i < 2; i++) {
             actualRoom.addDinamicObject(new Coin(this.idIterator.next(), 50, new Point2D(rnd.nextInt(785) + 240, rnd.nextInt(456) + 177), 
-                                                        new Vector2D(-1 , 0), GameObjectType.COIN));
+                                                        new Vector2D(-1 , 0), GameObjectType.COIN, this.actualRoom));
         }
-        for (SimpleObject obj: obstaclesFactory.getEmptyRoom()) {
+        for (SimpleObject obj: obstaclesFactory.getEmptyRoom(this.actualRoom)) {
             actualRoom.addSimpleObject(obj);
         }
 
@@ -78,10 +76,17 @@ public class RoomManagerImpl implements RoomManager {
     public Room getCurrentRoom() {
         return actualRoom;
     }
-    
+
     @Override
     public Character getCharacter() {
         return this.character;
     }
+
+    @Override
+    public IdIterator getIdIterator() {
+        return this.idIterator;
+    }
+
+
 
 }

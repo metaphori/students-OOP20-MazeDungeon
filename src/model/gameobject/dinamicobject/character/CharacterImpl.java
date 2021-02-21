@@ -4,11 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import model.common.GameObjectType;
+import model.common.IdIterator;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
 import model.gameobject.dinamicobject.bullet.*;
+import model.room.Room;
 import model.shop.Item;
 
 
@@ -17,22 +19,20 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private final double MAXLIFE = 4.0;
     private double life;
     private Set<Item> items; //contains set di items
-    private BulletFactory bulletFactory;
+    private final BulletFactory bulletFactory;
 
-    public CharacterImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
-        super(id, speed, position, direction, gameObjectType);
+
+    public CharacterImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
+        super(id, speed, position, direction, gameObjectType, room);
         this.life = MAXLIFE;
         this.items = new HashSet<>();
-        //this.bulletFactory = new BulletFactoryImpl();
+        this.bulletFactory = new BulletFactoryImpl(this.getRoom().getRoomManager().getIdIterator());
 
     }
 
 
     @Override
     public void shoot() {
-        //**// //ROOM MANAGER DEVE METTERE DENTRO LA STANZA IL BULLET CREATO DALLA FACTORY
-        //this.getRoom().addDinamicObject(bulletFactory.createCharacterBullet(super.getGameObjectType(), super.getPosition(), super.getDirection()));
-        //this.getRoom().getRoomManager().getCurrentRoom().addDinamicObject(bulletFactory.createCharacterBullet(super.getGameObjectType(), super.getPosition(), super.getDirection()));
         final Bullet bullet = this.bulletFactory.createCharacterBullet(GameObjectType.ENEMY_SOUL, this.getPosition(), this.getDirection());
         //System.out.println("Creo oggetto");
         this.getRoom().addDinamicObject(bullet);
