@@ -2,6 +2,7 @@ package model.room;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import model.common.BoundingBox;
 import model.common.GameObjectType;
@@ -78,7 +79,7 @@ public class RoomImpl implements Room {
     private void checkCollisions() {
         for (final DinamicObject obj1 : this.dinamicObjects) {
             for (final GameObject obj2 : this.getCurrentGameObjects()) {
-                if (obj1.getBoundingBox() == null || obj1.getBoundingBox() == null || obj1.equals(obj2)) {
+                if (obj1.getBoundingBox() == null || obj2.getBoundingBox() == null || obj1.equals(obj2)) {
                     continue;
                 }
                 if (obj1.getBoundingBox().intersectWith(obj2.getBoundingBox())) {
@@ -93,5 +94,9 @@ public class RoomImpl implements Room {
         return roomManager;
     }
 
+    @Override
+    public Optional<Point2D> getCharacterPosition() {
+        return dinamicObjects.stream().filter(obj -> obj.getGameObjectType() == GameObjectType.CHARACTER).map(obj -> obj.getPosition()).findAny();
+    }
 
 }

@@ -1,11 +1,12 @@
 package model.room;
 
 import java.util.List;
+import java.util.Optional;
 
+import model.common.Point2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.DinamicObject;
 import model.gameobject.simpleobject.SimpleObject;
-import model.gameobject.dinamicobject.character.Character;
 
 public interface Room {
 
@@ -21,4 +22,5 @@ public interface Room {
 
     RoomManager getRoomManager();
 
+    Optional<Point2D> getCharacterPosition();
 }
