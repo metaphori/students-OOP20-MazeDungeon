@@ -16,7 +16,7 @@ public class CommandImpl implements Command {
 
     private final Model model;
     private boolean[] keys;
-    private boolean up, down, left, right;
+
     private int key;
 
 
@@ -24,13 +24,7 @@ public class CommandImpl implements Command {
         this.model = model;
         this.keys = new boolean[256];
     }
-    
-    public void tick() {
-        up = keys[KeyEvent.VK_W];
-        down = keys[KeyEvent.VK_S];
-        right = keys[KeyEvent.VK_D];
-        left = keys[KeyEvent.VK_A];
-    }
+
 
     @Override
     public void execute(final int keyCommand) {
@@ -63,13 +57,24 @@ public class CommandImpl implements Command {
              }
         }
 
+        if (this.checkStopVertical()) {
+            this.model.getRoomManager().getCharacter().stopVertical();
+        }
+        
+        if (this.checkStopHorizontal()) {
+            this.model.getRoomManager().getCharacter().stopHorizontal();
+        }
+        
+        
+
+
 
      }
 
     @Override
     public void setKey(KeyEvent key, boolean b) {
         this.keys[key.getKeyCode()] = b;
-        this.key = key.getKeyCode();
+       // this.key = key.getKeyCode();
 
     }
 
@@ -90,8 +95,20 @@ public class CommandImpl implements Command {
         // TODO Auto-generated method stub
         this.key = key;
     }
-    
-    
+
+
+    @Override
+    public boolean checkStopVertical() {
+        
+        return !this.keys[KeyEvent.VK_W] && !this.keys[KeyEvent.VK_S];
+    }
+
+
+    @Override
+    public boolean checkStopHorizontal() {
+       
+        return !this.keys[KeyEvent.VK_A] && !this.keys[KeyEvent.VK_D];
+    }
 
 
 }

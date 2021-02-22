@@ -8,8 +8,7 @@ public interface GameController {
 
     void setup();
 
-    void notifyCommand(int keyCommand);
-
+   
     void setBoundingBox(int id, BoundingBox boundingBox);
 
     Command getCommand();

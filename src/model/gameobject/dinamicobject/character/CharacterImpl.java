@@ -116,6 +116,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     }
 
 
+
     @Override
     public void collideWith(final GameObject obj2) {
         /*final int footHeight = 15;
@@ -132,6 +133,19 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void tick() {
         System.out.println(this.getPosition().getX());
+    }
+
+
+    @Override
+    public void stopVertical() {
+        this.setDirection(new Vector2D(this.getDirection().getX() , 0));
+
+    }
+    
+    @Override
+    public void stopHorizontal() {
+        this.setDirection(new Vector2D(0 , this.getDirection().getY()));
+
     }
 
 

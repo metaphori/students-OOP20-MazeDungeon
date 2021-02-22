@@ -18,14 +18,13 @@ public class GameControllerImpl implements GameController {
     private final GameView view;
     private final Model model;
     private final List<Integer> lastGameObjectsID = new LinkedList<>();
-    private ArrayBlockingQueue<Integer> commands;
     private final Command command;
 
     public GameControllerImpl(final GameView view, final Model model) {
         this.view = view;
         this.model = model;
         this.command = new CommandImpl(this.model);
-        this.commands = new ArrayBlockingQueue<>(100);
+
 
     }
 
@@ -45,8 +44,7 @@ public class GameControllerImpl implements GameController {
         while (true) {
             final long current = System.currentTimeMillis();
             final int elapsed = (int) (current - lastTime);
-            //processInput();
-            this.getCommand().execute(this.getCommand().getKey());
+            processInput();
             updateGame(elapsed * 0.001);
             render();
             waitForNextFrame(current);
@@ -66,10 +64,7 @@ public class GameControllerImpl implements GameController {
     }
 
     private void processInput() {
-        final Integer keyCommand = commands.poll();
-        if (keyCommand != null) {
-            this.command.execute(keyCommand);
-        }
+        this.getCommand().execute(this.getCommand().getKey());
     }
 
     private void updateGame(final double elapsed) {
@@ -122,10 +117,10 @@ public class GameControllerImpl implements GameController {
     /**
      * 
      */
-    @Override
+ /*   @Override
     public void notifyCommand(final int keyCommand) {
         this.commands.add(keyCommand);
-    }
+    }*/
 
     /**
      * 

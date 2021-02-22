@@ -28,6 +28,10 @@ public interface Character extends DinamicObject {
 
     void tick();
 
+    void stopVertical();
+
+    void stopHorizontal();
+
 
 
 }

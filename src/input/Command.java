@@ -15,11 +15,10 @@ public interface Command {
 
     void setKey(KeyEvent key, boolean b);
 
-
-
     int getKey();
 
-
-
     void setKey(int key);
+    
+    boolean checkStopVertical();
+    boolean checkStopHorizontal();
 }
