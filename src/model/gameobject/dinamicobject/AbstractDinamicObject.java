@@ -73,7 +73,7 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
      * @param elapsed
      */
     protected void move(final double elapsed) {
-        this.setPosition(this.getPosition().sum(this.getDirection().mul(this.getDirection().module()).mul(speed).mul(elapsed)));
+        this.setPosition(this.getPosition().sum(this.getDirection().mul(speed).mul(elapsed)));
     }
 
     /**

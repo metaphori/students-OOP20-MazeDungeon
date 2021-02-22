@@ -22,8 +22,6 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private Set<Item> items; //contains set di items
     private final BulletFactory bulletFactory;
     private double velX = 0;
-    
-
     private double velY = 0;
 
 
@@ -53,8 +51,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     @Override
     public void updateState(final double elapsed) { 
-        //this.move(elapsed);
-
+        this.move(elapsed);
     }
 
     /*@Override
@@ -88,34 +85,34 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     @Override
     public void moveUp() {
-        this.setPosition(new Point2D(this.getPosition().getX(), 
-                this.getPosition().getY() - 0.5 ));
-        this.setDirection(new Vector2D(0 , 1));
+        //this.setPosition(new Point2D(this.getPosition().getX(), 
+                //this.getPosition().getY() - 0.5 ));
+        this.setDirection(new Vector2D(this.getDirection().getX() , -1));
     }
 
 
     @Override
     public void moveDown() {
-        this.setPosition(new Point2D(this.getPosition().getX(), 
-                this.getPosition().getY() + 0.5));
-        this.setDirection(new Vector2D(0 , -1));
+        //this.setPosition(new Point2D(this.getPosition().getX(), 
+                //this.getPosition().getY() + 0.5));
+        this.setDirection(new Vector2D(this.getDirection().getX() , 1));
     }
 
 
     @Override
     public void moveRight() {
-        this.setPosition(new Point2D(this.getPosition().getX() + 0.5, 
-                this.getPosition().getY() ));
-        this.setDirection(new Vector2D(1 , 0));
+        //this.setPosition(new Point2D(this.getPosition().getX() + 0.5, 
+                //this.getPosition().getY() ));
+        this.setDirection(new Vector2D(1, this.getDirection().getY()));
 
     }
 
 
     @Override
     public void moveLeft() {
-        this.setPosition(new Point2D(this.getPosition().getX() - 0.5 , 
-                this.getPosition().getY() ));
-        this.setDirection(new Vector2D(-1 , 0));
+        //this.setPosition(new Point2D(this.getPosition().getX() - 0.5 , 
+                //this.getPosition().getY() ));
+        this.setDirection(new Vector2D(-1, this.getDirection().getY()));
     }
 
 
@@ -128,14 +125,13 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
             this.setDirection(new Vector2D(0, 0));
             this.setPosition(this.getLastPosition());
         }*/
-        this.setDirection(new Vector2D(0, 0));
-        //this.setPosition(this.getLastPosition());
+        //this.setDirection(new Vector2D(0, 0));
+        this.setPosition(this.getLastPosition());
     }
 
     @Override
     public void tick() {
         System.out.println(this.getPosition().getX());
-        
     }
 
 
