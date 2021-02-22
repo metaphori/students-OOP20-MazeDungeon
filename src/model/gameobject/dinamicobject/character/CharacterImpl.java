@@ -89,7 +89,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void moveUp() {
         this.setPosition(new Point2D(this.getPosition().getX(), 
-                this.getPosition().getY() - 5 ));
+                this.getPosition().getY() - 0.5 ));
         this.setDirection(new Vector2D(0 , 1));
     }
 
@@ -97,14 +97,14 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void moveDown() {
         this.setPosition(new Point2D(this.getPosition().getX(), 
-                this.getPosition().getY() + 5 ));
+                this.getPosition().getY() + 0.5));
         this.setDirection(new Vector2D(0 , -1));
     }
 
 
     @Override
     public void moveRight() {
-        this.setPosition(new Point2D(this.getPosition().getX() + 5, 
+        this.setPosition(new Point2D(this.getPosition().getX() + 0.5, 
                 this.getPosition().getY() ));
         this.setDirection(new Vector2D(1 , 0));
 
@@ -113,7 +113,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     @Override
     public void moveLeft() {
-        this.setPosition(new Point2D(this.getPosition().getX() -5 , 
+        this.setPosition(new Point2D(this.getPosition().getX() - 0.5 , 
                 this.getPosition().getY() ));
         this.setDirection(new Vector2D(-1 , 0));
     }

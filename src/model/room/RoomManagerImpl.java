@@ -47,7 +47,7 @@ public class RoomManagerImpl implements RoomManager {
         //TODO
         actualRoom = new RoomImpl(this);
         rooms.put(new Point2D(0, 0), actualRoom);
-        character = new CharacterImpl(this.idIterator.next(), 0, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER, this.actualRoom);
+        character = new CharacterImpl(this.idIterator.next(), 1,new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER, this.actualRoom);
         final Enemy enemySoul = this.enemyFactory.createSoul(90, new Point2D(500, 500), new Vector2D(1, 1), this.actualRoom);
         final Enemy enemySkeletonSeeker = this.enemyFactory.createSkeletonSeeker(90, new Point2D(200, 200), new Vector2D(-1, 1), this.actualRoom);
         //final Bullet bullet = this.bulletFactory.createCharacterBullet(GameObjectType.ENEMY_SOUL , new Point2D(0, 0), new Vector2D(1, 1));
