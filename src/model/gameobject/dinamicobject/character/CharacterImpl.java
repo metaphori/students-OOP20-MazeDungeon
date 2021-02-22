@@ -21,6 +21,10 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private double life;
     private Set<Item> items; //contains set di items
     private final BulletFactory bulletFactory;
+    private double velX = 0;
+    
+
+    private double velY = 0;
 
 
     public CharacterImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
@@ -84,29 +88,33 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     @Override
     public void moveUp() {
-        this.setPosition(this.getPosition().sum(new Vector2D(0, -10)));
+        this.setPosition(new Point2D(this.getPosition().getX(), 
+                this.getPosition().getY() - 5 ));
         this.setDirection(new Vector2D(0 , 1));
     }
 
 
     @Override
     public void moveDown() {
-        this.setPosition(this.getPosition().sum(new Vector2D(0, 10)));
+        this.setPosition(new Point2D(this.getPosition().getX(), 
+                this.getPosition().getY() + 5 ));
         this.setDirection(new Vector2D(0 , -1));
     }
 
 
     @Override
     public void moveRight() {
-        this.setPosition(this.getPosition().sum(new Vector2D(10, 0)));
+        this.setPosition(new Point2D(this.getPosition().getX() + 5, 
+                this.getPosition().getY() ));
         this.setDirection(new Vector2D(1 , 0));
-        
+
     }
 
 
     @Override
     public void moveLeft() {
-        this.setPosition(this.getPosition().sum(new Vector2D(-10, 0)));
+        this.setPosition(new Point2D(this.getPosition().getX() -5 , 
+                this.getPosition().getY() ));
         this.setDirection(new Vector2D(-1 , 0));
     }
 
@@ -123,5 +131,12 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         this.setDirection(new Vector2D(0, 0));
         //this.setPosition(this.getLastPosition());
     }
+
+    @Override
+    public void tick() {
+        System.out.println(this.getPosition().getX());
+        
+    }
+
 
 }

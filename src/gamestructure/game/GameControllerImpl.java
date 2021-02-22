@@ -14,7 +14,7 @@ import model.gameobject.GameObject;
 import mvc.Model;
 
 public class GameControllerImpl implements GameController {
-    private static final long PERIOD = 15;
+    private static final long PERIOD = 1;
     private final GameView view;
     private final Model model;
     private final List<Integer> lastGameObjectsID = new LinkedList<>();
@@ -37,7 +37,6 @@ public class GameControllerImpl implements GameController {
         view.setController(this);
         view.show();
     }
-
     /**
      * @Override
      */
@@ -46,7 +45,8 @@ public class GameControllerImpl implements GameController {
         while (true) {
             final long current = System.currentTimeMillis();
             final int elapsed = (int) (current - lastTime);
-            processInput();
+            //processInput();
+            this.getCommand().execute(this.getCommand().getKey());
             updateGame(elapsed * 0.001);
             render();
             waitForNextFrame(current);

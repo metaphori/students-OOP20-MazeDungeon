@@ -25,4 +25,9 @@ public interface Character extends DinamicObject {
     void moveRight();
 
     void moveLeft();
+
+    void tick();
+
+
+
 }

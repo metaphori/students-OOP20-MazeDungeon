@@ -1,6 +1,7 @@
 package input;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -8,61 +9,89 @@ import java.util.Set;
 import javax.swing.SwingUtilities;
 
 import gamestructure.game.GameController;
+import model.common.Point2D;
 import mvc.Model;
 
 public class CommandImpl implements Command {
 
     private final Model model;
-    private final Set<Integer> keysPressed = new HashSet<>();
-    private int previousCommand;
-    private boolean shoot = false;
-    @Override
-    public Set<Integer> getKeysPressed() {
-        return keysPressed;
-    }
+    private boolean[] keys;
+    private boolean up, down, left, right;
+    private int key;
+
 
     public CommandImpl(final Model model) {
         this.model = model;
+        this.keys = new boolean[256];
+    }
+    
+    public void tick() {
+        up = keys[KeyEvent.VK_W];
+        down = keys[KeyEvent.VK_S];
+        right = keys[KeyEvent.VK_D];
+        left = keys[KeyEvent.VK_A];
     }
 
     @Override
-    public  void execute(final int keyCommand) {
-        //keysPressed.add(keyCommand);
+    public void execute(final int keyCommand) {
 
-        if (!keysPressed.isEmpty()) {
-            for (final Iterator<Integer> it = keysPressed.iterator(); it.hasNext();) {
-                switch (it.next()) {
-                    case KeyEvent.VK_W: //vai su
-                        this.model.getRoomManager().getCharacter().moveUp();
-                        //System.out.println("VAI SU");
-                        this.previousCommand = keyCommand;
-                        break;
-                    case KeyEvent.VK_A: //vai a sinistra
-                        //System.out.println("VAI A SINISTRA");
-                        this.model.getRoomManager().getCharacter().moveLeft();
-                        break;
-                    case KeyEvent.VK_S: //vai giu
-                        //System.out.println("VAI GIU");
-                        this.model.getRoomManager().getCharacter().moveDown();
-                        break;
-                    case KeyEvent.VK_D: //vai a destra
-                        //System.out.println("VAI A DESTRA");
-                        this.model.getRoomManager().getCharacter().moveRight();
-                        break;
-                    case KeyEvent.VK_SPACE:
-                        System.out.println("SPARA");
-                        this.model.getRoomManager().getCharacter().shoot();
-                        break;
-                    case KeyEvent.VK_ESCAPE:
-                        System.out.println("APRI MENUINGAME");
-                        break;
-                    default:
-                        break;
-                       /* System.out.println("TASTO DISABILITATO");
-                        break;*/
-                }
-            }
+        if (keyCommand == KeyEvent.VK_W) {
 
+            if (keys[keyCommand]) {
+                    this.model.getRoomManager().getCharacter().moveUp();
+             }
         }
+
+        if (keyCommand == KeyEvent.VK_S) {
+
+            if (keys[keyCommand]) {
+                    this.model.getRoomManager().getCharacter().moveDown();
+             }
+        }
+
+        if (keyCommand == KeyEvent.VK_D) {
+
+            if (keys[keyCommand]) {
+                    this.model.getRoomManager().getCharacter().moveRight();
+             }
+        }
+
+        if (keyCommand == KeyEvent.VK_A) {
+
+            if (keys[keyCommand]) {
+                    this.model.getRoomManager().getCharacter().moveLeft();
+             }
+        }
+
+
+     }
+
+    @Override
+    public void setKey(KeyEvent key, boolean b) {
+        this.keys[key.getKeyCode()] = b;
+        this.key = key.getKeyCode();
+
     }
+
+    @Override
+    public Model getModel() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int getKey() {
+        // TODO Auto-generated method stub
+        return this.key;
+    }
+    
+    @Override
+    public void setKey(int key) {
+        // TODO Auto-generated method stub
+        this.key = key;
+    }
+    
+    
+
+
 }

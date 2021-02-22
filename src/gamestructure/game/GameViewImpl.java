@@ -162,15 +162,16 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent key) {
-        final int keyPressed = key.getKeyCode();
-        this.controller.getCommand().getKeysPressed().add(keyPressed);
-        this.controller.notifyCommand(keyPressed);
+    public void keyPressed(final KeyEvent key) {
+        this.controller.getCommand().setKey(key, true);
+        //this.controller.getCommand().execute(key.getKeyCode());
+       // this.controller.notifyCommand(key.getKeyCode());
     }
 
     @Override
-    public void keyReleased(KeyEvent key) {
-       this.controller.getCommand().getKeysPressed().remove(key.getKeyCode());
+    public void keyReleased(final KeyEvent key) {
+       this.controller.getCommand().setKey(key, false);
+       this.controller.getCommand().setKey(key.getKeyCode());
     }
 
     @Override
