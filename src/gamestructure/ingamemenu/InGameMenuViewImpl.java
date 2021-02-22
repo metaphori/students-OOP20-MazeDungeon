@@ -18,8 +18,9 @@ import javax.swing.border.LineBorder;
 
 import gamestructure.ingamemenu.utilities.ImageLoader;
 import gamestructure.ingamemenu.utilities.Images;
+import model.shop.Items;
 
-public class InGameMenuViewImpl implements InGameMenuView {
+public class InGameMenuViewImpl implements InGameMenuView  {
     private static int SIZE_IMAGE_ITEM = 100;
     private static double WIDTH_RATIO = 0.67; 
     private static double HEIGHT_RATIO = 0.736;
@@ -47,7 +48,7 @@ public class InGameMenuViewImpl implements InGameMenuView {
 
     private boolean start;
 
-    private final InGameMenuControllerImpl controller = new InGameMenuControllerImpl(this);
+    private final InGameMenuController controller = new InGameMenuControllerImpl(this);
     public InGameMenuViewImpl() {
 
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,6 +62,7 @@ public class InGameMenuViewImpl implements InGameMenuView {
         showInGameMenu();
     }
 
+    @Override
     public void showShop() {
         this.frame.remove(inGameMenuPanel);
         this.frame.setContentPane(shopPanel);
@@ -75,21 +77,36 @@ public class InGameMenuViewImpl implements InGameMenuView {
         btnArthemideBowItem.setBounds(45, 180, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnArthemideBowItem);
         this.lblBackgroundShop.add(btnArthemideBowItem);
+        btnArthemideBowItem.addActionListener(e -> {
+            this.controller.buyItem(Items.ARTHEMIDEBOW);
+        });
+
 
         btnHermesBootsItem.setBounds(208, 175, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnHermesBootsItem);
         this.lblBackgroundShop.add(btnHermesBootsItem);
+        btnHermesBootsItem.addActionListener(e -> {
+            this.controller.buyItem(Items.HERMESBOOTS);
+        });
+
 
         btnZeusBoltItem.setBounds(350, 190, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnZeusBoltItem);
         this.lblBackgroundShop.add(btnZeusBoltItem);
+        btnZeusBoltItem.addActionListener(e -> {
+            this.controller.buyItem(Items.ZEUSBOLT);
+        });
 
         btnHealthItem.setBounds(510, 180, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnHealthItem);
         this.lblBackgroundShop.add(btnHealthItem);
+        btnHealthItem.addActionListener(e -> {
+            this.controller.buyItem(Items.HEALTH);
+        });
 
        this.show();
     }
+    @Override
     public void showInGameMenu() {
 
         this.frame.remove(shopPanel);
@@ -119,6 +136,7 @@ public class InGameMenuViewImpl implements InGameMenuView {
         }
     }
 
+    @Override
     public void show() {
         this.frame.pack();
         if (start == false) {
@@ -130,8 +148,9 @@ public class InGameMenuViewImpl implements InGameMenuView {
     }
 
     /**
-     * @Override
+     * 
      */
+    @Override
     public void hide() {
         this.frame.setVisible(false);
     }
@@ -145,8 +164,9 @@ public class InGameMenuViewImpl implements InGameMenuView {
 
     }
 
+    @Override
     public void returnMessage(String messageOuput) {
-
+        System.out.println(messageOuput);
     }
 
 }

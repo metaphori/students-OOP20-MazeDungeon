@@ -1,38 +1,44 @@
 package gamestructure.ingamemenu;
 
 import model.shop.Items;
+import model.shop.Shop;
 import model.shop.ShopImpl;
 
 public class InGameMenuControllerImpl implements InGameMenuController {
 
-    private ShopImpl shopModel = new ShopImpl();
-    private InGameMenuViewImpl view;
+    private Shop shopModel = new ShopImpl(15,3);
+    private InGameMenuView view;
 
-    public InGameMenuControllerImpl(final InGameMenuViewImpl view) {
+    public InGameMenuControllerImpl(final InGameMenuView view) {
         this.view = view;
     }
 
+    @Override
     public void buyItem(Items itemSelected) {
         if(shopModel.checkItem(itemSelected)) {
             //AGGIUNGE L' ITEM AL PERSONAGGIO
-            this.view.returnMessage(shopModel.getMessageOuput());
+           
         }
-
+        this.view.returnMessage(shopModel.getMessageOuput());
+        //System.out.println(shopModel.getMessageOuput());
     }
 
 
+    @Override
     public void openShop() {
         this.view.showShop();
 
     }
 
 
+    @Override
     public void openInGameMenu() {
         this.view.showInGameMenu();
 
     }
 
 
+    @Override
     public void exit() {
        this.view.hide();
 

@@ -3,23 +3,29 @@ package model.shop;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ShopImpl {
-    private int actualMoney;
-    private int actualLife;
+public class ShopImpl implements Shop {
+    private int actualMoney = 20;
+    private int actualLife = 3;
+
     private static int MAX_LIFE=7;
     private Set<Items> purchasedItems = new HashSet<>();
 
-    private String messageOuput="";
-    
-    private String msgBought = "You bought this item!";
+    private String messageOuput = "";
+
+    private String msgBought = "You bought this item! You have: ";
     private String msgNoMoney = "You don't have enough coins!";
+    @Override
     public String getMessageOuput() {
         return messageOuput;
     }
     /**
      * @return Item with features of ArthemideBow
      */
-
+    public ShopImpl(int actualMoney, int actualLife) {
+        this.actualLife = actualLife;
+        this.actualMoney = actualMoney;
+    }
+    @Override
     public boolean checkItem(final Items i) {
         if(purchasedItems.contains(i)) {
             messageOuput="You already have this item";
@@ -30,7 +36,7 @@ public class ShopImpl {
                 if (this.getArthemideBow().getCost() <= actualMoney) {
                     actualMoney -= this.getArthemideBow().getCost();
                     purchasedItems.add(i);
-                    messageOuput = msgBought;
+                    messageOuput = msgBought  + actualMoney;
                     return true;
                 }
                 break;
@@ -38,7 +44,7 @@ public class ShopImpl {
                 if (this.getHermesBoots().getCost() <= actualMoney) {
                     actualMoney -= this.getHermesBoots().getCost();
                     purchasedItems.add(i);
-                    messageOuput = msgBought;
+                    messageOuput = msgBought + actualMoney;
                     return true;
                 }
                 break;
@@ -46,7 +52,7 @@ public class ShopImpl {
                 if (this.getZeusBolt().getCost() <= actualMoney) {
                     actualMoney -= this.getZeusBolt().getCost();
                     purchasedItems.add(i);
-                    messageOuput = msgBought;
+                    messageOuput = msgBought + actualMoney;
                     return true;
                 }
                 break;
@@ -57,7 +63,7 @@ public class ShopImpl {
                         return false;
                     }
                     actualMoney -= this.getHealth().getCost();
-                    messageOuput = msgBought;
+                    messageOuput = msgBought + actualMoney;
                     return true;
                 }
                 break;
@@ -68,6 +74,7 @@ public class ShopImpl {
         }
         return false;
     }
+    @Override
     public Item getArthemideBow() {
         return new Item.Builder("ArthemideBow", 2).addDemage(5).build();
     }
@@ -75,6 +82,7 @@ public class ShopImpl {
     /**
      * @return Item with features of HermesBoots
      */
+    @Override
     public Item getHermesBoots() {
         return new Item.Builder("HermesBoots", 1).addSpeed(3).build();
     }
@@ -82,6 +90,7 @@ public class ShopImpl {
     /**
      * @return Item with features of ZeusBolt
      */
+    @Override
     public Item getZeusBolt() {
         return new Item.Builder("ZeusBolt", 1).addSpeedAttack(4).build();
     }
@@ -89,6 +98,7 @@ public class ShopImpl {
     /**
      * @return Item with features more Health
      */
+    @Override
     public Item getHealth() {
         return new Item.Builder("Health", 1).addHelath(2).build();
     }
