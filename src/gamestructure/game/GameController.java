@@ -8,7 +8,6 @@ public interface GameController {
 
     void setup();
 
-   
     void setBoundingBox(int id, BoundingBox boundingBox);
 
     Command getCommand();

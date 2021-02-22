@@ -24,8 +24,6 @@ public class GameControllerImpl implements GameController {
         this.view = view;
         this.model = model;
         this.command = new CommandImpl(this.model);
-
-
     }
 
     /**
@@ -64,7 +62,8 @@ public class GameControllerImpl implements GameController {
     }
 
     private void processInput() {
-        this.getCommand().execute(this.getCommand().getKey());
+            this.getCommand().execute(this.getCommand().getKey());
+            this.getCommand().lock();
     }
 
     private void updateGame(final double elapsed) {
@@ -117,19 +116,14 @@ public class GameControllerImpl implements GameController {
     /**
      * 
      */
- /*   @Override
-    public void notifyCommand(final int keyCommand) {
-        this.commands.add(keyCommand);
-    }*/
-
-    /**
-     * 
-     */
     @Override
     public void setBoundingBox(final int id, final BoundingBox boundingBox) {
         this.model.getGameObject(id).setBoundingBox(boundingBox);
     }
 
+    /*
+     * 
+     */
     @Override
     public Command getCommand() {
         return this.command;

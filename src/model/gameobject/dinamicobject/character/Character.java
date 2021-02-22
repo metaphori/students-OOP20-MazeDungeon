@@ -18,6 +18,9 @@ public interface Character extends DinamicObject {
 
     void setLife(int life);
 
+    /**
+     * Methods for movements.
+     */
     void moveUp();
 
     void moveDown();
@@ -25,8 +28,6 @@ public interface Character extends DinamicObject {
     void moveRight();
 
     void moveLeft();
-
-    void tick();
 
     void stopVertical();
 
