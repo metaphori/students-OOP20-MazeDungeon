@@ -38,8 +38,8 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public void shoot() {
         //System.out.println(this.getDirection().getX() + " " + this.getDirection().getY());
         Bullet bullet = this.bulletFactory.createCharacterBullet(GameObjectType.ENEMY_SOUL,
-                    new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2,
-                    this.getPosition().getY() + this.getBoundingBox().getHeight() / 2), this.getDirection(), this.getRoom());
+                    new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2 +100,
+                    this.getPosition().getY() + this.getBoundingBox().getHeight() / 2 + 100) , this.getDirection(), this.getRoom());
         this.getRoom().addDinamicObject(bullet);
 
     }

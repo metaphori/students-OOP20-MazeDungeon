@@ -57,6 +57,14 @@ public class CommandImpl implements Command {
              }
         }
 
+        if (keyCommand == KeyEvent.VK_SPACE) {
+
+            if (keys[keyCommand]) {
+                    this.model.getRoomManager().getCharacter().shoot();
+            }
+        }
+
+
         if (this.checkStopVertical()) {
             this.model.getRoomManager().getCharacter().stopVertical();
         }
