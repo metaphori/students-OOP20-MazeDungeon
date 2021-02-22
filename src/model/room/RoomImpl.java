@@ -33,7 +33,7 @@ public class RoomImpl implements Room {
      */
     @Override
     public void update(final double elapsed) {
-        for (final DinamicObject obj : dinamicObjects) {
+        for (final DinamicObject obj : new LinkedList<>(this.dinamicObjects)) {
             obj.updateState(elapsed);
         }
         this.checkCollisions();
@@ -77,7 +77,7 @@ public class RoomImpl implements Room {
     }
 
     private void checkCollisions() {
-        for (final DinamicObject obj1 : this.dinamicObjects) {
+        for (final DinamicObject obj1 : new LinkedList<>(this.dinamicObjects)) {
             for (final GameObject obj2 : this.getCurrentGameObjects()) {
                 if (obj1.getBoundingBox() == null || obj2.getBoundingBox() == null || obj1.equals(obj2)) {
                     continue;

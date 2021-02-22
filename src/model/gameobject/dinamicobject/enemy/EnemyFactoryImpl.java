@@ -30,9 +30,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
             }
 
             @Override
-            public Bullet shoot() {
+            public void shoot() {
                 // TODO Auto-generated method stub
-                return null;
             }
 
             @Override
@@ -52,14 +51,20 @@ public class EnemyFactoryImpl implements EnemyFactory {
             @Override
             public void updateState(final double elapsed) {
                 this.move(elapsed);
+                if (this.canShoot()) {
+                    this.shoot();
+                }
             }
 
             @Override
-            public Bullet shoot() {
-                /*final Bullet bullet = this.getBulletFactory().createSoulBullet(GameObjectType.ENEMY_SOUL, this.getPosition(), this.getDirection(), room);
+            public void shoot() {
+                if (this.getRoom().getCharacterPosition().isEmpty()) {
+                    return;
+                }
+                final Point2D characterPosition = this.getRoom().getCharacterPosition().get();
+                final Bullet bullet = this.getBulletFactory().createSoulBullet(GameObjectType.SOUL_BULLET, this.getPosition(),
+                        new Vector2D(characterPosition.getX() - this.getPosition().getX(), characterPosition.getY() - this.getPosition().getY()).getNormalized(), room);
                 this.getRoom().addDinamicObject(bullet);
-                return bullet;*/
-                return null;
             }
 
             @Override
@@ -67,7 +72,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 final Random rndFlipDirection = new Random();
                 final double newX = this.getDirection().getX() * (rndFlipDirection.nextBoolean() ? -1 : 1);
                 final double newY = this.getDirection().getY() * (rndFlipDirection.nextBoolean() ? -1 : 1);
-                this.setDirection(new Vector2D(newX, newY));;
+                this.setDirection(new Vector2D(newX, newY));
             }
         };
     }
@@ -85,9 +90,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
             }
 
             @Override
-            public Bullet shoot() {
+            public void shoot() {
                 // TODO Auto-generated method stub
-                return null;
             }
 
             @Override
@@ -102,7 +106,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Boss
      */
     @Override
-    public Enemy createBoss(final int speed, final Point2D position, final Vector2D direction, Room room) {
+    public Enemy createBoss(final int speed, final Point2D position, final Vector2D direction, final Room room) {
         // TODO Auto-generated method stub
         return null;
     }

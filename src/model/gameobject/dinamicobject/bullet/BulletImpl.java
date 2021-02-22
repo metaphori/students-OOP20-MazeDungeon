@@ -28,14 +28,7 @@ public class BulletImpl extends AbstractDinamicObject implements Bullet {
 
     @Override
     public void updateState(final double elapsed) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void move(final double elapsed) {
-        // TODO Auto-generated method stub
-
+        this.move(elapsed);
     }
 
     @Override

@@ -12,6 +12,7 @@ import model.room.Room;
 
 public abstract class AbstractEnemy extends AbstractDinamicObject implements Enemy {
 
+    private long lastShootTime = System.currentTimeMillis();
     private double life;
     private final BulletFactory bulletFactory;
 
@@ -57,13 +58,28 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
             this.changeRoutine();
             break;
 
+
         default:
             break;
         }
     }
 
+    /**
+     * 
+     * @return .
+     */
+    protected boolean canShoot() {
+        final long currentTime = System.currentTimeMillis();
+        if (currentTime - this.lastShootTime > 1000) {
+            this.lastShootTime = currentTime;
+            return true;
+        }
+        return false;
+    }
+
     protected abstract void changeRoutine();
 
     @Override
-    public abstract Bullet shoot();
+    public abstract void shoot();
+
 }
