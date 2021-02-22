@@ -19,12 +19,18 @@ public class MainMenuControllerImpl implements MainMenuController {
      */
     @Override
     public void newGame() {
-        final GameView view = new GameViewImpl();
-        final Model model = new ModelImpl();
-        final GameController controller = new GameControllerImpl(view, model);
-        //view.setController(controller);
-        controller.setup();
-        controller.mainLoop();
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final GameView view = new GameViewImpl();
+                final Model model = new ModelImpl();
+                final GameController controller = new GameControllerImpl(view, model);
+                //view.setController(controller);
+                controller.setup();
+                controller.mainLoop();
+            }
+        });
+        thread.start();
         this.view.hide();
     }
 

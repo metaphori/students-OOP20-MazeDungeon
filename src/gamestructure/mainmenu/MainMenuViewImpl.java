@@ -72,7 +72,7 @@ public class MainMenuViewImpl implements MainMenuView {
      * @Override
      */
     public void hide() {
-        this.frame.setVisible(false);
+        this.frame.dispose();
     }
 
     private void configureButton(final JButton btn) {
