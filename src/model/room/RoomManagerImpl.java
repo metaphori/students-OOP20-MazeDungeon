@@ -1,17 +1,15 @@
 package model.room;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.Map.Entry;
 
+import model.common.Direction;
 import model.common.GameObjectType;
 import model.common.IdIterator;
 import model.common.Point2D;
 import model.common.Vector2D;
-import model.gameobject.dinamicobject.Coin;
-import model.gameobject.dinamicobject.bullet.Bullet;
+
 import model.gameobject.dinamicobject.enemy.Enemy;
 import model.gameobject.dinamicobject.enemy.EnemyFactory;
 import model.gameobject.dinamicobject.enemy.EnemyFactoryImpl;
@@ -27,6 +25,7 @@ public class RoomManagerImpl implements RoomManager {
     private Room actualRoom;
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl(this.idIterator);
     private final ObstaclesFactory obstaclesFactory = new ObstaclesFactory(this.idIterator);
+    private final DoorFactory doorFactory = new DoorFactoryImpl(this.idIterator);
 
     public RoomManagerImpl() {
         this.createGameMap();
@@ -49,16 +48,13 @@ public class RoomManagerImpl implements RoomManager {
         final Enemy enemyBoss = this.enemyFactory.createBoss(90, new Point2D(500, 300), new Vector2D(1, 0), this.actualRoom);
         actualRoom.addDinamicObject(enemySkeletonSeeker);
         actualRoom.addDinamicObject(enemySoul);
-        //actualRoom.addDinamicObject(bullet);
         actualRoom.addDinamicObject(character);
-        
         actualRoom.addDinamicObject(enemyBoss);
+        actualRoom.addSimpleObject(doorFactory.createDownDoor(actualRoom));
+        actualRoom.addSimpleObject(doorFactory.createRightDoor(actualRoom));
+        actualRoom.addSimpleObject(doorFactory.createUpDoor(actualRoom));
+        actualRoom.addSimpleObject(doorFactory.createLeftDoor(actualRoom));
 
-        final Random rnd = new Random();
-        for (int i = 1; i < 2; i++) {
-            actualRoom.addDinamicObject(new Coin(this.idIterator.next(), 50, new Point2D(rnd.nextInt(785) + 240, rnd.nextInt(456) + 177), 
-                                                        new Vector2D(-1 , 0), GameObjectType.COIN, this.actualRoom));
-        }
         for (final SimpleObject obj: obstaclesFactory.getEmptyRoom(this.actualRoom)) {
             actualRoom.addSimpleObject(obj);
         }
@@ -80,6 +76,39 @@ public class RoomManagerImpl implements RoomManager {
         return this.idIterator;
     }
 
+    private Point2D getActualPosition() {
+        for (final Entry<Point2D, Room> entry : rooms.entrySet()) {
+            if (entry.getValue().equals(actualRoom)) {
+                return entry.getKey();
+            }
+        }
+        return null; //TODO non deve restituire null
+    }
 
+    /**
+     * @param direction .
+     * @Override
+     */
+    public void changeRoom(final Direction direction) {
+        final Point2D actualPosition = this.getActualPosition();
+        final Room newRoom;
+        switch (direction) {
+        case UP:
+            newRoom = rooms.get(new Point2D(actualPosition.getX(), actualPosition.getY() + 1));
+            break;
+        case DOWN:
+            newRoom = rooms.get(new Point2D(actualPosition.getX(), actualPosition.getY() - 1));
+            break;
+        case LEFT:
+            newRoom = rooms.get(new Point2D(actualPosition.getX() - 1, actualPosition.getY()));
+            break;
+        case RIGHT:
+            newRoom = rooms.get(new Point2D(actualPosition.getX() + 1, actualPosition.getY()));
+            break;
+        default:
+            return;
+        }
+        //seleziona newRoom come room attuale
+    }
 
 }
