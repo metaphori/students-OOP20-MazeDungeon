@@ -55,6 +55,8 @@ public class CommandImpl implements Command {
             character.get().setShoot(true);
         }
         if (keys[KeyEvent.VK_ESCAPE]) {
+            System.out.println("APRO MENU IN GAME");
+            
             final InGameMenuView window = new InGameMenuViewImpl();
             window.show();
         }

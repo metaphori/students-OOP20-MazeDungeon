@@ -14,12 +14,16 @@ public interface Character extends DinamicObject {
 
     Set<ItemBuilder> getItems();
 
+    /**
+     * @return character life
+     */
     double getLife();
 
     void setLife(int life);
 
+
     /**
-     * Methods for movements.
+     * Methods for movements and shoots.
      */
     void moveUp();
 
