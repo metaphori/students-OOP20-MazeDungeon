@@ -3,16 +3,16 @@ package model.gameobject.dinamicobject.character;
 import java.util.Set;
 
 import model.gameobject.dinamicobject.DinamicObject;
-import model.shop.Item;
+import model.shop.ItemBuilder;
 
 public interface Character extends DinamicObject {
     void shoot();
 
     void takeDamage(int damage);
 
-    void addItem(Item item);
+    void addItem(ItemBuilder item);
 
-    Set<Item> getItems();
+    Set<ItemBuilder> getItems();
 
     double getLife();
 

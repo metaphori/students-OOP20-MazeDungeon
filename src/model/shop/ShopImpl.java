@@ -77,32 +77,32 @@ public class ShopImpl implements Shop {
         return false;
     }
     @Override
-    public Item getArthemideBow() {
-        return new Item.Builder("ArthemideBow", 2).addDemage(5).build();
+    public ItemBuilder getArthemideBow() {
+        return new ItemBuilder.Builder("ArthemideBow", 2).addDemage(5).build();
     }
 
     /**
      * @return Item with features of HermesBoots
      */
     @Override
-    public Item getHermesBoots() {
-        return new Item.Builder("HermesBoots", 1).addSpeed(3).build();
+    public ItemBuilder getHermesBoots() {
+        return new ItemBuilder.Builder("HermesBoots", 1).addSpeed(3).build();
     }
 
     /**
      * @return Item with features of ZeusBolt
      */
     @Override
-    public Item getZeusBolt() {
-        return new Item.Builder("ZeusBolt", 1).addSpeedAttack(4).build();
+    public ItemBuilder getZeusBolt() {
+        return new ItemBuilder.Builder("ZeusBolt", 1).addSpeedAttack(4).build();
     }
 
     /**
      * @return Item with features more Health
      */
     @Override
-    public Item getHealth() {
-        return new Item.Builder("Health", 1).addHelath(2).build();
+    public ItemBuilder getHealth() {
+        return new ItemBuilder.Builder("Health", 1).addHelath(2).build();
     }
 
 

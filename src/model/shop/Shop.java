@@ -10,21 +10,21 @@ public interface Shop {
 
     boolean checkItem(Items i);
 
-    Item getArthemideBow();
+    ItemBuilder getArthemideBow();
 
     /**
      * @return Item with features of HermesBoots
      */
-    Item getHermesBoots();
+    ItemBuilder getHermesBoots();
 
     /**
      * @return Item with features of ZeusBolt
      */
-    Item getZeusBolt();
+    ItemBuilder getZeusBolt();
 
     /**
      * @return Item with features more Health
      */
-    Item getHealth();
+    ItemBuilder getHealth();
 
 }

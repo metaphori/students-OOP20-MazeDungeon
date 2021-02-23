@@ -13,27 +13,32 @@ import model.room.Room;
 
 public class Boss extends AbstractEnemy{
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+    private Vector2D vectorBullet = new Vector2D(0, 1);
     public Boss(final int id,final int speed,final Point2D position,final Vector2D direction,final GameObjectType gameObjectType,final Room room) {
         super(id, speed, position, direction, gameObjectType, room);
         //this.setLife(20);
         //System.out.println(this.getBoundingBox().getWidth() + "   " + this.getBoundingBox().getHeight());
     }
     private void checkWall() {
-        if ((int) this.getDirection().getX() == -1 && (int) this.getDirection().getY() == 0) {
+        if ((int) this.getDirection().getX() == 0 && (int) this.getDirection().getY() == -1) {
             this.setDirection(new Vector2D(1, 0));
             this.setPosition(new Point2D(this.getPosition().getX()+1 , this.getPosition().getY()+1));
+            vectorBullet = new Vector2D(0, 1);
         }
         else if((int) this.getDirection().getX() == 1 && (int) this.getDirection().getY() == 0) {
             this.setDirection(new Vector2D(0, 1));
             this.setPosition(new Point2D(this.getPosition().getX()-1 , this.getPosition().getY()+1));
+            vectorBullet = new Vector2D(-1, 0);
         }
         else if((int) this.getDirection().getX() == 0 && (int) this.getDirection().getY() == 1) {
             this.setDirection(new Vector2D(-1, 0));
             this.setPosition(new Point2D(this.getPosition().getX() -1, this.getPosition().getY()-1));
+            vectorBullet = new Vector2D(0, -1);
         }
         else if((int) this.getDirection().getX() == -1 && (int) this.getDirection().getY() == 0) {
             this.setDirection(new Vector2D(0, -1));
-            this.setPosition(new Point2D(this.getPosition().getX()+1 , this.getPosition().getY()+1));
+            this.setPosition(new Point2D(this.getPosition().getX()+1 , this.getPosition().getY()-1));
+            vectorBullet = new Vector2D(1, 0);
         }
     }
 
@@ -64,7 +69,7 @@ public class Boss extends AbstractEnemy{
             return;
         }
         final Bullet bullet = this.getBulletFactory().createBossBullet(this.getPosition().sum(new Vector2D(110,100)),
-                new Vector2D(0, 1), this.getRoom());
+                vectorBullet, this.getRoom());
         this.getRoom().addDinamicObject(bullet);
     }
 
