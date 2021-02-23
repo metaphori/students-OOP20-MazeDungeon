@@ -63,8 +63,6 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
             this.setPosition(this.getLastPosition());
             this.changeRoutine();
             break;
-
-
         default:
             break;
         }
