@@ -17,14 +17,13 @@ public class ResourceLoader {
         resources.put(GameObjectType.ENEMY_SKELETON, imagesPath + "Enemies" + sep + "Skeleton_Seeker" + sep + "Spawn" + sep + "Skeleton9.png");
 
         resources.put(GameObjectType.ENEMY_BOSS, imagesPath + "Boss" + sep + "Boss.png");
-        
-        
+
 
         /*LOAD BULLET IMAGE*/
         resources.put(GameObjectType.SOUL_BULLET, imagesPath + "Bullets" + sep + "TestBullet.png");
         resources.put(GameObjectType.CHARACTER_BULLET, imagesPath + "Bullets" + sep + "characterBullet.png");
         resources.put(GameObjectType.SKELETON_BULLET, imagesPath + "Bullets" + sep + "TestSkull1.png");
-
+        resources.put(GameObjectType.BOSS_BULLET, imagesPath + "Bullets" + sep + "bossBullet.png");
     }
 
     /**
