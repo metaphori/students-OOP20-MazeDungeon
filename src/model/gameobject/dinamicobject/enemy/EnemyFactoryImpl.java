@@ -107,8 +107,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      */
     @Override
     public Enemy createBoss(final int speed, final Point2D position, final Vector2D direction, final Room room) {
-        // TODO Auto-generated method stub
-        return null;
+        return new Boss(this.idIterator.next(), speed, position, direction, GameObjectType.ENEMY_BOSS, room);
     }
 
 }
