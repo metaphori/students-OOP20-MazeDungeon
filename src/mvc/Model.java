@@ -8,7 +8,7 @@ import model.gameobject.GameObject;
 import model.room.RoomManager;
 
 public interface Model {
-    Optional<Point2D> getGameObjectPosition(int id);
+    Point2D getGameObjectPosition(int id);
 
     GameObject getGameObject(int id);
 

@@ -84,17 +84,30 @@ public class EnemyFactoryImpl implements EnemyFactory {
     public Enemy createSkeletonSeeker(final int speed, final Point2D position, final Vector2D direction, final Room room) {
         return new AbstractEnemy(this.idIterator.next(), speed, position, direction, GameObjectType.ENEMY_SKELETON, room) {
 
+            private long lastChangeTime = System.currentTimeMillis();
+            private boolean stop = true;
+
             @Override
             public void updateState(final double elapsed) {
                 this.move(elapsed);
                 if (this.canShoot()) {
                     this.shoot();
                 }
+                final long currentTime = System.currentTimeMillis();
+                if (currentTime - this.lastChangeTime > 5000) {
+                    this.lastChangeTime = currentTime;
+                    if (stop) {
+                        this.stopMovement();
+                        this.stop = false;
+                    } else {
+                        this.changeRoutine();
+                        this.stop = true;
+                    }
+                }
             }
 
             @Override
             public void shoot() {
-                this.setDirection(new Vector2D(0, 0));
                 final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
                 final Bullet bullet = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(1, 0), room);
                 this.getRoom().addDinamicObject(bullet);
@@ -102,8 +115,14 @@ public class EnemyFactoryImpl implements EnemyFactory {
 
             @Override
             protected void changeRoutine() {
-                // TODO Auto-generated method stub
+                final Random rndFlipDirection = new Random();
+                final double newX = rndFlipDirection.nextBoolean() ? -1 : 1;
+                final double newY = rndFlipDirection.nextBoolean() ? -1 : 1;
+                this.setDirection(new Vector2D(newX, newY));
+            }
 
+            private void stopMovement() {
+                this.setDirection(new Vector2D(0, 0));
             }
         };
     }
@@ -113,8 +132,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      */
     @Override
     public Enemy createBoss(final int speed, final Point2D position, final Vector2D direction, final Room room) {
-        // TODO Auto-generated method stub
-        return null;
+        return new Boss(this.idIterator.next(), speed, position, direction, GameObjectType.ENEMY_BOSS, room);
     }
 
 }

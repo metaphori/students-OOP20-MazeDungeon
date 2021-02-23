@@ -83,11 +83,7 @@ public class GameControllerImpl implements GameController {
      */
     private void updateSpritePositions() {
         for (final Integer id : this.lastGameObjectsID) {
-            Optional<Point2D> temp =  model.getGameObjectPosition(id);
-            if (temp.isEmpty()) {
-                continue;
-            }
-            this.view.setSpritePosition(id, temp.get());
+            this.view.setSpritePosition(id, model.getGameObjectPosition(id));
         }
     }
 
