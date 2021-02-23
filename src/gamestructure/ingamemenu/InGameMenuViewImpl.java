@@ -122,6 +122,8 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.lblBackgroundMenu.add(btnShopMenu);
         btnShopMenu.addActionListener(e -> {
             this.controller.openShop();
+            System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
+            //System.out.println("priva");
         });
 
         btnExitMenu.setBounds((int) (screen.getWidth()/4), 523, 300, 90);

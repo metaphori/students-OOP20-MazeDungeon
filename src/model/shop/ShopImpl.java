@@ -12,8 +12,8 @@ public class ShopImpl implements Shop {
 
     private String messageOuput = "";
 
-    private String msgBought = "You bought this item! You have: ";
-    private String msgNoMoney = "You don't have enough coins!";
+    private final String msgBought;
+    private final String msgNoMoney;
     @Override
     public String getMessageOuput() {
         return messageOuput;
@@ -21,9 +21,11 @@ public class ShopImpl implements Shop {
     /**
      * @return Item with features of ArthemideBow
      */
-    public ShopImpl(int actualMoney, int actualLife) {
+    public ShopImpl(final int actualMoney, final int actualLife) {
         this.actualLife = actualLife;
         this.actualMoney = actualMoney;
+        msgBought = "You bought this item! You have: ";
+        msgNoMoney = "You don't have enough coins!";
     }
     @Override
     public boolean checkItem(final Items i) {
