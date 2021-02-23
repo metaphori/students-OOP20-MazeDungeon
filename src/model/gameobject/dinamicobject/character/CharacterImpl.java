@@ -1,5 +1,6 @@
 package model.gameobject.dinamicobject.character;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Optional;
@@ -7,6 +8,7 @@ import java.util.Set;
 
 import javax.swing.SwingUtilities;
 
+import jaco.mp3.player.MP3Player;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.IdIterator;
@@ -15,6 +17,7 @@ import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
 import model.gameobject.dinamicobject.bullet.*;
+import model.common.CollisionType;
 import model.room.Room;
 import model.shop.Item;
 
@@ -34,7 +37,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         this.life = MAXLIFE;
         this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl(this.getRoom().getRoomManager().getIdIterator());
-        this.lastDirection = new Vector2D(0, 0);
+        this.lastDirection = new Vector2D(1, 0);
     }
 
     @Override
@@ -45,6 +48,8 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
                     getDirection().sum(this.lastDirection),
                     getRoom()); 
             getRoom().addDinamicObject(bullet);
+            final MP3Player mp3Player = new MP3Player(new File("resources/sounds/characterhoot.mp3"));
+            mp3Player.play();
             this.shoot = false;
     }
 
@@ -89,7 +94,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * 
      */
     @Override
-    public void setLife(final int life) {
+    public void setLife(final int life) { /*ITEM DI DIGI*/
         this.life = life;
     }
     /**
@@ -163,23 +168,30 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     }
     /**
-     * 
+     * TODO
      */
     @Override
     public void collideWith(final GameObject obj2) {
-        final int footHeight = 15;
+       /* final int footHeight = 15;
         final Point2D footColliderUL = new Point2D(this.getBoundingBox().getULCorner().getX(), this.getBoundingBox().getBRCorner().getY() - footHeight);
         final BoundingBox footCollider = new BoundingBox(footColliderUL, this.getBoundingBox().getWidth(), footHeight);
         if (footCollider.intersectWith(obj2.getBoundingBox())) {
-            if (obj2.getGameObjectType() == GameObjectType.COIN) { //COLLECT A COIN
+            if (obj2.getGameObjectType().getCollisionType() == CollisionType.INTERACTIVE_ELEMENT) { //COLLISIONE CON MONETE E BULLET
+                switch (obj2.getGameObjectType()) {
+                    case COIN:
+                        System.out.println("COLLECT A COIN");
+                        break;
+                    default:
+                        break;
+
+                }
                 this.getRoom().deleteGameObject(obj2);
-                System.out.println("COLLECT A COIN");
             }
             this.setDirection(new Vector2D(0, 0));
             this.setPosition(this.getLastPosition());
         }
         this.setDirection(new Vector2D(0, 0));
-        this.setPosition(this.getLastPosition());
+        this.setPosition(this.getLastPosition());*/
     }
 
     /*

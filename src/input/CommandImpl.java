@@ -34,7 +34,7 @@ public class CommandImpl implements Command {
     }
 
     @Override
-    public void execute(final int keyCommand) {
+    public void execute() {
         final Optional<Character> character = this.model.getRoomManager().getCurrentRoom().getCharacter();
         if (character.isEmpty()) {
             return;
