@@ -62,9 +62,17 @@ public class RoomImpl implements Room {
      * @return .
      */
     public List<GameObject> getCurrentGameObjects() {
-        final List<GameObject> gameObjects = new LinkedList<>(simpleObjects);
-        gameObjects.addAll(dinamicObjects);
-        return gameObjects;
+        try {
+            final List<GameObject> gameObjects = new LinkedList<>(simpleObjects);
+            final List<GameObject> TMPgameObjects = new LinkedList<>(dinamicObjects); 
+            gameObjects.addAll(TMPgameObjects);
+            return gameObjects;
+        } catch (Exception e) {
+            System.out.println("ECCEZIONE");
+        }
+
+       return new LinkedList<>();
+        
     }
 
     /**
