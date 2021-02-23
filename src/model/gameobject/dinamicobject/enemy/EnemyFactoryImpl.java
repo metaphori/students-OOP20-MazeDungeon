@@ -62,7 +62,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
                     return;
                 }
                 final Point2D characterPosition = this.getRoom().getCharacterPosition().get();
-                final Bullet bullet = this.getBulletFactory().createSoulBullet(GameObjectType.SOUL_BULLET, this.getPosition(),
+                final Bullet bullet = this.getBulletFactory().createSoulBullet(this.getPosition(),
                         new Vector2D(characterPosition.getX() - this.getPosition().getX(), characterPosition.getY() - this.getPosition().getY()).getNormalized(), room);
                 this.getRoom().addDinamicObject(bullet);
             }
@@ -87,11 +87,17 @@ public class EnemyFactoryImpl implements EnemyFactory {
             @Override
             public void updateState(final double elapsed) {
                 this.move(elapsed);
+                if (this.canShoot()) {
+                    this.shoot();
+                }
             }
 
             @Override
             public void shoot() {
-                // TODO Auto-generated method stub
+                this.setDirection(new Vector2D(0, 0));
+                final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
+                final Bullet bullet = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(1, 0), room);
+                this.getRoom().addDinamicObject(bullet);
             }
 
             @Override
