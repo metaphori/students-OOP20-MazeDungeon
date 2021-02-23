@@ -15,6 +15,7 @@ import gamestructure.ingamemenu.InGameMenuViewImpl;
 import gamestructure.mainmenu.MainMenuView;
 import gamestructure.mainmenu.MainMenuViewImpl;
 import model.common.Point2D;
+import model.gameobject.dinamicobject.character.Character;
 import mvc.Model;
 
 public class CommandImpl implements Command {
@@ -23,31 +24,33 @@ public class CommandImpl implements Command {
     private boolean[] keys;
     private int key;
     private final Set<Integer> permittedKeys;
-
+    private Character character;
 
     public CommandImpl(final Model model) {
         this.model = model;
         this.keys = new boolean[256];
         this.permittedKeys = new HashSet<>(Set.of(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_A, KeyEvent.VK_SPACE, KeyEvent.VK_ESCAPE));
+       // this.character = this.model.getRoomManager().getCurrentRoom().getCharacter();
+        this.character = this.model.getRoomManager().getCharacter();
     }
 
     @Override
     public void execute(final int keyCommand) {
-       
+
         if (keys[KeyEvent.VK_W]) {
-            this.model.getRoomManager().getCharacter().moveUp();
+            this.character.moveUp();
         }
         if (keys[KeyEvent.VK_S]) {
-            this.model.getRoomManager().getCharacter().moveDown();
+            this.character.moveDown();
         }
         if (keys[KeyEvent.VK_D]) {
-            this.model.getRoomManager().getCharacter().moveRight();
+            this.character.moveRight();
         }
         if (keys[KeyEvent.VK_A]) {
-            this.model.getRoomManager().getCharacter().moveLeft();
+            this.character.moveLeft();
         }
         if (keys[KeyEvent.VK_SPACE]) {
-            this.model.getRoomManager().getCharacter().shoot();
+            this.character.setShoot(true);
         }
         if (keys[KeyEvent.VK_ESCAPE]) {
             final InGameMenuView window = new InGameMenuViewImpl();
@@ -55,11 +58,11 @@ public class CommandImpl implements Command {
         }
 
         if (this.checkStopVertical()) {
-            this.model.getRoomManager().getCharacter().stopVertical();
+            this.character.stopVertical();
         }
 
         if (this.checkStopHorizontal()) {
-            this.model.getRoomManager().getCharacter().stopHorizontal();
+            this.character.stopHorizontal();
         }
      }
 

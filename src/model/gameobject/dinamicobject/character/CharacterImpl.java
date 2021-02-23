@@ -26,44 +26,26 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private Set<Item> items; //contains set di items
     private final BulletFactory bulletFactory;
     private long lastShootTime = System.currentTimeMillis();
-    private final Runnable bulletThread;
-
-
+    private boolean shoot = false;
+    private Vector2D lastDirection;
+ 
     public CharacterImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
         super(id, speed, position, direction, gameObjectType, room);
         this.life = MAXLIFE;
         this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl(this.getRoom().getRoomManager().getIdIterator());
-        this.bulletThread = new BulletThread();
+        this.lastDirection = new Vector2D(0, 0);
     }
 
-    private class BulletThread implements Runnable{
-
-        @Override
-        public  void run() {
-                Bullet bullet = bulletFactory.createCharacterBullet(
-                        new Point2D(getPosition().getX() + 50 , getPosition().getY() +  50),
-                        getDirection().sum(new Vector2D(getDirection().getX(), getDirection().getY())),
-                        getRoom()); 
-                getRoom().addDinamicObject(bullet);
-               /* try {
-                    SwingUtilities.invokeAndWait(this);
-                } catch (InvocationTargetException | InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }*/
-
-        }
-    }
-
-    /**
-     * RICORDARSI DI STOPPARE IL THREAD UNA VOLTA SPARATO
-     */
     @Override
     public void shoot() {
-        if (this.canShoot()) {
-            this.bulletThread.run();
-        }
+
+            Bullet bullet = bulletFactory.createCharacterBullet(
+                    new Point2D(getPosition().getX() + 50 , getPosition().getY() +  50),
+                    getDirection().sum(this.lastDirection),
+                    getRoom()); 
+            getRoom().addDinamicObject(bullet);
+            this.shoot = false;
     }
 
     /**
@@ -92,6 +74,9 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void updateState(final double elapsed) { 
         this.move(elapsed);
+        if (this.shoot) {
+            this.shoot();
+        }
     }
     /**
      * 
@@ -130,6 +115,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void moveUp() {
         this.setDirection(new Vector2D(this.getDirection().getX() , -1));
+        this.setLastDirection(new Vector2D(this.getDirection().getX() , -1));
     }
 
     /**
@@ -138,6 +124,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void moveDown() {
         this.setDirection(new Vector2D(this.getDirection().getX() , 1));
+        this.setLastDirection(new Vector2D(this.getDirection().getX() , 1));
     }
 
     /**
@@ -146,6 +133,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void moveRight() {
         this.setDirection(new Vector2D(1, this.getDirection().getY()));
+        this.setLastDirection(new Vector2D(1, this.getDirection().getY()));
 
     }
 
@@ -155,6 +143,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void moveLeft() {
         this.setDirection(new Vector2D(-1, this.getDirection().getY()));
+        this.setLastDirection(new Vector2D(-1, this.getDirection().getY()));
     }
 
     /**
@@ -191,6 +180,20 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         }
         this.setDirection(new Vector2D(0, 0));
         this.setPosition(this.getLastPosition());
+    }
+
+    /*
+     * 
+     */
+    @Override
+    public void setShoot(boolean shoot) {
+        if (this.canShoot()) {
+            this.shoot = shoot;
+        }
+    }
+
+    private void setLastDirection(final Vector2D lastDirection) {
+        this.lastDirection = lastDirection;
     }
 }
 

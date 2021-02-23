@@ -33,6 +33,8 @@ public interface Character extends DinamicObject {
 
     void stopHorizontal();
 
+    void setShoot(boolean shoot);
+
 
 
 }

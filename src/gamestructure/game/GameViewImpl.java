@@ -95,10 +95,6 @@ public class GameViewImpl implements GameView, KeyListener {
             super.paintComponent(g);
             g.drawImage(room, 0, 0, null);
 
-           /* for (final Sprite sprite : new LinkedList<>(sprites.values())) {
-                g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
-            }*/
-
             final List<Sprite> temp = new ArrayList<>(sprites.values());
 
             temp.iterator().forEachRemaining(sprite -> {
