@@ -72,10 +72,10 @@ public class GameControllerImpl implements GameController {
         this.model.update(elapsed);
         this.checkDeletedObject();
         this.checkNewGameObjects();
-        this.updateSpritePositions();
     }
 
     private void render() {
+        this.updateSpritePositions();
         this.view.render();
     } 
     /**

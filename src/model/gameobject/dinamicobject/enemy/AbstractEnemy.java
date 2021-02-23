@@ -5,7 +5,6 @@ import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
-import model.gameobject.dinamicobject.bullet.Bullet;
 import model.gameobject.dinamicobject.bullet.BulletFactory;
 import model.gameobject.dinamicobject.bullet.BulletFactoryImpl;
 import model.room.Room;
@@ -28,7 +27,11 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     public double getLife() {
         return this.life;
     }
-    public void setLife(double life) {
+
+    /**
+     * @param life set the enemy life
+     */
+    public void setLife(final double life) {
         this.life = life;
     }
 
@@ -71,12 +74,12 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     }
 
     /**
-     * 
+     * @param shootFrequency the frequency of shoot
      * @return .
      */
-    protected boolean canShoot() {
+    protected boolean canShoot(final long shootFrequency) {
         final long currentTime = System.currentTimeMillis();
-        if (currentTime - this.lastShootTime > 1000) {
+        if (currentTime - this.lastShootTime > shootFrequency) {
             this.lastShootTime = currentTime;
             return true;
         }

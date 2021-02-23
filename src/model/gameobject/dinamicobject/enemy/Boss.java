@@ -90,7 +90,7 @@ public class Boss extends AbstractEnemy{
             this.setDirection(new Vector2D(1, 0));
         }*/
         this.move(elapsed);
-        if(this.canShoot()) {
+        if(this.canShoot(1000)) {
             this.shoot();
         }
         

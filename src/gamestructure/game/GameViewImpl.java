@@ -92,10 +92,11 @@ public class GameViewImpl implements GameView, KeyListener {
 
         @Override
         protected void paintComponent(final Graphics g) {
+            final Map<Integer, Sprite> tmpMap = Map.copyOf(sprites);
             super.paintComponent(g);
             g.drawImage(room, 0, 0, null);
 
-            final List<Sprite> temp = new ArrayList<>(sprites.values());
+            final List<Sprite> temp = new ArrayList<>(tmpMap.values());
 
             temp.iterator().forEachRemaining(sprite -> {
                 g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);

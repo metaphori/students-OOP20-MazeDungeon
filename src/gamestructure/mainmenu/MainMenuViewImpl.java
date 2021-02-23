@@ -25,8 +25,8 @@ public class MainMenuViewImpl implements MainMenuView {
     private final JButton btnNewGame = new JButton("", new ImageIcon("resources//images//MainMenu//NewGame.png")); 
     private final JButton btnExit = new JButton("", new ImageIcon("resources//images//MainMenu//Exit.png")); 
     private final JButton btnCredits = new JButton("", new ImageIcon("resources//images//MainMenu//Credits.png")); 
-    private static double WIDTH_RATIO = 0.67; 
-    private static double HEIGHT_RATIO = 0.736;
+    private static final double WIDTH_RATIO = 0.67; 
+    private static final double HEIGHT_RATIO = 0.736;
 
     public MainMenuViewImpl() {
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

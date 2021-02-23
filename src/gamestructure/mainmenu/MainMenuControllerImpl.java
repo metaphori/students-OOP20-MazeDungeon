@@ -19,7 +19,7 @@ public class MainMenuControllerImpl implements MainMenuController {
      */
     @Override
     public void newGame() {
-        Thread thread = new Thread(new Runnable() {
+        final Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 final GameView view = new GameViewImpl();
