@@ -19,14 +19,14 @@ import model.gameobject.dinamicobject.AbstractDinamicObject;
 import model.gameobject.dinamicobject.bullet.*;
 import model.common.CollisionType;
 import model.room.Room;
-import model.shop.Item;
+import model.shop.ItemBuilder;
 
 
 public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     private final double MAXLIFE = 4.0;
     private double life;
-    private Set<Item> items; //contains set di items
+    private Set<ItemBuilder> items; //contains set di items
     private final BulletFactory bulletFactory;
     private long lastShootTime = System.currentTimeMillis();
     private boolean shoot = false;
@@ -101,14 +101,14 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * 
      */
     @Override
-    public Set<Item> getItems() {
+    public Set<ItemBuilder> getItems() {
         return this.items;
     }
     /**
      * 
      */
     @Override
-    public void addItem(Item item) {
+    public void addItem(ItemBuilder item) {
         this.items.add(item);
     }
 
