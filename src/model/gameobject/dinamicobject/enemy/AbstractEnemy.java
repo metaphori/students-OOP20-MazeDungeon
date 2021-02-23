@@ -28,6 +28,9 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     public double getLife() {
         return this.life;
     }
+    public void setLife(double life) {
+        this.life = life;
+    }
 
     /**
      * @return the factory of bullet
@@ -53,6 +56,9 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     public void collideWith(final GameObject obj2) {
         switch (obj2.getGameObjectType().getCollisionType()) {
         case OBSTACLE:
+            //this.setPosition(this.getLastPosition());
+            this.changeRoutine();
+            break;
         case ENTITY:
             this.setPosition(this.getLastPosition());
             this.setDirection(this.getDirection().mul(-1));
