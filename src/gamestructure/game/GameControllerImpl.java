@@ -64,7 +64,7 @@ public class GameControllerImpl implements GameController {
     }
 
     private void processInput() {
-            this.getCommand().execute(this.getCommand().getKey());
+            this.getCommand().execute();
             this.getCommand().lock();
     }
 

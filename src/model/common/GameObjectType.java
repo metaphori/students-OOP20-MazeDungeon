@@ -10,10 +10,13 @@ public enum GameObjectType {
     ENEMY_SKELETON(CollisionType.ENTITY),
     ENEMY_BOSS(CollisionType.ENTITY),
     /**
-     * bulletType
+     * 
      */
     COIN(CollisionType.INTERACTIVE_ELEMENT),
-    DOOR(CollisionType.INTERACTIVE_ELEMENT),
+    DOOR_LEFT(CollisionType.INTERACTIVE_ELEMENT),
+    DOOR_RIGHT(CollisionType.INTERACTIVE_ELEMENT),
+    DOOR_UP(CollisionType.INTERACTIVE_ELEMENT),
+    DOOR_DOWN(CollisionType.INTERACTIVE_ELEMENT),
     
     CHARACTER_BULLET(CollisionType.INTERACTIVE_ELEMENT),
     SKELETON_BULLET(CollisionType.INTERACTIVE_ELEMENT),

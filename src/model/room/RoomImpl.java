@@ -1,14 +1,16 @@
 package model.room;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+import model.common.Direction;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.DinamicObject;
-import model.gameobject.dinamicobject.character.CharacterImpl;
 import model.gameobject.simpleobject.SimpleObject;
 import model.gameobject.dinamicobject.character.Character;
 
@@ -16,6 +18,7 @@ public class RoomImpl implements Room {
 
     private final List<SimpleObject> simpleObjects = new LinkedList<>();
     private final List<DinamicObject> dinamicObjects = new LinkedList<>();
+    private final Set<Direction> nearRooms = new HashSet<>();
     private final RoomManager roomManager;
  
     public RoomImpl(final RoomManager roomManager) {
@@ -35,7 +38,6 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * 
      * @param obj
      */
     public void addDinamicObject(final DinamicObject obj) {
@@ -44,7 +46,6 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * 
      * @param obj
      */
     public void addSimpleObject(final SimpleObject obj) {
@@ -53,7 +54,6 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * TODO METODO BASTARDO
      * @return .
      */
     public List<GameObject> getCurrentGameObjects() {
@@ -63,9 +63,9 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * 
+     * @param gameObject
+     * @Override
      */
-    @Override
     public void deleteGameObject(final GameObject gameObject) {
         simpleObjects.remove(gameObject);
         dinamicObjects.remove(gameObject);
@@ -112,6 +112,14 @@ public class RoomImpl implements Room {
                              .filter(obj -> obj.getGameObjectType() == GameObjectType.CHARACTER) //<- posso essere indipendente da meobjectType e controllare se è castabile a character?
                              .map(obj -> (Character) obj)
                              .findAny();
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void addDoor(final Direction direction) {
+        nearRooms.add(direction);
     }
 
 }
