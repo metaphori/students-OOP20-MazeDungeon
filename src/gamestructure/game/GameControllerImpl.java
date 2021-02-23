@@ -3,6 +3,7 @@ package gamestructure.game;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,7 @@ import input.Command;
 import input.CommandImpl;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
+import model.common.Point2D;
 import model.gameobject.GameObject;
 import mvc.Model;
 
@@ -81,7 +83,11 @@ public class GameControllerImpl implements GameController {
      */
     private void updateSpritePositions() {
         for (final Integer id : this.lastGameObjectsID) {
-            this.view.setSpritePosition(id, model.getGameObjectPosition(id));
+            Optional<Point2D> temp =  model.getGameObjectPosition(id);
+            if (temp.isEmpty()) {
+                continue;
+            }
+            this.view.setSpritePosition(id, temp.get());
         }
     }
 
