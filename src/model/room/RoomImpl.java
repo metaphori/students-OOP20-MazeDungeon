@@ -59,20 +59,16 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * 
+     * TODO METODO BASTARDO
      * @return .
      */
     public List<GameObject> getCurrentGameObjects() {
-        try {
-            final List<GameObject> gameObjects = new LinkedList<>(simpleObjects);
-            final List<GameObject> TMPgameObjects = new LinkedList<>(dinamicObjects);
-            gameObjects.addAll(TMPgameObjects);
-            return gameObjects;
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-       return new LinkedList<>();
+        final List<GameObject> gameObjects = new LinkedList<>(simpleObjects);
+        dinamicObjects.iterator().forEachRemaining(obj -> {
+            gameObjects.add(obj);
+        });
+       
+        return gameObjects;
 
     }
 

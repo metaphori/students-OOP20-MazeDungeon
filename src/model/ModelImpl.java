@@ -16,11 +16,8 @@ public class ModelImpl implements Model {
     /**
      */
     @Override
-    public Optional<Point2D> getGameObjectPosition(final int id) {
-       if (this.getGameObject(id) == null) {
-           return Optional.empty();
-       }
-       return Optional.of(this.getGameObject(id).getPosition());
+    public Point2D getGameObjectPosition(final int id) {
+       return this.getGameObject(id).getPosition();
     }
 
     /**

@@ -48,9 +48,9 @@ public class Boss extends AbstractEnemy{
         if (this.getRoom().getCharacterPosition().isEmpty()) {
             return;
         }
-        final Bullet bullet = this.getBulletFactory().createBossBullet(GameObjectType.BOSS_BULLET, this.getPosition().sum(new Vector2D(110,100)),
+        /*final Bullet bullet = this.getBulletFactory().createBossBullet(GameObjectType.BOSS_BULLET, this.getPosition().sum(new Vector2D(110,100)),
                 new Vector2D(0, 1), this.getRoom());
-        this.getRoom().addDinamicObject(bullet);
+        this.getRoom().addDinamicObject(bullet);*/
     }
 
     @Override
