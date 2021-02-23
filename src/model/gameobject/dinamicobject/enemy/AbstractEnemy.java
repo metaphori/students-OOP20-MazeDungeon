@@ -64,8 +64,6 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
             this.setDirection(this.getDirection().mul(-1));
             this.changeRoutine();
             break;
-
-
         default:
             break;
         }
