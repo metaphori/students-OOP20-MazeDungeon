@@ -14,14 +14,13 @@ public class ObstaclesFactory {
     private static final Point2D UL_CORNER = new Point2D(240, 177); //TODO in caso di resize della finestra vanno cambiati!!!!
     private static final Point2D BR_CORNER = new Point2D(1025, 633);
     private final IdIterator idIterator;
-    
 
     public ObstaclesFactory(final IdIterator idIterator) {
         this.idIterator = idIterator;
     }
 
     /**
-     * 
+     * @param room where to add obstacles
      * @return .
      */
     public List<SimpleObject> getEmptyRoom(final Room room) {
@@ -49,4 +48,5 @@ public class ObstaclesFactory {
         walls.add(tmp);
         return walls;
     }
+
 }

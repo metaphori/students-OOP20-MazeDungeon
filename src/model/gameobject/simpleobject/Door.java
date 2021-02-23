@@ -5,7 +5,7 @@ import model.common.Point2D;
 import model.room.Room;
 
 public class Door extends SimpleObjectImpl {
-    public Door(int id, Point2D position, GameObjectType gameObjectType, Room room) {
+    public Door(final int id, final Point2D position, final GameObjectType gameObjectType, final Room room) {
         super(id, position, gameObjectType, room);
     }
 

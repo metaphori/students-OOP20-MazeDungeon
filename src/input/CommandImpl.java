@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.swing.SwingUtilities;
@@ -24,45 +25,45 @@ public class CommandImpl implements Command {
     private boolean[] keys;
     private int key;
     private final Set<Integer> permittedKeys;
-    private Character character;
+    
 
     public CommandImpl(final Model model) {
         this.model = model;
         this.keys = new boolean[256];
         this.permittedKeys = new HashSet<>(Set.of(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_A, KeyEvent.VK_SPACE, KeyEvent.VK_ESCAPE));
-       // this.character = this.model.getRoomManager().getCurrentRoom().getCharacter();
-        this.character = this.model.getRoomManager().getCharacter();
     }
 
     @Override
     public void execute(final int keyCommand) {
-
+        final Optional<Character> character = this.model.getRoomManager().getCurrentRoom().getCharacter();
+        if (character.isEmpty()) {
+            return;
+        }
         if (keys[KeyEvent.VK_W]) {
-            this.character.moveUp();
+            character.get().moveUp();
         }
         if (keys[KeyEvent.VK_S]) {
-            this.character.moveDown();
+            character.get().moveDown();
         }
         if (keys[KeyEvent.VK_D]) {
-            this.character.moveRight();
+            character.get().moveRight();
         }
         if (keys[KeyEvent.VK_A]) {
-            this.character.moveLeft();
+            character.get().moveLeft();
         }
         if (keys[KeyEvent.VK_SPACE]) {
-            this.character.setShoot(true);
+            character.get().setShoot(true);
         }
         if (keys[KeyEvent.VK_ESCAPE]) {
             final InGameMenuView window = new InGameMenuViewImpl();
             window.show();
         }
-
         if (this.checkStopVertical()) {
-            this.character.stopVertical();
+            character.get().stopVertical();
         }
 
         if (this.checkStopHorizontal()) {
-            this.character.stopHorizontal();
+            character.get().stopHorizontal();
         }
      }
 

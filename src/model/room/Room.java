@@ -6,6 +6,7 @@ import java.util.Optional;
 import model.common.Point2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.DinamicObject;
+import model.gameobject.dinamicobject.character.Character;
 import model.gameobject.simpleobject.SimpleObject;
 
 public interface Room {
@@ -23,4 +24,6 @@ public interface Room {
     RoomManager getRoomManager();
 
     Optional<Point2D> getCharacterPosition();
+
+    Optional<Character> getCharacter();
 }

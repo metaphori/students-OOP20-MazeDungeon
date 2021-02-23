@@ -11,6 +11,10 @@ import model.room.Room;
 
 public class EnemyFactoryImpl implements EnemyFactory {
 
+    private final int SOUL_SPEED = 90;
+    private final int SPROUT_SPEED = 50;
+    private final int SKELETON_SPEED = 90;
+    private final int BOSS_SPEED = 90;
     private final IdIterator idIterator;
 
     public EnemyFactoryImpl(final IdIterator idIterator) {
@@ -21,8 +25,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Sprout
      */
     @Override
-    public Enemy createSprout(final int speed, final Point2D position, final Vector2D direction,  final Room room) {
-        return new AbstractEnemy(this.idIterator.next(), speed, position, direction, GameObjectType.ENEMY_SPROUT, room) {
+    public Enemy createSprout(final Point2D position, final Vector2D direction,  final Room room) {
+        return new AbstractEnemy(this.idIterator.next(), this.SPROUT_SPEED, position, direction, GameObjectType.ENEMY_SPROUT, room) {
 
             @Override
             public void updateState(final double elapsed) {
@@ -46,8 +50,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Soul
      */
     @Override
-    public Enemy createSoul(final int speed, final Point2D position, final Vector2D direction, final Room room) {
-        return new AbstractEnemy(this.idIterator.next(), speed, position, direction, GameObjectType.ENEMY_SOUL, room) {
+    public Enemy createSoul(final Point2D position, final Vector2D direction, final Room room) {
+        return new AbstractEnemy(this.idIterator.next(), this.SOUL_SPEED, position, direction, GameObjectType.ENEMY_SOUL, room) {
             @Override
             public void updateState(final double elapsed) {
                 this.move(elapsed);
@@ -81,8 +85,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: SkeletonSeeker
      */
     @Override
-    public Enemy createSkeletonSeeker(final int speed, final Point2D position, final Vector2D direction, final Room room) {
-        return new AbstractEnemy(this.idIterator.next(), speed, position, direction, GameObjectType.ENEMY_SKELETON, room) {
+    public Enemy createSkeletonSeeker(final Point2D position, final Vector2D direction, final Room room) {
+        return new AbstractEnemy(this.idIterator.next(), this.SKELETON_SPEED, position, direction, GameObjectType.ENEMY_SKELETON, room) {
 
             private long lastChangeTime = System.currentTimeMillis();
             private boolean stop = true;
@@ -131,8 +135,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Boss
      */
     @Override
-    public Enemy createBoss(final int speed, final Point2D position, final Vector2D direction, final Room room) {
-        return new Boss(this.idIterator.next(), speed, position, direction, GameObjectType.ENEMY_BOSS, room);
+    public Enemy createBoss(final Point2D position, final Vector2D direction, final Room room) {
+        return new Boss(this.idIterator.next(), this.BOSS_SPEED, position, direction, GameObjectType.ENEMY_BOSS, room);
     }
 
 }
