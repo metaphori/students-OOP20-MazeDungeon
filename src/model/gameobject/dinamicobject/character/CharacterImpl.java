@@ -8,7 +8,7 @@ import java.util.Set;
 
 import javax.swing.SwingUtilities;
 
-import jaco.mp3.player.MP3Player;
+//import jaco.mp3.player.MP3Player;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.IdIterator;
@@ -48,8 +48,8 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
                     getDirection().sum(this.lastDirection),
                     getRoom()); 
             getRoom().addDinamicObject(bullet);
-            final MP3Player mp3Player = new MP3Player(new File("resources/sounds/characterhoot.mp3"));
-            mp3Player.play();
+            /*final MP3Player mp3Player = new MP3Player(new File("resources/sounds/characterhoot.mp3"));
+            mp3Player.play();*/
             this.shoot = false;
     }
 
@@ -172,7 +172,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     @Override
     public void collideWith(final GameObject obj2) {
-       /* final int footHeight = 15;
+       /*final int footHeight = 15;
         final Point2D footColliderUL = new Point2D(this.getBoundingBox().getULCorner().getX(), this.getBoundingBox().getBRCorner().getY() - footHeight);
         final BoundingBox footCollider = new BoundingBox(footColliderUL, this.getBoundingBox().getWidth(), footHeight);
         if (footCollider.intersectWith(obj2.getBoundingBox())) {
@@ -189,8 +189,25 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
             }
             this.setDirection(new Vector2D(0, 0));
             this.setPosition(this.getLastPosition());
+        }*/
+        switch (obj2.getGameObjectType().getCollisionType()) {
+            case OBSTACLE:
+            case ENTITY:
+                /*this.setPosition(new Point2D(this.getLastPosition().getX() - (this.getDirection().getX() * 10),
+                        this.getLastPosition().getY()  - (this.getDirection().getY() * 10)));*/
+                this.setDirection(new Vector2D(0, 0));
+                this.setPosition(this.getLastPosition());
+                break;
+            case INTERACTIVE_ELEMENT:
+                if (obj2.getGameObjectType().equals(GameObjectType.COIN)) {
+                    System.out.println("COLLECT A COIN");
+                    this.getRoom().deleteGameObject(obj2);
+                }
+                break;
+            default:
+                break;
         }
-        this.setDirection(new Vector2D(0, 0));
+        /*this.setDirection(new Vector2D(0, 0));
         this.setPosition(this.getLastPosition());*/
     }
 
@@ -198,7 +215,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * 
      */
     @Override
-    public void setShoot(boolean shoot) {
+    public void setShoot(final boolean shoot) {
         if (this.canShoot()) {
             this.shoot = shoot;
         }

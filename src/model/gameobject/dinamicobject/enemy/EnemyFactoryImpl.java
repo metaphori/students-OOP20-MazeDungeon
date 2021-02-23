@@ -30,6 +30,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
 
             @Override
             public void updateState(final double elapsed) {
+                this.followCharacter();
                 this.move(elapsed);
             }
 
@@ -40,8 +41,16 @@ public class EnemyFactoryImpl implements EnemyFactory {
 
             @Override
             protected void changeRoutine() {
-                // TODO Auto-generated method stub
+                this.setPosition(this.getLastPosition());
+            }
 
+            private void followCharacter() {
+                if (this.getRoom().getCharacterPosition().isEmpty()) {
+                    return;
+                }
+                final Point2D characterPosition = this.getRoom().getCharacterPosition().get();
+                this.setDirection(new Vector2D(characterPosition.getX() - this.getPosition().getX(), 
+                        characterPosition.getY() - this.getPosition().getY()).getNormalized());
             }
         };
     }
