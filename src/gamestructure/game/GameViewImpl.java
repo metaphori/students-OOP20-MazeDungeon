@@ -168,7 +168,7 @@ public class GameViewImpl implements GameView, KeyListener {
     public void keyPressed(final KeyEvent key) {
         if (this.controller.getCommand().getPermittedKeys().contains(key.getKeyCode())) {
             this.controller.getCommand().setKey(key, true);
-            this.controller.getCommand().execute(key.getKeyCode());
+            this.controller.getCommand().execute();
         }
         
     }

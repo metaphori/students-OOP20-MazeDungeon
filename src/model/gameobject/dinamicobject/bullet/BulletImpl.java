@@ -38,7 +38,14 @@ public class BulletImpl extends AbstractDinamicObject implements Bullet {
 
     @Override
     public void collideWith(final GameObject obj2) {
-        // TODO Auto-generated method stub
+        switch (obj2.getGameObjectType().getCollisionType()) {
+        case OBSTACLE:
+            this.getRoom().deleteGameObject(this);
+            break;
+        default:
+            break;
+
+        }
     }
 
 }
