@@ -9,6 +9,7 @@ import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.DinamicObject;
+import model.gameobject.dinamicobject.character.CharacterImpl;
 import model.gameobject.simpleobject.SimpleObject;
 import model.gameobject.simpleobject.SimpleObjectImpl;
 
