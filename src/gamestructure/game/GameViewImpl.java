@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -94,9 +95,15 @@ public class GameViewImpl implements GameView, KeyListener {
             super.paintComponent(g);
             g.drawImage(room, 0, 0, null);
 
-            for (final Sprite sprite : new LinkedList<>(sprites.values())) {
+           /* for (final Sprite sprite : new LinkedList<>(sprites.values())) {
                 g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
-            }
+            }*/
+
+            final List<Sprite> temp = new ArrayList<>(sprites.values());
+
+            temp.iterator().forEachRemaining(sprite -> {
+                g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
+            });
             Toolkit.getDefaultToolkit().sync();
         }
 

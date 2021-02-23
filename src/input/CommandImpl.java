@@ -33,30 +33,25 @@ public class CommandImpl implements Command {
 
     @Override
     public void execute(final int keyCommand) {
-        if (keys[keyCommand]) {
-            switch (keyCommand) {
-                case KeyEvent.VK_W:
-                    this.model.getRoomManager().getCharacter().moveUp();
-                    break;
-                case KeyEvent.VK_S:
-                    this.model.getRoomManager().getCharacter().moveDown();
-                    break;
-                case KeyEvent.VK_D:
-                    this.model.getRoomManager().getCharacter().moveRight();
-                    break;
-                case KeyEvent.VK_A:
-                    this.model.getRoomManager().getCharacter().moveLeft();
-                    break;
-                case KeyEvent.VK_SPACE:
-                    this.model.getRoomManager().getCharacter().shoot();
-                    break;
-                case KeyEvent.VK_ESCAPE:
-                    final InGameMenuView window = new InGameMenuViewImpl();
-                    window.show();
-                    break;
-                default:
-                    break;
-            }
+       
+        if (keys[KeyEvent.VK_W]) {
+            this.model.getRoomManager().getCharacter().moveUp();
+        }
+        if (keys[KeyEvent.VK_S]) {
+            this.model.getRoomManager().getCharacter().moveDown();
+        }
+        if (keys[KeyEvent.VK_D]) {
+            this.model.getRoomManager().getCharacter().moveRight();
+        }
+        if (keys[KeyEvent.VK_A]) {
+            this.model.getRoomManager().getCharacter().moveLeft();
+        }
+        if (keys[KeyEvent.VK_SPACE]) {
+            this.model.getRoomManager().getCharacter().shoot();
+        }
+        if (keys[KeyEvent.VK_ESCAPE]) {
+            final InGameMenuView window = new InGameMenuViewImpl();
+            window.show();
         }
 
         if (this.checkStopVertical()) {

@@ -1,8 +1,11 @@
 package model.gameobject.dinamicobject.character;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+
+import javax.swing.SwingUtilities;
 
 import model.common.BoundingBox;
 import model.common.GameObjectType;
@@ -23,6 +26,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private Set<Item> items; //contains set di items
     private final BulletFactory bulletFactory;
     private long lastShootTime = System.currentTimeMillis();
+    private final Runnable bulletThread;
 
 
     public CharacterImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
@@ -30,7 +34,26 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         this.life = MAXLIFE;
         this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl(this.getRoom().getRoomManager().getIdIterator());
+        this.bulletThread = new BulletThread();
+    }
 
+    private class BulletThread implements Runnable{
+
+        @Override
+        public  void run() {
+                Bullet bullet = bulletFactory.createCharacterBullet(
+                        new Point2D(getPosition().getX() + 50 , getPosition().getY() +  50),
+                        getDirection().sum(new Vector2D(getDirection().getX(), getDirection().getY())),
+                        getRoom()); 
+                getRoom().addDinamicObject(bullet);
+               /* try {
+                    SwingUtilities.invokeAndWait(this);
+                } catch (InvocationTargetException | InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }*/
+
+        }
     }
 
     /**
@@ -38,26 +61,9 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     @Override
     public void shoot() {
-      /*  if (this.canShoot()) {
-            Bullet bullet = bulletFactory.createCharacterBullet(GameObjectType.CHARACTER_BULLET,
-                    new Point2D(getPosition().getX() + 20 , getPosition().getY()),
-                    this.getDirection().sum(new Vector2D(this.getDirection().getY(), this.getDirection().getY())),
-                    getRoom()); 
-            getRoom().addDinamicObject(bullet);
-        }*/
-        Runnable thread = new Runnable() {
-            @Override
-            public void run() { 
-                if (canShoot()) {
-                    Bullet bullet = bulletFactory.createCharacterBullet(GameObjectType.CHARACTER_BULLET,
-                            new Point2D(getPosition().getX() + 50 , getPosition().getY() +  50),
-                            getDirection().sum(new Vector2D(getDirection().getX(), getDirection().getY())),
-                            getRoom()); 
-                    getRoom().addDinamicObject(bullet);
-                }
-            }
-        };
-        thread.run();
+        if (this.canShoot()) {
+            this.bulletThread.run();
+        }
     }
 
     /**
@@ -66,7 +72,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     private boolean canShoot() {
         final long currentTime = System.currentTimeMillis();
-        if (currentTime - this.lastShootTime > 1000) {
+        if (currentTime - this.lastShootTime > 500 ) {
             this.lastShootTime = currentTime;
             return true;
         }
@@ -187,3 +193,4 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         this.setPosition(this.getLastPosition());
     }
 }
+

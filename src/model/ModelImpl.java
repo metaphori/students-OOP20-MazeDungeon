@@ -2,6 +2,7 @@ package model;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import model.common.Point2D;
 import model.gameobject.GameObject;
@@ -15,8 +16,11 @@ public class ModelImpl implements Model {
     /**
      */
     @Override
-    public Point2D getGameObjectPosition(final int id) {
-       return this.getGameObject(id).getPosition();
+    public Optional<Point2D> getGameObjectPosition(final int id) {
+       if (this.getGameObject(id) == null) {
+           return Optional.empty();
+       }
+       return Optional.of(this.getGameObject(id).getPosition());
     }
 
     /**

@@ -33,9 +33,10 @@ public class RoomImpl implements Room {
      */
     @Override
     public void update(final double elapsed) {
-        for (final DinamicObject obj : new LinkedList<>(this.dinamicObjects)) {
+        final List<DinamicObject> temp = new LinkedList<>(List.copyOf(this.dinamicObjects));
+        temp.iterator().forEachRemaining(obj -> {
             obj.updateState(elapsed);
-        }
+        });
         this.checkCollisions();
     }
 
@@ -62,9 +63,17 @@ public class RoomImpl implements Room {
      * @return .
      */
     public List<GameObject> getCurrentGameObjects() {
-        final List<GameObject> gameObjects = new LinkedList<>(simpleObjects);
-        gameObjects.addAll(dinamicObjects);
-        return gameObjects;
+        try {
+            final List<GameObject> gameObjects = new LinkedList<>(simpleObjects);
+            final List<GameObject> TMPgameObjects = new LinkedList<>(dinamicObjects);
+            gameObjects.addAll(TMPgameObjects);
+            return gameObjects;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+       return new LinkedList<>();
+
     }
 
     /**
