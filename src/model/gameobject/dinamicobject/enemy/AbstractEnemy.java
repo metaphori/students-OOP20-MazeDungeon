@@ -61,7 +61,6 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
             break;
         case ENTITY:
             this.setPosition(this.getLastPosition());
-            this.setDirection(this.getDirection().mul(-1));
             this.changeRoutine();
             break;
 
