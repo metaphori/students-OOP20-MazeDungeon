@@ -46,7 +46,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
 
             @Override
             protected void changeRoutine() {
-                this.setPosition(this.getLastPosition());
+                //this.setPosition(this.getLastPosition());
             }
 
             private void followCharacter() {

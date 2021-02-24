@@ -169,7 +169,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     @Override
     public void collideWith(final GameObject obj2) {
-       final int footHeight = 15;
+       /*final int footHeight = 15;
         final Point2D footColliderUL = new Point2D(this.getBoundingBox().getULCorner().getX(), this.getBoundingBox().getBRCorner().getY() - footHeight);
         final BoundingBox footCollider = new BoundingBox(footColliderUL, this.getBoundingBox().getWidth(), footHeight);
         if (footCollider.intersectWith(obj2.getBoundingBox())) {
@@ -186,14 +186,13 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
             }
             this.setDirection(new Vector2D(0, 0));
             this.setPosition(this.getLastPosition());
-        }
+        }*/
 
-      /* switch (obj2.getGameObjectType().getCollisionType()) {
+       switch (obj2.getGameObjectType().getCollisionType()) {
             case OBSTACLE:
             case ENTITY:
-                /*this.setPosition(new Point2D(this.getLastPosition().getX() - (this.getDirection().getX() * 10),
-                        this.getLastPosition().getY()  - (this.getDirection().getY() * 10)));*/
-                /*this.setDirection(new Vector2D(0, 0));
+                /*this.setPosition(new Point2D(this.getLastPosition().getX() - (this.getDirection().getX() * 1),
+                        this.getLastPosition().getY()  - (this.getDirection().getY() * 1)));*/
                 this.setPosition(this.getLastPosition());
                 break;
             case INTERACTIVE_ELEMENT:
@@ -205,8 +204,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
             default:
                 break;
         }
-        /*this.setDirection(new Vector2D(0, 0));
-        this.setPosition(this.getLastPosition());*/
+        /*this.setPosition(this.getLastPosition());*/
     }
 
     /*

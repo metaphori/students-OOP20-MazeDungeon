@@ -59,13 +59,15 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     public void collideWith(final GameObject obj2) {
         switch (obj2.getGameObjectType().getCollisionType()) {
         case OBSTACLE:
-            /*this.setPosition(new Point2D(this.getLastPosition().getX() - (this.getDirection().getX() * 5),
-                    this.getLastPosition().getY()  - (this.getDirection().getY() * 5)));*/
+            /*this.setPosition(new Point2D(this.getLastPosition().getX() - (this.getDirection().getX() * 1),
+                    this.getLastPosition().getY()  - (this.getDirection().getY() * 1)));*/
             this.setPosition(this.getLastPosition());
             this.changeRoutine();
             break;
         case ENTITY:
-            //this.setPosition(this.getLastPosition());
+            /*this.setPosition(new Point2D(this.getLastPosition().getX() - (this.getDirection().getX() * 1),
+                    this.getLastPosition().getY()  - (this.getDirection().getY() * 1)));*/
+            this.setPosition(this.getLastPosition());
             this.changeRoutine();
             break;
         default:
