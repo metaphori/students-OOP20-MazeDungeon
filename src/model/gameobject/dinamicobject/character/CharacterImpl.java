@@ -1,9 +1,10 @@
 package model.gameobject.dinamicobject.character;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
-
+import jaco.mp3.player.MP3Player;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
@@ -16,55 +17,33 @@ import model.shop.Item;
 
 public class CharacterImpl extends AbstractDinamicObject implements Character {
 
+    /**
+     * CONSTANTS.
+     */
     private final double MAXLIFE = 4.0;
+    private final double SHOOTSPEED = 4;
+    private final long SHOOTDELAY = 300;
+    /*
+     * VARIABLES.
+     */
     private double life;
-    private Set<Item> items; //contains set di items
+    private Set<Item> items;
     private final BulletFactory bulletFactory;
-    private long lastShootTime = System.currentTimeMillis();
-    private boolean shoot = false;
-    private Vector2D lastDirection;
+    private long lastShootTime; 
+    private boolean shoot;
+    private Vector2D shootDirection;
+
  
     public CharacterImpl(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
         super(speed, position, direction, gameObjectType, room);
         this.life = MAXLIFE;
         this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl();
-        this.lastDirection = new Vector2D(1, 0);
+        this.shoot = false;
+        this.lastShootTime = System.currentTimeMillis();
     }
 
-    @Override
-    public void shoot() {
 
-            Bullet bullet = bulletFactory.createCharacterBullet(
-                    new Point2D(getPosition().getX() + this.getBoundingBox().getWidth() / 2, getPosition().getY() + this.getBoundingBox().getHeight() / 2),
-                    getDirection().sum(this.lastDirection),
-                    getRoom()); 
-            getRoom().addDinamicObject(bullet);
-            /*final MP3Player mp3Player = new MP3Player(new File("resources/sounds/characterhoot.mp3"));
-            mp3Player.play();*/
-            this.shoot = false;
-    }
-
-    /**
-     * 
-     * @return
-     */
-    private boolean canShoot() {
-        final long currentTime = System.currentTimeMillis();
-        if (currentTime - this.lastShootTime > 500 ) {
-            this.lastShootTime = currentTime;
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 
-     */
-    @Override
-    public void takeDamage(final int damage) {
-        this.life = this.life - damage;
-    }
     /**
      * 
      */
@@ -75,22 +54,24 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
             this.shoot();
         }
     }
+
     /**
      * 
+     */
+    @Override
+    public void takeDamage(final int damage) {
+        this.life = this.life - damage;
+    }
+    /**
+     * @return the life
      */
     @Override
     public double getLife() {
         return this.life;
     }
+
     /**
-     * 
-     */
-    @Override
-    public void setLife(final int life) { /*PER DIGI*/
-        this.life = life;
-    }
-    /**
-     * 
+     * @return the items' set
      */
     @Override
     public Set<Item> getItems() {
@@ -103,48 +84,59 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public void addItem(Item item) {
         this.items.add(item);
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-    /** METHODS FOR MOVEMENT**/
+
+
+    /*METHODS FOR MOVEMENT*/
 
     /**
-     * 
+     * move up the character.
      */
     @Override
     public void moveUp() {
         this.setDirection(new Vector2D(this.getDirection().getX() , -1));
-        this.setLastDirection(new Vector2D(this.getDirection().getX() , -1));
     }
 
     /**
-     * 
+     * move down the character..
      */
     @Override
     public void moveDown() {
         this.setDirection(new Vector2D(this.getDirection().getX() , 1));
-        this.setLastDirection(new Vector2D(this.getDirection().getX() , 1));
     }
 
     /**
-     * 
+     * move right the character.
      */
     @Override
     public void moveRight() {
         this.setDirection(new Vector2D(1, this.getDirection().getY()));
-        this.setLastDirection(new Vector2D(1, this.getDirection().getY()));
-
     }
 
     /**
-     * 
+     * move left the character.
      */
     @Override
     public void moveLeft() {
         this.setDirection(new Vector2D(-1, this.getDirection().getY()));
-        this.setLastDirection(new Vector2D(-1, this.getDirection().getY()));
     }
 
     /**
-     * 
+     * stops the character when moving vertically.
      */
     @Override
     public void stopVertical() {
@@ -152,13 +144,13 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     }
     /**
-     * 
+     * stops the character when moving horizontally.
      */
     @Override
     public void stopHorizontal() {
         this.setDirection(new Vector2D(0 , this.getDirection().getY()));
-
     }
+
     /**
      * TODO
      */
@@ -206,18 +198,44 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         /*this.setPosition(this.getLastPosition());*/
     }
 
-    /*
-     * 
+    
+    /*METHODS FOR SHOOTING*/
+    /**
+     * shoot a bullet.
      */
     @Override
-    public void setShoot(final boolean shoot) {
-        if (this.canShoot()) {
-            this.shoot = shoot;
-        }
+    public void shoot() {
+        Bullet bullet = bulletFactory.createCharacterBullet(
+                new Point2D(getPosition().getX() + this.getBoundingBox().getWidth() / 2, getPosition().getY() + this.getBoundingBox().getHeight() / 2),
+                this.shootDirection.mul(SHOOTSPEED),
+                getRoom()); 
+        getRoom().addDinamicObject(bullet);
+        /*final MP3Player mp3Player = new MP3Player(new File("resources/sounds/characterhoot.mp3"));
+        mp3Player.play();*/
+        this.shoot = false;
     }
 
-    private void setLastDirection(final Vector2D lastDirection) {
-        this.lastDirection = lastDirection;
+    /**
+     * 
+     * @return if the character can shoot
+     */
+    private boolean canShoot() {
+        final long currentTime = System.currentTimeMillis();
+        if (currentTime - this.lastShootTime > this.SHOOTDELAY) {
+            this.lastShootTime = currentTime;
+            return true;
+        }
+        return false;
+    }
+    /*
+     * set a shoot and his shoot direction.
+     */
+    @Override
+    public void setShoot(final boolean shoot, final Vector2D shootDirection) {
+        if (this.canShoot()) {
+            this.shoot = shoot;
+            this.shootDirection = shootDirection;
+        }
     }
 }
 

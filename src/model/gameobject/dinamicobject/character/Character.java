@@ -2,6 +2,7 @@ package model.gameobject.dinamicobject.character;
 
 import java.util.Set;
 
+import model.common.Vector2D;
 import model.gameobject.dinamicobject.DinamicObject;
 import model.shop.Item;
 import model.shop.ItemBuilder;
@@ -15,12 +16,8 @@ public interface Character extends DinamicObject {
 
     Set<Item> getItems();
 
-    /**
-     * @return character life
-     */
-    double getLife();
 
-    void setLife(int life);
+    double getLife();
 
 
     /**
@@ -38,7 +35,7 @@ public interface Character extends DinamicObject {
 
     void stopHorizontal();
 
-    void setShoot(boolean shoot);
+    void setShoot(boolean shoot, Vector2D shootDirection);
 
 
 

@@ -2,9 +2,11 @@ package input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,6 +18,7 @@ import gamestructure.ingamemenu.InGameMenuViewImpl;
 import gamestructure.mainmenu.MainMenuView;
 import gamestructure.mainmenu.MainMenuViewImpl;
 import model.common.Point2D;
+import model.common.Vector2D;
 import model.gameobject.dinamicobject.character.Character;
 import mvc.Model;
 
@@ -25,16 +28,24 @@ public class CommandImpl implements Command {
     private boolean[] keys;
     private int key;
     private final Set<Integer> permittedKeys;
-    
+    private final Map<Integer, Vector2D> keyDirectionMap;
+
 
     public CommandImpl(final Model model) {
         this.model = model;
         this.keys = new boolean[256];
-        this.permittedKeys = new HashSet<>(Set.of(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_A, KeyEvent.VK_SPACE, KeyEvent.VK_ESCAPE));
+        this.permittedKeys = new HashSet<>(Set.of(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_A,
+                                                    KeyEvent.VK_ESCAPE, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT));
+
+        this.keyDirectionMap = new HashMap<>(Map.of(KeyEvent.VK_UP, new Vector2D(0, -1),
+                                                    KeyEvent.VK_DOWN, new Vector2D(0, 1), 
+                                                    KeyEvent.VK_LEFT, new Vector2D(-1, 0),
+                                                    KeyEvent.VK_RIGHT, new Vector2D(1, 0)));
     }
 
     @Override
     public void execute() {
+
         final Optional<Character> character = this.model.getRoomManager().getCurrentRoom().getCharacter();
         if (character.isEmpty()) {
             return;
@@ -51,8 +62,17 @@ public class CommandImpl implements Command {
         if (keys[KeyEvent.VK_A]) {
             character.get().moveLeft();
         }
-        if (keys[KeyEvent.VK_SPACE]) {
-            character.get().setShoot(true);
+        if (keys[KeyEvent.VK_UP]) {
+            character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_UP));
+        }
+        if (keys[KeyEvent.VK_DOWN]) {
+            character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_DOWN));
+        }
+        if (keys[KeyEvent.VK_LEFT]) {
+            character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_LEFT));
+        }
+        if (keys[KeyEvent.VK_RIGHT]) {
+            character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_RIGHT));
         }
         if (keys[KeyEvent.VK_ESCAPE]) {
             //System.out.println("APRO MENU IN GAME");
