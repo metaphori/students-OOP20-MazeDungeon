@@ -7,14 +7,13 @@ import model.gameobject.GameObject;
 import model.room.Room;
 
 public abstract class SimpleObjectImpl implements SimpleObject {
-    private final int id;
+    private int id;
     private Point2D position;
     private final GameObjectType gameObjectType;
     private BoundingBox boundingBox;
     private Room room;
 
-    public SimpleObjectImpl(final int id, final Point2D position, final GameObjectType gameObjectType, final Room room) {
-        this.id = id;
+    public SimpleObjectImpl(final Point2D position, final GameObjectType gameObjectType, final Room room) {
         this.position = position;
         this.room = room;
         this.gameObjectType = gameObjectType;
@@ -26,6 +25,14 @@ public abstract class SimpleObjectImpl implements SimpleObject {
     @Override
     public int getID() {
         return this.id;
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void setID(final int id) {
+        this.id = id;
     }
 
     /**

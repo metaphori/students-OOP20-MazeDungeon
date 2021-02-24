@@ -8,7 +8,5 @@ public interface Enemy extends DinamicObject {
 
     void takesDamage(int damage);
 
-    void notifyDropCoin();
-
     double getLife();
 }
