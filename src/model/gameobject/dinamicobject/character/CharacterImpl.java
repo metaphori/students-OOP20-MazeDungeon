@@ -41,8 +41,8 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private Vector2D shootDirection;
 
  
-    public CharacterImpl(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
-        super(speed, position, direction, gameObjectType, room);
+    public CharacterImpl(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
+        super(speed, position, direction, gameObjectType);
         this.life = MAXLIFE;
         this.bulletSpeed = INITIALSHOOTSPEED;
         this.items = new HashSet<>();
@@ -224,8 +224,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public void shoot() {
         Bullet bullet = bulletFactory.createCharacterBullet(
                 new Point2D(getPosition().getX() + this.getBoundingBox().getWidth() / 2, getPosition().getY() + this.getBoundingBox().getHeight() / 2),
-                this.shootDirection.mul(this.bulletSpeed),
-                getRoom()); 
+                this.shootDirection.mul(this.bulletSpeed)); 
         getRoom().addDinamicObject(bullet);
         /*final MP3Player mp3Player = new MP3Player(new File("resources/sounds/characterhoot.mp3"));
         mp3Player.play();*/

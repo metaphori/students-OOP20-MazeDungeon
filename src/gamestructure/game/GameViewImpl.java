@@ -41,6 +41,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private static final int PERIOD = 15;
     private final GamePanel gamePanel;
     private final Map<Integer, Sprite> sprites = new HashMap<>();
+    private final Map<Integer, Sprite> backupSprites = new HashMap<>();
     private final ResourceLoader resourceLoader = new ResourceLoader();
 
     public GameViewImpl() {
@@ -178,8 +179,13 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent key) {
+    public void keyTyped(final KeyEvent key) {
      // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void syncronizeMap() {
+        this.backupSprites.putAll(this.sprites);
     }
 
 }

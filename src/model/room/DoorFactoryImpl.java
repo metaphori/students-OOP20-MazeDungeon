@@ -13,7 +13,7 @@ public class DoorFactoryImpl implements DoorFactory {
      */
     @Override
     public Door createLeftDoor(final Room room) {
-        return new Door(new Point2D(110, 360), GameObjectType.DOOR_LEFT, room);
+        return new Door(new Point2D(110, 360), GameObjectType.DOOR_LEFT);
     }
 
     /**
@@ -21,7 +21,7 @@ public class DoorFactoryImpl implements DoorFactory {
      */
     @Override
     public Door createRightDoor(final Room room) {
-        return new Door(new Point2D(1010, 360), GameObjectType.DOOR_RIGHT, room);
+        return new Door(new Point2D(1010, 360), GameObjectType.DOOR_RIGHT);
     }
 
     /**
@@ -29,7 +29,7 @@ public class DoorFactoryImpl implements DoorFactory {
      */
     @Override
     public Door createUpDoor(final Room room) {
-        return new Door(new Point2D(590, 40), GameObjectType.DOOR_UP, room);
+        return new Door(new Point2D(590, 40), GameObjectType.DOOR_UP);
     }
 
     /**
@@ -37,7 +37,7 @@ public class DoorFactoryImpl implements DoorFactory {
      */
     @Override
     public Door createDownDoor(final Room room) {
-        return new Door(new Point2D(590, 615), GameObjectType.DOOR_DOWN, room);
+        return new Door(new Point2D(590, 615), GameObjectType.DOOR_DOWN);
     }
 
     /**

@@ -63,7 +63,7 @@ public class RoomManagerImpl implements RoomManager {
     private void createGameMap() {
 
         actualRoom = new RoomImpl(this);
-        final Character character = new CharacterImpl( 130, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER, this.actualRoom);
+        final Character character = new CharacterImpl( 130, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER);
         actualRoom.addDinamicObject(character);
         rooms.put(new Point2D(0, 0), actualRoom);
 

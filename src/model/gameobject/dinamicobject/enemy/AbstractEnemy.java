@@ -17,8 +17,8 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     private double life;
     private final BulletFactory bulletFactory;
 
-    public AbstractEnemy(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
-        super(speed, position, direction, gameObjectType, room);
+    public AbstractEnemy(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
+        super(speed, position, direction, gameObjectType);
         this.bulletFactory = new BulletFactoryImpl();
     }
 
@@ -36,7 +36,7 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     public void setLife(final double life) {
         this.life = life;
         if (this.life <= 0) {
-            this.getRoom().addDinamicObject(new Coin(0, this.getPosition(), new Vector2D(0, 0), GameObjectType.COIN, this.getRoom()));
+            this.getRoom().addDinamicObject(new Coin(0, this.getPosition(), new Vector2D(0, 0), GameObjectType.COIN));
             this.getRoom().deleteGameObject(this);
         }
     }

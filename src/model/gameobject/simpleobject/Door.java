@@ -8,8 +8,8 @@ import model.room.Room;
 
 public class Door extends SimpleObjectImpl {
 
-    public Door(final Point2D position, final GameObjectType gameObjectType, final Room room) {
-        super(position, gameObjectType, room);
+    public Door(final Point2D position, final GameObjectType gameObjectType) {
+        super(position, gameObjectType);
     }
 
     /**

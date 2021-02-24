@@ -7,8 +7,8 @@ import model.room.Room;
 
 public class Obstacle extends SimpleObjectImpl {
 
-    public Obstacle(final Point2D position, final GameObjectType gameObjectType, final Room room) {
-        super(position, gameObjectType, room);
+    public Obstacle(final Point2D position, final GameObjectType gameObjectType) {
+        super(position, gameObjectType);
     }
 
     @Override

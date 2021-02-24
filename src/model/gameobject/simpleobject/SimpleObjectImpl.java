@@ -13,9 +13,8 @@ public abstract class SimpleObjectImpl implements SimpleObject {
     private BoundingBox boundingBox;
     private Room room;
 
-    public SimpleObjectImpl(final Point2D position, final GameObjectType gameObjectType, final Room room) {
+    public SimpleObjectImpl(final Point2D position, final GameObjectType gameObjectType) {
         this.position = position;
-        this.room = room;
         this.gameObjectType = gameObjectType;
     }
 

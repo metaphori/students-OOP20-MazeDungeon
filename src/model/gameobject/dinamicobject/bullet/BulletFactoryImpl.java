@@ -33,27 +33,27 @@ public class BulletFactoryImpl implements BulletFactory {
      **/
 
     @Override
-    public Bullet createCharacterBullet(final Point2D initialPosition, final  Vector2D direction, final Room room) {
-        return new BulletImpl(CHARACTER_BULLET_SPEED, initialPosition, direction, GameObjectType.CHARACTER_BULLET, CHARACTER_BULLET_DAMAGE, room);
+    public Bullet createCharacterBullet(final Point2D initialPosition, final  Vector2D direction) {
+        return new BulletImpl(CHARACTER_BULLET_SPEED, initialPosition, direction, GameObjectType.CHARACTER_BULLET, CHARACTER_BULLET_DAMAGE);
     }
     @Override
-    public Bullet createSkeletonBullet(final Point2D initialPosition, final Vector2D direction, final Room room) {
-        return new BulletImpl(SKELETON_BULLET_SPEED, initialPosition, direction, GameObjectType.SKELETON_BULLET, SKELETON_BULLET_DAMAGE, room);
+    public Bullet createSkeletonBullet(final Point2D initialPosition, final Vector2D direction) {
+        return new BulletImpl(SKELETON_BULLET_SPEED, initialPosition, direction, GameObjectType.SKELETON_BULLET, SKELETON_BULLET_DAMAGE);
     }
     @Override
-    public Bullet createSoulBullet(final Point2D initialPosition, final Vector2D direction, final Room room) {
-        return new BulletImpl(SOUL_BULLET_SPEED, initialPosition, direction, GameObjectType.SOUL_BULLET, SOUL_BULLET_DAMAGE, room);
+    public Bullet createSoulBullet(final Point2D initialPosition, final Vector2D direction) {
+        return new BulletImpl(SOUL_BULLET_SPEED, initialPosition, direction, GameObjectType.SOUL_BULLET, SOUL_BULLET_DAMAGE);
     }
     @Override
-    public Bullet createSproutBullet(final Point2D initialPosition, final Vector2D direction, final Room room) {
-        return new BulletImpl(SPROUT_BULLET_SPEED, initialPosition, direction, GameObjectType.SPROUT_BULLET, SPROUT_BULLET_DAMAGE, room);
+    public Bullet createSproutBullet(final Point2D initialPosition, final Vector2D direction) {
+        return new BulletImpl(SPROUT_BULLET_SPEED, initialPosition, direction, GameObjectType.SPROUT_BULLET, SPROUT_BULLET_DAMAGE);
     }
     @Override
-    public Bullet createBossBullet(final Point2D initialPosition, final Vector2D direction, final Room room) {
-        return new BulletImpl(BOSS_BULLET_SPEED, initialPosition, direction, GameObjectType.BOSS_BULLET, BOSS_BULLET_DAMAGE, room);
+    public Bullet createBossBullet(final Point2D initialPosition, final Vector2D direction) {
+        return new BulletImpl(BOSS_BULLET_SPEED, initialPosition, direction, GameObjectType.BOSS_BULLET, BOSS_BULLET_DAMAGE);
     }
     @Override
-    public Bullet createOldGuardianBullet(final Point2D initialPosition, final Vector2D direction, final Room room) {
-        return new BulletImpl(OLDGUARDIAN_BULLET_SPEED, initialPosition, direction, GameObjectType.OLDGUARDIAN_BULLET, OLDGUARDIAN_BULLET_DAMAGE, room);
+    public Bullet createOldGuardianBullet(final Point2D initialPosition, final Vector2D direction) {
+        return new BulletImpl(OLDGUARDIAN_BULLET_SPEED, initialPosition, direction, GameObjectType.OLDGUARDIAN_BULLET, OLDGUARDIAN_BULLET_DAMAGE);
     }
 }

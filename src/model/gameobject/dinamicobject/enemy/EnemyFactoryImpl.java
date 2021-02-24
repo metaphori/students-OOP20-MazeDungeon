@@ -27,8 +27,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Sprout
      */
     @Override
-    public Enemy createSprout(final Point2D position, final Vector2D direction,  final Room room) {
-        return new AbstractEnemy(SPROUT_SPEED, position, direction, GameObjectType.ENEMY_SPROUT, room) {
+    public Enemy createSprout(final Point2D position, final Vector2D direction) {
+        return new AbstractEnemy(SPROUT_SPEED, position, direction, GameObjectType.ENEMY_SPROUT) {
 
             @Override
             public void updateState(final double elapsed) {
@@ -42,7 +42,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
             @Override
             public void shoot() {
                 final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
-                final Bullet bullet = this.getBulletFactory().createSproutBullet(newPosition, this.getDirection().getNormalized(), room);
+                final Bullet bullet = this.getBulletFactory().createSproutBullet(newPosition, this.getDirection().getNormalized());
                 this.getRoom().addDinamicObject(bullet);
             }
 
@@ -66,8 +66,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Soul
      */
     @Override
-    public Enemy createSoul(final Point2D position, final Vector2D direction, final Room room) {
-        return new AbstractEnemy(SOUL_SPEED, position, direction, GameObjectType.ENEMY_SOUL, room) {
+    public Enemy createSoul(final Point2D position, final Vector2D direction) {
+        return new AbstractEnemy(SOUL_SPEED, position, direction, GameObjectType.ENEMY_SOUL) {
             @Override
             public void updateState(final double elapsed) {
                 this.move(elapsed);
@@ -83,7 +83,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 }
                 final Point2D characterPosition = this.getRoom().getCharacterPosition().get();
                 final Bullet bullet = this.getBulletFactory().createSoulBullet(this.getPosition(),
-                        new Vector2D(characterPosition.getX() - this.getPosition().getX(), characterPosition.getY() - this.getPosition().getY()).getNormalized(), room);
+                        new Vector2D(characterPosition.getX() - this.getPosition().getX(), characterPosition.getY() - this.getPosition().getY()).getNormalized());
                 this.getRoom().addDinamicObject(bullet);
             }
 
@@ -101,8 +101,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: SkeletonSeeker
      */
     @Override
-    public Enemy createSkeletonSeeker(final Point2D position, final Vector2D direction, final Room room) {
-        return new AbstractEnemy(SKELETON_SPEED, position, direction, GameObjectType.ENEMY_SKELETON, room) {
+    public Enemy createSkeletonSeeker(final Point2D position, final Vector2D direction) {
+        return new AbstractEnemy(SKELETON_SPEED, position, direction, GameObjectType.ENEMY_SKELETON) {
 
             private long lastChangeTime = System.currentTimeMillis();
             private boolean stop = true;
@@ -129,7 +129,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
             @Override
             public void shoot() {
                 final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
-                final Bullet bullet = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(1, 0), room);
+                final Bullet bullet = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(1, 0));
                 this.getRoom().addDinamicObject(bullet);
             }
 
@@ -151,8 +151,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Boss
      */
     @Override
-    public Enemy createBoss(final Point2D position, final Vector2D direction, final Room room) {
-        return new Boss(BOSS_SPEED, position, direction, GameObjectType.ENEMY_BOSS, room);
+    public Enemy createBoss(final Point2D position, final Vector2D direction) {
+        return new Boss(BOSS_SPEED, position, direction, GameObjectType.ENEMY_BOSS);
     }
 
 }

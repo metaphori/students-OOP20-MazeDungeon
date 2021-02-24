@@ -42,7 +42,7 @@ public class RoomImpl implements Room {
      * @param obj
      */
     public void addDinamicObject(final DinamicObject obj) {
-      //  obj.setRoom(this);
+        obj.setRoom(this);
         obj.setID(this.roomManager.getIdIterator().next());
         dinamicObjects.add(obj);
     }
@@ -51,7 +51,7 @@ public class RoomImpl implements Room {
      * @param obj
      */
     public void addSimpleObject(final SimpleObject obj) {
-       // obj.setRoom(this);
+        obj.setRoom(this);
         obj.setID(this.roomManager.getIdIterator().next());
         simpleObjects.add(obj);
     }
