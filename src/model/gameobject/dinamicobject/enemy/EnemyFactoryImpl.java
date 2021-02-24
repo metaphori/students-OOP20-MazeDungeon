@@ -19,7 +19,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     private static final int BOSS_SPEED = 90;
 
     private static final long SOUL_SHOOT_TIME = 1500;
-    private static final long SPROUT_SHOOT_TIME = 1000;
+    private static final long SPROUT_SHOOT_TIME = 2000;
     private static final long SKELETON_SHOOT_TIME = 2000;
     private static final long BOSS_SHOOT_TIME = 1000;
     private final IdIterator idIterator;
@@ -39,16 +39,21 @@ public class EnemyFactoryImpl implements EnemyFactory {
             public void updateState(final double elapsed) {
                 this.followCharacter();
                 this.move(elapsed);
+                if (canShoot(SPROUT_SHOOT_TIME)) {
+                    this.shoot();
+                }
             }
 
             @Override
             public void shoot() {
-                // TODO Auto-generated method stub
+                final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
+                final Bullet bullet = this.getBulletFactory().createSproutBullet(newPosition, this.getDirection().getNormalized(), room);
+                this.getRoom().addDinamicObject(bullet);
             }
 
             @Override
             protected void changeRoutine() {
-                //this.setPosition(this.getLastPosition());
+
             }
 
             private void followCharacter() {
@@ -72,7 +77,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
             public void updateState(final double elapsed) {
                 this.move(elapsed);
                 if (this.canShoot(SOUL_SHOOT_TIME)) {
-                    //this.shoot();
+                    this.shoot();
                 }
             }
 
@@ -111,7 +116,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
             public void updateState(final double elapsed) {
                 this.move(elapsed);
                 if (this.canShoot(SKELETON_SHOOT_TIME)) {
-                    //this.shoot();
+                    this.shoot();
                 }
                 final long currentTime = System.currentTimeMillis();
                 if (currentTime - this.lastChangeTime > 5000) {
