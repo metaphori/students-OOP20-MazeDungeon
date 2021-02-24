@@ -45,7 +45,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
 
     private final JPanel inGameMenuPanel = new JPanel(new GridBagLayout());
     private final JPanel shopPanel = new JPanel(new GridBagLayout());
-
+    private final JLabel msg = new JLabel();
     private boolean start;
 
     private final InGameMenuController controller = new InGameMenuControllerImpl(this);
@@ -167,8 +167,17 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     }
 
     @Override
-    public void returnMessage(String messageOuput) {
+    public void returnMessage(final String messageOuput) {
+       
+        msg.setBounds(250, 580, 350, 50);
+        //this.frame.add(msg);
+        this.lblBackgroundShop.add(msg);
+        msg.setText(messageOuput);
+        msg.setVisible(true);
         System.out.println(messageOuput);
+    }
+    public void removeMessage() {
+        msg.setText("");
     }
 
 }

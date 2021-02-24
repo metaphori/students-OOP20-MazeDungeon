@@ -16,20 +16,12 @@ public class InGameMenuControllerImpl implements InGameMenuController {
 
     @Override
     public void buyItem(Items itemSelected) {
+        this.view.removeMessage();
         if(shopModel.checkItem(itemSelected)) {
-            //AGGIUNGE L' ITEM AL PERSONAGGIO
-            //public void addSkills(Item item, int speed, int speedAttack, int demage, int helath){
-                
-                
-                
-            //}
             model.getRoomManager().getCurrentRoom().getCharacter().get().addItem(itemSelected.getItem());
-            
-            System.out.println(itemSelected.getItem().getName());
-            
         }
         this.view.returnMessage(shopModel.getMessageOuput());
-        //System.out.println(shopModel.getMessageOuput());
+
     }
 
 
@@ -42,7 +34,9 @@ public class InGameMenuControllerImpl implements InGameMenuController {
 
     @Override
     public void openInGameMenu() {
+        this.view.removeMessage();
         this.view.showInGameMenu();
+        
 
     }
 

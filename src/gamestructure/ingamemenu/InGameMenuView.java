@@ -15,4 +15,5 @@ public interface InGameMenuView {
 
     void returnMessage(String messageOuput);
 
+    void removeMessage();
 }
