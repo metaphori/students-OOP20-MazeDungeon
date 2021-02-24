@@ -2,13 +2,17 @@ package model.gameobject.simpleobject;
 
 import model.common.GameObjectType;
 import model.common.Point2D;
+import model.gameobject.GameObject;
 import model.room.Room;
 
 public class Obstacle extends SimpleObjectImpl {
 
-    public Obstacle(int id, Point2D position, GameObjectType gameObjectType, Room room) {
+    public Obstacle(final int id, final Point2D position, final GameObjectType gameObjectType, final Room room) {
         super(id, position, gameObjectType, room);
-        // TODO Auto-generated constructor stub
+    }
+
+    @Override
+    public void collideWith(final GameObject obj2) {
     }
 
 }

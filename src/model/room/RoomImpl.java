@@ -13,6 +13,7 @@ import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.DinamicObject;
 import model.gameobject.simpleobject.SimpleObject;
 import model.gameobject.dinamicobject.character.Character;
+import model.gameobject.dinamicobject.enemy.AbstractEnemy;
 
 public class RoomImpl implements Room {
 
@@ -72,7 +73,7 @@ public class RoomImpl implements Room {
     }
 
     private void checkCollisions() {
-        for (final DinamicObject obj1 : new LinkedList<>(this.dinamicObjects)) {
+        for (final GameObject obj1 : this.getCurrentGameObjects()) {
             for (final GameObject obj2 : this.getCurrentGameObjects()) {
                 if (obj1.getBoundingBox() == null || obj2.getBoundingBox() == null || obj1.equals(obj2)) {
                     continue;
@@ -120,6 +121,19 @@ public class RoomImpl implements Room {
     @Override
     public void addDoor(final Direction direction) {
         nearRooms.add(direction);
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public boolean isDoorOpen() {
+        for (final DinamicObject dinamicObject : dinamicObjects) {
+            if (AbstractEnemy.class.isAssignableFrom(dinamicObject.getClass()) && dinamicObject.getGameObjectType() != GameObjectType.CHARACTER) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

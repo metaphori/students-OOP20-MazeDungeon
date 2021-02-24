@@ -87,6 +87,4 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
     @Override
     public abstract void updateState(double elapsed);
 
-    @Override
-    public abstract void collideWith(GameObject obj2);
 }
