@@ -23,7 +23,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     private final double MAXLIFE = 20.0;
     private final long INITIALSHOOTSPEED = 3;
-    private final long INITIALBULLETDELAY = 300;
+    private final long INITIALBULLETDELAY = 0;
     /*
      * VARIABLES.
      */
