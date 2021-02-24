@@ -1,18 +1,12 @@
 package gamestructure.ingamemenu;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Toolkit;
-import java.util.concurrent.TimeUnit;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -45,20 +39,20 @@ public class InGameMenuViewImpl implements InGameMenuView  {
 
     private final JPanel inGameMenuPanel = new JPanel(new GridBagLayout());
     private final JPanel shopPanel = new JPanel(new GridBagLayout());
-
+    private final JLabel msg = new JLabel();
     private boolean start;
 
     private final InGameMenuController controller = new InGameMenuControllerImpl(this);
     public InGameMenuViewImpl() {
 
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 
                 (int) (screen.getHeight() * HEIGHT_RATIO)));
 
         inGameMenuPanel.add(lblBackgroundMenu);
         shopPanel.add(lblBackgroundShop);
-
+        this.frame.setTitle("MazeDungeon");
         showInGameMenu();
     }
 
@@ -158,7 +152,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     }
 
     private void configureButton(final JButton btn) {
-        
+
         btn.setBackground(new Color(11,23,30,255));
         btn.setBorder(new LineBorder(new Color(11,23,30,255))); //Colore del bordo del bottone
         btn.setFocusPainted(false); //Disabilita il paint del focus sul testo del bottone
@@ -167,8 +161,17 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     }
 
     @Override
-    public void returnMessage(String messageOuput) {
-        System.out.println(messageOuput);
+    public void returnMessage(final String messageOuput) {
+
+        msg.setBounds(250, 580, 350, 50);
+        //this.frame.add(msg);
+        this.lblBackgroundShop.add(msg);
+        msg.setText(messageOuput);
+        msg.setVisible(true);
+        //System.out.println(messageOuput);
+    }
+    public void removeMessage() {
+        msg.setText("");
     }
 
 }

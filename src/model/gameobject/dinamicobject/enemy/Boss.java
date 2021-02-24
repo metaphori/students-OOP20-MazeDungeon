@@ -14,8 +14,8 @@ import model.room.Room;
 public class Boss extends AbstractEnemy{
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private Vector2D vectorBullet = new Vector2D(0, 1);
-    public Boss(final int id,final int speed,final Point2D position,final Vector2D direction,final GameObjectType gameObjectType,final Room room) {
-        super(id, speed, position, direction, gameObjectType, room);
+    public Boss(final int speed,final Point2D position,final Vector2D direction,final GameObjectType gameObjectType,final Room room) {
+        super(speed, position, direction, gameObjectType, room);
         //this.setLife(20);
         //System.out.println(this.getBoundingBox().getWidth() + "   " + this.getBoundingBox().getHeight());
     }
@@ -90,7 +90,7 @@ public class Boss extends AbstractEnemy{
             this.setDirection(new Vector2D(1, 0));
         }*/
         this.move(elapsed);
-        if(this.canShoot(1000)) {
+        if (this.canShoot(1000)) {
             this.shoot();
         }
         

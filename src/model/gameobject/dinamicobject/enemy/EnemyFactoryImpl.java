@@ -19,36 +19,36 @@ public class EnemyFactoryImpl implements EnemyFactory {
     private static final int BOSS_SPEED = 90;
 
     private static final long SOUL_SHOOT_TIME = 1500;
-    private static final long SPROUT_SHOOT_TIME = 1000;
+    private static final long SPROUT_SHOOT_TIME = 2000;
     private static final long SKELETON_SHOOT_TIME = 2000;
     private static final long BOSS_SHOOT_TIME = 1000;
-    private final IdIterator idIterator;
-
-    public EnemyFactoryImpl(final IdIterator idIterator) {
-        this.idIterator = idIterator;
-    }
 
     /**
      * @return an enemy of type: Sprout
      */
     @Override
     public Enemy createSprout(final Point2D position, final Vector2D direction,  final Room room) {
-        return new AbstractEnemy(this.idIterator.next(), SPROUT_SPEED, position, direction, GameObjectType.ENEMY_SPROUT, room) {
+        return new AbstractEnemy(SPROUT_SPEED, position, direction, GameObjectType.ENEMY_SPROUT, room) {
 
             @Override
             public void updateState(final double elapsed) {
                 this.followCharacter();
                 this.move(elapsed);
+                if (canShoot(SPROUT_SHOOT_TIME)) {
+                    this.shoot();
+                }
             }
 
             @Override
             public void shoot() {
-                // TODO Auto-generated method stub
+                final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
+                final Bullet bullet = this.getBulletFactory().createSproutBullet(newPosition, this.getDirection().getNormalized(), room);
+                this.getRoom().addDinamicObject(bullet);
             }
 
             @Override
             protected void changeRoutine() {
-                //this.setPosition(this.getLastPosition());
+
             }
 
             private void followCharacter() {
@@ -67,12 +67,12 @@ public class EnemyFactoryImpl implements EnemyFactory {
      */
     @Override
     public Enemy createSoul(final Point2D position, final Vector2D direction, final Room room) {
-        return new AbstractEnemy(this.idIterator.next(), SOUL_SPEED, position, direction, GameObjectType.ENEMY_SOUL, room) {
+        return new AbstractEnemy(SOUL_SPEED, position, direction, GameObjectType.ENEMY_SOUL, room) {
             @Override
             public void updateState(final double elapsed) {
                 this.move(elapsed);
                 if (this.canShoot(SOUL_SHOOT_TIME)) {
-                    //this.shoot();
+                    this.shoot();
                 }
             }
 
@@ -102,7 +102,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      */
     @Override
     public Enemy createSkeletonSeeker(final Point2D position, final Vector2D direction, final Room room) {
-        return new AbstractEnemy(this.idIterator.next(), SKELETON_SPEED, position, direction, GameObjectType.ENEMY_SKELETON, room) {
+        return new AbstractEnemy(SKELETON_SPEED, position, direction, GameObjectType.ENEMY_SKELETON, room) {
 
             private long lastChangeTime = System.currentTimeMillis();
             private boolean stop = true;
@@ -111,7 +111,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
             public void updateState(final double elapsed) {
                 this.move(elapsed);
                 if (this.canShoot(SKELETON_SHOOT_TIME)) {
-                    //this.shoot();
+                    this.shoot();
                 }
                 final long currentTime = System.currentTimeMillis();
                 if (currentTime - this.lastChangeTime > 5000) {
@@ -152,7 +152,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      */
     @Override
     public Enemy createBoss(final Point2D position, final Vector2D direction, final Room room) {
-        return new Boss(this.idIterator.next(), BOSS_SPEED, position, direction, GameObjectType.ENEMY_BOSS, room);
+        return new Boss(BOSS_SPEED, position, direction, GameObjectType.ENEMY_BOSS, room);
     }
 
 }

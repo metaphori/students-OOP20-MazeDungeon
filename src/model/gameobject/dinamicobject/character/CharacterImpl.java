@@ -1,11 +1,8 @@
 package model.gameobject.dinamicobject.character;
 
-import java.io.File;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
-import javax.swing.SwingUtilities;
 
 import model.common.GameObjectType;
 import model.common.Point2D;
@@ -13,11 +10,8 @@ import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
 import model.gameobject.dinamicobject.bullet.*;
-import model.common.BoundingBox;
-import model.common.CollisionType;
 import model.room.Room;
 import model.shop.Item;
-import model.shop.ItemBuilder;
 
 
 public class CharacterImpl extends AbstractDinamicObject implements Character {
@@ -30,11 +24,11 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private boolean shoot = false;
     private Vector2D lastDirection;
  
-    public CharacterImpl(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
-        super(id, speed, position, direction, gameObjectType, room);
+    public CharacterImpl(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
+        super(speed, position, direction, gameObjectType, room);
         this.life = MAXLIFE;
         this.items = new HashSet<>();
-        this.bulletFactory = new BulletFactoryImpl(this.getRoom().getRoomManager().getIdIterator());
+        this.bulletFactory = new BulletFactoryImpl();
         this.lastDirection = new Vector2D(1, 0);
     }
 

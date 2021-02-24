@@ -24,6 +24,7 @@ public class ResourceLoader {
         resources.put(GameObjectType.CHARACTER_BULLET, imagesPath + "Bullets" + sep + "characterBullet.png");
         resources.put(GameObjectType.SKELETON_BULLET, imagesPath + "Bullets" + sep + "TestSkull1.png");
         resources.put(GameObjectType.BOSS_BULLET, imagesPath + "Bullets" + sep + "bossBullet.png");
+        resources.put(GameObjectType.SPROUT_BULLET, imagesPath + "Bullets" + sep + "TestSprout1.png");
 
         /*DOOR*/
         resources.put(GameObjectType.DOOR_UP, imagesPath + "Door" + sep + "topDoor.png");
