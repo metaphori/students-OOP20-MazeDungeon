@@ -16,7 +16,11 @@ public interface Room {
 
     void addDinamicObject(DinamicObject obj);
 
+    void addDinamicObject(List<DinamicObject> objs);
+
     void addSimpleObject(SimpleObject obj);
+
+    void addSimpleObject(List<SimpleObject> objs);
 
     List<GameObject> getCurrentGameObjects();
 
@@ -32,10 +36,8 @@ public interface Room {
 
     boolean isDoorOpen();
 
-    /**
-     * 
-     * @return . 
-     */
     Set<Direction> getDoors();
+
+    void clean();
 
 }

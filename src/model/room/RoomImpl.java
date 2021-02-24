@@ -57,6 +57,14 @@ public class RoomImpl implements Room {
     }
 
     /**
+     * 
+     */
+    @Override
+    public void clean() {
+        this.dinamicObjects.clear();
+    }
+
+    /**
      * @return .
      */
     public List<GameObject> getCurrentGameObjects() {
@@ -145,6 +153,20 @@ public class RoomImpl implements Room {
             }
         }
         return true;
+    }
+
+    @Override
+    public void addDinamicObject(final List<DinamicObject> objs) {
+        for (final DinamicObject dinamicObject : objs) {
+            this.addDinamicObject(dinamicObject);
+        }
+    }
+
+    @Override
+    public void addSimpleObject(final List<SimpleObject> objs) {
+        for (final SimpleObject simpleObject : objs) {
+            this.addSimpleObject(simpleObject);
+        }
     }
 
 }

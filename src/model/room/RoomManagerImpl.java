@@ -63,7 +63,8 @@ public class RoomManagerImpl implements RoomManager {
     private void createGameMap() {
 
         actualRoom = new RoomImpl(this);
-        final Character character = new CharacterImpl( 130, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER);
+        actualRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
+        final Character character = new CharacterImpl(200, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER);
         actualRoom.addDinamicObject(character);
         rooms.put(new Point2D(0, 0), actualRoom);
 
@@ -80,6 +81,7 @@ public class RoomManagerImpl implements RoomManager {
                 }
             } else {
                 final Room newRoom = new RoomImpl(this);
+                newRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
                 newRoom.addDoor(Direction.getOppositeDirection(randomDirection));
                 newRoom.addSimpleObject(doorFactory.createDoor(newRoom, Direction.getOppositeDirection(randomDirection)));
                 rooms.put(newPoint, newRoom);
@@ -96,8 +98,6 @@ public class RoomManagerImpl implements RoomManager {
         //final Enemy enemyBoss = this.enemyFactory.createBoss(new Point2D(500, 300), new Vector2D(1, 0), this.actualRoom);
         final Enemy enemySprout = this.enemyFactory.createSprout(new Point2D(500, 200), new Vector2D(0, 1), this.actualRoom);
 
-        
-        
         actualRoom.addDinamicObject(character);
         actualRoom.addDinamicObject(enemySkeletonSeeker);
         actualRoom.addDinamicObject(this.enemyFactory.createSkeletonSeeker(new Point2D(500, 300), new Vector2D(-1, 1), this.actualRoom));
@@ -149,10 +149,10 @@ public class RoomManagerImpl implements RoomManager {
      * @Override
      */
     public void changeRoom(final Direction direction) {
-        final Point2D actualPosition = this.getRoomPosition(actualRoom);
-        Room newRoom = rooms.get(this.getNearbyPoint(this.getRoomPosition(actualRoom), direction));
+        final Room newRoom = rooms.get(this.getNearbyPoint(this.getRoomPosition(actualRoom), direction));
         actualRoom.getCharacter().get().setPosition(new Point2D(300, 300));
         newRoom.addDinamicObject(actualRoom.getCharacter().get());
+        actualRoom.clean();
         actualRoom = newRoom;
     }
 

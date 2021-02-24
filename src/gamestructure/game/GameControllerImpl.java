@@ -73,7 +73,6 @@ public class GameControllerImpl implements GameController {
         this.model.update(elapsed);
         this.checkDeletedObject();
         this.checkNewGameObjects();
-        //this.view.syncronizeMap();
     }
 
     private void render() {

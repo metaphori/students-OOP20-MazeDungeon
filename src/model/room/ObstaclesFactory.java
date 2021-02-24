@@ -16,14 +16,13 @@ public class ObstaclesFactory {
     private static final Point2D BR_CORNER = new Point2D(1025, 633);
 
     /**
-     * @param room where to add obstacles
      * @return .
      */
-    public List<SimpleObject> getEmptyRoom(final Room room) {
-        return this.getWalls(room);
+    public List<SimpleObject> getEmptyRoom() {
+        return this.getWalls();
     }
 
-    private List<SimpleObject> getWalls(final Room room) {
+    private List<SimpleObject> getWalls() {
         final List<SimpleObject> walls = new LinkedList<>();
         SimpleObject tmp;
         //TOP

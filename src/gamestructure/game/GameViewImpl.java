@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -40,8 +41,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private static double ASPECT_RATIO = 1.6;
     private static final int PERIOD = 15;
     private final GamePanel gamePanel;
-    private final Map<Integer, Sprite> sprites = new HashMap<>();
-    private final Map<Integer, Sprite> backupSprites = new HashMap<>();
+    private final Map<Integer, Sprite> sprites = new ConcurrentHashMap<>();
     private final ResourceLoader resourceLoader = new ResourceLoader();
 
     public GameViewImpl() {
@@ -93,11 +93,10 @@ public class GameViewImpl implements GameView, KeyListener {
 
         @Override
         protected void paintComponent(final Graphics g) {
-            final Map<Integer, Sprite> tmpMap = Map.copyOf(sprites);
             super.paintComponent(g);
             g.drawImage(room, 0, 0, null);
 
-            final List<Sprite> temp = new ArrayList<>(tmpMap.values());
+            final List<Sprite> temp = new ArrayList<>(sprites.values());
 
             temp.iterator().forEachRemaining(sprite -> {
                 g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
@@ -181,11 +180,6 @@ public class GameViewImpl implements GameView, KeyListener {
     @Override
     public void keyTyped(final KeyEvent key) {
      // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void syncronizeMap() {
-        this.backupSprites.putAll(this.sprites);
     }
 
 }
