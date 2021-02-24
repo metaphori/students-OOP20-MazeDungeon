@@ -3,6 +3,7 @@ package model.gameobject.dinamicobject.character;
 import java.util.Set;
 
 import model.gameobject.dinamicobject.DinamicObject;
+import model.shop.Item;
 import model.shop.ItemBuilder;
 
 public interface Character extends DinamicObject {
@@ -12,7 +13,7 @@ public interface Character extends DinamicObject {
 
     void addItem(Item item);
 
-    Set<ItemBuilder> getItems();
+    Set<Item> getItems();
 
     /**
      * @return character life
