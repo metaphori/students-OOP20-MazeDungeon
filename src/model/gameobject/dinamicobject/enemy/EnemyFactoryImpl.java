@@ -22,18 +22,13 @@ public class EnemyFactoryImpl implements EnemyFactory {
     private static final long SPROUT_SHOOT_TIME = 2000;
     private static final long SKELETON_SHOOT_TIME = 2000;
     private static final long BOSS_SHOOT_TIME = 1000;
-    private final IdIterator idIterator;
-
-    public EnemyFactoryImpl(final IdIterator idIterator) {
-        this.idIterator = idIterator;
-    }
 
     /**
      * @return an enemy of type: Sprout
      */
     @Override
     public Enemy createSprout(final Point2D position, final Vector2D direction,  final Room room) {
-        return new AbstractEnemy(this.idIterator.next(), SPROUT_SPEED, position, direction, GameObjectType.ENEMY_SPROUT, room) {
+        return new AbstractEnemy(SPROUT_SPEED, position, direction, GameObjectType.ENEMY_SPROUT, room) {
 
             @Override
             public void updateState(final double elapsed) {
@@ -72,7 +67,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      */
     @Override
     public Enemy createSoul(final Point2D position, final Vector2D direction, final Room room) {
-        return new AbstractEnemy(this.idIterator.next(), SOUL_SPEED, position, direction, GameObjectType.ENEMY_SOUL, room) {
+        return new AbstractEnemy(SOUL_SPEED, position, direction, GameObjectType.ENEMY_SOUL, room) {
             @Override
             public void updateState(final double elapsed) {
                 this.move(elapsed);
@@ -107,7 +102,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      */
     @Override
     public Enemy createSkeletonSeeker(final Point2D position, final Vector2D direction, final Room room) {
-        return new AbstractEnemy(this.idIterator.next(), SKELETON_SPEED, position, direction, GameObjectType.ENEMY_SKELETON, room) {
+        return new AbstractEnemy(SKELETON_SPEED, position, direction, GameObjectType.ENEMY_SKELETON, room) {
 
             private long lastChangeTime = System.currentTimeMillis();
             private boolean stop = true;
@@ -157,7 +152,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      */
     @Override
     public Enemy createBoss(final Point2D position, final Vector2D direction, final Room room) {
-        return new Boss(this.idIterator.next(), BOSS_SPEED, position, direction, GameObjectType.ENEMY_BOSS, room);
+        return new Boss(BOSS_SPEED, position, direction, GameObjectType.ENEMY_BOSS, room);
     }
 
 }

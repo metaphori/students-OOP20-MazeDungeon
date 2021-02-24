@@ -7,8 +7,8 @@ import model.room.Room;
 
 public class Wall extends SimpleObjectImpl {
 
-    public Wall(int id, Point2D position, GameObjectType gameObjectType, Room room) {
-        super(id, position, gameObjectType, room);
+    public Wall(final Point2D position, final GameObjectType gameObjectType, final Room room) {
+        super(position, gameObjectType, room);
     }
 
     @Override

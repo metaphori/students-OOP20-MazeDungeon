@@ -5,6 +5,7 @@ import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
+import model.gameobject.dinamicobject.Coin;
 import model.gameobject.dinamicobject.DinamicObject;
 import model.gameobject.dinamicobject.bullet.BulletFactory;
 import model.gameobject.dinamicobject.bullet.BulletFactoryImpl;
@@ -16,9 +17,9 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     private double life;
     private final BulletFactory bulletFactory;
 
-    public AbstractEnemy(final int id, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
-        super(id, speed, position, direction, gameObjectType, room);
-        this.bulletFactory = new BulletFactoryImpl(room.getRoomManager().getIdIterator());
+    public AbstractEnemy(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
+        super(speed, position, direction, gameObjectType, room);
+        this.bulletFactory = new BulletFactoryImpl();
     }
 
     /**
@@ -34,6 +35,10 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
      */
     public void setLife(final double life) {
         this.life = life;
+        if (this.life <= 0) {
+            this.getRoom().addDinamicObject(new Coin(0, this.getPosition(), new Vector2D(0, 0), GameObjectType.COIN, this.getRoom()));
+            this.getRoom().deleteGameObject(this);
+        }
     }
 
     /**
@@ -46,11 +51,6 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     @Override
     public void takesDamage(final int damage) {
         //TODO
-    }
-
-    @Override
-    public void notifyDropCoin() {
-      //TODO
     }
 
     /**
@@ -72,6 +72,7 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
             final AbstractDinamicObject dinamicObject = (AbstractDinamicObject) obj2;
             dinamicObject.setPosition(dinamicObject.getLastPosition());
             this.changeRoutine();
+            this.setLife(0);
             break;
         default:
             break;
