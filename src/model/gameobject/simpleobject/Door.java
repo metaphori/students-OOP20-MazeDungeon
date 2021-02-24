@@ -22,9 +22,8 @@ public class Door extends SimpleObjectImpl {
         }
         switch (obj2.getGameObjectType()) {
         case CHARACTER:
-            System.out.println(this.getRoom().isDoorOpen());
             final Direction direction;
-            switch (obj2.getGameObjectType()) {
+            switch (this.getGameObjectType()) {
             case DOOR_DOWN:
                 direction = Direction.DOWN;
                 break;

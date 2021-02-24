@@ -125,6 +125,15 @@ public class RoomImpl implements Room {
 
     /**
      * 
+     * @return . 
+     */
+    @Override
+    public Set<Direction> getDoors() {
+        return new HashSet<Direction>(nearRooms);
+    }
+
+    /**
+     * 
      */
     @Override
     public boolean isDoorOpen() {

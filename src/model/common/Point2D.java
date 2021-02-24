@@ -1,5 +1,8 @@
 package model.common;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Point2D implements java.io.Serializable {
     private static final long serialVersionUID = 4674087395785183468L;
     private final double x;
@@ -39,4 +42,5 @@ public class Point2D implements java.io.Serializable {
     public double getY() {
         return this.y;
     }
+
 }

@@ -1,21 +1,20 @@
 package model.room;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 
 import model.common.Direction;
 import model.common.GameObjectType;
 import model.common.IdIterator;
 import model.common.Point2D;
 import model.common.Vector2D;
-
-import model.gameobject.dinamicobject.enemy.Enemy;
 import model.gameobject.dinamicobject.enemy.EnemyFactory;
 import model.gameobject.dinamicobject.enemy.EnemyFactoryImpl;
-import model.gameobject.simpleobject.SimpleObject;
-import model.gameobject.dinamicobject.character.CharacterImpl;
 import model.gameobject.dinamicobject.character.Character;
+import model.gameobject.dinamicobject.character.CharacterImpl;
 
 public class RoomManagerImpl implements RoomManager {
 
@@ -38,9 +37,57 @@ public class RoomManagerImpl implements RoomManager {
         this.actualRoom.update(elapsed);
     }
 
+    /**
+     * @return a random point in the floor
+     */
+    private Point2D getRandomPointInFloor() {
+        final Random rnd = new Random();
+        return new LinkedList<>(rooms.keySet()).get(rnd.nextInt(rooms.size()));
+    }
+
+    private Point2D getNearbyPoint(final Point2D point, final Direction direction) {
+        switch (direction) {
+        case UP:
+            return new Point2D(point.getX(), point.getY() + 1);
+        case DOWN:
+            return new Point2D(point.getX(), point.getY() - 1);
+        case LEFT:
+            return new Point2D(point.getX() - 1, point.getY());
+        case RIGHT:
+            return new Point2D(point.getX() + 1, point.getY());
+        default:
+            throw new IllegalStateException("not valid direction");
+        }
+    }
+
     private void createGameMap() {
-        //TODO
+
         actualRoom = new RoomImpl(this);
+        final Character character = new CharacterImpl(this.idIterator.next(), 130, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER, this.actualRoom);
+        actualRoom.addDinamicObject(character);
+        rooms.put(new Point2D(0, 0), actualRoom);
+
+        while (rooms.size() < NUMBER_OF_ROOMS) {
+            final Direction randomDirection = Direction.getRandomDirection();
+            final Point2D randomPoint = this.getRandomPointInFloor();
+            final Point2D newPoint = this.getNearbyPoint(randomPoint, randomDirection);
+            if (rooms.containsKey(newPoint)) {
+                if (!rooms.get(randomPoint).getDoors().contains(randomDirection)) {
+                    rooms.get(randomPoint).addSimpleObject(doorFactory.createDoor(rooms.get(randomPoint), randomDirection));
+                    rooms.get(randomPoint).addDoor(randomDirection);
+                    rooms.get(newPoint).addDoor(Direction.getOppositeDirection(randomDirection));
+                    rooms.get(newPoint).addSimpleObject(doorFactory.createDoor(rooms.get(newPoint), Direction.getOppositeDirection(randomDirection)));
+                }
+            } else {
+                final Room newRoom = new RoomImpl(this);
+                newRoom.addDoor(Direction.getOppositeDirection(randomDirection));
+                newRoom.addSimpleObject(doorFactory.createDoor(newRoom, Direction.getOppositeDirection(randomDirection)));
+                rooms.put(newPoint, newRoom);
+                rooms.get(randomPoint).addSimpleObject(doorFactory.createDoor(rooms.get(randomPoint), randomDirection));
+                rooms.get(randomPoint).addDoor(randomDirection);
+            }
+        }
+        /*actualRoom = new RoomImpl(this);
         rooms.put(new Point2D(0, 0), actualRoom);
 
         final Character character = new CharacterImpl(this.idIterator.next(), 130, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER, this.actualRoom);
@@ -65,8 +112,9 @@ public class RoomManagerImpl implements RoomManager {
 
         for (final SimpleObject obj: obstaclesFactory.getEmptyRoom(this.actualRoom)) {
             actualRoom.addSimpleObject(obj);
-        }
+        }*/
     }
+
 
     /**
      * 
@@ -84,9 +132,9 @@ public class RoomManagerImpl implements RoomManager {
         return this.idIterator;
     }
 
-    private Point2D getActualPosition() {
+    private Point2D getRoomPosition(final Room room) {
         for (final Entry<Point2D, Room> entry : rooms.entrySet()) {
-            if (entry.getValue().equals(actualRoom)) {
+            if (entry.getValue().equals(room)) {
                 return entry.getKey();
             }
         }
@@ -98,25 +146,11 @@ public class RoomManagerImpl implements RoomManager {
      * @Override
      */
     public void changeRoom(final Direction direction) {
-        final Point2D actualPosition = this.getActualPosition();
-        final Room newRoom;
-        switch (direction) {
-        case UP:
-            newRoom = rooms.get(new Point2D(actualPosition.getX(), actualPosition.getY() + 1));
-            break;
-        case DOWN:
-            newRoom = rooms.get(new Point2D(actualPosition.getX(), actualPosition.getY() - 1));
-            break;
-        case LEFT:
-            newRoom = rooms.get(new Point2D(actualPosition.getX() - 1, actualPosition.getY()));
-            break;
-        case RIGHT:
-            newRoom = rooms.get(new Point2D(actualPosition.getX() + 1, actualPosition.getY()));
-            break;
-        default:
-            return;
-        }
-        //seleziona newRoom come room attuale
+        final Point2D actualPosition = this.getRoomPosition(actualRoom);
+        Room newRoom = rooms.get(this.getNearbyPoint(this.getRoomPosition(actualRoom), direction));
+        actualRoom.getCharacter().get().setPosition(new Point2D(300, 300));
+        newRoom.addDinamicObject(actualRoom.getCharacter().get());
+        actualRoom = newRoom;
     }
 
 }

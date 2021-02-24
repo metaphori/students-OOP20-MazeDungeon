@@ -2,6 +2,7 @@ package model.room;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import model.common.Direction;
 import model.common.Point2D;
@@ -30,5 +31,11 @@ public interface Room {
     void addDoor(Direction direction);
 
     boolean isDoorOpen();
+
+    /**
+     * 
+     * @return . 
+     */
+    Set<Direction> getDoors();
 
 }

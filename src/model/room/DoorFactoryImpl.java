@@ -1,5 +1,6 @@
 package model.room;
 
+import model.common.Direction;
 import model.common.GameObjectType;
 import model.common.IdIterator;
 import model.common.Point2D;
@@ -43,6 +44,25 @@ public class DoorFactoryImpl implements DoorFactory {
     @Override
     public Door createDownDoor(final Room room) {
         return new Door(idIterator.next(), new Point2D(590, 615), GameObjectType.DOOR_DOWN, room);
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public Door createDoor(final Room room, final Direction direction) {
+        switch (direction) {
+        case UP:
+            return this.createUpDoor(room);
+        case DOWN:
+            return this.createDownDoor(room);
+        case LEFT:
+            return this.createLeftDoor(room);
+        case RIGHT:
+            return this.createRightDoor(room);
+        default:
+            throw new IllegalStateException("not valid direction");
+        }
     }
 
 }
