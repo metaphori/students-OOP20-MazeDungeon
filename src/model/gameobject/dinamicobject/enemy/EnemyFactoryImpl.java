@@ -6,6 +6,8 @@ import model.common.GameObjectType;
 import model.common.IdIterator;
 import model.common.Point2D;
 import model.common.Vector2D;
+import model.gameobject.GameObject;
+import model.gameobject.dinamicobject.AbstractDinamicObject;
 import model.gameobject.dinamicobject.bullet.Bullet;
 import model.room.Room;
 
@@ -70,7 +72,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
             public void updateState(final double elapsed) {
                 this.move(elapsed);
                 if (this.canShoot(SOUL_SHOOT_TIME)) {
-                    this.shoot();
+                    //this.shoot();
                 }
             }
 
@@ -109,7 +111,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
             public void updateState(final double elapsed) {
                 this.move(elapsed);
                 if (this.canShoot(SKELETON_SHOOT_TIME)) {
-                    this.shoot();
+                    //this.shoot();
                 }
                 final long currentTime = System.currentTimeMillis();
                 if (currentTime - this.lastChangeTime > 5000) {
