@@ -6,13 +6,14 @@ public enum Items {
     HERMESBOOTS(new ItemBuilder.Builder("HermesBoots", 1).addSpeed(3).build()), 
     ZEUSBOLT(new ItemBuilder.Builder("ZeusBolt", 1).addSpeedAttack(4).build()),
     HEALTH(new ItemBuilder.Builder("Health", 1).addHelath(2).build());
-    
-    private ItemBuilder item;
-    private Items(final ItemBuilder item) {
+
+    private final Item item;
+
+    private Items(final Item item) {
         this.item = item;
     }
-    
-    public ItemBuilder getItem() {
+
+    public Item getItem() {
         return this.item;
     }
 }

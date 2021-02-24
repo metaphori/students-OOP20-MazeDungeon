@@ -2,7 +2,7 @@ package model.shop;
 
 import java.util.Optional;
 
-public class ItemBuilder {
+public class ItemBuilder implements Item {
 
     private String name;
 
@@ -14,9 +14,10 @@ public class ItemBuilder {
 
     private int speedAttack;
 
-    private  Optional<Integer> health;
+    //private  Optional<Integer> health;
+    private  int health;
 
-    private ItemBuilder(final String name, final int cost, final int demage, final int speed, final int speedAttack, final Optional<Integer> health) {
+    private ItemBuilder(final String name, final int cost, final int demage, final int speed, final int speedAttack, final int health) {
         super();
         this.name = name;
         this.setCost(cost);
@@ -26,16 +27,35 @@ public class ItemBuilder {
         this.health = health;
     }
 
+    @Override
     public int getCost() {
         return cost;
     }
 
+    @Override
     public void setCost(int cost) {
         this.cost = cost;
     }
-
-    public Optional<Integer> getHealth() {
+    
+    @Override
+    public String getName() {
+        return this.name;
+    }
+    @Override
+    public int getHealth() {
         return health;
+    }
+    @Override
+    public int getSpeed() {
+        return this.speed;
+    }
+    @Override
+    public int getSpeedHattack() {
+        return this.speedAttack;
+    }
+    @Override
+    public int getDemage() {
+        return this.demage;
     }
 
     public static class Builder {
@@ -45,7 +65,7 @@ public class ItemBuilder {
         private int demage;
         private int speed;
         private int speedAttack;
-        private  Optional<Integer> health = Optional.empty();
+        private int health;
 
         public Builder(final String name, final int cost) {
             this.name = name;
@@ -53,6 +73,7 @@ public class ItemBuilder {
             this.demage = 0;
             this.speed = 0;
             this.speedAttack = 0;
+            this.health = 0;
         }
 
         /**
@@ -60,7 +81,7 @@ public class ItemBuilder {
          * @return this
          */
         public Builder addHelath(final int health) {
-            this.health = Optional.of(health);
+            this.health = health;
             return this;
         }
 
@@ -79,7 +100,7 @@ public class ItemBuilder {
         /**
          * @return Item
          */
-        public ItemBuilder build() {
+        public Item build() {
             return new ItemBuilder(this.name, this.cost, this.demage, this.speed, this.speedAttack, this.health);
         }
     }

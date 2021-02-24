@@ -10,7 +10,7 @@ public interface Character extends DinamicObject {
 
     void takeDamage(int damage);
 
-    void addItem(ItemBuilder item);
+    void addItem(Item item);
 
     Set<ItemBuilder> getItems();
 

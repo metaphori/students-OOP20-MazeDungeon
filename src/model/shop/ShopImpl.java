@@ -33,6 +33,10 @@ public class ShopImpl implements Shop {
             messageOuput="You already have this item";
             return false;
         }
+        if(actualMoney == 0) {
+            messageOuput = msgNoMoney;
+            return false;
+        }
         switch (i) {
             case ARTHEMIDEBOW:
                 if (this.getArthemideBow().getCost() <= actualMoney) {
@@ -60,7 +64,7 @@ public class ShopImpl implements Shop {
                 break;
             case HEALTH:
                 if (this.getHealth().getCost() <= actualMoney) {
-                    if (this.actualLife + this.getHealth().getHealth().get() > MAX_LIFE) {
+                    if (this.actualLife + this.getHealth().getHealth() > MAX_LIFE) {
                         messageOuput = "You have too much life!";
                         return false;
                     }
@@ -77,7 +81,7 @@ public class ShopImpl implements Shop {
         return false;
     }
     @Override
-    public ItemBuilder getArthemideBow() {
+    public Item getArthemideBow() {
         return new ItemBuilder.Builder("ArthemideBow", 2).addDemage(5).build();
     }
 
@@ -85,7 +89,7 @@ public class ShopImpl implements Shop {
      * @return Item with features of HermesBoots
      */
     @Override
-    public ItemBuilder getHermesBoots() {
+    public Item getHermesBoots() {
         return new ItemBuilder.Builder("HermesBoots", 1).addSpeed(3).build();
     }
 
@@ -93,7 +97,7 @@ public class ShopImpl implements Shop {
      * @return Item with features of ZeusBolt
      */
     @Override
-    public ItemBuilder getZeusBolt() {
+    public Item getZeusBolt() {
         return new ItemBuilder.Builder("ZeusBolt", 1).addSpeedAttack(4).build();
     }
 
@@ -101,7 +105,7 @@ public class ShopImpl implements Shop {
      * @return Item with features more Health
      */
     @Override
-    public ItemBuilder getHealth() {
+    public Item getHealth() {
         return new ItemBuilder.Builder("Health", 1).addHelath(2).build();
     }
 

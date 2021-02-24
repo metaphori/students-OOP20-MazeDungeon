@@ -18,7 +18,15 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     public void buyItem(Items itemSelected) {
         if(shopModel.checkItem(itemSelected)) {
             //AGGIUNGE L' ITEM AL PERSONAGGIO
-           // model.getRoomManager().getCurrentRoom().getCharacter().get().addItem(Items.);
+            //public void addSkills(Item item, int speed, int speedAttack, int demage, int helath){
+                
+                
+                
+            //}
+            model.getRoomManager().getCurrentRoom().getCharacter().get().addItem(itemSelected.getItem());
+            
+            System.out.println(itemSelected.getItem().getName());
+            
         }
         this.view.returnMessage(shopModel.getMessageOuput());
         //System.out.println(shopModel.getMessageOuput());
