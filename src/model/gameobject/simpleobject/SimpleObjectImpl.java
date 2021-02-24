@@ -3,16 +3,17 @@ package model.gameobject.simpleobject;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
+import model.gameobject.GameObject;
 import model.room.Room;
 
-public class SimpleObjectImpl implements SimpleObject {
+public abstract class SimpleObjectImpl implements SimpleObject {
     private final int id;
     private Point2D position;
     private final GameObjectType gameObjectType;
     private BoundingBox boundingBox;
     private Room room;
 
-    public SimpleObjectImpl(final int id, final Point2D position, final GameObjectType gameObjectType, Room room) {
+    public SimpleObjectImpl(final int id, final Point2D position, final GameObjectType gameObjectType, final Room room) {
         this.id = id;
         this.position = position;
         this.room = room;
@@ -83,4 +84,6 @@ public class SimpleObjectImpl implements SimpleObject {
         this.room = room;
     }
 
+    @Override
+    public abstract void collideWith(GameObject obj2);
 }

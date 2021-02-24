@@ -19,4 +19,6 @@ public interface GameObject {
 
     void setRoom(Room room);
 
+    void collideWith(GameObject obj2);
+
 }

@@ -29,4 +29,6 @@ public interface Room {
 
     void addDoor(Direction direction);
 
+    boolean isDoorOpen();
+
 }
