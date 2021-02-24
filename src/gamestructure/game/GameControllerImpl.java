@@ -21,7 +21,7 @@ public class GameControllerImpl implements GameController {
     private final Model model;
     private final List<Integer> lastGameObjectsID = new LinkedList<>();
     private final Command command;
-    
+
 
     public GameControllerImpl(final GameView view, final Model model) {
         this.view = view;

@@ -6,15 +6,16 @@ import model.common.Vector2D;
 import model.gameobject.dinamicobject.DinamicObject;
 import model.shop.Item;
 import model.shop.ItemBuilder;
+import model.shop.Items;
 
 public interface Character extends DinamicObject {
     void shoot();
 
     void takeDamage(int damage);
 
-    void addItem(Item item);
+    void addItem(Items item);
 
-    Set<Item> getItems();
+    Set<Items> getItems();
 
 
     double getLife();
@@ -36,7 +37,5 @@ public interface Character extends DinamicObject {
     void stopHorizontal();
 
     void setShoot(boolean shoot, Vector2D shootDirection);
-
-
 
 }

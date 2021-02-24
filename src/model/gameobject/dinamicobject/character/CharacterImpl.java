@@ -13,6 +13,7 @@ import model.gameobject.dinamicobject.AbstractDinamicObject;
 import model.gameobject.dinamicobject.bullet.*;
 import model.room.Room;
 import model.shop.Item;
+import model.shop.Items;
 
 
 public class CharacterImpl extends AbstractDinamicObject implements Character {
@@ -20,14 +21,20 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     /**
      * CONSTANTS.
      */
-    private final double MAXLIFE = 4.0;
-    private final double SHOOTSPEED = 4;
-    private final long SHOOTDELAY = 300;
+    private final double MAXLIFE = 20.0;
+    private final long INITIALSHOOTSPEED = 3;
+    private final long INITIALBULLETDELAY = 300;
     /*
      * VARIABLES.
      */
     private double life;
-    private Set<Item> items;
+    private int damage;
+    private long bulletSpeed;
+
+    /**
+     * 
+     */
+    private Set<Items> items;
     private final BulletFactory bulletFactory;
     private long lastShootTime; 
     private boolean shoot;
@@ -37,6 +44,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public CharacterImpl(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final Room room) {
         super(speed, position, direction, gameObjectType, room);
         this.life = MAXLIFE;
+        this.bulletSpeed = INITIALSHOOTSPEED;
         this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl();
         this.shoot = false;
@@ -61,6 +69,9 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void takeDamage(final int damage) {
         this.life = this.life - damage;
+        if (this.life < 0) {
+            System.out.println("SEI MORTO");
+        }
     }
     /**
      * @return the life
@@ -69,35 +80,41 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public double getLife() {
         return this.life;
     }
+    
+    /**
+     * set the current life
+     */
+
+    private void setLife(double life) {
+        this.life = this.life + life;
+    }
 
     /**
      * @return the items' set
      */
     @Override
-    public Set<Item> getItems() {
+    public Set<Items> getItems() {
         return this.items;
     }
     /**
      * 
      */
     @Override
-    public void addItem(Item item) {
+    public void addItem(final Items item) {
         this.items.add(item);
+        switch (item) {
+            case ARTHEMIDEBOW:break;
+            /*TODO*/
+            case HERMESBOOTS:break;
+            /*TODO*/
+            case ZEUSBOLT:break;
+            /*TODO*/
+            case HEALTH:break;
+            /*TODO*/
+            default:
+                break;
+        }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
 
 
@@ -207,7 +224,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public void shoot() {
         Bullet bullet = bulletFactory.createCharacterBullet(
                 new Point2D(getPosition().getX() + this.getBoundingBox().getWidth() / 2, getPosition().getY() + this.getBoundingBox().getHeight() / 2),
-                this.shootDirection.mul(SHOOTSPEED),
+                this.shootDirection.mul(this.bulletSpeed),
                 getRoom()); 
         getRoom().addDinamicObject(bullet);
         /*final MP3Player mp3Player = new MP3Player(new File("resources/sounds/characterhoot.mp3"));
@@ -221,7 +238,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     private boolean canShoot() {
         final long currentTime = System.currentTimeMillis();
-        if (currentTime - this.lastShootTime > this.SHOOTDELAY) {
+        if (currentTime - this.lastShootTime > this.INITIALBULLETDELAY) {
             this.lastShootTime = currentTime;
             return true;
         }

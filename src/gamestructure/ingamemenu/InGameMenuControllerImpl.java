@@ -18,7 +18,7 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     public void buyItem(Items itemSelected) {
         this.view.removeMessage();
         if(shopModel.checkItem(itemSelected)) {
-            model.getRoomManager().getCurrentRoom().getCharacter().get().addItem(itemSelected.getItem());
+            model.getRoomManager().getCurrentRoom().getCharacter().get().addItem(itemSelected);
         }
         this.view.returnMessage(shopModel.getMessageOuput());
 
