@@ -80,7 +80,7 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
      * 
      * @return last position of the object
      */
-    protected Point2D getLastPosition() {
+    public Point2D getLastPosition() {
         return this.lastPosition;
     }
 

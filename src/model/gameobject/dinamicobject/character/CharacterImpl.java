@@ -190,10 +190,14 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
        switch (obj2.getGameObjectType().getCollisionType()) {
             case OBSTACLE:
+                this.setPosition(this.getLastPosition());
+                break;
             case ENTITY:
-                this.setPosition(new Point2D(this.getPosition().getX() - (this.getDirection().getX() * 1),
-                        this.getPosition().getY()  - (this.getDirection().getY() * 1)));
+                /*this.setPosition(new Point2D(this.getPosition().getX() - (this.getDirection().getX() * 1),
+                        this.getPosition().getY()  - (this.getDirection().getY() * 1)));*/
                 //this.setPosition(this.getLastPosition());
+                final AbstractDinamicObject dinamicObject = (AbstractDinamicObject) obj2;
+                dinamicObject.setPosition(dinamicObject.getLastPosition());
                 break;
             case INTERACTIVE_ELEMENT:
                 if (obj2.getGameObjectType().equals(GameObjectType.COIN)) {

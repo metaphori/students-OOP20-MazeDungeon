@@ -5,6 +5,7 @@ import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
+import model.gameobject.dinamicobject.DinamicObject;
 import model.gameobject.dinamicobject.bullet.BulletFactory;
 import model.gameobject.dinamicobject.bullet.BulletFactoryImpl;
 import model.room.Room;
@@ -59,15 +60,17 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     public void collideWith(final GameObject obj2) {
         switch (obj2.getGameObjectType().getCollisionType()) {
         case OBSTACLE:
-            this.setPosition(new Point2D(this.getPosition().getX() - (this.getDirection().getX() * 1),
-                    this.getPosition().getY()  - (this.getDirection().getY() * 1)));
-            //this.setPosition(this.getLastPosition());
+            /*this.setPosition(new Point2D(this.getPosition().getX() - (this.getDirection().getX() * 1),
+                    this.getPosition().getY()  - (this.getDirection().getY() * 1)));*/
+            this.setPosition(this.getLastPosition());
             this.changeRoutine();
             break;
         case ENTITY:
-            this.setPosition(new Point2D(this.getPosition().getX() - (this.getDirection().getX() * 1),
-                    this.getPosition().getY()  - (this.getDirection().getY() * 1)));
+            /*this.setPosition(new Point2D(this.getPosition().getX() - (this.getDirection().getX() * 1),
+                    this.getPosition().getY()  - (this.getDirection().getY() * 1)));*/
             //this.setPosition(this.getLastPosition());
+            final AbstractDinamicObject dinamicObject = (AbstractDinamicObject) obj2;
+            dinamicObject.setPosition(dinamicObject.getLastPosition());
             this.changeRoutine();
             break;
         default:
