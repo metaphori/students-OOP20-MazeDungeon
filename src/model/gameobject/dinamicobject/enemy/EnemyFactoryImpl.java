@@ -35,9 +35,15 @@ public class EnemyFactoryImpl implements EnemyFactory {
     public Enemy createSprout(final Point2D position, final Vector2D direction) {
         return new AbstractEnemy(SPROUT_LIFE, SPROUT_SPEED, position, direction, GameObjectType.ENEMY_SPROUT) {
 
+            private long lastHitTime;
+
             @Override
             public void updateState(final double elapsed) {
-                this.followCharacter();
+                final long currentTime = System.currentTimeMillis();
+                if (currentTime - this.lastHitTime > 1000) {
+                    this.lastHitTime = currentTime;
+                    this.followCharacter();
+                }
                 this.move(elapsed);
                 if (canShoot(SPROUT_SHOOT_DELAY)) {
                     this.shoot();
@@ -53,7 +59,11 @@ public class EnemyFactoryImpl implements EnemyFactory {
 
             @Override
             protected void changeRoutine() {
-
+                this.lastHitTime = System.currentTimeMillis();
+                final Random rndFlipDirection = new Random();
+                final double newX = this.getDirection().getX() * (rndFlipDirection.nextBoolean() ? -1 : 1);
+                final double newY = this.getDirection().getY() * (rndFlipDirection.nextBoolean() ? -1 : 1);
+                this.setDirection(new Vector2D(newX, newY));
             }
 
             private void followCharacter() {
@@ -110,25 +120,25 @@ public class EnemyFactoryImpl implements EnemyFactory {
         return new AbstractEnemy(SKELETON_LIFE, SKELETON_SPEED, position, direction, GameObjectType.ENEMY_SKELETON) {
 
             private long lastChangeTime = System.currentTimeMillis();
-            private boolean stop = true;
+            private boolean inMovement = true;
 
             @Override
             public void updateState(final double elapsed) {
-                this.move(elapsed);
-                if (this.canShoot(SKELETON_SHOOT_DELAY)) {
-                    this.shoot();
-                }
                 final long currentTime = System.currentTimeMillis();
                 if (currentTime - this.lastChangeTime > 5000) {
                     this.lastChangeTime = currentTime;
-                    if (stop) {
+                    if (inMovement) {
                         this.stopMovement();
-                        this.stop = false;
+                        this.inMovement = false;
                     } else {
                         this.changeRoutine();
-                        this.stop = true;
+                        this.inMovement = true;
                     }
                 }
+                if (this.canShoot(SKELETON_SHOOT_DELAY) && !this.inMovement) {
+                    this.shoot();
+                }
+                this.move(elapsed);
             }
 
             @Override

@@ -47,6 +47,9 @@ public class BulletImpl extends AbstractDinamicObject implements Bullet {
     @Override
     public void collideWith(final GameObject obj2) {
         switch (obj2.getGameObjectType().getCollisionType()) {
+        case OBSTACLE:
+            this.getRoom().deleteGameObject(this);
+            break;
         case ENTITY:
             if (obj2.getGameObjectType().equals(GameObjectType.CHARACTER) && !this.getGameObjectType().equals(GameObjectType.CHARACTER_BULLET)) {
                 final Character character = (Character) obj2;
@@ -57,7 +60,6 @@ public class BulletImpl extends AbstractDinamicObject implements Bullet {
                 enemy.takesDamage(this.getDamage());
                 this.getRoom().deleteGameObject(this);
             }
-            
         default:
             break;
         }

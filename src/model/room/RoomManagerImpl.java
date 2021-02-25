@@ -119,11 +119,11 @@ public class RoomManagerImpl implements RoomManager {
         for (final SimpleObject obj: obstaclesFactory.getEmptyRoom(this.actualRoom)) {
             actualRoom.addSimpleObject(obj);
         }*/
-        //actualRoom.addDinamicObject(this.enemyFactory.createSkeletonSeeker(new Point2D(500, 300), new Vector2D(-1, 1)));
+        actualRoom.addDinamicObject(this.enemyFactory.createSkeletonSeeker(new Point2D(400, 300), new Vector2D(-1, 1)));
         //actualRoom.addDinamicObject(this.enemyFactory.createSoul(new Point2D(350, 500), new Vector2D(1, 1)));
         //actualRoom.addDinamicObject(this.enemyFactory.createSoul(new Point2D(400, 500), new Vector2D(1, 1)));
         //actualRoom.addDinamicObject(this.enemyFactory.createSoul(new Point2D(750, 500), new Vector2D(1, 1)));
-        actualRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(450, 300), new Vector2D(1, 1)));
+        actualRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(770, 300), new Vector2D(1, 1)));
     }
 
 
