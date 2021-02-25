@@ -1,47 +1,54 @@
 package model.gameobject.dinamicobject.enemy;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.util.Random;
-
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.bullet.Bullet;
-import model.room.Room;
+
 
 public class Boss extends AbstractEnemy{
-    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+   // private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private Vector2D vectorBullet = new Vector2D(0, 1);
-    public Boss(final int speed,final Point2D position,final Vector2D direction,final GameObjectType gameObjectType) {
+    public Boss(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
         super(speed, position, direction, gameObjectType);
         //this.setLife(20);
         //System.out.println(this.getBoundingBox().getWidth() + "   " + this.getBoundingBox().getHeight());
     }
-    private void checkWall() {
+    private void moveAroundWall() {
         if ((int) this.getDirection().getX() == 0 && (int) this.getDirection().getY() == -1) {
             this.setDirection(new Vector2D(1, 0));
-            this.setPosition(new Point2D(this.getPosition().getX()+1 , this.getPosition().getY()+1));
+            this.setPosition(new Point2D(this.getPosition().getX() + 1, this.getPosition().getY() + 1));
             vectorBullet = new Vector2D(0, 1);
         }
-        else if((int) this.getDirection().getX() == 1 && (int) this.getDirection().getY() == 0) {
+        else if ((int) this.getDirection().getX() == 1 && (int) this.getDirection().getY() == 0) {
             this.setDirection(new Vector2D(0, 1));
-            this.setPosition(new Point2D(this.getPosition().getX()-1 , this.getPosition().getY()+1));
+            this.setPosition(new Point2D(this.getPosition().getX() - 1, this.getPosition().getY() + 1));
             vectorBullet = new Vector2D(-1, 0);
         }
-        else if((int) this.getDirection().getX() == 0 && (int) this.getDirection().getY() == 1) {
+        else if ((int) this.getDirection().getX() == 0 && (int) this.getDirection().getY() == 1) {
             this.setDirection(new Vector2D(-1, 0));
-            this.setPosition(new Point2D(this.getPosition().getX() -1, this.getPosition().getY()-1));
+            this.setPosition(new Point2D(this.getPosition().getX() - 1, this.getPosition().getY() - 1));
             vectorBullet = new Vector2D(0, -1);
         }
-        else if((int) this.getDirection().getX() == -1 && (int) this.getDirection().getY() == 0) {
+        else if ((int) this.getDirection().getX() == -1 && (int) this.getDirection().getY() == 0) {
             this.setDirection(new Vector2D(0, -1));
-            this.setPosition(new Point2D(this.getPosition().getX()+1 , this.getPosition().getY()-1));
+            this.setPosition(new Point2D(this.getPosition().getX() + 1, this.getPosition().getY() - 1));
             vectorBullet = new Vector2D(1, 0);
         }
     }
-
+    public void moveUpWall() {
+        if ((int) this.getDirection().getX() == 0 && (int) this.getDirection().getY() == -1) {
+            this.setDirection(new Vector2D(1, 0));
+            this.setPosition(new Point2D(this.getPosition().getX() + 1, this.getPosition().getY() + 1));
+            vectorBullet = new Vector2D(0, 1);
+        }
+        else {
+            this.setDirection(new Vector2D(-1, 0));
+            this.setPosition(new Point2D(this.getPosition().getX() -1, this.getPosition().getY()-1));
+            vectorBullet = new Vector2D(0, 1);
+        }
+    }
     @Override
     public void collideWith(final GameObject obj2) {
         switch (obj2.getGameObjectType().getCollisionType()) {
@@ -52,7 +59,6 @@ public class Boss extends AbstractEnemy{
         case ENTITY:
             break;
 
-
         default:
             break;
         }
@@ -60,7 +66,14 @@ public class Boss extends AbstractEnemy{
 
     @Override
     protected void changeRoutine() {
-        checkWall();
+        if (this.getLife() >= this.getLife() / 2) {
+            moveUpWall();
+        } else {
+            moveAroundWall();
+            this.setSpeed(this.getSpeed() + 10);
+            
+        }
+        //moveAroundWall();
     }
 
     @Override
