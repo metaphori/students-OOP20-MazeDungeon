@@ -70,8 +70,9 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void takesDamage(final double damage) {
         this.life = this.life - damage;
+        System.out.println(this.getID() + ") " + this.getGameObjectType() + " Life: " + this.getLife());
         if (this.life < 0) {
-            System.out.println("SEI MORTO");
+            System.out.println("IL PERSONAGGIO PRINCIPALE E' MORTO");
         }
     }
     /**
@@ -111,22 +112,28 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public void addItem(final Items item) {
         this.items.add(item);
         switch (item) {
-            case ARTHEMIDEBOW:break;
-            /*TODO*/
-            case HERMESBOOTS:break;
-            /*TODO*/
-            case ZEUSBOLT:break;
-            /*TODO*/
-            case HEALTH:break;
-            /*TODO*/
+            case ARTHEMIDEBOW:
+            case HERMESBOOTS:
+            case ZEUSBOLT:
+            case HEALTH:
+                
+            this.setSkills();
+
             default:
                 break;
         }
     }
-
+    
+    private void setSkills() {
+        // TODO Auto-generated method stub
+        
+    }
 
 
     /*METHODS FOR MOVEMENT*/
+
+   
+
 
     /**
      * move up the character.
