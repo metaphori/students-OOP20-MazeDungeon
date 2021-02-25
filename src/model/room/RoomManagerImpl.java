@@ -100,7 +100,6 @@ public class RoomManagerImpl implements RoomManager {
                 rooms.get(randomPoint).addDoor(randomDirection);
             }
         }
-        actualRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(450, 300), new Vector2D(1, 1)));
     }
 
 
