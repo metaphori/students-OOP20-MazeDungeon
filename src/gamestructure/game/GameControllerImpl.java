@@ -71,7 +71,6 @@ public class GameControllerImpl implements GameController {
 
     private void processInput() {
             this.getCommand().execute();
-            this.getCommand().lock();
     }
 
     private void updateGame(final double elapsed) {
@@ -136,7 +135,7 @@ public class GameControllerImpl implements GameController {
     public Command getCommand() {
         return this.command;
     }
-    
+
     @Override
     public void notifyClosedMenu() {
         this.getCommand().setMenuClosed();
@@ -144,9 +143,7 @@ public class GameControllerImpl implements GameController {
 
     @Override
     public void pressKey(final KeyEvent key) {
-        if (getCommand().getPermittedKeys().contains(key.getKeyCode())) {
-            this.getCommand().setKey(key, true);
-        }
+        this.getCommand().setKey(key, true);
     }
 
     @Override

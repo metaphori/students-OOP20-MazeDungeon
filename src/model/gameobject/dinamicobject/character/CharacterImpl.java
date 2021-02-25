@@ -90,7 +90,6 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     /**
      * set the current life
      */
-
     private void setLife(final double life) {
         this.life = this.life + life;
     }
@@ -132,7 +131,6 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
             case HEALTH:
                 /**TODO*/
           //  this.setSkills(item.getItem().get);
-
             default:
                 break;
         }

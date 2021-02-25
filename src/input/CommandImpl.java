@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.SwingUtilities;
 
@@ -28,7 +29,7 @@ import mvc.Model;
 public class CommandImpl implements Command {
 
     private final Model model;
-    private boolean[] keys;
+    private Map<Integer, Boolean> keysMap;
     private int key;
     private final Set<Integer> permittedKeys;
     private final Map<Integer, Vector2D> keyDirectionMap;
@@ -37,12 +38,22 @@ public class CommandImpl implements Command {
 
 
     public CommandImpl(final Model model, final GameController gameController) {
-        this.model = model;
-        this.keys = new boolean[256];
+        this.model = model;  
+        this.gameController = gameController; 
         this.menuIsOpen = false;
-        this.gameController = gameController;
+        this.keysMap = new ConcurrentHashMap<>(Map.of(KeyEvent.VK_UP, false,
+                                            KeyEvent.VK_DOWN, false, 
+                                            KeyEvent.VK_LEFT, false,
+                                            KeyEvent.VK_RIGHT, false, 
+                                            KeyEvent.VK_W, false, 
+                                            KeyEvent.VK_S, false,
+                                            KeyEvent.VK_D, false,
+                                            KeyEvent.VK_A, false,
+                                            KeyEvent.VK_ESCAPE, false));
+        
         this.permittedKeys = new HashSet<>(Set.of(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_A,
-                                                    KeyEvent.VK_ESCAPE, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT));
+                                                    KeyEvent.VK_ESCAPE, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT, 
+                                                        KeyEvent.VK_LEFT));
 
         this.keyDirectionMap = new HashMap<>(Map.of(KeyEvent.VK_UP, new Vector2D(0, -1),
                                                     KeyEvent.VK_DOWN, new Vector2D(0, 1), 
@@ -50,6 +61,9 @@ public class CommandImpl implements Command {
                                                     KeyEvent.VK_RIGHT, new Vector2D(1, 0)));
     }
 
+    /*
+     * 
+     */
     @Override
     public void execute() {
 
@@ -57,54 +71,39 @@ public class CommandImpl implements Command {
         if (character.isEmpty()) {
             return;
         }
-        if (keys[KeyEvent.VK_W]) {
+        if (this.keysMap.get(KeyEvent.VK_W)) {
             character.get().moveUp();
         }
-        if (keys[KeyEvent.VK_S]) {
+        if (this.keysMap.get(KeyEvent.VK_S)) {
             character.get().moveDown();
         }
-        if (keys[KeyEvent.VK_D]) {
+        if (this.keysMap.get(KeyEvent.VK_D)) {
             character.get().moveRight();
         }
-        if (keys[KeyEvent.VK_A]) {
+        if (this.keysMap.get(KeyEvent.VK_A)) {
             character.get().moveLeft();
         }
-        if (keys[KeyEvent.VK_UP]) {
+
+        if (this.keysMap.get(KeyEvent.VK_UP)) {
             character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_UP));
         }
-        if (keys[KeyEvent.VK_DOWN]) {
+        if (this.keysMap.get(KeyEvent.VK_DOWN)) {
             character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_DOWN));
         }
-        if (keys[KeyEvent.VK_LEFT]) {
+        if (this.keysMap.get(KeyEvent.VK_LEFT)) {
             character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_LEFT));
         }
-        if (keys[KeyEvent.VK_RIGHT]) {
+        if (this.keysMap.get(KeyEvent.VK_RIGHT)) {
             character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_RIGHT));
         }
-        /*if (keys[KeyEvent.VK_ESCAPE]) {
-            //System.out.println("APRO MENU IN GAME");
-          /*  final Thread thread = new Thread(new Runnable() {
-                @Override
-                public synchronized void run() {
-                    final InGameMenuView window = new InGameMenuViewImpl();
-                    window.show();
-            });
-            thread.start();*/
-            /*if (!this.menuIsOpen) {
-                final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController);
-                this.menuIsOpen = true;
-            }*/
+        
+        if (this.keysMap.get(KeyEvent.VK_ESCAPE) && !this.menuIsOpen) {
+            final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController);
+            this.menuIsOpen = true;
+            return;
+           
+        }
 
-            /*try {
-                while (!chiuso) {
-                    Thread.currentThread().wait();
-                }
-
-            } catch (InterruptedException | InvocationTargetException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }*/
-        //}
         if (this.checkStopVertical()) {
             character.get().stopVertical();
         }
@@ -119,21 +118,14 @@ public class CommandImpl implements Command {
      */
     @Override
     public void setKey(final KeyEvent key, final boolean b) {
-        if (key.getKeyCode() == KeyEvent.VK_ESCAPE && !this.menuIsOpen) {
+        /*if (key.getKeyCode() == KeyEvent.VK_ESCAPE && !this.menuIsOpen) {
             final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController);
             this.menuIsOpen = true;
             return;
+        }*/
+        if (this.permittedKeys.contains(key.getKeyCode())) {
+             this.keysMap.put(key.getKeyCode(), b);
         }
-        this.keys[key.getKeyCode()] = b;
-        this.key = key.getKeyCode();
-    }
-
-    /**
-     * 
-     */
-    @Override
-    public int getKey() {
-        return this.key;
     }
 
     /**
@@ -141,7 +133,7 @@ public class CommandImpl implements Command {
      */
     @Override
     public boolean checkStopVertical() {
-        return !this.keys[KeyEvent.VK_W] && !this.keys[KeyEvent.VK_S];
+        return !this.keysMap.get(KeyEvent.VK_W) && !this.keysMap.get(KeyEvent.VK_S);
     }
 
     /**
@@ -149,17 +141,12 @@ public class CommandImpl implements Command {
      */
     @Override
     public boolean checkStopHorizontal() {
-        return !this.keys[KeyEvent.VK_A] && !this.keys[KeyEvent.VK_D];
+        return !this.keysMap.get(KeyEvent.VK_A) && !this.keysMap.get(KeyEvent.VK_D);
     }
 
     /*
      * 
      */
-    @Override
-    public void lock() {
-        this.key = 0;
-
-    }
 
     @Override
     public Set<Integer> getPermittedKeys() {
