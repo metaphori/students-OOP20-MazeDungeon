@@ -15,9 +15,9 @@ import gamestructure.ingamemenu.utilities.Images;
 import model.shop.Items;
 
 public class InGameMenuViewImpl implements InGameMenuView  {
-    private static int SIZE_IMAGE_ITEM = 100;
-    private static double WIDTH_RATIO = 0.67; 
-    private static double HEIGHT_RATIO = 0.736;
+    private static final int SIZE_IMAGE_ITEM = 100;
+    private static final double WIDTH_RATIO = 0.67; 
+    private static final double HEIGHT_RATIO = 0.736;
     private final JFrame frame = new JFrame();
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -32,6 +32,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     private final JButton btnHermesBootsItem = new JButton("", imageIconSources.getImage(Images.BTNHERMESBOOTS)); 
     private final JButton btnZeusBoltItem = new JButton("", imageIconSources.getImage(Images.BTNZEUSBOLT)); 
     private final JButton btnHealthItem = new JButton("", imageIconSources.getImage(Images.BTNHEALTH)); 
+    private final JButton btnOracleAmulet = new JButton("", imageIconSources.getImage(Images.BTNORACLEAMULET)); 
 
     private final JButton btnBackToMenu = new JButton("", imageIconSources.getImage(Images.BTNRETURNMENU)); 
 
@@ -97,7 +98,12 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         btnHealthItem.addActionListener(e -> {
             this.controller.buyItem(Items.HEALTH);
         });
-
+        btnOracleAmulet.setBounds(680, 180, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
+        this.configureButton(btnOracleAmulet);
+        this.lblBackgroundShop.add(btnOracleAmulet);
+        btnOracleAmulet.addActionListener(e -> {
+            this.controller.buyItem(Items.ORACLEAMULET);
+        });
        this.show();
     }
     @Override

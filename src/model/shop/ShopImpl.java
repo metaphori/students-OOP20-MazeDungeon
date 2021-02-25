@@ -14,7 +14,7 @@ public class ShopImpl implements Shop {
 
     private final String msgBought;
     private final String msgNoMoney;
-
+    private final int actualMoney;
     /**
      * @return .
      */
@@ -24,6 +24,7 @@ public class ShopImpl implements Shop {
 
     public ShopImpl(final int actualMoney, final int actualLife) {
         this.actualLife = actualLife;
+        this.actualMoney = actualMoney;
         //this.actualMoney = actualMoney;
         msgBought = "You bought this item! You have: ";
         msgNoMoney = "You don't have enough coins!";
@@ -76,6 +77,18 @@ public class ShopImpl implements Shop {
                     return true;
                 }
                 break;
+            case ORACLEAMULET:
+                if (this.getHealth().getCost() <= actualMoney) {
+                    if (this.actualLife + this.getHealth().getHealth() > MAX_LIFE) {
+                        messageOuput = "You have too much life!";
+                        return false;
+                    }
+                    actualMoney -= this.getHealth().getCost();
+                    purchasedItems.add(i);
+                    messageOuput = msgBought + actualMoney;
+                    return true;
+                }
+                break;
              default:
                  messageOuput = msgNoMoney;
                  return false;
@@ -83,6 +96,10 @@ public class ShopImpl implements Shop {
         }
         return false;
     }
+    public int moneyLeft() {
+        return actualMoney;
+    }
+
     /**
      * @return .
      */
@@ -109,6 +126,13 @@ public class ShopImpl implements Shop {
      */
     public Item getHealth() {
         return new ItemBuilder.Builder(Items.HEALTH, 1).addHelath(2).build();
+    }
+    /**
+     * 
+     * @return .
+     */
+    public Item getOracleAmulet() {
+        return new ItemBuilder.Builder(Items.ORACLEAMULET, 6).addDemage(1).addSpeed(1).addSpeed(1).addSpeedAttack(1).addHelath(2).build();
     }
 
 }

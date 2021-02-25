@@ -25,6 +25,7 @@ public class ImageLoader {
         images.put(Images.BTNHEALTH, new ImageIcon(imagesPathItem + sep +"health.png").getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, Image.SCALE_SMOOTH));
         images.put(Images.BTNHERMESBOOTS, new ImageIcon(imagesPathItem + sep +"hermesBoots.png").getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, Image.SCALE_SMOOTH));
         images.put(Images.BTNZEUSBOLT, new ImageIcon(imagesPathItem + sep +"zeusBolt.png").getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, Image.SCALE_SMOOTH));
+        images.put(Images.BTNORACLEAMULET, new ImageIcon(imagesPathItem + sep +"oracleAmulet.png").getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, Image.SCALE_SMOOTH));
 
     }
     public ImageIcon getImage(final Images im) {

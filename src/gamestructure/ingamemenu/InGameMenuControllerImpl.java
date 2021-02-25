@@ -21,6 +21,7 @@ public class InGameMenuControllerImpl implements InGameMenuController {
         this.view.removeMessage();
         int actualMoney = model.getRoomManager().getCurrentRoom().getCharacter().get().getMoney();
         if (shopModel.checkItem(itemSelected, actualMoney)) {
+            //model.getRoomManager().getCurrentRoom().getCharacter().get().setMoney();
             model.getRoomManager().getCurrentRoom().getCharacter().get().addItem(itemSelected);
         }
         this.view.returnMessage(shopModel.getMessageOuput());
