@@ -266,7 +266,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     private boolean canShoot() {
         final long currentTime = System.currentTimeMillis();
-        if (currentTime - this.lastShootTime > this.INITIALBULLETDELAY) {
+        if (currentTime - this.lastShootTime > this.INITIAL_BULLET_DELAY) {
             this.lastShootTime = currentTime;
             return true;
         }

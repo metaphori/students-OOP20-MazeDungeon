@@ -10,27 +10,20 @@ import model.shop.ShopImpl;
 
 public class InGameMenuControllerImpl implements InGameMenuController {
 
-<<<<<<< HEAD
     private Shop shopModel = new ShopImpl(15,3);
     private InGameMenuView view = new InGameMenuViewImpl(this);
     private ModelImpl model = new ModelImpl();
     private GameController gameController;
-    public InGameMenuControllerImpl(GameController gameController) {
+
+    public InGameMenuControllerImpl(final GameController gameController) {
         this.gameController = gameController;
         this.view.show();
-=======
-    private final Shop shopModel = new ShopImpl(15, 3);
-    private final InGameMenuView view;
-    private final ModelImpl model = new ModelImpl();
-    public InGameMenuControllerImpl(final InGameMenuView view) {
-        this.view = view;
->>>>>>> a94d0fecd81b77d64b13749a067b604e78313bf7
     }
 
     @Override
     public void buyItem(final Items itemSelected) {
         this.view.removeMessage();
-        int actualMoney = model.getRoomManager().getCurrentRoom().getCharacter().get().getMoney();
+        final int actualMoney = model.getRoomManager().getCurrentRoom().getCharacter().get().getMoney();
         if (shopModel.checkItem(itemSelected, actualMoney)) {
             model.getRoomManager().getCurrentRoom().getCharacter().get().addItem(itemSelected);
         }
