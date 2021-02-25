@@ -25,13 +25,16 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private static final int INITIAL_SPEED = 200;
     private static final long INITIAL_SHOOT_SPEED = 3;
     private static final long INITIAL_BULLET_DELAY = 200;
+    private static final int INITIAL_MONEY = 0;
+
     /*
      * VARIABLES.
      */
     private double life;
     private int damage;
     private long bulletSpeed;
-
+    private int money;
+    
     /**
      * 
      */
@@ -45,6 +48,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public CharacterImpl(final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
         super(INITIAL_SPEED, position, direction, gameObjectType);
         this.life = MAX_LIFE;
+        this.money = INITIAL_MONEY;
         this.bulletSpeed = INITIAL_SHOOT_SPEED;
         this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl();
@@ -87,8 +91,18 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * set the current life
      */
 
-    private void setLife(double life) {
+    private void setLife(final double life) {
         this.life = this.life + life;
+    }
+
+    @Override
+    public int getMoney() {
+        return money;
+    }
+
+    @Override
+    public void setMoney(int money) {
+        this.money = money;
     }
 
     /**
@@ -116,8 +130,8 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
             case HERMESBOOTS:
             case ZEUSBOLT:
             case HEALTH:
-                
-            this.setSkills();
+                /**TODO*/
+          //  this.setSkills(item.getItem().get);
 
             default:
                 break;
@@ -126,7 +140,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     
     private void setSkills() {
         // TODO Auto-generated method stub
-        
+
     }
 
 
@@ -230,7 +244,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         /*this.setPosition(this.getLastPosition());*/
     }
 
-    
+
     /*METHODS FOR SHOOTING*/
     /**
      * shoot a bullet.
@@ -252,7 +266,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     private boolean canShoot() {
         final long currentTime = System.currentTimeMillis();
-        if (currentTime - this.lastShootTime > this.INITIALBULLETDELAY) {
+        if (currentTime - this.lastShootTime > this.INITIAL_BULLET_DELAY) {
             this.lastShootTime = currentTime;
             return true;
         }

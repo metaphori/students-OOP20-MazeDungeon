@@ -31,6 +31,9 @@ public class ResourceLoader {
         resources.put(GameObjectType.DOOR_DOWN, imagesPath + "Door" + sep + "bottomDoor.png");
         resources.put(GameObjectType.DOOR_LEFT, imagesPath + "Door" + sep + "leftDoor.png");
         resources.put(GameObjectType.DOOR_RIGHT, imagesPath + "Door" + sep + "rightDoor.png");
+        
+        /*OBSTACLE*/
+        resources.put(GameObjectType.ROCK, imagesPath + "Obstacle" + sep + "rock.png");
     }
 
     /**

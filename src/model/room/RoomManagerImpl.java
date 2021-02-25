@@ -18,12 +18,14 @@ import model.gameobject.dinamicobject.character.CharacterImpl;
 
 public class RoomManagerImpl implements RoomManager {
 
+    private static final Point2D UL_CORNER = new Point2D(240, 177); //TODO in caso di resize della finestra vanno cambiati!!!!
+    private static final Point2D BR_CORNER = new Point2D(1025, 633);
     private static final int NUMBER_OF_ROOMS = 10;
     private final IdIterator idIterator = new IdIterator();
     private final Map<Point2D, Room> rooms = new HashMap<>();
     private Room actualRoom;
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
-    private final ObstaclesFactory obstaclesFactory = new ObstaclesFactory();
+    private final ObstaclesFactory obstaclesFactory = new ObstaclesFactory(UL_CORNER, BR_CORNER);
     private final DoorFactory doorFactory = new DoorFactoryImpl();
 
     public RoomManagerImpl() {
@@ -63,7 +65,8 @@ public class RoomManagerImpl implements RoomManager {
     private void createGameMap() {
 
         actualRoom = new RoomImpl(this);
-        actualRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
+        //actualRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
+        actualRoom.addSimpleObject(obstaclesFactory.createXComposition());
         final Character character = new CharacterImpl(new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER);
         actualRoom.addDinamicObject(character);
         rooms.put(new Point2D(0, 0), actualRoom);

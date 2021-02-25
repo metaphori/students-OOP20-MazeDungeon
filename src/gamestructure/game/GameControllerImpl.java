@@ -26,7 +26,7 @@ public class GameControllerImpl implements GameController {
     public GameControllerImpl(final GameView view, final Model model) {
         this.view = view;
         this.model = model;
-        this.command = new CommandImpl(this.model);
+        this.command = new CommandImpl(this.model, this);
     }
 
     /**
@@ -130,6 +130,11 @@ public class GameControllerImpl implements GameController {
     @Override
     public Command getCommand() {
         return this.command;
+    }
+    
+    @Override
+    public void notifyClosedMenu() {
+        this.getCommand().setMenuClosed();
     }
 
     @Override
