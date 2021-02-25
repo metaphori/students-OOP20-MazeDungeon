@@ -132,5 +132,17 @@ public class GameControllerImpl implements GameController {
         return this.command;
     }
 
+    @Override
+    public void pressKey(final KeyEvent key) {
+        if (getCommand().getPermittedKeys().contains(key.getKeyCode())) {
+            this.getCommand().setKey(key, true);
+        }
+    }
+
+    @Override
+    public void releaseKey(KeyEvent key) {
+        this.getCommand().setKey(key, false);
+    }
+
 
 }

@@ -16,4 +16,5 @@ public interface Command {
     void lock();
     Set<Integer> getPermittedKeys();
     void execute();
+    void notifyClosedMenu();
 }

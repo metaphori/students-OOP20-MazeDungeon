@@ -2,6 +2,7 @@ package input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -29,11 +30,13 @@ public class CommandImpl implements Command {
     private int key;
     private final Set<Integer> permittedKeys;
     private final Map<Integer, Vector2D> keyDirectionMap;
+    private boolean menuIsOpen;
 
 
     public CommandImpl(final Model model) {
         this.model = model;
         this.keys = new boolean[256];
+        this.menuIsOpen = false;
         this.permittedKeys = new HashSet<>(Set.of(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_A,
                                                     KeyEvent.VK_ESCAPE, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT));
 
@@ -76,16 +79,28 @@ public class CommandImpl implements Command {
         }
         if (keys[KeyEvent.VK_ESCAPE]) {
             //System.out.println("APRO MENU IN GAME");
-            /*final Thread thread = new Thread(new Runnable() {
+          /*  final Thread thread = new Thread(new Runnable() {
                 @Override
-                public void run() {
+                public synchronized void run() {
                     final InGameMenuView window = new InGameMenuViewImpl();
                     window.show();
+            });
+            thread.start();*/
+            if (!this.menuIsOpen) {
+                final InGameMenuView window = new InGameMenuViewImpl();
+                window.show();
+                this.menuIsOpen = true;
+            }
+
+            /*try {
+                while (!chiuso) {
+                    Thread.currentThread().wait();
                 }
 
-            });*/
-            final InGameMenuView window = new InGameMenuViewImpl();
-            window.show();
+            } catch (InterruptedException | InvocationTargetException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }*/
         }
         if (this.checkStopVertical()) {
             character.get().stopVertical();
@@ -142,6 +157,13 @@ public class CommandImpl implements Command {
     public Set<Integer> getPermittedKeys() {
         return this.permittedKeys;
     }
+
+    @Override
+    public void notifyClosedMenu() {
+        this.menuIsOpen = false;
+        
+    }
+
 
 
 }

@@ -1,5 +1,6 @@
 package gamestructure.ingamemenu;
 
+import input.Command;
 import model.ModelImpl;
 import model.shop.Items;
 import model.shop.Shop;
@@ -36,7 +37,6 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     public void openInGameMenu() {
         this.view.removeMessage();
         this.view.showInGameMenu();
-        
 
     }
 
@@ -44,6 +44,5 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     @Override
     public void exit() {
        this.view.hide();
-
     }
 }
