@@ -235,6 +235,8 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
             case INTERACTIVE_ELEMENT:
                 if (obj2.getGameObjectType().equals(GameObjectType.COIN)) {
                     System.out.println("COLLECT A COIN");
+                    this.money++;
+                    System.out.println("CURRENT MONEY BADGE: " + this.money);
                     this.getRoom().deleteGameObject(obj2);
                 }
                 break;
