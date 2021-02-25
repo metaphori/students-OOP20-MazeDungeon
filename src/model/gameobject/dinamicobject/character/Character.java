@@ -11,15 +11,13 @@ import model.shop.Items;
 public interface Character extends DinamicObject {
     void shoot();
 
-    void takeDamage(int damage);
+    void takesDamage(double damage);
 
     void addItem(Items item);
 
     Set<Items> getItems();
 
-
     double getLife();
-
 
     /**
      * Methods for movements and shoots.
@@ -37,5 +35,7 @@ public interface Character extends DinamicObject {
     void stopHorizontal();
 
     void setShoot(boolean shoot, Vector2D shootDirection);
+
+    double getMaxLife();
 
 }

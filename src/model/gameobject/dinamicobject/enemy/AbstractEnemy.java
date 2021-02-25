@@ -17,8 +17,9 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     private double life;
     private final BulletFactory bulletFactory;
 
-    public AbstractEnemy(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
+    public AbstractEnemy(final double life, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
         super(speed, position, direction, gameObjectType);
+        this.life = life;
         this.bulletFactory = new BulletFactoryImpl();
     }
 
@@ -31,26 +32,23 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     }
 
     /**
-     * @param life set the enemy life
-     */
-    public void setLife(final double life) {
-        this.life = life;
-        if (this.life <= 0) {
-            this.getRoom().addDinamicObject(new Coin(0, this.getPosition(), new Vector2D(0, 0), GameObjectType.COIN));
-            this.getRoom().deleteGameObject(this);
-        }
-    }
-
-    /**
      * @return the factory of bullet
      */
     protected BulletFactory getBulletFactory() {
         return this.bulletFactory;
     }
 
+    /**
+     * 
+     */
     @Override
-    public void takesDamage(final int damage) {
-        //TODO
+    public void takesDamage(final double damage) {
+        this.life = this.life - damage;
+        System.out.println(this.getID() + ") " + this.getGameObjectType() + " Life: " + this.getLife());
+        if (this.life <= 0) {
+            this.getRoom().addDinamicObject(new Coin(0, this.getPosition(), new Vector2D(0, 0), GameObjectType.COIN));
+            this.getRoom().deleteGameObject(this);
+        }
     }
 
     /**
@@ -72,7 +70,6 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
             final AbstractDinamicObject dinamicObject = (AbstractDinamicObject) obj2;
             dinamicObject.setPosition(dinamicObject.getLastPosition());
             this.changeRoutine();
-            this.setLife(0);
             break;
         default:
             break;
