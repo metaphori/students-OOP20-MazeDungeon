@@ -2,6 +2,7 @@ package gamestructure.ingamemenu;
 
 import input.Command;
 import model.ModelImpl;
+import model.shop.Item;
 import model.shop.Items;
 import model.shop.Shop;
 import model.shop.ShopImpl;
