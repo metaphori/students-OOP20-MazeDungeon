@@ -1,5 +1,6 @@
 package gamestructure.ingamemenu;
 
+import gamestructure.game.GameController;
 import input.Command;
 import model.ModelImpl;
 import model.shop.Item;
@@ -10,10 +11,12 @@ import model.shop.ShopImpl;
 public class InGameMenuControllerImpl implements InGameMenuController {
 
     private Shop shopModel = new ShopImpl(15,3);
-    private InGameMenuView view;
+    private InGameMenuView view = new InGameMenuViewImpl(this);
     private ModelImpl model = new ModelImpl();
-    public InGameMenuControllerImpl(final InGameMenuView view) {
-        this.view = view;
+    private GameController gameController;
+    public InGameMenuControllerImpl(GameController gameController) {
+        this.gameController = gameController;
+        this.view.show();
     }
 
     @Override
@@ -23,7 +26,6 @@ public class InGameMenuControllerImpl implements InGameMenuController {
             model.getRoomManager().getCurrentRoom().getCharacter().get().addItem(itemSelected);
         }
         this.view.returnMessage(shopModel.getMessageOuput());
-
     }
 
 
@@ -45,5 +47,6 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     @Override
     public void exit() {
        this.view.hide();
+       this.gameController.notifyClosedMenu();
     }
 }

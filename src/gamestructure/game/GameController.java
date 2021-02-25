@@ -17,4 +17,6 @@ public interface GameController {
     void pressKey(KeyEvent key);
 
     void releaseKey(KeyEvent key);
+
+    void notifyClosedMenu();
 }

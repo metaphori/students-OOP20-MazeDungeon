@@ -14,6 +14,8 @@ import java.util.Set;
 import javax.swing.SwingUtilities;
 
 import gamestructure.game.GameController;
+import gamestructure.ingamemenu.InGameMenuController;
+import gamestructure.ingamemenu.InGameMenuControllerImpl;
 import gamestructure.ingamemenu.InGameMenuView;
 import gamestructure.ingamemenu.InGameMenuViewImpl;
 import gamestructure.mainmenu.MainMenuView;
@@ -31,12 +33,14 @@ public class CommandImpl implements Command {
     private final Set<Integer> permittedKeys;
     private final Map<Integer, Vector2D> keyDirectionMap;
     private boolean menuIsOpen;
+    private GameController gameController;
 
 
-    public CommandImpl(final Model model) {
+    public CommandImpl(final Model model, final GameController gameController) {
         this.model = model;
         this.keys = new boolean[256];
         this.menuIsOpen = false;
+        this.gameController = gameController;
         this.permittedKeys = new HashSet<>(Set.of(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_A,
                                                     KeyEvent.VK_ESCAPE, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT));
 
@@ -87,8 +91,7 @@ public class CommandImpl implements Command {
             });
             thread.start();*/
             if (!this.menuIsOpen) {
-                final InGameMenuView window = new InGameMenuViewImpl();
-                window.show();
+                final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController);
                 this.menuIsOpen = true;
             }
 
@@ -159,7 +162,7 @@ public class CommandImpl implements Command {
     }
 
     @Override
-    public void notifyClosedMenu() {
+    public void setMenuClosed() {
         this.menuIsOpen = false;
     }
 

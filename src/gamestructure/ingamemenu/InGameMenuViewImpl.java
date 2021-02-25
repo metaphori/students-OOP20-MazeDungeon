@@ -42,9 +42,9 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     private final JLabel msg = new JLabel();
     private boolean start;
 
-    private final InGameMenuController controller = new InGameMenuControllerImpl(this);
-    public InGameMenuViewImpl() {
-
+    private final InGameMenuController controller;
+    public InGameMenuViewImpl(InGameMenuController controller) {
+        this.controller = controller;
         this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 

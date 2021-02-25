@@ -38,4 +38,8 @@ public interface Character extends DinamicObject {
 
     double getMaxLife();
 
+    int getMoney();
+
+    void setMoney(int money);
+
 }
