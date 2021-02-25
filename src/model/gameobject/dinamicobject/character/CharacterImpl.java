@@ -21,9 +21,10 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     /**
      * CONSTANTS.
      */
-    private final double MAXLIFE = 20.0;
-    private final long INITIALSHOOTSPEED = 3;
-    private final long INITIALBULLETDELAY = 0;
+    private static final double MAX_LIFE = 20.0;
+    private static final int INITIAL_SPEED = 200;
+    private static final long INITIAL_SHOOT_SPEED = 3;
+    private static final long INITIAL_BULLET_DELAY = 200;
     /*
      * VARIABLES.
      */
@@ -41,10 +42,10 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private Vector2D shootDirection;
 
  
-    public CharacterImpl(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
-        super(speed, position, direction, gameObjectType);
-        this.life = MAXLIFE;
-        this.bulletSpeed = INITIALSHOOTSPEED;
+    public CharacterImpl(final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
+        super(INITIAL_SPEED, position, direction, gameObjectType);
+        this.life = MAX_LIFE;
+        this.bulletSpeed = INITIAL_SHOOT_SPEED;
         this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl();
         this.shoot = false;
@@ -67,10 +68,11 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * 
      */
     @Override
-    public void takeDamage(final int damage) {
+    public void takesDamage(final double damage) {
         this.life = this.life - damage;
+        System.out.println(this.getID() + ") " + this.getGameObjectType() + " Life: " + this.getLife());
         if (this.life < 0) {
-            System.out.println("SEI MORTO");
+            System.out.println("IL PERSONAGGIO PRINCIPALE E' MORTO");
         }
     }
     /**
@@ -80,7 +82,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public double getLife() {
         return this.life;
     }
-    
+
     /**
      * set the current life
      */
@@ -89,6 +91,13 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         this.life = this.life + life;
     }
 
+    /**
+     * @return the max life
+     */
+    @Override
+    public double getMaxLife() {
+        return MAX_LIFE;
+    }
     /**
      * @return the items' set
      */
@@ -103,22 +112,28 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public void addItem(final Items item) {
         this.items.add(item);
         switch (item) {
-            case ARTHEMIDEBOW:break;
-            /*TODO*/
-            case HERMESBOOTS:break;
-            /*TODO*/
-            case ZEUSBOLT:break;
-            /*TODO*/
-            case HEALTH:break;
-            /*TODO*/
+            case ARTHEMIDEBOW:
+            case HERMESBOOTS:
+            case ZEUSBOLT:
+            case HEALTH:
+                
+            this.setSkills();
+
             default:
                 break;
         }
     }
-
+    
+    private void setSkills() {
+        // TODO Auto-generated method stub
+        
+    }
 
 
     /*METHODS FOR MOVEMENT*/
+
+   
+
 
     /**
      * move up the character.

@@ -1,29 +1,26 @@
 package model.shop;
 
-import java.util.Optional;
+public final class ItemBuilder implements Item {
 
-public class ItemBuilder implements Item {
-
-    private String name;
+    private final Items name;
 
     private int cost;
 
-    private int demage;
+    private final double damage;
 
-    private int speed;
+    private final int speed;
 
-    private int speedAttack;
+    private final int shootDelay;
 
-    //private  Optional<Integer> health;
-    private  int health;
+    private final double health;
 
-    private ItemBuilder(final String name, final int cost, final int demage, final int speed, final int speedAttack, final int health) {
+    private ItemBuilder(final Items name, final int cost, final double damage, final int speed, final int shootDelay, final double health) {
         super();
         this.name = name;
         this.setCost(cost);
-        this.demage = demage;
+        this.damage = damage;
         this.speed = speed;
-        this.speedAttack = speedAttack;
+        this.shootDelay = shootDelay;
         this.health = health;
     }
 
@@ -33,16 +30,15 @@ public class ItemBuilder implements Item {
     }
 
     @Override
-    public void setCost(int cost) {
+    public void setCost(final int cost) {
         this.cost = cost;
     }
-    
     @Override
-    public String getName() {
+    public Items getName() {
         return this.name;
     }
     @Override
-    public int getHealth() {
+    public double getHealth() {
         return health;
     }
     @Override
@@ -51,28 +47,28 @@ public class ItemBuilder implements Item {
     }
     @Override
     public int getSpeedHattack() {
-        return this.speedAttack;
+        return this.shootDelay;
     }
     @Override
-    public int getDemage() {
-        return this.demage;
+    public double getDamage() {
+        return this.damage;
     }
 
     public static class Builder {
 
-        private final String name;
+        private final Items name;
         private final int cost;
-        private int demage;
-        private int speed;
-        private int speedAttack;
-        private int health;
+        private final int speed;
+        private double damage;
+        private int shootDelay;
+        private double health;
 
-        public Builder(final String name, final int cost) {
+        public Builder(final Items name, final int cost) {
             this.name = name;
             this.cost = cost;
-            this.demage = 0;
+            this.damage = 0;
             this.speed = 0;
-            this.speedAttack = 0;
+            this.shootDelay = 0;
             this.health = 0;
         }
 
@@ -80,28 +76,42 @@ public class ItemBuilder implements Item {
          * @param health
          * @return this
          */
-        public Builder addHelath(final int health) {
+        public Builder addHelath(final double health) {
             this.health = health;
             return this;
         }
-
-        public Builder addDemage(final int demage) {
-            this.demage = demage;
+        /**
+         * 
+         * @param damage
+         * @return .
+         */
+        public Builder addDemage(final double damage) {
+            this.damage = damage;
             return this;
         }
+        /**
+         * 
+         * @param speed
+         * @return .
+         */
         public Builder addSpeed(final int speed) {
-            this.demage = speed;
+            this.damage = speed;
             return this;
         }
-        public Builder addSpeedAttack(final int speedAttack) {
-            this.speedAttack = speedAttack;
+        /**
+         * 
+         * @param speedAttack
+         * @return .
+         */
+        public Builder addSpeedAttack(final int shootDelay) {
+            this.shootDelay = shootDelay;
             return this;
         }
         /**
          * @return Item
          */
         public Item build() {
-            return new ItemBuilder(this.name, this.cost, this.demage, this.speed, this.speedAttack, this.health);
+            return new ItemBuilder(this.name, this.cost, this.damage, this.speed, this.shootDelay, this.health);
         }
     }
 

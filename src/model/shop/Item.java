@@ -6,14 +6,14 @@ public interface Item {
 
     void setCost(int cost);
 
-    String getName();
+    Items getName();
 
-    int getHealth();
+    double getHealth();
 
     int getSpeed();
 
     int getSpeedHattack();
 
-    int getDemage();
+    double getDamage();
 
 }

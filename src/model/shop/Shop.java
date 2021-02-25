@@ -8,7 +8,7 @@ public interface Shop {
      * @return Item with features of ArthemideBow
      */
 
-    boolean checkItem(Items i);
+    boolean checkItem(Items i, int actualMoney);
 
     Item getArthemideBow();
 
