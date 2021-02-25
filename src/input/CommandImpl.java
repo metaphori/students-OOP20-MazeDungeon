@@ -81,7 +81,7 @@ public class CommandImpl implements Command {
         if (keys[KeyEvent.VK_RIGHT]) {
             character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_RIGHT));
         }
-        if (keys[KeyEvent.VK_ESCAPE]) {
+        /*if (keys[KeyEvent.VK_ESCAPE]) {
             //System.out.println("APRO MENU IN GAME");
           /*  final Thread thread = new Thread(new Runnable() {
                 @Override
@@ -90,10 +90,10 @@ public class CommandImpl implements Command {
                     window.show();
             });
             thread.start();*/
-            if (!this.menuIsOpen) {
+            /*if (!this.menuIsOpen) {
                 final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController);
                 this.menuIsOpen = true;
-            }
+            }*/
 
             /*try {
                 while (!chiuso) {
@@ -104,7 +104,7 @@ public class CommandImpl implements Command {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }*/
-        }
+        //}
         if (this.checkStopVertical()) {
             character.get().stopVertical();
         }
@@ -119,6 +119,11 @@ public class CommandImpl implements Command {
      */
     @Override
     public void setKey(final KeyEvent key, final boolean b) {
+        if (key.getKeyCode() == KeyEvent.VK_ESCAPE && !this.menuIsOpen) {
+            final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController);
+            this.menuIsOpen = true;
+            return;
+        }
         this.keys[key.getKeyCode()] = b;
         this.key = key.getKeyCode();
     }
