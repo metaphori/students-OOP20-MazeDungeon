@@ -157,7 +157,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      */
     @Override
     public Enemy createBoss(final Point2D position, final Vector2D direction) {
-        return new Boss(BOSS_SPEED, position, direction, GameObjectType.ENEMY_BOSS);
+        return new Boss(BOSS_LIFE, BOSS_SPEED, position, direction, GameObjectType.ENEMY_BOSS);
     }
 
 }
