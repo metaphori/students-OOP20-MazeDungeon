@@ -17,9 +17,7 @@ public interface Character extends DinamicObject {
 
     Set<Items> getItems();
 
-
     double getLife();
-
 
     /**
      * Methods for movements and shoots.
@@ -37,5 +35,7 @@ public interface Character extends DinamicObject {
     void stopHorizontal();
 
     void setShoot(boolean shoot, Vector2D shootDirection);
+
+    double getMaxLife();
 
 }
