@@ -5,10 +5,10 @@ import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
-import model.gameobject.dinamicobject.Coin;
 import model.gameobject.dinamicobject.DinamicObject;
 import model.gameobject.dinamicobject.bullet.BulletFactory;
 import model.gameobject.dinamicobject.bullet.BulletFactoryImpl;
+import model.gameobject.simpleobject.Coin;
 import model.room.Room;
 
 public abstract class AbstractEnemy extends AbstractDinamicObject implements Enemy {
@@ -46,7 +46,7 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
         this.life = this.life - damage;
         System.out.println(this.getID() + ") " + this.getGameObjectType() + " Life: " + this.getLife());
         if (this.life <= 0) {
-            this.getRoom().addDinamicObject(new Coin(0, this.getPosition(), new Vector2D(0, 0), GameObjectType.COIN));
+            this.getRoom().addSimpleObject(new Coin(this.getPosition(), GameObjectType.COIN));
             this.getRoom().deleteGameObject(this);
         }
     }

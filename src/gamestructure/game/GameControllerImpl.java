@@ -44,6 +44,11 @@ public class GameControllerImpl implements GameController {
         long lastTime = System.currentTimeMillis();
         while (true) {
             final long current = System.currentTimeMillis();
+            /*if (this.command.isMenuOpen()) {
+                waitForNextFrame(current);
+                lastTime = current;
+                continue;
+            }*/
             final int elapsed = (int) (current - lastTime);
             processInput();
             updateGame(elapsed * 0.001);

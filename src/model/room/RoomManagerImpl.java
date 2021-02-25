@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import java.util.Random;
 
 import model.common.Direction;
@@ -27,6 +28,12 @@ public class RoomManagerImpl implements RoomManager {
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
     private final ObstaclesFactory obstaclesFactory = new ObstaclesFactory(UL_CORNER, BR_CORNER);
     private final DoorFactory doorFactory = new DoorFactoryImpl();
+    private final Map<Direction, Point2D> characterSpawnPosition = new HashMap<>() {{
+        put(Direction.UP, new Point2D(620, 550));
+        put(Direction.DOWN, new Point2D(620, 200));
+        put(Direction.LEFT, new Point2D(975, 360));
+        put(Direction.RIGHT, new Point2D(265, 360));
+    }};
 
     public RoomManagerImpl() {
         this.createGameMap();
@@ -84,6 +91,7 @@ public class RoomManagerImpl implements RoomManager {
                 }
             } else {
                 final Room newRoom = new RoomImpl(this);
+                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(450, 300), new Vector2D(1, 1)));
                 newRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
                 newRoom.addDoor(Direction.getOppositeDirection(randomDirection));
                 newRoom.addSimpleObject(doorFactory.createDoor(newRoom, Direction.getOppositeDirection(randomDirection)));
@@ -92,37 +100,6 @@ public class RoomManagerImpl implements RoomManager {
                 rooms.get(randomPoint).addDoor(randomDirection);
             }
         }
-        /*actualRoom = new RoomImpl(this);
-        rooms.put(new Point2D(0, 0), actualRoom);
-
-        final Character character = new CharacterImpl(130, new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER, this.actualRoom);
-        final Enemy enemySoul = this.enemyFactory.createSoul(new Point2D(500, 500), new Vector2D(1, 1), this.actualRoom);
-        final Enemy enemySkeletonSeeker = this.enemyFactory.createSkeletonSeeker(new Point2D(300, 300), new Vector2D(-1, 1), this.actualRoom);
-        //final Enemy enemyBoss = this.enemyFactory.createBoss(new Point2D(500, 300), new Vector2D(1, 0), this.actualRoom);
-        final Enemy enemySprout = this.enemyFactory.createSprout(new Point2D(500, 200), new Vector2D(0, 1), this.actualRoom);
-
-        actualRoom.addDinamicObject(character);
-        actualRoom.addDinamicObject(enemySkeletonSeeker);
-        actualRoom.addDinamicObject(this.enemyFactory.createSkeletonSeeker(new Point2D(500, 300), new Vector2D(-1, 1), this.actualRoom));
-        actualRoom.addDinamicObject(enemySoul);
-        actualRoom.addDinamicObject(this.enemyFactory.createSoul(new Point2D(350, 500), new Vector2D(1, 1), this.actualRoom));
-        actualRoom.addDinamicObject(this.enemyFactory.createSoul(new Point2D(400, 500), new Vector2D(1, 1), this.actualRoom));
-        actualRoom.addDinamicObject(this.enemyFactory.createSoul(new Point2D(350, 200), new Vector2D(1, 1), this.actualRoom));
-
-        actualRoom.addDinamicObject(enemySprout);
-        //actualRoom.addDinamicObject(enemyBoss);
-        actualRoom.addSimpleObject(doorFactory.createDownDoor(actualRoom));
-        actualRoom.addSimpleObject(doorFactory.createRightDoor(actualRoom));
-        actualRoom.addSimpleObject(doorFactory.createUpDoor(actualRoom));
-        actualRoom.addSimpleObject(doorFactory.createLeftDoor(actualRoom));
-
-        for (final SimpleObject obj: obstaclesFactory.getEmptyRoom(this.actualRoom)) {
-            actualRoom.addSimpleObject(obj);
-        }*/
-        //actualRoom.addDinamicObject(this.enemyFactory.createSkeletonSeeker(new Point2D(500, 300), new Vector2D(-1, 1)));
-        //actualRoom.addDinamicObject(this.enemyFactory.createSoul(new Point2D(350, 500), new Vector2D(1, 1)));
-        //actualRoom.addDinamicObject(this.enemyFactory.createSoul(new Point2D(400, 500), new Vector2D(1, 1)));
-        //actualRoom.addDinamicObject(this.enemyFactory.createSoul(new Point2D(750, 500), new Vector2D(1, 1)));
         actualRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(450, 300), new Vector2D(1, 1)));
     }
 
@@ -158,7 +135,7 @@ public class RoomManagerImpl implements RoomManager {
      */
     public void changeRoom(final Direction direction) {
         final Room newRoom = rooms.get(this.getNearbyPoint(this.getRoomPosition(actualRoom), direction));
-        actualRoom.getCharacter().get().setPosition(new Point2D(300, 300));
+        actualRoom.getCharacter().get().setPosition(characterSpawnPosition.get(direction));
         newRoom.addDinamicObject(actualRoom.getCharacter().get());
         actualRoom.clean();
         actualRoom = newRoom;

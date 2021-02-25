@@ -171,6 +171,11 @@ public class CommandImpl implements Command {
         this.menuIsOpen = false;
     }
 
+    @Override
+    public boolean isMenuOpen() {
+       return this.menuIsOpen;
+    }
+
 
 
 }
