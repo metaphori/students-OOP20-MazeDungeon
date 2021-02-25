@@ -6,7 +6,7 @@ import model.gameobject.dinamicobject.bullet.Bullet;
 public interface Enemy extends DinamicObject {
     void shoot();
 
-    void takesDamage(int damage);
+    void takesDamage(double damage);
 
     double getLife();
 }

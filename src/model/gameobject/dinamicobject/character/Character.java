@@ -11,7 +11,7 @@ import model.shop.Items;
 public interface Character extends DinamicObject {
     void shoot();
 
-    void takeDamage(int damage);
+    void takesDamage(double damage);
 
     void addItem(Items item);
 

@@ -22,8 +22,9 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * CONSTANTS.
      */
     private final double MAXLIFE = 20.0;
+    private static final int INITIALSPEED = 200;
     private final long INITIALSHOOTSPEED = 3;
-    private final long INITIALBULLETDELAY = 0;
+    private final long INITIALBULLETDELAY = 200;
     /*
      * VARIABLES.
      */
@@ -41,8 +42,8 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private Vector2D shootDirection;
 
  
-    public CharacterImpl(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
-        super(speed, position, direction, gameObjectType);
+    public CharacterImpl(final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
+        super(INITIALSPEED, position, direction, gameObjectType);
         this.life = MAXLIFE;
         this.bulletSpeed = INITIALSHOOTSPEED;
         this.items = new HashSet<>();
@@ -67,7 +68,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * 
      */
     @Override
-    public void takeDamage(final int damage) {
+    public void takesDamage(final double damage) {
         this.life = this.life - damage;
         if (this.life < 0) {
             System.out.println("SEI MORTO");
