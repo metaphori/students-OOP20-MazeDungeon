@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
+import jaco.mp3.player.MP3Player;
 
 
 public class MainMenuViewImpl implements MainMenuView {
@@ -65,6 +68,8 @@ public class MainMenuViewImpl implements MainMenuView {
         this.frame.pack();
         this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2, 
                                screen.height / 2 - this.frame.getSize().height / 2);
+        MP3Player mp3Player = new MP3Player(new File("resources/sounds/undergroundMusic.mp3"));
+        mp3Player.play();
         this.frame.setVisible(true);
     }
 

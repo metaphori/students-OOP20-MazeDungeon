@@ -2,6 +2,7 @@ package gamestructure.game;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -90,8 +91,9 @@ public class GameViewImpl implements GameView, KeyListener {
 
         GamePanel() {
             lblCoinCounter.setBounds(50, 100, 50, 50);
-            lblCoinCounter.setText("10");
-            //lblCoinCounter.setFont(new Font("Helvetica", Font.ITALIC, 30));
+            lblCoinCounter.setText("0");
+            lblCoinCounter.setFont(new Font("Helvetica", Font.ITALIC, 25));
+            lblCoinCounter.setForeground(Color.white);
             lblCoinImage.setBounds(0, 100, coinImage.getIconWidth(), coinImage.getIconHeight());
             lblRoom.setBounds(0, 0, roomImage.getIconWidth(), roomImage.getIconHeight());
             this.add(this.lblRoom, JLayeredPane.FRAME_CONTENT_LAYER);
@@ -113,6 +115,10 @@ public class GameViewImpl implements GameView, KeyListener {
                 g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
             });
             Toolkit.getDefaultToolkit().sync();
+        }
+        
+        public JLabel getLblCoinCounter() {
+            return lblCoinCounter;
         }
     }
 
@@ -169,6 +175,11 @@ public class GameViewImpl implements GameView, KeyListener {
     @Override
     public void removeSprite(final int id) {
         this.sprites.remove(id);
+    }
+
+    @Override 
+    public void updateMoneyBadge() {
+        this.gamePanel.getLblCoinCounter().setText(String.valueOf(this.controller.getCharacter().get().getMoney()));
     }
 
     @Override

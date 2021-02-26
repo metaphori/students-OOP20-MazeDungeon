@@ -21,7 +21,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     /**
      * CONSTANTS.
      */
-    private static final double MAX_LIFE = 20.0;
+    private static final double MAX_LIFE = 10;
     private static final int INITIAL_SPEED = 200;
     private static final long INITIAL_SHOOT_SPEED = 3;
     private static final long INITIAL_BULLET_DELAY = 200;
@@ -75,7 +75,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public void takesDamage(final double damage) {
         this.life = this.life - damage;
         System.out.println(this.getID() + ") " + this.getGameObjectType() + " Life: " + this.getLife());
-        if (this.life < 0) {
+        if (this.life <= 0) {
             System.out.println("IL PERSONAGGIO PRINCIPALE E' MORTO");
         }
     }
@@ -96,7 +96,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     @Override
     public int getMoney() {
-        return money;
+        return this.money;
     }
 
     @Override

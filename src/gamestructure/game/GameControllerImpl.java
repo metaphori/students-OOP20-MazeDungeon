@@ -11,6 +11,7 @@ import input.Command;
 import input.CommandImpl;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
+import model.gameobject.dinamicobject.character.Character;
 import model.common.Point2D;
 import model.gameobject.GameObject;
 import mvc.Model;
@@ -75,6 +76,7 @@ public class GameControllerImpl implements GameController {
 
     private void updateGame(final double elapsed) {
         this.model.update(elapsed);
+        this.view.updateMoneyBadge();
         this.checkDeletedObject();
         this.checkNewGameObjects();
     }
@@ -128,6 +130,11 @@ public class GameControllerImpl implements GameController {
         this.model.getGameObject(id).setBoundingBox(boundingBox);
     }
 
+    @Override 
+    public Optional<Character> getCharacter() {
+        return this.model.getRoomManager().getCurrentRoom().getCharacter();
+    }
+
     /*
      * 
      */
@@ -138,17 +145,17 @@ public class GameControllerImpl implements GameController {
 
     @Override
     public void notifyClosedMenu() {
-        this.getCommand().setMenuClosed();
+        this.command.setMenuClosed();
     }
 
     @Override
     public void pressKey(final KeyEvent key) {
-        this.getCommand().setKey(key, true);
+        this.command.setKey(key, true);
     }
 
     @Override
     public void releaseKey(KeyEvent key) {
-        this.getCommand().setKey(key, false);
+        this.command.setKey(key, false);
     }
 
 
