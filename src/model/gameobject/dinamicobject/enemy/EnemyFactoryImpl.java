@@ -35,12 +35,13 @@ public class EnemyFactoryImpl implements EnemyFactory {
     public Enemy createSprout(final Point2D position, final Vector2D direction) {
         return new AbstractEnemy(SPROUT_LIFE, SPROUT_SPEED, position, direction, GameObjectType.ENEMY_SPROUT) {
 
+            private static final int ROUTINE_CHANGE_TIME = 1000;
             private long lastHitTime;
 
             @Override
             public void updateState(final double elapsed) {
                 final long currentTime = System.currentTimeMillis();
-                if (currentTime - this.lastHitTime > 1000) {
+                if (currentTime - this.lastHitTime > ROUTINE_CHANGE_TIME) {
                     this.lastHitTime = currentTime;
                     this.followCharacter();
                 }
@@ -120,12 +121,13 @@ public class EnemyFactoryImpl implements EnemyFactory {
         return new AbstractEnemy(SKELETON_LIFE, SKELETON_SPEED, position, direction, GameObjectType.ENEMY_SKELETON) {
 
             private long lastChangeTime = System.currentTimeMillis();
+            private static final int ROUTINE_CHANGE_TIME = 5000;
             private boolean inMovement = true;
 
             @Override
             public void updateState(final double elapsed) {
                 final long currentTime = System.currentTimeMillis();
-                if (currentTime - this.lastChangeTime > 5000) {
+                if (currentTime - this.lastChangeTime > ROUTINE_CHANGE_TIME) {
                     this.lastChangeTime = currentTime;
                     if (inMovement) {
                         this.stopMovement();

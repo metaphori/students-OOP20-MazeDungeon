@@ -10,15 +10,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.Timer;
 
 import model.common.BoundingBox;
@@ -26,8 +25,6 @@ import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.ResourceLoader;
 import model.common.Sprite;
-import model.common.Vector2D;
-import input.Command;;
 
 public class GameViewImpl implements GameView, KeyListener {
 
@@ -51,6 +48,7 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.setTitle("MazeDungeon");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gamePanel = new GamePanel();
+        //gamePanel.setLayout(null);
         gamePanel.setBackground(new Color(11,19,30));
         //gamePanel.setSize(this.frame.getSize());
         this.frame.add(gamePanel);
@@ -72,7 +70,6 @@ public class GameViewImpl implements GameView, KeyListener {
         //this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
         this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2,
                                screen.height / 2 - this.frame.getSize().height / 2);
-
     }
 
     /**
@@ -83,30 +80,39 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.setVisible(false);
     }
 
-    private class GamePanel extends JPanel implements ActionListener {
+    private class GamePanel extends JLayeredPane implements ActionListener {
         private static final long serialVersionUID = 1L;
-        private final Image room;
+        private final JLabel lblCoinCounter = new JLabel();
+        private final ImageIcon roomImage = new ImageIcon("resources/images/Room/room.png");
+        private final ImageIcon coinImage = new ImageIcon("resources/images/HUD/Coins/coin.png");
+        private final JLabel lblCoinImage = new JLabel(this.coinImage);
+        private final JLabel lblRoom = new JLabel(this.roomImage);
 
         GamePanel() {
-            room = adaptImage(new ImageIcon("resources/images/Room/room.png"));
+            lblCoinCounter.setBounds(50, 100, 50, 50);
+            lblCoinCounter.setText("10");
+            //lblCoinCounter.setFont(new Font("Helvetica", Font.ITALIC, 30));
+            lblCoinImage.setBounds(0, 100, coinImage.getIconWidth(), coinImage.getIconHeight());
+            lblRoom.setBounds(0, 0, roomImage.getIconWidth(), roomImage.getIconHeight());
+            this.add(this.lblRoom, JLayeredPane.FRAME_CONTENT_LAYER);
+            this.add(this.lblCoinImage, JLayeredPane.DEFAULT_LAYER);
+            this.add(this.lblCoinCounter, JLayeredPane.DEFAULT_LAYER);
         }
 
         @Override
-        protected void paintComponent(final Graphics g) {
-            super.paintComponent(g);
-            g.drawImage(room, 0, 0, null);
+        public void actionPerformed(final ActionEvent e) {
+            repaint();
+        }
 
+        @Override
+        protected void paintChildren(final Graphics g) {
+            super.paintChildren(g);
             final List<Sprite> temp = new ArrayList<>(sprites.values());
 
             temp.iterator().forEachRemaining(sprite -> {
                 g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
             });
             Toolkit.getDefaultToolkit().sync();
-        }
-
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            repaint();
         }
     }
 
@@ -176,7 +182,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent arg0) {
+    public void keyTyped(final KeyEvent arg0) {
         // TODO Auto-generated method stub
     }
 
