@@ -91,7 +91,8 @@ public class RoomManagerImpl implements RoomManager {
                 }
             } else {
                 final Room newRoom = new RoomImpl(this);
-                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(450, 300)));
+                //newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(450, 300)));
+                newRoom.addDinamicObject(this.enemyFactory.createSkeletonSeeker(new Point2D(550, 300)));
                 newRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
                 newRoom.addDoor(Direction.getOppositeDirection(randomDirection));
                 newRoom.addSimpleObject(doorFactory.createDoor(newRoom, Direction.getOppositeDirection(randomDirection)));
