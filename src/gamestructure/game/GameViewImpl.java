@@ -84,20 +84,14 @@ public class GameViewImpl implements GameView, KeyListener {
     private class GamePanel extends JLayeredPane implements ActionListener {
         private static final long serialVersionUID = 1L;
         private final JLabel lblCoinCounter = new JLabel();
-        private final ImageIcon roomImage = new ImageIcon("resources/images/Room/room.png");
-        private final ImageIcon coinImage = new ImageIcon("resources/images/HUD/Coins/coin.png");
-        private final JLabel lblCoinImage = new JLabel(this.coinImage);
-        private final JLabel lblRoom = new JLabel(this.roomImage);
+        private final Image roomImage = adaptImage(new ImageIcon("resources/images/Room/room.png"));
+        private final Image coinImage = adaptImage(new ImageIcon("resources/images/HUD/Coins/coin.png"));
 
         GamePanel() {
             lblCoinCounter.setBounds(50, 100, 50, 50);
             lblCoinCounter.setText("0");
             lblCoinCounter.setFont(new Font("Helvetica", Font.ITALIC, 25));
             lblCoinCounter.setForeground(Color.white);
-            lblCoinImage.setBounds(0, 100, coinImage.getIconWidth(), coinImage.getIconHeight());
-            lblRoom.setBounds(0, 0, roomImage.getIconWidth(), roomImage.getIconHeight());
-            this.add(this.lblRoom, JLayeredPane.FRAME_CONTENT_LAYER);
-            this.add(this.lblCoinImage, JLayeredPane.DEFAULT_LAYER);
             this.add(this.lblCoinCounter, JLayeredPane.DEFAULT_LAYER);
         }
 
@@ -107,16 +101,17 @@ public class GameViewImpl implements GameView, KeyListener {
         }
 
         @Override
-        protected void paintChildren(final Graphics g) {
-            super.paintChildren(g);
+        protected void paintComponent(final Graphics g) {
             final List<Sprite> temp = new ArrayList<>(sprites.values());
 
+            g.drawImage(this.roomImage, 0, 0, null);
+            g.drawImage(this.coinImage, 0, 100, null);
             temp.iterator().forEachRemaining(sprite -> {
                 g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
             });
             Toolkit.getDefaultToolkit().sync();
         }
-        
+
         public JLabel getLblCoinCounter() {
             return lblCoinCounter;
         }
