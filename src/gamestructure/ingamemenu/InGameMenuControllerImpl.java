@@ -16,19 +16,20 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     private final Shop shopModel;
     private final InGameMenuView view = new InGameMenuViewImpl(this);
    // private final ModelImpl model = new ModelImpl();
-    private final double actualLife;
+   /* private final double actualLife;
     private final int actualMoney;
-    private final double maxLife;
-    
+    private final double maxLife;*/
+
     public InGameMenuControllerImpl(final GameController gameController, final Model model) {
         this.gameController = gameController;
         this.view.show();
         this.model = model; 
-        this.actualLife = model.getRoomManager().getCurrentRoom().getCharacter().get().getLife();
-        this.actualMoney = model.getRoomManager().getCurrentRoom().getCharacter().get().getMoney();
-        this.maxLife = model.getRoomManager().getCurrentRoom().getCharacter().get().getMaxLife();
-        this.shopModel = new ShopImpl(this.maxLife, this.actualLife, this.actualMoney);
+        final double actualLife = model.getRoomManager().getCurrentRoom().getCharacter().get().getLife();
+        final int actualMoney = model.getRoomManager().getCurrentRoom().getCharacter().get().getMoney();
+        final double maxLife = model.getRoomManager().getCurrentRoom().getCharacter().get().getMaxLife();
+        this.shopModel = new ShopImpl(this.model, maxLife, actualLife, actualMoney);
     }
+
     /**
      *
      */
@@ -36,11 +37,12 @@ public class InGameMenuControllerImpl implements InGameMenuController {
         this.view.removeMessage();
         //final int actualMoney = model.getRoomManager().getCurrentRoom().getCharacter().get().getMoney();
         //System.out.println(actualMoney);
-        if (shopModel.checkItem(itemSelected)) {
-            model.getRoomManager().getCurrentRoom().getCharacter().get().setMoney(this.shopModel.moneyLeft());
-            model.getRoomManager().getCurrentRoom().getCharacter().get().addItem(itemSelected);
+        /*if (shopModel.checkItem(itemSelected)) {
+           /* model.getRoomManager().getCurrentRoom().getCharacter().get().setMoney(this.shopModel.moneyLeft());
+            model.getRoomManager().getCurrentRoom().getCharacter().get().addItem(itemSelected);*/
             //System.out.println(this.shopModel.moneyLeft());
-        }
+        //}
+        shopModel.checkItem(itemSelected);
         this.view.returnMessage(shopModel.getMessageOuput());
     }
     /**

@@ -30,6 +30,6 @@ public interface Shop {
      * 
      * @return .
      */
-    int moneyLeft();
+    //int moneyLeft();
 
 }

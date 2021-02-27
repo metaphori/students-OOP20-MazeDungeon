@@ -10,17 +10,17 @@ public final class ItemBuilder implements Item {
 
     private final int speed;
 
-    private final int shootDelay;
+    private final int bulletSpeed;
 
     private final double health;
 
-    private ItemBuilder(final Items name, final int cost, final double damage, final int speed, final int shootDelay, final double health) {
+    private ItemBuilder(final Items name, final int cost, final double damage, final int speed, final int bulletSpeed, final double health) {
         super();
         this.name = name;
         this.setCost(cost);
         this.damage = damage;
         this.speed = speed;
-        this.shootDelay = shootDelay;
+        this.bulletSpeed = bulletSpeed;
         this.health = health;
     }
 
@@ -46,8 +46,8 @@ public final class ItemBuilder implements Item {
         return this.speed;
     }
     @Override
-    public int getSpeedHattack() {
-        return this.shootDelay;
+    public int getBulletSpeed() {
+        return this.bulletSpeed;
     }
     @Override
     public double getDamage() {
@@ -60,7 +60,7 @@ public final class ItemBuilder implements Item {
         private final int cost;
         private final int speed;
         private double damage;
-        private int shootDelay;
+        private int bulletSpeed;
         private double health;
 
         public Builder(final Items name, final int cost) {
@@ -68,7 +68,7 @@ public final class ItemBuilder implements Item {
             this.cost = cost;
             this.damage = 0;
             this.speed = 0;
-            this.shootDelay = 0;
+            this.bulletSpeed = 0;
             this.health = 0;
         }
 
@@ -85,7 +85,7 @@ public final class ItemBuilder implements Item {
          * @param damage
          * @return .
          */
-        public Builder addDemage(final double damage) {
+        public Builder addDamage(final double damage) {
             this.damage = damage;
             return this;
         }
@@ -103,15 +103,15 @@ public final class ItemBuilder implements Item {
          * @param speedAttack
          * @return .
          */
-        public Builder addSpeedAttack(final int shootDelay) {
-            this.shootDelay = shootDelay;
+        public Builder addBulletSpeed(final int bulletSpeed) {
+            this.bulletSpeed = bulletSpeed;
             return this;
         }
         /**
          * @return Item
          */
         public Item build() {
-            return new ItemBuilder(this.name, this.cost, this.damage, this.speed, this.shootDelay, this.health);
+            return new ItemBuilder(this.name, this.cost, this.damage, this.speed, this.bulletSpeed, this.health);
         }
     }
 

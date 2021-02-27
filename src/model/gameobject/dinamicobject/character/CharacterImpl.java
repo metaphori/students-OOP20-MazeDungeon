@@ -32,7 +32,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     private double life;
     
-    private int damage;
+    private double damage;
     private long bulletSpeed;
     private int speed;
     private int money;
@@ -88,7 +88,9 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public double getLife() {
         return this.life;
     }
-
+    public double getDamage() {
+        return this.damage;
+    }
     /**
      * set the current life
      */
@@ -100,7 +102,9 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public int getMoney() {
         return this.money;
     }
-
+    public long getBulletSpeed() {
+        return this.bulletSpeed;
+    }
     @Override
     public void setMoney(int money) {
         this.money = money;

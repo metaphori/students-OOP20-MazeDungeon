@@ -45,5 +45,8 @@ public interface Character extends DinamicObject {
     void setDamage(int damage);
 
     void setBulletSpeed(long bulletSpeed);
-
+    
+    double getDamage();
+    
+    long getBulletSpeed();
 }

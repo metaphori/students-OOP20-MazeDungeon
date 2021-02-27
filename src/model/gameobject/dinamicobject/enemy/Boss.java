@@ -9,44 +9,46 @@ import model.gameobject.dinamicobject.bullet.Bullet;
 
 public class Boss extends AbstractEnemy{
    // private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-    private Vector2D vectorBullet = new Vector2D(0, 1);
+   // private Vector2D vectorBullet = new Vector2D(0, 1);
+    private final double maxLife;
     public Boss(final double life, final int speed, final Point2D position, final GameObjectType gameObjectType) {
         super(life, speed, position, gameObjectType);
         //this.setLife(20);
         //System.out.println(this.getBoundingBox().getWidth() + "   " + this.getBoundingBox().getHeight());
+        this.maxLife = life;
     }
     private void moveAroundWall() {
         if ((int) this.getDirection().getX() == 0 && (int) this.getDirection().getY() == -1) {
             this.setDirection(new Vector2D(1, 0));
             this.setPosition(new Point2D(this.getPosition().getX() + 1, this.getPosition().getY() + 1));
-            vectorBullet = new Vector2D(0, 1);
+           // vectorBullet = new Vector2D(0, 1);
         }
         else if ((int) this.getDirection().getX() == 1 && (int) this.getDirection().getY() == 0) {
             this.setDirection(new Vector2D(0, 1));
             this.setPosition(new Point2D(this.getPosition().getX() - 1, this.getPosition().getY() + 1));
-            vectorBullet = new Vector2D(-1, 0);
+            //vectorBullet = new Vector2D(-1, 0);
         }
         else if ((int) this.getDirection().getX() == 0 && (int) this.getDirection().getY() == 1) {
             this.setDirection(new Vector2D(-1, 0));
             this.setPosition(new Point2D(this.getPosition().getX() - 1, this.getPosition().getY() - 1));
-            vectorBullet = new Vector2D(0, -1);
+            //vectorBullet = new Vector2D(0, -1);
         }
         else if ((int) this.getDirection().getX() == -1 && (int) this.getDirection().getY() == 0) {
             this.setDirection(new Vector2D(0, -1));
             this.setPosition(new Point2D(this.getPosition().getX() + 1, this.getPosition().getY() - 1));
-            vectorBullet = new Vector2D(1, 0);
+           // vectorBullet = new Vector2D(1, 0);
         }
     }
     public void moveUpWall() {
-        if ((int) this.getDirection().getX() == 0 && (int) this.getDirection().getY() == -1) {
+        if ((int) this.getDirection().getX() == -1 && (int) this.getDirection().getY() == 0) {
             this.setDirection(new Vector2D(1, 0));
             this.setPosition(new Point2D(this.getPosition().getX() + 1, this.getPosition().getY() + 1));
-            vectorBullet = new Vector2D(0, 1);
+           // vectorBullet = new Vector2D(0, 1);
         }
         else {
             this.setDirection(new Vector2D(-1, 0));
-            this.setPosition(new Point2D(this.getPosition().getX() -1, this.getPosition().getY()-1));
-            vectorBullet = new Vector2D(0, 1);
+            this.setPosition(new Point2D(this.getPosition().getX() -1, this.getPosition().getY()+1));
+           // vectorBullet = new Vector2D(0, 1);
         }
     }
     @Override
@@ -66,12 +68,11 @@ public class Boss extends AbstractEnemy{
 
     @Override
     protected void changeRoutine() {
-        if (this.getLife() >= this.getLife() / 2) {
+        if (this.getLife() >=  this.maxLife / 2) {
             moveUpWall();
         } else {
             moveAroundWall();
             this.setSpeed(this.getSpeed() + 10);
-            
         }
         //moveAroundWall();
     }
@@ -81,8 +82,10 @@ public class Boss extends AbstractEnemy{
         if (this.getRoom().getCharacterPosition().isEmpty()) {
             return;
         }
+        final Point2D characterPosition = this.getRoom().getCharacterPosition().get();
         final Bullet bullet = this.getBulletFactory().createBossBullet(this.getPosition().sum(new Vector2D(110,100)),
-                vectorBullet);
+                new Vector2D(characterPosition.getX() - this.getPosition().getX()-20,
+                        characterPosition.getY() - this.getPosition().getY()).getNormalized());
         this.getRoom().addDinamicObject(bullet);
     }
 

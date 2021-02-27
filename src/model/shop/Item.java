@@ -12,7 +12,7 @@ public interface Item {
 
     int getSpeed();
 
-    int getSpeedHattack();
+    int getBulletSpeed();
 
     double getDamage();
 
