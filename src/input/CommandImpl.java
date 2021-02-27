@@ -98,7 +98,7 @@ public class CommandImpl implements Command {
         }
         
         if (this.keysMap.get(KeyEvent.VK_ESCAPE) && !this.menuIsOpen) {
-            final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController);
+            final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController, this.model);
             this.menuIsOpen = true;
             return;
            

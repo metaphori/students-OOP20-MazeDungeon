@@ -4,35 +4,29 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ShopImpl implements Shop {
-    //private int actualMoney = 20;
-    private int actualLife = 7;
 
-    private static double MAX_LIFE=7;
     private final Set<Items> purchasedItems = new HashSet<>();
 
     private String messageOuput = "";
 
     private final String msgBought;
     private final String msgNoMoney;
-    private final int actualMoney;
-    /**
-     * @return .
-     */
-    public String getMessageOuput() {
-        return messageOuput;
-    }
+    private int actualMoney;
+    private double actualLife;
+    private final double maxLife;
 
-    public ShopImpl(final int actualMoney, final int actualLife) {
-        this.actualLife = actualLife;
-        this.actualMoney = actualMoney;
+    public ShopImpl(final double maxLife, final double actualLife, int actualMoney) {
+        this.maxLife = maxLife;
         //this.actualMoney = actualMoney;
         msgBought = "You bought this item! You have: ";
         msgNoMoney = "You don't have enough coins!";
+        this.actualLife = actualLife;
+        this.actualMoney = actualMoney;
     }
     /**
      * @return .
      */
-    public boolean checkItem(final Items i, int actualMoney) {
+    public boolean checkItem(final Items i) {
         if (purchasedItems.contains(i)) {
             messageOuput = "You already have this item";
             return false;
@@ -68,7 +62,7 @@ public class ShopImpl implements Shop {
                 break;
             case HEALTH:
                 if (this.getHealth().getCost() <= actualMoney) {
-                    if (this.actualLife + this.getHealth().getHealth() > MAX_LIFE) {
+                    if (this.actualLife + this.getHealth().getHealth() > maxLife) {
                         messageOuput = "You have too much life!";
                         return false;
                     }
@@ -79,7 +73,7 @@ public class ShopImpl implements Shop {
                 break;
             case ORACLEAMULET:
                 if (this.getHealth().getCost() <= actualMoney) {
-                    if (this.actualLife + this.getHealth().getHealth() > MAX_LIFE) {
+                    if (this.actualLife + this.getHealth().getHealth() > maxLife) {
                         messageOuput = "You have too much life!";
                         return false;
                     }
@@ -96,6 +90,16 @@ public class ShopImpl implements Shop {
         }
         return false;
     }
+
+    /**
+     * @return .
+     */
+    public String getMessageOuput() {
+        return messageOuput;
+    }
+    /**
+     * @return .
+     */
     public int moneyLeft() {
         return actualMoney;
     }

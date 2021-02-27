@@ -44,9 +44,9 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     private boolean start;
 
     private final InGameMenuController controller;
-    public InGameMenuViewImpl(InGameMenuController controller) {
+    public InGameMenuViewImpl(final InGameMenuController controller) {
         this.controller = controller;
-        this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 
                 (int) (screen.getHeight() * HEIGHT_RATIO)));
@@ -56,8 +56,9 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.frame.setTitle("MazeDungeon");
         showInGameMenu();
     }
-
-    @Override
+    /**
+     * 
+     */
     public void showShop() {
         this.frame.remove(inGameMenuPanel);
         this.frame.setContentPane(shopPanel);
@@ -106,7 +107,9 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         });
        this.show();
     }
-    @Override
+    /**
+     * 
+     */
     public void showInGameMenu() {
 
         this.frame.remove(shopPanel);
@@ -116,6 +119,10 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         btnResumeMenu.setBounds((int) (screen.getWidth()/4), 340, 300, 90);
         this.configureButton(btnResumeMenu);
         this.lblBackgroundMenu.add(btnResumeMenu);
+        btnResumeMenu.addActionListener(e -> {
+           // System.out.println("Premuto");
+            this.controller.resume();
+        });
 
         btnShopMenu.setBounds((int) (screen.getWidth()/4), 433, 300, 90);
         this.configureButton(btnShopMenu);
@@ -138,10 +145,12 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         }
     }
 
-    @Override
+    /**
+     * 
+     */
     public void show() {
         this.frame.pack();
-        if (start == false) {
+        if (!start) {
             this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2, 
                                  screen.height / 2 - this.frame.getSize().height / 2);
             start = true;
@@ -152,7 +161,6 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     /**
      * 
      */
-    @Override
     public void hide() {
         this.frame.setVisible(false);
     }
@@ -166,7 +174,9 @@ public class InGameMenuViewImpl implements InGameMenuView  {
 
     }
 
-    @Override
+    /**
+     * 
+     */
     public void returnMessage(final String messageOuput) {
 
         msg.setBounds(250, 580, 350, 50);
@@ -176,6 +186,9 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         msg.setVisible(true);
         //System.out.println(messageOuput);
     }
+    /**
+     * 
+     */
     public void removeMessage() {
         msg.setText("");
     }

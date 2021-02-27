@@ -1,7 +1,6 @@
 package gamestructure.ingamemenu;
 
 import model.shop.Items;
-
 public interface InGameMenuController {
 
     void buyItem(Items itemSelected);
@@ -11,5 +10,7 @@ public interface InGameMenuController {
     void openInGameMenu();
 
     void exit();
+
+    void resume();
 
 }
