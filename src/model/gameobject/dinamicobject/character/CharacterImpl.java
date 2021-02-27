@@ -31,10 +31,12 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * VARIABLES.
      */
     private double life;
+    
     private int damage;
     private long bulletSpeed;
+    private int speed;
     private int money;
-    
+
     /**
      * 
      */
@@ -102,6 +104,21 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    @Override
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    @Override
+    public void setBulletSpeed(long bulletSpeed) {
+        this.bulletSpeed = bulletSpeed;
+    }
+
+    @Override
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     /**
