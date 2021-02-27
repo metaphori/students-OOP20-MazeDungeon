@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.Timer;
 
 import model.common.BoundingBox;
@@ -84,32 +84,12 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.setVisible(false);
     }
 
-    private class LifePanel extends JPanel {
-        private final List<JLabel> hearts = new ArrayList<>();
-        private final Image fullHeart = adaptImage(new ImageIcon("resources/images/HUD/Heart/fullHeart.png"));
-        private final Image emptyHeart = adaptImage(new ImageIcon("resources/images/HUD/Heart/emptyHeart.png"));
-        private final Image halfHeart = adaptImage(new ImageIcon("resources/images/HUD/Heart/halfHeart.png"));
-
-        LifePanel() {
-            this.setLayout(new GridLayout(1, 4));
-            this.add(new JLabel(new ImageIcon("resources/images/HUD/Heart/fullHeart.png")), 0, 0);
-            this.add(new JLabel(new ImageIcon("resources/images/HUD/Heart/halfHeart.png")), 0, 1);
-            this.add(new JLabel(new ImageIcon("resources/images/HUD/Heart/halfHeart.png")), 0, 2);
-            this.add(new JLabel(new ImageIcon("resources/images/HUD/Heart/halfHeart.png")), 0, 3);
-            this.setOpaque(false);
-        }
-
-        /*@Override
-        protected void paintComponent(final Graphics g) {
-
-        }*/
-    }
-
     private class GamePanel extends JLayeredPane implements ActionListener {
         private static final long serialVersionUID = 1L;
         private final JLabel lblCoinCounter = new JLabel();
         private final Image roomImage = adaptImage(new ImageIcon("resources/images/Room/room.png"));
         private final Image coinImage = adaptImage(new ImageIcon("resources/images/HUD/Coins/coin.png"));
+        private JProgressBar life;
 
         GamePanel() {
             lblCoinCounter.setBounds(50, 100, 50, 50);
@@ -117,9 +97,6 @@ public class GameViewImpl implements GameView, KeyListener {
             lblCoinCounter.setFont(new Font("Helvetica", Font.ITALIC, 25));
             lblCoinCounter.setForeground(Color.white);
             this.add(this.lblCoinCounter, JLayeredPane.DEFAULT_LAYER);
-            final LifePanel lifePanel = new LifePanel();
-            lifePanel.setBounds(0, 10, 134, 32);
-            this.add(lifePanel);
         }
 
         @Override
@@ -142,6 +119,17 @@ public class GameViewImpl implements GameView, KeyListener {
         public JLabel getLblCoinCounter() {
             return lblCoinCounter;
         }
+
+        public void updateHUD() {
+            this.life.setValue((int) (controller.getCharacter().get().getLife()));
+        }
+
+        public void initialize() {
+            life = new JProgressBar(0, (int) controller.getCharacter().get().getMaxLife());
+            life.setBounds(10, 10, 200, 30);
+            life.setForeground(new Color(150, 0, 0));
+            this.add(life);
+        }
     }
 
     /**
@@ -154,7 +142,7 @@ public class GameViewImpl implements GameView, KeyListener {
 
     @Override
     public void render() {
-        // TODO Auto-generated method stub
+        gamePanel.updateHUD();
     }
 
     private int getNewWidth(final int width) {
@@ -219,6 +207,13 @@ public class GameViewImpl implements GameView, KeyListener {
         // TODO Auto-generated method stub
     }
 
+    /**
+     * 
+     */
+    @Override
+    public void initialize() {
+        this.gamePanel.initialize();
+    }
 }
 
 

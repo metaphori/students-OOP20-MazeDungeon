@@ -17,4 +17,6 @@ public interface GameView extends View {
 
     void updateMoneyBadge();
 
+    void initialize();
+
 }

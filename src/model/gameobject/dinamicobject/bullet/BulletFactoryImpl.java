@@ -21,12 +21,12 @@ public class BulletFactoryImpl implements BulletFactory {
     /**
      * constant for damage of each bullet.
      */
-    private static final double CHARACTER_BULLET_DAMAGE = 0.5;
-    private static final double SKELETON_BULLET_DAMAGE = 0.25;
-    private static final double SOUL_BULLET_DAMAGE = 0.5;
-    private static final double SPROUT_BULLET_DAMAGE = 0.1;
-    private static final double BOSS_BULLET_DAMAGE = 100;
-    private static final double OLDGUARDIAN_BULLET_DAMAGE = 100;
+    private static final double CHARACTER_BULLET_DAMAGE = 12.5;
+    private static final double SKELETON_BULLET_DAMAGE = 6.25;
+    private static final double SOUL_BULLET_DAMAGE = 12.5;
+    private static final double SPROUT_BULLET_DAMAGE = 2.5;
+    private static final double BOSS_BULLET_DAMAGE = 20.0;
+    private static final double OLDGUARDIAN_BULLET_DAMAGE = 10.0;
 
     /**
      * fields.
