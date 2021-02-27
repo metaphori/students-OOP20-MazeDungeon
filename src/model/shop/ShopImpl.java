@@ -31,10 +31,10 @@ public class ShopImpl implements Shop {
             messageOuput = "You already have this item";
             return false;
         }
-        if (actualMoney == 0) {
+        /*if (actualMoney == 0) {
             messageOuput = msgNoMoney;
             return false;
-        }
+        }*/
         switch (i) {
             case ARTHEMIDEBOW:
                 if (this.getArthemideBow().getCost() <= actualMoney) {
@@ -43,6 +43,7 @@ public class ShopImpl implements Shop {
                     messageOuput = msgBought  + actualMoney;
                     return true;
                 }
+                messageOuput = msgNoMoney;
                 break;
             case HERMESBOOTS:
                 if (this.getHermesBoots().getCost() <= actualMoney) {
@@ -51,6 +52,7 @@ public class ShopImpl implements Shop {
                     messageOuput = msgBought + actualMoney;
                     return true;
                 }
+                messageOuput = msgNoMoney;
                 break;
             case ZEUSBOLT:
                 if (this.getZeusBolt().getCost() <= actualMoney) {
@@ -59,6 +61,7 @@ public class ShopImpl implements Shop {
                     messageOuput = msgBought + actualMoney;
                     return true;
                 }
+                messageOuput = msgNoMoney;
                 break;
             case HEALTH:
                 if (this.getHealth().getCost() <= actualMoney) {
@@ -70,6 +73,7 @@ public class ShopImpl implements Shop {
                     messageOuput = msgBought + actualMoney;
                     return true;
                 }
+                messageOuput = msgNoMoney;
                 break;
             case ORACLEAMULET:
                 if (this.getHealth().getCost() <= actualMoney) {
@@ -82,9 +86,10 @@ public class ShopImpl implements Shop {
                     messageOuput = msgBought + actualMoney;
                     return true;
                 }
+                messageOuput = msgNoMoney;
                 break;
              default:
-                 messageOuput = msgNoMoney;
+                 messageOuput = "ERROR!";
                  return false;
 
         }
@@ -108,7 +113,7 @@ public class ShopImpl implements Shop {
      * @return .
      */
     public Item getArthemideBow() {
-        return new ItemBuilder.Builder(Items.ARTHEMIDEBOW, 2).addDemage(5).build();
+        return new ItemBuilder.Builder(Items.ARTHEMIDEBOW, 1).addDemage(5).build();
     }
 
     /**
