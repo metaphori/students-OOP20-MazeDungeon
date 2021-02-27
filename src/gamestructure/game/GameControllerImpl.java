@@ -77,7 +77,6 @@ public class GameControllerImpl implements GameController {
 
     private void updateGame(final double elapsed) {
         this.model.update(elapsed);
-        this.view.updateMoneyBadge();
         this.checkDeletedObject();
         this.checkNewGameObjects();
     }

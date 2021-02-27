@@ -1,7 +1,10 @@
 package model.room;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import model.common.BoundingBox;
 import model.common.GameObjectType;
@@ -15,6 +18,8 @@ import model.gameobject.simpleobject.Wall;
 public class ObstaclesFactory {
     private static final int obstacleForRow = 24;
     private static final int obstacleForCol = 14;
+    private static final int freeRows = 3;
+    private static final int freeCols = 3;
     private final double obstacleWidth;
     private final double obstacleHeight;
     private final Point2D ulCorner;
@@ -61,6 +66,22 @@ public class ObstaclesFactory {
         obstacles.add(getObstacle(getObstaclePosition(11, 9)));
         obstacles.add(getObstacle(getObstaclePosition(11, 16)));
         return obstacles;
+    }
+
+    /**
+     * 
+     * @param n
+     * @return .
+     */
+    public List<SimpleObject> createRandomComposition(final int n) {
+        final Set<SimpleObject> obstacles = new HashSet<>();
+        final Random rnd = new Random();
+        while (obstacles.size() < n) {
+            obstacles.add(getObstacle(getObstaclePosition(rnd.nextInt(obstacleForCol - 2 * freeRows) + freeRows, 
+                                                          rnd.nextInt(obstacleForRow - 2 * freeCols) + freeCols)));
+        }
+        obstacles.addAll(getEmptyRoom());
+        return new LinkedList<>(obstacles);
     }
 
     private List<SimpleObject> getWalls() {

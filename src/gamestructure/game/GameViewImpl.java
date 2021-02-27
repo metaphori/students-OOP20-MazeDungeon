@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,26 +36,25 @@ public class GameViewImpl implements GameView, KeyListener {
     private GameController controller;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final JFrame frame;
-    private static int NATIVE_WIDTH = 1920;
-    private static int NATIVE_HEIGHT = 1080;
-    private static double WIDTH_RATIO = 0.666667; 
-    private static double HEIGHT_RATIO = 0.740740; 
-    private static double ASPECT_RATIO = 1.6;
+    private static final int NATIVE_WIDTH = 1920;
+    private static final int NATIVE_HEIGHT = 1080;
+    private static final double WIDTH_RATIO = 0.666_667; 
+    private static final double HEIGHT_RATIO = 0.740_740; 
+    private static final double ASPECT_RATIO = 1.6;
+    private static final Color BACKGROUND = new Color(11, 19, 30);
     private static final int PERIOD = 15;
     private final GamePanel gamePanel;
     private final Map<Integer, Sprite> sprites = new ConcurrentHashMap<>();
     private final ResourceLoader resourceLoader = new ResourceLoader();
+    private final Timer timer;
 
     public GameViewImpl() {
-        final Timer timer;
         this.frame = new JFrame();
         this.frame.setResizable(false);
         this.frame.setTitle("MazeDungeon");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gamePanel = new GamePanel();
-        //gamePanel.setLayout(null);
-        gamePanel.setBackground(new Color(11,19,30));
-        //gamePanel.setSize(this.frame.getSize());
+        gamePanel.setBackground(BACKGROUND);
         this.frame.add(gamePanel);
         this.frame.addKeyListener(this);
         timer = new Timer(PERIOD, gamePanel);
@@ -67,7 +67,6 @@ public class GameViewImpl implements GameView, KeyListener {
     @Override
     public void show() {
         this.frame.setVisible(true);
-
         this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO + this.frame.getInsets().right + this.frame.getInsets().left),
                 (int) (NATIVE_HEIGHT * HEIGHT_RATIO) + this.frame.getInsets().top + this.frame.getInsets().bottom));
         gamePanel.setSize(this.frame.getSize());
@@ -84,15 +83,42 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.setVisible(false);
     }
 
+    private class ItemPanel extends JPanel {
+
+        private final Image item = new ImageIcon("resources/images/Item/hermesBoots.png").getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+        private final List<Image> items = new LinkedList<>();
+
+        public ItemPanel() {
+            items.add(item);
+            items.add(new ImageIcon("resources/images/Item/oracleAmulet.png").getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
+            items.add(item);
+            items.add(item);
+            this.setOpaque(false);
+        }
+
+        public void addItem() {
+            //this.add(new JLabel(item), itemCounter++, 0);
+        }
+
+        @Override
+        protected void paintComponent(final Graphics g) {
+            super.paintComponent(g);
+            for (int i = 0; i < items.size(); i++) {
+                g.drawImage(items.get(i), 0, i * 64, null);
+            }
+        }
+    }
+
     private class GamePanel extends JLayeredPane implements ActionListener {
         private static final long serialVersionUID = 1L;
         private final JLabel lblCoinCounter = new JLabel();
         private final Image roomImage = adaptImage(new ImageIcon("resources/images/Room/room.png"));
         private final Image coinImage = adaptImage(new ImageIcon("resources/images/HUD/Coins/coin.png"));
         private JProgressBar life;
+        private ItemPanel items;
 
         GamePanel() {
-            lblCoinCounter.setBounds(50, 100, 50, 50);
+            lblCoinCounter.setBounds(60, 50, 50, 50);
             lblCoinCounter.setText("0");
             lblCoinCounter.setFont(new Font("Helvetica", Font.ITALIC, 25));
             lblCoinCounter.setForeground(Color.white);
@@ -109,19 +135,16 @@ public class GameViewImpl implements GameView, KeyListener {
             final List<Sprite> temp = new ArrayList<>(sprites.values());
 
             g.drawImage(this.roomImage, 0, 0, null);
-            g.drawImage(this.coinImage, 0, 100, null);
+            g.drawImage(this.coinImage, 10, 50, null);
             temp.iterator().forEachRemaining(sprite -> {
                 g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
             });
             Toolkit.getDefaultToolkit().sync();
         }
 
-        public JLabel getLblCoinCounter() {
-            return lblCoinCounter;
-        }
-
         public void updateHUD() {
             this.life.setValue((int) (controller.getCharacter().get().getLife()));
+            this.lblCoinCounter.setText(String.valueOf(controller.getCharacter().get().getMoney()));
         }
 
         public void initialize() {
@@ -129,6 +152,11 @@ public class GameViewImpl implements GameView, KeyListener {
             life.setBounds(10, 10, 200, 30);
             life.setForeground(new Color(150, 0, 0));
             this.add(life);
+
+            items = new ItemPanel();
+            items.setBounds(10, 100, 64, 256);
+            this.add(items);
+            items.addItem();
         }
     }
 
@@ -140,25 +168,22 @@ public class GameViewImpl implements GameView, KeyListener {
        this.controller = controller;
     }
 
+    /**
+     * 
+     */
     @Override
     public void render() {
         gamePanel.updateHUD();
     }
 
-    private int getNewWidth(final int width) {
-        //return width * (int) screen.getWidth() / NATIVE_WIDTH;
-        return width;
-    }
-
-    private int getNewHeight(final int height) {
-        //return height * (int) screen.getHeight() / NATIVE_HEIGHT;
-        return height;
-    }
-
     private Image adaptImage(final ImageIcon img) {
-        return img.getImage().getScaledInstance(getNewWidth(img.getIconWidth()), getNewHeight(img.getIconHeight()), Image.SCALE_SMOOTH);
+        //return width * (int) screen.getWidth() / NATIVE_WIDTH;
+        //return height * (int) screen.getHeight() / NATIVE_HEIGHT;
+        final int width = img.getIconWidth();
+        final int heigth = img.getIconHeight();
+        return img.getImage().getScaledInstance(width, heigth, Image.SCALE_SMOOTH);
     }
-
+    
     /**
      * 
      */
@@ -172,7 +197,8 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @param id
+     * @param id the id of the sprite to update.
+     * @param position the new position of the sprite.
      */
     @Override
     public void setSpritePosition(final int id, final Point2D position) {
@@ -180,16 +206,11 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * 
+     * @param id the id of the sprite that has to been removed.
      */
     @Override
     public void removeSprite(final int id) {
         this.sprites.remove(id);
-    }
-
-    @Override 
-    public void updateMoneyBadge() {
-        this.gamePanel.getLblCoinCounter().setText(String.valueOf(this.controller.getCharacter().get().getMoney()));
     }
 
     @Override
@@ -213,6 +234,7 @@ public class GameViewImpl implements GameView, KeyListener {
     @Override
     public void initialize() {
         this.gamePanel.initialize();
+        this.timer.start();
     }
 }
 
