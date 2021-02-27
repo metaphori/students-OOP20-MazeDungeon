@@ -13,8 +13,9 @@ public class BulletImpl extends AbstractDinamicObject implements Bullet {
     private double damage;
 
     public BulletImpl(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final double damage) {
-        super(speed, position, direction, gameObjectType);
+        super(speed, position, gameObjectType);
         this.damage = damage;
+        this.setDirection(direction);
     }
 
     /**

@@ -6,11 +6,11 @@ import model.room.Room;
 
 public interface EnemyFactory {
 
-    Enemy createSprout(Point2D position, Vector2D direction);
+    Enemy createSprout(Point2D position);
 
-    Enemy createSoul(Point2D position, Vector2D direction);
+    Enemy createSoul(Point2D position);
 
-    Enemy createSkeletonSeeker(Point2D position, Vector2D direction);
+    Enemy createSkeletonSeeker(Point2D position);
 
-    Enemy createBoss(Point2D position, Vector2D direction);
+    Enemy createBoss(Point2D position);
 }

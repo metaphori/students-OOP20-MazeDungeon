@@ -45,8 +45,8 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private Vector2D shootDirection;
 
  
-    public CharacterImpl(final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
-        super(INITIAL_SPEED, position, direction, gameObjectType);
+    public CharacterImpl(final Point2D position, final GameObjectType gameObjectType) {
+        super(INITIAL_SPEED, position, gameObjectType);
         this.life = MAX_LIFE;
         this.money = INITIAL_MONEY;
         this.bulletSpeed = INITIAL_SHOOT_SPEED;

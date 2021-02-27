@@ -12,11 +12,11 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
     private int speed;
     private Point2D lastPosition;
 
-    public AbstractDinamicObject(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
+    public AbstractDinamicObject(final int speed, final Point2D position, final GameObjectType gameObjectType) {
         super(position, gameObjectType);
         this.speed = speed;
-        this.direction = direction;
         this.lastPosition = this.getPosition();
+        this.direction = new Vector2D(0, 0);
     }
 
     /**

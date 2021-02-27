@@ -17,10 +17,11 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     private double life;
     private final BulletFactory bulletFactory;
 
-    public AbstractEnemy(final double life, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
-        super(speed, position, direction, gameObjectType);
+    public AbstractEnemy(final double life, final int speed, final Point2D position, final GameObjectType gameObjectType) {
+        super(speed, position, gameObjectType);
         this.life = life;
         this.bulletFactory = new BulletFactoryImpl();
+        this.changeRoutine();
     }
 
     /**

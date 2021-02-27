@@ -10,8 +10,8 @@ import model.gameobject.dinamicobject.bullet.Bullet;
 public class Boss extends AbstractEnemy{
    // private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private Vector2D vectorBullet = new Vector2D(0, 1);
-    public Boss(final double life, final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType) {
-        super(life, speed, position, direction, gameObjectType);
+    public Boss(final double life, final int speed, final Point2D position, final GameObjectType gameObjectType) {
+        super(life, speed, position, gameObjectType);
         //this.setLife(20);
         //System.out.println(this.getBoundingBox().getWidth() + "   " + this.getBoundingBox().getHeight());
     }

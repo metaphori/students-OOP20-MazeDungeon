@@ -32,8 +32,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Sprout
      */
     @Override
-    public Enemy createSprout(final Point2D position, final Vector2D direction) {
-        return new AbstractEnemy(SPROUT_LIFE, SPROUT_SPEED, position, direction, GameObjectType.ENEMY_SPROUT) {
+    public Enemy createSprout(final Point2D position) {
+        return new AbstractEnemy(SPROUT_LIFE, SPROUT_SPEED, position, GameObjectType.ENEMY_SPROUT) {
 
             private static final int ROUTINE_CHANGE_TIME = 1000;
             private long lastHitTime;
@@ -82,8 +82,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Soul
      */
     @Override
-    public Enemy createSoul(final Point2D position, final Vector2D direction) {
-        return new AbstractEnemy(SOUL_LIFE, SOUL_SPEED, position, direction, GameObjectType.ENEMY_SOUL) {
+    public Enemy createSoul(final Point2D position) {
+        return new AbstractEnemy(SOUL_LIFE, SOUL_SPEED, position, GameObjectType.ENEMY_SOUL) {
             @Override
             public void updateState(final double elapsed) {
                 this.move(elapsed);
@@ -117,8 +117,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: SkeletonSeeker
      */
     @Override
-    public Enemy createSkeletonSeeker(final Point2D position, final Vector2D direction) {
-        return new AbstractEnemy(SKELETON_LIFE, SKELETON_SPEED, position, direction, GameObjectType.ENEMY_SKELETON) {
+    public Enemy createSkeletonSeeker(final Point2D position) {
+        return new AbstractEnemy(SKELETON_LIFE, SKELETON_SPEED, position, GameObjectType.ENEMY_SKELETON) {
 
             private long lastChangeTime = System.currentTimeMillis();
             private static final int ROUTINE_CHANGE_TIME = 5000;
@@ -168,8 +168,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return an enemy of type: Boss
      */
     @Override
-    public Enemy createBoss(final Point2D position, final Vector2D direction) {
-        return new Boss(BOSS_LIFE, BOSS_SPEED, position, direction, GameObjectType.ENEMY_BOSS);
+    public Enemy createBoss(final Point2D position) {
+        return new Boss(BOSS_LIFE, BOSS_SPEED, position, GameObjectType.ENEMY_BOSS);
     }
 
 }

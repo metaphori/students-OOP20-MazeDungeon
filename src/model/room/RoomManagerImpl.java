@@ -74,7 +74,7 @@ public class RoomManagerImpl implements RoomManager {
         actualRoom = new RoomImpl(this);
         //actualRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
         actualRoom.addSimpleObject(obstaclesFactory.createXComposition());
-        final Character character = new CharacterImpl(new Point2D(300, 200), new Vector2D(0, 0), GameObjectType.CHARACTER);
+        final Character character = new CharacterImpl(new Point2D(300, 200), GameObjectType.CHARACTER);
         actualRoom.addDinamicObject(character);
         rooms.put(new Point2D(0, 0), actualRoom);
 
@@ -91,7 +91,7 @@ public class RoomManagerImpl implements RoomManager {
                 }
             } else {
                 final Room newRoom = new RoomImpl(this);
-                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(450, 300), new Vector2D(1, 1)));
+                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(450, 300)));
                 newRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
                 newRoom.addDoor(Direction.getOppositeDirection(randomDirection));
                 newRoom.addSimpleObject(doorFactory.createDoor(newRoom, Direction.getOppositeDirection(randomDirection)));
