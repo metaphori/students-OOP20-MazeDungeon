@@ -1,5 +1,6 @@
 package model.gameobject.dinamicobject.enemy;
 
+import java.util.List;
 import java.util.Random;
 
 import model.common.GameObjectType;
@@ -146,8 +147,11 @@ public class EnemyFactoryImpl implements EnemyFactory {
             @Override
             public void shoot() {
                 final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
-                final Bullet bullet = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(1, 0));
-                this.getRoom().addDinamicObject(bullet);
+                final Bullet bulletNorth = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(0, -1));
+                final Bullet bulletSouth = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(0, 1));
+                final Bullet bulletEast = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(1,0));
+                final Bullet bulletWest = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(-1,0));
+                this.getRoom().addDinamicObject(List.of(bulletNorth, bulletEast, bulletWest, bulletSouth));
             }
 
             @Override
