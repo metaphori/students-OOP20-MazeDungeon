@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import model.common.BoundingBox;
@@ -81,6 +84,27 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.setVisible(false);
     }
 
+    private class LifePanel extends JPanel {
+        private final List<JLabel> hearts = new ArrayList<>();
+        private final Image fullHeart = adaptImage(new ImageIcon("resources/images/HUD/Heart/fullHeart.png"));
+        private final Image emptyHeart = adaptImage(new ImageIcon("resources/images/HUD/Heart/emptyHeart.png"));
+        private final Image halfHeart = adaptImage(new ImageIcon("resources/images/HUD/Heart/halfHeart.png"));
+
+        LifePanel() {
+            this.setLayout(new GridLayout(1, 4));
+            this.add(new JLabel(new ImageIcon("resources/images/HUD/Heart/fullHeart.png")), 0, 0);
+            this.add(new JLabel(new ImageIcon("resources/images/HUD/Heart/halfHeart.png")), 0, 1);
+            this.add(new JLabel(new ImageIcon("resources/images/HUD/Heart/halfHeart.png")), 0, 2);
+            this.add(new JLabel(new ImageIcon("resources/images/HUD/Heart/halfHeart.png")), 0, 3);
+            this.setOpaque(false);
+        }
+
+        /*@Override
+        protected void paintComponent(final Graphics g) {
+
+        }*/
+    }
+
     private class GamePanel extends JLayeredPane implements ActionListener {
         private static final long serialVersionUID = 1L;
         private final JLabel lblCoinCounter = new JLabel();
@@ -93,6 +117,9 @@ public class GameViewImpl implements GameView, KeyListener {
             lblCoinCounter.setFont(new Font("Helvetica", Font.ITALIC, 25));
             lblCoinCounter.setForeground(Color.white);
             this.add(this.lblCoinCounter, JLayeredPane.DEFAULT_LAYER);
+            final LifePanel lifePanel = new LifePanel();
+            lifePanel.setBounds(0, 10, 134, 32);
+            this.add(lifePanel);
         }
 
         @Override

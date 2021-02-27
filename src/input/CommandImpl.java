@@ -97,12 +97,13 @@ public class CommandImpl implements Command {
             character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_RIGHT));
         }
         
+
         if (this.keysMap.get(KeyEvent.VK_ESCAPE) && !this.menuIsOpen) {
             final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController, this.model);
             this.menuIsOpen = true;
             return;
-           
         }
+
 
         if (this.checkStopVertical()) {
             character.get().stopVertical();
@@ -118,11 +119,11 @@ public class CommandImpl implements Command {
      */
     @Override
     public void setKey(final KeyEvent key, final boolean b) {
-        /*if (key.getKeyCode() == KeyEvent.VK_ESCAPE && !this.menuIsOpen) {
-            final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController);
+        if (key.getKeyCode() == KeyEvent.VK_ESCAPE && !this.menuIsOpen) {
+            final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController, this.model);
             this.menuIsOpen = true;
             return;
-        }*/
+        }
         if (this.permittedKeys.contains(key.getKeyCode())) {
              this.keysMap.put(key.getKeyCode(), b);
         }
