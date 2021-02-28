@@ -84,6 +84,27 @@ public class ObstaclesFactory {
         return new LinkedList<>(obstacles);
     }
 
+    /**
+     * 
+     * @param size
+     * @return .
+     */
+    public List<SimpleObject> createSquare(final int size) {
+        final List<SimpleObject> obstacles = new LinkedList<>();
+        final Random rnd = new Random();
+
+        final int ulX = rnd.nextInt(obstacleForCol - 2 * freeRows - size + 1) + freeRows;
+        final int ulY = rnd.nextInt(obstacleForRow - 2 * freeCols - size + 1) + freeCols;
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                obstacles.add(getObstacle(getObstaclePosition(ulX + i, ulY + j)));
+            }
+        }
+        obstacles.addAll(getEmptyRoom());
+        return new LinkedList<>(obstacles);
+    }
+
     private List<SimpleObject> getWalls() {
         final List<SimpleObject> walls = new LinkedList<>();
         SimpleObject tmp;
@@ -118,6 +139,10 @@ public class ObstaclesFactory {
 
     private Obstacle getObstacle(final Point2D position) {
         return new Obstacle(position, GameObjectType.ROCK);
+    }
+    
+    private Obstacle getObstacle(final int x, final int y) {
+        return this.getObstacle(new Point2D(x, y));
     }
 
 }
