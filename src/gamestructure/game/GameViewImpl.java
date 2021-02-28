@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -44,7 +45,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private static final Color BACKGROUND = new Color(11, 19, 30);
     private static final int PERIOD = 15;
     private final GamePanel gamePanel;
-    private final Map<Integer, Sprite> sprites = new ConcurrentHashMap<>();
+    private final Map<Integer, Sprite> sprites = new ConcurrentSkipListMap<>();
     private final ResourceLoader resourceLoader = new ResourceLoader();
     private final Timer timer;
 
@@ -136,7 +137,7 @@ public class GameViewImpl implements GameView, KeyListener {
 
             g.drawImage(this.roomImage, 0, 0, null);
             g.drawImage(this.coinImage, 10, 50, null);
-            temp.iterator().forEachRemaining(sprite -> {
+            temp.forEach(sprite -> {
                 g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
             });
             Toolkit.getDefaultToolkit().sync();
