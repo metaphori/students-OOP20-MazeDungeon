@@ -20,7 +20,7 @@ public interface GameController {
 
     void releaseKey(KeyEvent key);
 
-    void notifyClosedMenu();
+    void notifyClosedInGameMenu();
 
     Optional<Character> getCharacter();
 }

@@ -27,13 +27,12 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private static final long INITIAL_SHOOT_SPEED = 3;
     private static final long INITIAL_BULLET_DELAY = 200;
     private static final int INITIAL_MONEY = 0;
-
+    private static final int INITIAL_DAMAGE = 15;
     /*
      * VARIABLES.
      */
     private double life;
-    
-    private double damage;
+    private int damage;
     private long bulletSpeed;
     private int speed;
     private int money;
@@ -41,7 +40,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     /**
      * 
      */
-    private Set<Items> items;
+    private Set<Item> items;
     private final BulletFactory bulletFactory;
     private long lastShootTime; 
     private boolean shoot;
@@ -75,7 +74,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * 
      */
     @Override
-    public void takesDamage(final double damage) {
+    public void takesDamage(final int damage) {
         this.life = this.life - damage;
         System.out.println(this.getID() + ") " + this.getGameObjectType() + " Life: " + this.getLife());
         if (this.life <= 0) {
@@ -89,13 +88,11 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public double getLife() {
         return this.life;
     }
-    public double getDamage() {
+    public int getDamage() {
         return this.damage;
     }
-    /**
-     * set the current life
-     */
-    private void setLife(final double life) {
+    @Override
+    public void setLife(final double life) {
         this.life = this.life + life;
     }
 
@@ -137,14 +134,14 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * @return the items' set
      */
     @Override
-    public Set<Items> getItems() {
+    public Set<Item> getItems() {
         return this.items;
     }
     /**
      * 
      */
     @Override
-    public void addItem(final Items item) {
+    public void addItem(final Item item) {
         this.items.add(item);
     }
 

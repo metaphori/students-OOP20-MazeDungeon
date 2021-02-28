@@ -2,9 +2,7 @@ package gamestructure.mainmenu;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.io.File;
 
@@ -12,31 +10,32 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import jaco.mp3.player.MP3Player;
-
-
 public class MainMenuViewImpl implements MainMenuView {
 
-    private final MainMenuController controller = new MainMenuControllerImpl(this);
+    private final String sep = File.separator;
+    private final String imagesPath = "resources" + sep + "images" + sep + "MainMenu" + sep;
+    private final JLabel lblBackground = new JLabel(new ImageIcon(this.imagesPath + "MainMenu3.png"));
+    private final JLabel lblTitle = new JLabel(new ImageIcon(this.imagesPath + "Title.png"));
+    private final JButton btnNewGame = new JButton("", new ImageIcon(this.imagesPath + "NewGame.png")); 
+    private final JButton btnExit = new JButton("", new ImageIcon(this.imagesPath + "Exit.png")); 
+    private final JButton btnCredits = new JButton("", new ImageIcon(this.imagesPath + "Credits.png")); 
     private final JFrame frame = new JFrame();
+    private final JPanel mainPanel = new JPanel(new GridLayout());
+
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-    private final JLabel lblBackground = new JLabel(new ImageIcon("resources//images//MainMenu//MainMenu3.png"));
-    private final JLabel lblTitle = new JLabel(new ImageIcon("resources//images//MainMenu//Title.png"));
-    private final JButton btnNewGame = new JButton("", new ImageIcon("resources//images//MainMenu//NewGame.png")); 
-    private final JButton btnExit = new JButton("", new ImageIcon("resources//images//MainMenu//Exit.png")); 
-    private final JButton btnCredits = new JButton("", new ImageIcon("resources//images//MainMenu//Credits.png")); 
     private static final double WIDTH_RATIO = 0.67; 
     private static final double HEIGHT_RATIO = 0.736;
+    private MainMenuController controller;
 
     public MainMenuViewImpl() {
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 
                 (int) (screen.getHeight() * HEIGHT_RATIO)));
-        final JPanel mainPanel = new JPanel(new GridBagLayout());
 
         btnNewGame.setBounds(160, 340, 300, 45);
         this.configureButton(btnNewGame);
@@ -51,13 +50,14 @@ public class MainMenuViewImpl implements MainMenuView {
         btnExit.setBounds(160, 523, 300, 45);
         this.configureButton(btnExit);
 
-        lblTitle.setLayout(null);
-        lblBackground.setLayout(null);
+        btnExit.addActionListener(e -> {
+            System.exit(0);
+        });
 
         lblTitle.setBounds(50, 208, 500, 100);
         lblBackground.add(lblTitle);
 
-        mainPanel.add(lblBackground);
+        mainPanel.add(lblBackground, JLayeredPane.FRAME_CONTENT_LAYER);
         this.frame.setContentPane(mainPanel);
     }
 
@@ -68,8 +68,8 @@ public class MainMenuViewImpl implements MainMenuView {
         this.frame.pack();
         this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2, 
                                screen.height / 2 - this.frame.getSize().height / 2);
-        MP3Player mp3Player = new MP3Player(new File("resources/sounds/undergroundMusic.mp3"));
-        mp3Player.play();
+        //MP3Player mp3Player = new MP3Player(new File("resources/sounds/undergroundMusic.mp3"));
+        //mp3Player.play();
         this.frame.setVisible(true);
     }
 
@@ -81,11 +81,17 @@ public class MainMenuViewImpl implements MainMenuView {
     }
 
     private void configureButton(final JButton btn) {
-        btn.setBackground(Color.DARK_GRAY); //Colore del background del bottone
-        btn.setBorder(new LineBorder(Color.BLACK)); //Colore del bordo del bottone
-        btn.setFocusPainted(false); //Disabilita il paint del focus sul testo del bottone
-        btn.setLayout(null);
+        btn.setBackground(Color.DARK_GRAY);
+        btn.setBorder(new LineBorder(Color.BLACK));
+        btn.setFocusPainted(false);
         this.lblBackground.add(btn);
     }
 
+    /**
+     * @Override
+     * @param controller : the controller of this view
+     */
+    public void setController(final MainMenuController controller) {
+        this.controller = controller;
+    }
 }

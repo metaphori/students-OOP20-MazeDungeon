@@ -182,7 +182,7 @@ public class GameViewImpl implements GameView, KeyListener {
         final int heigth = img.getIconHeight();
         return img.getImage().getScaledInstance(width, heigth, Image.SCALE_SMOOTH);
     }
-    
+
     /**
      * 
      */

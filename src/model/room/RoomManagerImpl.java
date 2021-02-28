@@ -87,10 +87,10 @@ public class RoomManagerImpl implements RoomManager {
             if (rooms.containsKey(newRoomPosition)) {
                 if (!extractedRoom.getDoors().contains(extractedDirection)) {
                     final Room newRoom = rooms.get(newRoomPosition);
-                    newRoom.addSimpleObject(doorFactory.createDoor(rooms.get(extractedPosition), extractedDirection));
-                    newRoom.addDoor(extractedDirection);
-                    extractedRoom.addDoor(Direction.getOppositeDirection(extractedDirection));
-                    extractedRoom.addSimpleObject(doorFactory.createDoor(rooms.get(newRoomPosition), Direction.getOppositeDirection(extractedDirection)));
+                    extractedRoom.addSimpleObject(doorFactory.createDoor(rooms.get(extractedRoom), extractedDirection));
+                    extractedRoom.addDoor(extractedDirection);
+                    newRoom.addDoor(Direction.getOppositeDirection(extractedDirection));
+                    newRoom.addSimpleObject(doorFactory.createDoor(rooms.get(newRoom), Direction.getOppositeDirection(extractedDirection)));
                 }
             } else {
                 final Room newRoom = new RoomImpl(this);

@@ -19,7 +19,7 @@ public class ImageLoader {
         images.put(Images.BACKGROUNDSHOP, new ImageIcon(imagesPathInGameMenu+ sep +"shop.png").getImage());
         images.put(Images.BTNRESUME, new ImageIcon(imagesPathInGameMenu + sep +"resume.png").getImage().getScaledInstance(300, 90, Image.SCALE_SMOOTH));
         images.put(Images.BTNEXIT, new ImageIcon(imagesPathInGameMenu + sep +"exit.png").getImage().getScaledInstance(300, 90, Image.SCALE_SMOOTH));
-        images.put(Images.BTNSHOP, new ImageIcon(imagesPathInGameMenu + sep +"shopbtn.png").getImage().getScaledInstance(300, 90, Image.SCALE_SMOOTH));
+        images.put(Images.BTNSHOP, new ImageIcon(imagesPathInGameMenu + sep +"shopBTN.png").getImage().getScaledInstance(300, 90, Image.SCALE_SMOOTH));
         images.put(Images.BTNRETURNMENU, new ImageIcon(imagesPathInGameMenu + sep +"backToMenu.png").getImage().getScaledInstance(300, 90, Image.SCALE_SMOOTH));
         images.put(Images.BTNARTHEMIDEBOW, new ImageIcon(imagesPathItem + sep +"arthemideBow.png").getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, Image.SCALE_SMOOTH));
         images.put(Images.BTNHEALTH, new ImageIcon(imagesPathItem + sep +"health.png").getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, Image.SCALE_SMOOTH));
