@@ -21,13 +21,14 @@ public class RoomManagerImpl implements RoomManager {
 
     private static final Point2D UL_CORNER = new Point2D(240, 177); //TODO in caso di resize della finestra vanno cambiati!!!!
     private static final Point2D BR_CORNER = new Point2D(1025, 633);
-    private static final int NUMBER_OF_ROOMS = 10;
+    private static final int NUMBER_OF_ROOMS = 100;
     private final IdIterator idIterator = new IdIterator();
     private final Map<Point2D, Room> rooms = new HashMap<>();
     private Room actualRoom;
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
     private final ObstaclesFactory obstaclesFactory = new ObstaclesFactory(UL_CORNER, BR_CORNER);
-    private final DoorFactory doorFactory = new DoorFactoryImpl();
+    private DoorFactory doorFactory = new DoorFactoryImpl();
+    //private final DoorFactory doorFactory = new DoorFactoryImpl();
     private final Map<Direction, Point2D> characterSpawnPosition = new HashMap<>() {{
         put(Direction.UP, new Point2D(620, 550));
         put(Direction.DOWN, new Point2D(620, 200));
@@ -72,35 +73,36 @@ public class RoomManagerImpl implements RoomManager {
     private void createGameMap() {
 
         actualRoom = new RoomImpl(this);
-        //actualRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
-        actualRoom.addSimpleObject(obstaclesFactory.createXComposition());
+        actualRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
+        //actualRoom.addSimpleObject(obstaclesFactory.createXComposition());
         final Character character = new CharacterImpl(new Point2D(300, 200), GameObjectType.CHARACTER);
         actualRoom.addDinamicObject(character);
         rooms.put(new Point2D(0, 0), actualRoom);
 
         while (rooms.size() < NUMBER_OF_ROOMS) {
-            final Direction randomDirection = Direction.getRandomDirection();
-            final Point2D randomPoint = this.getRandomPointInFloor();
-            final Point2D newPoint = this.getNearbyPoint(randomPoint, randomDirection);
-            if (rooms.containsKey(newPoint)) {
-                if (!rooms.get(randomPoint).getDoors().contains(randomDirection)) {
-                    rooms.get(randomPoint).addSimpleObject(doorFactory.createDoor(rooms.get(randomPoint), randomDirection));
-                    rooms.get(randomPoint).addDoor(randomDirection);
-                    rooms.get(newPoint).addDoor(Direction.getOppositeDirection(randomDirection));
-                    rooms.get(newPoint).addSimpleObject(doorFactory.createDoor(rooms.get(newPoint), Direction.getOppositeDirection(randomDirection)));
+            final Direction extractedDirection = Direction.getRandomDirection();
+            final Point2D extractedPosition = this.getRandomPointInFloor();
+            final Room extractedRoom = rooms.get(extractedPosition);
+            final Point2D newRoomPosition = this.getNearbyPoint(extractedPosition, extractedDirection);
+            if (rooms.containsKey(newRoomPosition)) {
+                if (!extractedRoom.getDoors().contains(extractedDirection)) {
+                    final Room newRoom = rooms.get(newRoomPosition);
+                    extractedRoom.addSimpleObject(doorFactory.createDoor(rooms.get(extractedRoom), extractedDirection));
+                    extractedRoom.addDoor(extractedDirection);
+                    newRoom.addDoor(Direction.getOppositeDirection(extractedDirection));
+                    newRoom.addSimpleObject(doorFactory.createDoor(rooms.get(newRoom), Direction.getOppositeDirection(extractedDirection)));
                 }
             } else {
                 final Room newRoom = new RoomImpl(this);
-                //newRoom.addDinamicObject(this.enemyFactory.createBoss(new Point2D(550, 100)));
-                //newRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
-                newRoom.addSimpleObject(obstaclesFactory.createRandomComposition(20));
-                newRoom.addDoor(Direction.getOppositeDirection(randomDirection));
-                newRoom.addSimpleObject(doorFactory.createDoor(newRoom, Direction.getOppositeDirection(randomDirection)));
+
+                newRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
+                newRoom.addDoor(Direction.getOppositeDirection(extractedDirection));
+                newRoom.addSimpleObject(doorFactory.createDoor(newRoom, Direction.getOppositeDirection(extractedDirection)));
                 //newRoom.addDinamicObject(this.enemyFactory.createSkeletonSeeker(new Point2D(550, 300)));
-                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(450, 300)));
-                rooms.put(newPoint, newRoom);
-                rooms.get(randomPoint).addSimpleObject(doorFactory.createDoor(rooms.get(randomPoint), randomDirection));
-                rooms.get(randomPoint).addDoor(randomDirection);
+                rooms.put(newRoomPosition, newRoom);
+                extractedRoom.addSimpleObject(doorFactory.createDoor(rooms.get(extractedPosition), extractedDirection));
+                extractedRoom.addDoor(extractedDirection);
+
             }
         }
     }
@@ -137,6 +139,9 @@ public class RoomManagerImpl implements RoomManager {
      */
     public void changeRoom(final Direction direction) {
         final Room newRoom = rooms.get(this.getNearbyPoint(this.getRoomPosition(actualRoom), direction));
+        if (newRoom == null || actualRoom.getCharacter().isEmpty()) {
+            return;
+        }
         actualRoom.getCharacter().get().setPosition(characterSpawnPosition.get(direction));
         newRoom.addDinamicObject(actualRoom.getCharacter().get());
         actualRoom.clean();

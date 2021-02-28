@@ -1,18 +1,16 @@
 package gamestructure.ingamemenu;
 
-public interface InGameMenuView {
+import mvc.View;
+
+public interface InGameMenuView extends View{
 
     void showShop();
 
     void showInGameMenu();
 
-    void show();
-
     /**
      * @Override
      */
-    void hide();
-
     void returnMessage(String messageOuput);
 
     void removeMessage();

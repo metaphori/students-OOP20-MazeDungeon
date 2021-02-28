@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -15,6 +16,9 @@ import gamestructure.ingamemenu.utilities.Images;
 import model.shop.Items;
 
 public class InGameMenuViewImpl implements InGameMenuView  {
+    
+    private final JLayeredPane backGroundPanel = new JLayeredPane();
+    
     private static final int SIZE_IMAGE_ITEM = 100;
     private static final double WIDTH_RATIO = 0.67; 
     private static final double HEIGHT_RATIO = 0.736;
@@ -145,9 +149,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         }
     }
 
-    /**
-     * 
-     */
+    @Override
     public void show() {
         this.frame.pack();
         if (!start) {
@@ -158,9 +160,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.frame.setVisible(true);
     }
 
-    /**
-     * 
-     */
+    @Override
     public void hide() {
         this.frame.setVisible(false);
     }
