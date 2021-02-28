@@ -67,7 +67,7 @@ public class GameViewImpl implements GameView, KeyListener {
     public void show() {
         this.frame.setVisible(true);
         this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO),
-                (int) (NATIVE_HEIGHT * HEIGHT_RATIO) + this.frame.getInsets().top + this.frame.getInsets().bottom));
+                (int) (NATIVE_HEIGHT * HEIGHT_RATIO)));
         gamePanel.setSize(this.frame.getSize());
         //this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
         this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2,
@@ -138,19 +138,21 @@ public class GameViewImpl implements GameView, KeyListener {
             this.graphics = g;
             g.drawImage(this.roomImage, 0, 0, null);
             g.drawImage(this.coinImage, 10, 50, null);
+
             temp.forEach(sprite -> {
                 g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
-            });
+            }); 
+            //g.drawImage(this.youLoseImage, 0, 0, null);
             Toolkit.getDefaultToolkit().sync();
         }
-        
+
         public void updateHUD() {
             this.life.setValue((int) (controller.getCharacter().get().getLife()));
             this.lblCoinCounter.setText(controller.getCharacter().get().getMoney() + "$");
         }
 
         public void gameOver() {
-            graphics.drawImage(this.youLoseImage, this.getHeight() / 2, this.getWidth() / 2, null);
+            graphics.drawImage(this.youLoseImage, 0, 0, null);
         }
 
         public void initialize() {

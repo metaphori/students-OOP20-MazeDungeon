@@ -29,7 +29,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private static final long INITIAL_BULLET_DELAY = 200; 
     private static final int INITIAL_BULLET_DAMAGE = 15;
     private static final int INITIAL_MONEY = 0;
-   
+
     /*
      * VARIABLES.
      */
@@ -47,8 +47,9 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private long lastShootTime; 
     private boolean shoot;
     private Vector2D shootDirection;
+    private boolean death;
 
- 
+
     public CharacterImpl(final Point2D position, final GameObjectType gameObjectType) {
         super(INITIAL_SPEED, position, gameObjectType);
         this.life = MAX_LIFE;
@@ -58,6 +59,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl();
         this.shoot = false;
+        this.death = false;
         this.lastShootTime = System.currentTimeMillis();
     }
 
@@ -80,11 +82,16 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public void takesDamage(final int damage) {
         this.life = this.life - damage;
         System.out.println(this.getID() + ") " + this.getGameObjectType() + " Life: " + this.getLife());
-        if (this.life <= 0) {
+        if (this.life <= 0 && !isDeath()) {
             /*TODO*/
-            
+            this.death = true;
             System.out.println("IL PERSONAGGIO PRINCIPALE E' MORTO");
         }
+    }
+
+    @Override
+    public boolean isDeath() {
+        return this.death;
     }
     /**
      * @return the life
@@ -93,6 +100,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public double getLife() {
         return this.life;
     }
+
     public int getDamage() {
         return this.damage;
     }
@@ -105,9 +113,11 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public int getMoney() {
         return this.money;
     }
+
     public long getBulletSpeed() {
         return this.bulletSpeed;
     }
+
     @Override
     public void setMoney(int money) {
         this.money = money;
@@ -153,7 +163,6 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
     /*METHODS FOR MOVEMENT*/
 
-   
 
 
     /**

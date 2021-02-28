@@ -52,4 +52,6 @@ public interface Character extends DinamicObject {
     long getBulletSpeed();
 
     void setLife(double life);
+
+    boolean isDeath();
 }
