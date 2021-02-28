@@ -9,7 +9,7 @@ import mvc.Model;
 
 public class ShopImpl implements Shop {
     private static final double MORE_HEALTH = 0.5;
-    private static final double MORE_DAMAGE = 0.5;
+    private static final int MORE_DAMAGE = 50;
     private static final int MORE_SPEED = 50;
     private static final int MORE_BULLETSPEED = 40;
     private static final int PRICE_ARTHEMIDEBOW = 3;
@@ -43,12 +43,12 @@ public class ShopImpl implements Shop {
      */
     private void addSkills(Item item) {
         final Character c = this.model.getRoomManager().getCurrentRoom().getCharacter().get();
-        c.setDamage((int)c.getDamage() + (int)item.getDamage());///////////
+        c.setDamage(c.getDamage() + item.getDamage());///////////
         c.setSpeed(c.getSpeed() + item.getSpeed());
         c.setBulletSpeed(c.getBulletSpeed() + item.getBulletSpeed());
-        //c.setLife(item.getHealth())
+        c.setLife(item.getHealth());
         c.setMoney(actualMoney);
-        //c.addItem(item);
+        c.addItem(item);
 
     }
 
