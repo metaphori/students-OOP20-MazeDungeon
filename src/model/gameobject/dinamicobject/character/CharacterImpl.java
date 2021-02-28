@@ -27,12 +27,11 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private static final long INITIAL_SHOOT_SPEED = 3;
     private static final long INITIAL_BULLET_DELAY = 200;
     private static final int INITIAL_MONEY = 0;
-
+    private static final int INITIAL_DAMAGE = 15;
     /*
      * VARIABLES.
      */
     private double life;
-    
     private int damage;
     private long bulletSpeed;
     private int speed;

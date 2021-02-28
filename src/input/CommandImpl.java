@@ -50,7 +50,7 @@ public class CommandImpl implements Command {
                                             KeyEvent.VK_D, false,
                                             KeyEvent.VK_A, false,
                                             KeyEvent.VK_ESCAPE, false));
-        
+
         this.permittedKeys = new HashSet<>(Set.of(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_A,
                                                     KeyEvent.VK_ESCAPE, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT, 
                                                         KeyEvent.VK_LEFT));
@@ -96,7 +96,6 @@ public class CommandImpl implements Command {
         if (this.keysMap.get(KeyEvent.VK_RIGHT)) {
             character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_RIGHT));
         }
-        
 
         if (this.keysMap.get(KeyEvent.VK_ESCAPE) && !this.menuIsOpen) {
             final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController, this.model);
@@ -126,6 +125,8 @@ public class CommandImpl implements Command {
         }
         if (this.permittedKeys.contains(key.getKeyCode())) {
              this.keysMap.put(key.getKeyCode(), b);
+        } else {
+            System.out.println("Tasto disabilitato");
         }
     }
 
