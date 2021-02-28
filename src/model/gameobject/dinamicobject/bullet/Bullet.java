@@ -4,9 +4,9 @@ import model.gameobject.dinamicobject.DinamicObject;
 
 public interface Bullet extends DinamicObject {
 
-    double getDamage();
+    int getDamage();
 
-    void setDamage(double damage);
+    void setDamage(int damage);
     
     
 }

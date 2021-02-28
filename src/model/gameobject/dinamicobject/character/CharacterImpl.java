@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import jaco.mp3.player.MP3Player;
+import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
@@ -32,7 +33,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     private double life;
     
-    private double damage;
+    private int damage;
     private long bulletSpeed;
     private int speed;
     private int money;
@@ -40,7 +41,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     /**
      * 
      */
-    private Set<Items> items;
+    private Set<Item> items;
     private final BulletFactory bulletFactory;
     private long lastShootTime; 
     private boolean shoot;
@@ -74,7 +75,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * 
      */
     @Override
-    public void takesDamage(final double damage) {
+    public void takesDamage(final int damage) {
         this.life = this.life - damage;
         System.out.println(this.getID() + ") " + this.getGameObjectType() + " Life: " + this.getLife());
         if (this.life <= 0) {
@@ -88,13 +89,11 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public double getLife() {
         return this.life;
     }
-    public double getDamage() {
+    public int getDamage() {
         return this.damage;
     }
-    /**
-     * set the current life
-     */
-    private void setLife(final double life) {
+    @Override
+    public void setLife(final double life) {
         this.life = this.life + life;
     }
 
@@ -136,14 +135,14 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * @return the items' set
      */
     @Override
-    public Set<Items> getItems() {
+    public Set<Item> getItems() {
         return this.items;
     }
     /**
      * 
      */
     @Override
-    public void addItem(final Items item) {
+    public void addItem(final Item item) {
         this.items.add(item);
     }
 
@@ -227,7 +226,12 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
        switch (obj2.getGameObjectType().getCollisionType()) {
             case OBSTACLE:
-                this.setPosition(this.getLastPosition());
+                final int footHeight = 15;
+                final Point2D footColliderUL = new Point2D(this.getBoundingBox().getULCorner().getX(), this.getBoundingBox().getBRCorner().getY() - footHeight);
+                final BoundingBox footCollider = new BoundingBox(footColliderUL, this.getBoundingBox().getWidth(), footHeight);
+                if (footCollider.intersectWith(obj2.getBoundingBox())) {
+                    this.setPosition(this.getLastPosition());
+                }
                 break;
             case ENTITY:
                 /*this.setPosition(new Point2D(this.getPosition().getX() - (this.getDirection().getX() * 1),

@@ -11,11 +11,11 @@ import model.shop.Items;
 public interface Character extends DinamicObject {
     void shoot();
 
-    void takesDamage(double damage);
+    void takesDamage(int damage);
 
-    void addItem(Items item);
+    void addItem(Item item);
 
-    Set<Items> getItems();
+    Set<Item> getItems();
 
     double getLife();
 
@@ -46,7 +46,9 @@ public interface Character extends DinamicObject {
 
     void setBulletSpeed(long bulletSpeed);
     
-    double getDamage();
+    int getDamage();
     
     long getBulletSpeed();
+
+    void setLife(double life);
 }

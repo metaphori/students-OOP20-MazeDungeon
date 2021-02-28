@@ -14,6 +14,6 @@ public interface Item {
 
     int getBulletSpeed();
 
-    double getDamage();
+    int getDamage();
 
 }

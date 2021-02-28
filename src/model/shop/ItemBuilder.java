@@ -6,7 +6,7 @@ public final class ItemBuilder implements Item {
 
     private int cost;
 
-    private final double damage;
+    private final int damage;
 
     private final int speed;
 
@@ -14,7 +14,7 @@ public final class ItemBuilder implements Item {
 
     private final double health;
 
-    private ItemBuilder(final Items name, final int cost, final double damage, final int speed, final int bulletSpeed, final double health) {
+    private ItemBuilder(final Items name, final int cost, final int damage, final int speed, final int bulletSpeed, final double health) {
         super();
         this.name = name;
         this.setCost(cost);
@@ -50,7 +50,7 @@ public final class ItemBuilder implements Item {
         return this.bulletSpeed;
     }
     @Override
-    public double getDamage() {
+    public int getDamage() {
         return this.damage;
     }
 
@@ -59,7 +59,7 @@ public final class ItemBuilder implements Item {
         private final Items name;
         private final int cost;
         private final int speed;
-        private double damage;
+        private int damage;
         private int bulletSpeed;
         private double health;
 
@@ -85,7 +85,7 @@ public final class ItemBuilder implements Item {
          * @param damage
          * @return .
          */
-        public Builder addDamage(final double damage) {
+        public Builder addDamage(final int damage) {
             this.damage = damage;
             return this;
         }

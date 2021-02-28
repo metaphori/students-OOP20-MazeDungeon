@@ -10,9 +10,9 @@ import model.gameobject.dinamicobject.character.Character;
 
 public class BulletImpl extends AbstractDinamicObject implements Bullet {
 
-    private double damage;
+    private int damage;
 
-    public BulletImpl(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final double damage) {
+    public BulletImpl(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final int damage) {
         super(speed, position, gameObjectType);
         this.damage = damage;
         this.setDirection(direction);
@@ -22,7 +22,7 @@ public class BulletImpl extends AbstractDinamicObject implements Bullet {
      * 
      */
     @Override
-    public double getDamage() {
+    public int getDamage() {
         return this.damage;
     }
 
@@ -38,7 +38,7 @@ public class BulletImpl extends AbstractDinamicObject implements Bullet {
      * 
      */
     @Override
-    public void setDamage(final double damage) {
+    public void setDamage(final int damage) {
         this.damage = damage;
     }
 
