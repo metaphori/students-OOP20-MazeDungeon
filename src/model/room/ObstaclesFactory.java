@@ -18,7 +18,7 @@ import model.gameobject.simpleobject.Wall;
 public class ObstaclesFactory {
     private static final int obstacleForRow = 24;
     private static final int obstacleForCol = 14;
-    private static final int freeRows = 3;
+    private static final int freeRows = 4;
     private static final int freeCols = 3;
     private final double obstacleWidth;
     private final double obstacleHeight;
