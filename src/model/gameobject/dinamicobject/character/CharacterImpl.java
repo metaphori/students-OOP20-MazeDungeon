@@ -145,21 +145,6 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public void addItem(final Items item) {
         this.items.add(item);
-        switch (item) {
-            case ARTHEMIDEBOW:
-            case HERMESBOOTS:
-            case ZEUSBOLT:
-            case HEALTH:
-                /**TODO*/
-          //  this.setSkills(item.getItem().get);
-            default:
-                break;
-        }
-    }
-    
-    private void setSkills() {
-        // TODO Auto-generated method stub
-
     }
 
 
