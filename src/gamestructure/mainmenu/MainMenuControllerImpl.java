@@ -9,13 +9,15 @@ import mvc.Model;
 
 public class MainMenuControllerImpl implements MainMenuController {
 
-    private final MainMenuView view;
+    private final MainMenuView view = new MainMenuViewImpl();
 
-    public MainMenuControllerImpl(final MainMenuView view) {
-        this.view = view;
+    public MainMenuControllerImpl() {
+        this.view.setController(this);
+        this.view.show();
     }
+
     /**
-     * 
+     * It start a new game using a new Thread.
      */
     @Override
     public void newGame() {
@@ -25,7 +27,6 @@ public class MainMenuControllerImpl implements MainMenuController {
                 final GameView view = new GameViewImpl();
                 final Model model = new ModelImpl();
                 final GameController controller = new GameControllerImpl(view, model);
-                //view.setController(controller);
                 controller.setup();
                 controller.mainLoop();
             }
@@ -33,5 +34,4 @@ public class MainMenuControllerImpl implements MainMenuController {
         thread.start();
         this.view.hide();
     }
-
 }

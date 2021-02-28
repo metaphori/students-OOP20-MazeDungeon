@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 import javax.swing.ImageIcon;
@@ -184,7 +182,7 @@ public class GameViewImpl implements GameView, KeyListener {
         final int heigth = img.getIconHeight();
         return img.getImage().getScaledInstance(width, heigth, Image.SCALE_SMOOTH);
     }
-    
+
     /**
      * 
      */

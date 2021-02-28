@@ -1,13 +1,12 @@
 package test;
 
-import gamestructure.mainmenu.MainMenuView;
-import gamestructure.mainmenu.MainMenuViewImpl;
+import gamestructure.mainmenu.MainMenuController;
+import gamestructure.mainmenu.MainMenuControllerImpl;
 
 public class TestMainMenu {
 
     public static void main(final String[] args) {
-        final MainMenuView window = new MainMenuViewImpl();
-        window.show();
+        final MainMenuController controller = new MainMenuControllerImpl();
     }
 
 }

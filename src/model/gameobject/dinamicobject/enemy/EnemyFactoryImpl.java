@@ -149,8 +149,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
                 final Bullet bulletNorth = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(0, -1));
                 final Bullet bulletSouth = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(0, 1));
-                final Bullet bulletEast = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(1,0));
-                final Bullet bulletWest = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(-1,0));
+                final Bullet bulletEast = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(1, 0));
+                final Bullet bulletWest = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(-1, 0));
                 this.getRoom().addDinamicObject(List.of(bulletNorth, bulletEast, bulletWest, bulletSouth));
             }
 
