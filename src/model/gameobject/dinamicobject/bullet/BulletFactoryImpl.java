@@ -16,16 +16,16 @@ public class BulletFactoryImpl implements BulletFactory {
     private static final int SKELETON_BULLET_SPEED = 200;
     private static final int SOUL_BULLET_SPEED = 200;
     private static final int SPROUT_BULLET_SPEED = 300;
-    private static final int BOSS_BULLET_SPEED = 100;
+    private static final int BOSS_BULLET_SPEED = 300;
     private static final int OLDGUARDIAN_BULLET_SPEED = 100;
     /**
      * constant for damage of each bullet.
      */
-    private static final int CHARACTER_BULLET_DAMAGE = 12;
-    private static final int SKELETON_BULLET_DAMAGE = 62;
-    private static final int SOUL_BULLET_DAMAGE = 12;
-    private static final int SPROUT_BULLET_DAMAGE = 25;
-    private static final int BOSS_BULLET_DAMAGE = 20;
+    private static final int CHARACTER_BULLET_DAMAGE = 10;
+    private static final int SKELETON_BULLET_DAMAGE = 15;
+    private static final int SOUL_BULLET_DAMAGE = 10;
+    private static final int SPROUT_BULLET_DAMAGE = 20;
+    private static final int BOSS_BULLET_DAMAGE = 30;
     private static final int OLDGUARDIAN_BULLET_DAMAGE = 10;
 
     /**

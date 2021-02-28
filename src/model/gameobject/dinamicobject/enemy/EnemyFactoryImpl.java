@@ -27,7 +27,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     private static final long SOUL_SHOOT_DELAY = 1500;
     private static final long SPROUT_SHOOT_DELAY = 2000;
     private static final long SKELETON_SHOOT_DELAY = 1000;
-    private static final long BOSS_SHOOT_DELAY = 1000;
+    private static final long BOSS_SHOOT_DELAY = 2000;
 
     /**
      * @return an enemy of type: Sprout
