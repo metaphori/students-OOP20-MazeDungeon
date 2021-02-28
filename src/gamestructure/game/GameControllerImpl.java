@@ -3,6 +3,7 @@ package gamestructure.game;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Observer;
 import java.util.Optional;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.stream.Collectors;
@@ -72,7 +73,7 @@ public class GameControllerImpl implements GameController {
     }
 
     private void processInput() {
-            this.getCommand().execute();
+            this.command.execute();
     }
 
     private void updateGame(final double elapsed) {
@@ -138,14 +139,15 @@ public class GameControllerImpl implements GameController {
     /*
      * 
      */
-    @Override
-    public Command getCommand() {
-        return this.command;
-    }
 
     @Override
     public void notifyClosedInGameMenu() {
         this.command.setMenuClosed();
+    }
+
+    @Override
+    public void gameOver() {
+        this.view.gameOver();
     }
 
     @Override

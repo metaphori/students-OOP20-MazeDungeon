@@ -14,8 +14,6 @@ public interface GameController {
 
     void setBoundingBox(int id, BoundingBox boundingBox);
 
-    Command getCommand();
-
     void pressKey(KeyEvent key);
 
     void releaseKey(KeyEvent key);
@@ -23,4 +21,6 @@ public interface GameController {
     void notifyClosedInGameMenu();
 
     Optional<Character> getCharacter();
+
+    void gameOver();
 }

@@ -16,4 +16,6 @@ public interface GameView extends View {
     void removeSprite(int id);
 
     void initialize();
+
+    void gameOver();
 }

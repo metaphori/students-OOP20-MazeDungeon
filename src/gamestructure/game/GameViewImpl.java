@@ -113,10 +113,13 @@ public class GameViewImpl implements GameView, KeyListener {
     private class GamePanel extends JLayeredPane implements ActionListener {
         private static final long serialVersionUID = 1L;
         private final JLabel lblCoinCounter = new JLabel();
+        private final Image youLoseImage = adaptImage(new ImageIcon("resources/images/HUD/GameOver/gameOverFinal.png"));
         private final Image roomImage = adaptImage(new ImageIcon("resources/images/Room/room.png"));
         private final Image coinImage = adaptImage(new ImageIcon("resources/images/HUD/Coins/coin.png"));
         private JProgressBar life;
         private ItemPanel items;
+        private Graphics graphics;
+
 
         GamePanel() {
             lblCoinCounter.setBounds(60, 50, 50, 50);
@@ -134,7 +137,7 @@ public class GameViewImpl implements GameView, KeyListener {
         @Override
         protected void paintComponent(final Graphics g) {
             final List<Sprite> temp = new ArrayList<>(sprites.values());
-
+            this.graphics = g;
             g.drawImage(this.roomImage, 0, 0, null);
             g.drawImage(this.coinImage, 10, 50, null);
             temp.forEach(sprite -> {
@@ -142,10 +145,14 @@ public class GameViewImpl implements GameView, KeyListener {
             });
             Toolkit.getDefaultToolkit().sync();
         }
-
+        
         public void updateHUD() {
             this.life.setValue((int) (controller.getCharacter().get().getLife()));
             this.lblCoinCounter.setText(controller.getCharacter().get().getMoney() + "$");
+        }
+
+        public void gameOver() {
+            graphics.drawImage(this.youLoseImage, this.getHeight() / 2, this.getWidth() / 2, null);
         }
 
         public void initialize() {
@@ -236,6 +243,11 @@ public class GameViewImpl implements GameView, KeyListener {
     public void initialize() {
         this.gamePanel.initialize();
         this.timer.start();
+    }
+
+    @Override
+    public void gameOver() {
+        this.gamePanel.gameOver();
     }
 }
 

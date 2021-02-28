@@ -8,6 +8,7 @@ import model.shop.Item;
 import model.shop.ItemBuilder;
 import model.shop.Items;
 
+
 public interface Character extends DinamicObject {
     void shoot();
 
