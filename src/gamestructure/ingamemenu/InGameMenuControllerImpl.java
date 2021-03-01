@@ -66,7 +66,6 @@ public class InGameMenuControllerImpl implements InGameMenuController {
      * 
      */
     public void resume() {
-        this.shopModel.clearCart();
         this.view.hide();
         this.gameController.notifyClosedInGameMenu();
     }

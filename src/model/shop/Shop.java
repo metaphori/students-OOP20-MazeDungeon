@@ -1,6 +1,7 @@
 package model.shop;
 
 import java.util.Map;
+import java.util.Set;
 
 public interface Shop {
 
@@ -36,4 +37,6 @@ public interface Shop {
     Map<Items, Integer> addPrice();
 
     void clearCart();
+
+    Set<Items> getCart();
 }

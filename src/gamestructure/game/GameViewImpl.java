@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 import javax.swing.ImageIcon;
@@ -29,6 +30,7 @@ import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.ResourceLoader;
 import model.common.Sprite;
+import model.shop.Items;
 
 public class GameViewImpl implements GameView, KeyListener {
 
@@ -46,6 +48,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private final Map<Integer, Sprite> sprites = new ConcurrentSkipListMap<>();
     private final ResourceLoader resourceLoader = new ResourceLoader();
     private final Timer timer;
+    private final ItemPanel items = new ItemPanel();
     private boolean gameOver = false;
 
     public GameViewImpl() {
@@ -88,16 +91,27 @@ public class GameViewImpl implements GameView, KeyListener {
         private final Image item = new ImageIcon("resources/images/Item/hermesBoots.png").getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
         private final List<Image> items = new LinkedList<>();
 
-        public ItemPanel() {
-            items.add(item);
-            items.add(new ImageIcon("resources/images/Item/oracleAmulet.png").getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-            items.add(item);
-            items.add(item);
+        ItemPanel() {
             this.setOpaque(false);
         }
 
-        public void addItem() {
-            //this.add(new JLabel(item), itemCounter++, 0);
+        public void addItem(final Items item) {
+            switch (item) {
+            case ARTHEMIDEBOW:
+                items.add(new ImageIcon("resources/images/Item/arthemideBow.png").getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
+                break;
+            case HERMESBOOTS:
+                items.add(new ImageIcon("resources/images/Item/hermesBoots.png").getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
+                break;
+            case ZEUSBOLT:
+                items.add(new ImageIcon("resources/images/Item/zeusBolt.png").getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
+                break;
+            case ORACLEAMULET:
+                items.add(new ImageIcon("resources/images/Item/oracleAmulet.png").getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
+                break;
+            default:
+                break;
+            }
         }
 
         @Override
@@ -116,8 +130,6 @@ public class GameViewImpl implements GameView, KeyListener {
         private final Image roomImage = adaptImage(new ImageIcon("resources/images/Room/room.png"));
         private final Image coinImage = adaptImage(new ImageIcon("resources/images/HUD/Coins/coin.png"));
         private JProgressBar life;
-        private ItemPanel items;
-
 
         GamePanel() {
             lblCoinCounter.setBounds(60, 50, 50, 50);
@@ -158,11 +170,9 @@ public class GameViewImpl implements GameView, KeyListener {
             life.setForeground(new Color(150, 0, 0));
             this.add(life);
 
-
-            items = new ItemPanel();
+            
             items.setBounds(10, 100, 64, 256);
             this.add(items);
-            items.addItem();
         }
     }
 
@@ -246,7 +256,16 @@ public class GameViewImpl implements GameView, KeyListener {
     @Override
     public void gameOver() {
         this.gameOver = true;
+    }
 
+    /**
+     * 
+     */
+    @Override
+    public void renderItems(final Set<Items> purchasedItems) {
+        for (final Items item : purchasedItems) {
+            this.items.addItem(item);
+        }
     }
 }
 

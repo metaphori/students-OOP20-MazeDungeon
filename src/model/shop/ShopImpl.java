@@ -112,7 +112,6 @@ public class ShopImpl implements Shop {
                         this.messageOuput = "You have too much life!";
                         return false;
                     }
-                    this.cart.add(i);
                     this.actualMoney -= this.getHealth().getCost();
                     this.addSkills(getHealth());
                     this.messageOuput = this.msgBought + this.actualMoney;
@@ -195,7 +194,14 @@ public class ShopImpl implements Shop {
      */
     public void clearCart() {
         this.cart.clear();
-
+    }
+    
+    /**
+     * 
+     */
+    @Override
+    public Set<Items> getCart() {
+        return Set.copyOf(this.cart);
     }
 
 }
