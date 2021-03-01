@@ -26,10 +26,10 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     private static final double WIDTH_RATIO = 0.67; 
     private static final double HEIGHT_RATIO = 0.736;
     private String priceArthemideBow = "2";
-    private String PRICE_HEMRESBOOTS = "2";
-    private String PRICE_ZEUSBOLTH = "2";
-    private String PRICE_HEALTH = "2";
-    private String PRICE_ORACLEAMULET = "2";
+    private String priceHermesBoots = "2";
+    private String priceZeusBolth = "2";
+    private String priceHelath = "2";
+    private String priceOracleAmulet = "2";
     private final JFrame frame = new JFrame();
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -126,25 +126,25 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         //priceArthemideBow.setForeground(Color.black);
         labelPriceArthemideBow.setFont(new Font("", Font.PLAIN, 25));
 
-        final JLabel labelPriceHermesBoots = new JLabel(PRICE_HEMRESBOOTS);
+        final JLabel labelPriceHermesBoots = new JLabel(priceHermesBoots);
         labelPriceHermesBoots.setBounds(250, 310, 25, 25);
         this.lblBackgroundShop.add(labelPriceHermesBoots);
         labelPriceHermesBoots.setVisible(true);
         labelPriceHermesBoots.setFont(new Font("", Font.PLAIN, 25));
 
-        final JLabel labelPriceZeusBolt = new JLabel(PRICE_ZEUSBOLTH);
+        final JLabel labelPriceZeusBolt = new JLabel(priceZeusBolth);
         labelPriceZeusBolt.setBounds(390, 310, 25, 25);
         this.lblBackgroundShop.add(labelPriceZeusBolt);
         labelPriceZeusBolt.setVisible(true);
         labelPriceZeusBolt.setFont(new Font("", Font.PLAIN, 25));
 
-        final JLabel labelPriceHealth = new JLabel(PRICE_HEALTH);
+        final JLabel labelPriceHealth = new JLabel(priceHelath);
         labelPriceHealth.setBounds(560, 310, 25, 25);
         this.lblBackgroundShop.add(labelPriceHealth);
         labelPriceHealth.setVisible(true);
         labelPriceHealth.setFont(new Font("", Font.PLAIN, 25));
 
-        final JLabel labelPriceOracleAmulet = new JLabel(PRICE_ORACLEAMULET);
+        final JLabel labelPriceOracleAmulet = new JLabel(priceOracleAmulet);
         labelPriceOracleAmulet.setBounds(710, 310, 25, 25);
         this.lblBackgroundShop.add(labelPriceOracleAmulet);
         labelPriceOracleAmulet.setVisible(true);
@@ -232,7 +232,11 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         msg.setText("");
     }
     public void setPriceItem(Map<Items, Integer> map) {
-        
+        priceArthemideBow = map.get(Items.ARTHEMIDEBOW).toString();
+        priceHermesBoots = map.get(Items.HERMESBOOTS).toString();
+        priceZeusBolth = map.get(Items.ZEUSBOLT).toString();
+        priceHelath = map.get(Items.HEALTH).toString();
+        priceOracleAmulet = map.get(Items.ORACLEAMULET).toString();
     }
 
 }

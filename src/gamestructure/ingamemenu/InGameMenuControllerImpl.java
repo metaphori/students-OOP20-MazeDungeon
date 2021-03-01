@@ -30,13 +30,6 @@ public class InGameMenuControllerImpl implements InGameMenuController {
      */
     public void buyItem(final Items itemSelected) {
         this.view.removeMessage();
-        //final int actualMoney = model.getRoomManager().getCurrentRoom().getCharacter().get().getMoney();
-        //System.out.println(actualMoney);
-        /*if (shopModel.checkItem(itemSelected)) {
-           /* model.getRoomManager().getCurrentRoom().getCharacter().get().setMoney(this.shopModel.moneyLeft());
-            model.getRoomManager().getCurrentRoom().getCharacter().get().addItem(itemSelected);*/
-            //System.out.println(this.shopModel.moneyLeft());
-        //}
         shopModel.checkItem(itemSelected);
         this.view.returnMessage(shopModel.getMessageOuput());
     }
@@ -46,7 +39,6 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     public void openShop() {
         this.view.setPriceItem(shopModel.addPrice());
         this.view.showShop();
-
     }
     /**
      * 
@@ -54,7 +46,6 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     public void openInGameMenu() {
         this.view.removeMessage();
         this.view.showInGameMenu();
-
     }
     /**
      * 

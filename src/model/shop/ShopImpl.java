@@ -10,7 +10,7 @@ import mvc.Model;
 
 
 public class ShopImpl implements Shop {
-    private static final double MORE_HEALTH = 0.5;
+    private static final double MORE_HEALTH = 15;
     private static final int MORE_DAMAGE = 50;
     private static final int MORE_SPEED = 50;
     private static final int MORE_BULLETSPEED = 40;
@@ -26,20 +26,19 @@ public class ShopImpl implements Shop {
 
     private final String msgBought;
     private final String msgNoMoney;
-    private int actualMoney;
-    private final double actualLife;
-    private final double maxLife;
-
+    //private int actualMoney;
+    //private final double actualLife;
+    //private final double maxLife;
+    private final Character character;
     private final Model model;
     public ShopImpl(final Model model, final Character character) {
-      
+        this.character = character;
         this.model = model;
-        this.maxLife = character.getMaxLife();
         //this.actualMoney = actualMoney;
-        msgBought = "You bought this item! You have: " + actualMoney + " money";
+        msgBought = "You bought this item! You have coins: ";
         msgNoMoney = "You don't have enough coins!";
-        this.actualLife = character.getLife();
-        this.actualMoney = character.getMoney();
+       // this.actualLife = character.getLife();
+        //this.actualMoney = character.getMoney();
     }
     /**
      * @return .
@@ -49,8 +48,10 @@ public class ShopImpl implements Shop {
         c.setDamage(c.getDamage() + item.getDamage());///////////
         c.setSpeed(c.getSpeed() + item.getSpeed());
         c.setBulletSpeed(c.getBulletSpeed() + item.getBulletSpeed());
+        System.out.println(c.getLife() + " VITA PRIMA");
         c.setLife(item.getHealth());
-        c.setMoney(actualMoney);
+        System.out.println(c.getLife() + " VITA");
+        //c.setMoney(actualMoney);
         c.addItem(item);
 
     }
@@ -74,62 +75,62 @@ public class ShopImpl implements Shop {
         }*/
         switch (i) {
             case ARTHEMIDEBOW:
-                if (this.getArthemideBow().getCost() <= this.actualMoney) {
-                    this.actualMoney -= this.getArthemideBow().getCost();
+                if (this.getArthemideBow().getCost() <= this.character.getMoney()) {
+                    this.character.setMoney(this.character.getMoney() - this.getArthemideBow().getCost());
                     this.purchasedItems.add(i);
                     this.cart.add(i);
                     this.addSkills(this.getArthemideBow());
-                    this.messageOuput = this.msgBought  + this.actualMoney;
+                    this.messageOuput = this.msgBought  + this.character.getMoney();
                     return true;
                 }
                 this.messageOuput = this.msgNoMoney;
                 break;
             case HERMESBOOTS:
-                if (this.getHermesBoots().getCost() <= this.actualMoney) {
-                    this.actualMoney -= this.getHermesBoots().getCost();
+                if (this.getHermesBoots().getCost() <= this.character.getMoney()) {
+                    this.character.setMoney(this.character.getMoney() - this.getHermesBoots().getCost());
                     this.purchasedItems.add(i);
                     this.cart.add(i);
                     this.addSkills(this.getHermesBoots());
-                    this.messageOuput = this.msgBought + this.actualMoney;
+                    this.messageOuput = this.msgBought + this.character.getMoney();
                     return true;
                 }
                 this.messageOuput = this.msgNoMoney;
                 break;
             case ZEUSBOLT:
-                if (this.getZeusBolt().getCost() <= this.actualMoney) {
-                    this.actualMoney -= this.getZeusBolt().getCost();
+                if (this.getZeusBolt().getCost() <= this.character.getMoney()) {
+                    this.character.setMoney(this.character.getMoney() - this.getZeusBolt().getCost());
                     this.purchasedItems.add(i);
                     this.cart.add(i);
                     this.addSkills(getZeusBolt());
-                    this.messageOuput = this.msgBought + this.actualMoney;
+                    this.messageOuput = this.msgBought + this.character.getMoney();
                     return true;
                 }
                 this.messageOuput = this.msgNoMoney;
                 break;
             case HEALTH:
-                if (this.getHealth().getCost() <= actualMoney) {
-                    if (this.actualLife + this.getHealth().getHealth() > this.maxLife) {
+                if (this.getHealth().getCost() <= this.character.getMoney()) {
+                    if (this.character.getLife() + this.getHealth().getHealth() > this.character.getMaxLife()) {
                         this.messageOuput = "You have too much life!";
                         return false;
                     }
-                    this.actualMoney -= this.getHealth().getCost();
+                    this.character.setMoney(this.character.getMoney() - this.getHealth().getCost());
                     this.addSkills(getHealth());
-                    this.messageOuput = this.msgBought + this.actualMoney;
+                    this.messageOuput = this.msgBought + this.character.getMoney();
                     return true;
                 }
                 messageOuput = msgNoMoney;
                 break;
             case ORACLEAMULET:
-                if (this.getHealth().getCost() <= this.actualMoney) {
-                    if (this.actualLife + this.getHealth().getHealth() > maxLife) {
+                if (this.getHealth().getCost() <= this.character.getMoney()) {
+                    /*if (this.actualLife + this.getHealth().getHealth() > maxLife) {
                         this.messageOuput = "You have too much life!";
                         return false;
-                    }
-                    this.actualMoney -= this.getHealth().getCost();
+                    }*/
+                    this.character.setMoney(this.character.getMoney() - this.getOracleAmulet().getCost());
                     this.purchasedItems.add(i);
                     this.cart.add(i);
                     this.addSkills(this.getOracleAmulet());
-                    this.messageOuput = this.msgBought + this.actualMoney;
+                    this.messageOuput = this.msgBought + this.character.getMoney();
                     return true;
                 }
                 this.messageOuput = this.msgNoMoney;
@@ -187,7 +188,7 @@ public class ShopImpl implements Shop {
      * @return .
      */
     public Item getOracleAmulet() {
-        return new ItemBuilder.Builder(Items.ORACLEAMULET, PRICE_ORACLEAMULET).addDamage(MORE_DAMAGE).addSpeed(MORE_SPEED).addBulletSpeed(MORE_BULLETSPEED).addHelath(MORE_HEALTH).build();
+        return new ItemBuilder.Builder(Items.ORACLEAMULET, PRICE_ORACLEAMULET).addDamage(MORE_DAMAGE).addSpeed(MORE_SPEED).addBulletSpeed(MORE_BULLETSPEED).build();
     }
     /**
      * @return .
