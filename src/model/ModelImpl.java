@@ -12,7 +12,6 @@ import mvc.Model;
 
 public class ModelImpl implements Model {
     private final RoomManager roomManager = new RoomManagerImpl();
-
     /**
      */
     @Override
@@ -48,5 +47,10 @@ public class ModelImpl implements Model {
     @Override
     public RoomManager getRoomManager() {
         return this.roomManager;
+    }
+
+    @Override
+    public boolean isGameOver() {
+        return this.roomManager.getCurrentRoom().getCharacter().get().isDead();
     }
 }

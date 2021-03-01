@@ -45,7 +45,7 @@ public class GameControllerImpl implements GameController {
      */
     public void mainLoop() {
         long lastTime = System.currentTimeMillis();
-        while (true) {
+        while (!this.model.isGameOver()) {
             final long current = System.currentTimeMillis();
             /*if (this.command.isMenuOpen()) {
                 waitForNextFrame(current);
@@ -59,6 +59,7 @@ public class GameControllerImpl implements GameController {
             waitForNextFrame(current);
             lastTime = current;
         }
+        this.view.gameOver();
     }
 
     private void waitForNextFrame(final long current) {

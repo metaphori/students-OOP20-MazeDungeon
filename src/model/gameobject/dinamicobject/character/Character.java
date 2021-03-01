@@ -53,5 +53,5 @@ public interface Character extends DinamicObject {
 
     void setLife(double life);
 
-    boolean isDeath();
+    boolean isDead();
 }

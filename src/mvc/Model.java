@@ -17,4 +17,6 @@ public interface Model {
     void update(double elapsed);
 
     RoomManager getRoomManager();
+
+    boolean isGameOver();
 }

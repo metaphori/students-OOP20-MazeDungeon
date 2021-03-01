@@ -47,7 +47,6 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private long lastShootTime; 
     private boolean shoot;
     private Vector2D shootDirection;
-    private boolean death;
 
 
     public CharacterImpl(final Point2D position, final GameObjectType gameObjectType) {
@@ -59,7 +58,6 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl();
         this.shoot = false;
-        this.death = false;
         this.lastShootTime = System.currentTimeMillis();
     }
 
@@ -82,19 +80,14 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public void takesDamage(final int damage) {
         this.life = this.life - damage;
         System.out.println(this.getID() + ") " + this.getGameObjectType() + " Life: " + this.getLife());
-        if (this.life <= 0 && !isDeath()) {
-            /*TODO*/
-            this.death = true;
-            System.out.println("IL PERSONAGGIO PRINCIPALE E' MORTO");
-        }
     }
 
     /**
      * @return true if the character is death.
      */
     @Override
-    public boolean isDeath() {
-        return this.death;
+    public boolean isDead() {
+        return this.life <= 0;
     }
 
     /**

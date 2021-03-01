@@ -46,6 +46,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private final Map<Integer, Sprite> sprites = new ConcurrentSkipListMap<>();
     private final ResourceLoader resourceLoader = new ResourceLoader();
     private final Timer timer;
+    private boolean gameOver = false;
 
     public GameViewImpl() {
         this.frame = new JFrame();
@@ -111,12 +112,11 @@ public class GameViewImpl implements GameView, KeyListener {
     private class GamePanel extends JLayeredPane implements ActionListener {
         private static final long serialVersionUID = 1L;
         private final JLabel lblCoinCounter = new JLabel();
-        private final Image youLoseImage = adaptImage(new ImageIcon("resources/images/HUD/GameOver/gameOverFinal.png"));
+        private  Image youLoseImage = adaptImage(new ImageIcon("resources/images/HUD/GameOver/gameOverFinal.png"));
         private final Image roomImage = adaptImage(new ImageIcon("resources/images/Room/room.png"));
         private final Image coinImage = adaptImage(new ImageIcon("resources/images/HUD/Coins/coin.png"));
         private JProgressBar life;
         private ItemPanel items;
-        private Graphics graphics;
 
 
         GamePanel() {
@@ -135,14 +135,15 @@ public class GameViewImpl implements GameView, KeyListener {
         @Override
         protected void paintComponent(final Graphics g) {
             final List<Sprite> temp = new ArrayList<>(sprites.values());
-            this.graphics = g;
             g.drawImage(this.roomImage, 0, 0, null);
             g.drawImage(this.coinImage, 10, 50, null);
 
             temp.forEach(sprite -> {
                 g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
             }); 
-            //g.drawImage(this.youLoseImage, 0, 0, null);
+            if (gameOver) {
+                g.drawImage(this.youLoseImage, 0, 0, null);
+            }
             Toolkit.getDefaultToolkit().sync();
         }
 
@@ -151,15 +152,12 @@ public class GameViewImpl implements GameView, KeyListener {
             this.lblCoinCounter.setText(controller.getCharacter().get().getMoney() + "$");
         }
 
-        public void gameOver() {
-            graphics.drawImage(this.youLoseImage, 0, 0, null);
-        }
-
         public void initialize() {
             life = new JProgressBar(0, (int) controller.getCharacter().get().getMaxLife());
             life.setBounds(10, 10, 200, 30);
             life.setForeground(new Color(150, 0, 0));
             this.add(life);
+
 
             items = new ItemPanel();
             items.setBounds(10, 100, 64, 256);
@@ -247,7 +245,8 @@ public class GameViewImpl implements GameView, KeyListener {
 
     @Override
     public void gameOver() {
-        this.gamePanel.gameOver();
+        this.gameOver = true;
+
     }
 }
 
