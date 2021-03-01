@@ -31,7 +31,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private static final int INITIAL_MONEY = 0;
 
     /*
-     * VARIABLES.
+     * CHARACTER CHARACTERISTIC.
      */
     private double life;
     private int damage;
@@ -40,7 +40,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private int money;
 
     /**
-     * 
+     * VARIABLES.
      */
     private Set<Item> items;
     private final BulletFactory bulletFactory;
@@ -65,7 +65,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
 
 
     /**
-     * 
+     * Update state.
      */
     @Override
     public void updateState(final double elapsed) { 
@@ -76,7 +76,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     }
 
     /**
-     * 
+     * take damage to the character.
      */
     @Override
     public void takesDamage(final int damage) {
@@ -89,53 +89,29 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         }
     }
 
+    /**
+     * @return true if the character is death.
+     */
     @Override
     public boolean isDeath() {
         return this.death;
     }
+
     /**
-     * @return the life
+     * @return the current life.
      */
     @Override
     public double getLife() {
         return this.life;
     }
 
-    public int getDamage() {
-        return this.damage;
-    }
+    /**
+     * @param life
+     * set the current life.
+     */
     @Override
     public void setLife(final double life) {
         this.life = this.life + life;
-    }
-
-    @Override
-    public int getMoney() {
-        return this.money;
-    }
-
-    public long getBulletSpeed() {
-        return this.bulletSpeed;
-    }
-
-    @Override
-    public void setMoney(int money) {
-        this.money = money;
-    }
-
-    @Override
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    @Override
-    public void setBulletSpeed(long bulletSpeed) {
-        this.bulletSpeed = bulletSpeed;
-    }
-
-    @Override
-    public void setSpeed(int speed) {
-        this.speed = speed;
     }
 
     /**
@@ -145,6 +121,74 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public double getMaxLife() {
         return MAX_LIFE;
     }
+
+    /**
+     * @return the current bullet damage.
+     */
+    @Override
+    public int getDamage() {
+        return this.damage;
+    }
+
+    /**
+     * @param damage
+     * set the current damage.
+     */
+    @Override
+    public void setDamage(final int damage) {
+        this.damage = damage;
+    }
+
+    /**
+     * @return the amount of money.
+     */
+    @Override
+    public int getMoney() {
+        return this.money;
+    }
+    /**
+     * @param money
+     * set the current money amount
+     */
+    @Override
+    public void setMoney(final int money) {
+        this.money = money;
+    }
+    /**
+     * @return the bullet speed.
+     */
+    @Override
+    public long getBulletSpeed() {
+        return this.bulletSpeed;
+    }
+
+    /**
+     * @param bulletSpeed
+     * set the current bullet speed.
+     */
+    @Override
+    public void setBulletSpeed(final long bulletSpeed) {
+        this.bulletSpeed = bulletSpeed;
+    }
+
+    /**
+     * @param speed
+     * set the current character Speed.
+     */
+    @Override
+    public void setSpeed(final int speed) {
+        this.speed = speed;
+    }
+
+    /**
+     * @param item
+     * Add to the items list the item passed.
+     */
+    @Override
+    public void addItem(final Item item) {
+        this.items.add(item);
+    }
+
     /**
      * @return the items' set
      */
@@ -152,25 +196,15 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public Set<Item> getItems() {
         return this.items;
     }
-    /**
-     * 
-     */
-    @Override
-    public void addItem(final Item item) {
-        this.items.add(item);
-    }
 
 
     /*METHODS FOR MOVEMENT*/
-
-
-
     /**
      * move up the character.
      */
     @Override
     public void moveUp() {
-        this.setDirection(new Vector2D(this.getDirection().getX() , -1));
+        this.setDirection(new Vector2D(this.getDirection().getX(), -1));
     }
 
     /**
@@ -178,7 +212,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     @Override
     public void moveDown() {
-        this.setDirection(new Vector2D(this.getDirection().getX() , 1));
+        this.setDirection(new Vector2D(this.getDirection().getX(), 1));
     }
 
     /**
@@ -202,7 +236,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     @Override
     public void stopVertical() {
-        this.setDirection(new Vector2D(this.getDirection().getX() , 0));
+        this.setDirection(new Vector2D(this.getDirection().getX(), 0));
 
     }
     /**
@@ -210,11 +244,12 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     @Override
     public void stopHorizontal() {
-        this.setDirection(new Vector2D(0 , this.getDirection().getY()));
+        this.setDirection(new Vector2D(0, this.getDirection().getY()));
     }
 
     /**
-     * TODO
+     * @param obj2 
+     * the object the character is collide with.
      */
     @Override
     public void collideWith(final GameObject obj2) {
