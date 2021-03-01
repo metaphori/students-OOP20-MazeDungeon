@@ -6,6 +6,7 @@ import java.util.Optional;
 import model.common.Point2D;
 import model.gameobject.GameObject;
 import model.room.RoomManager;
+import model.shop.Shop;
 
 public interface Model {
     Point2D getGameObjectPosition(int id);
@@ -19,4 +20,6 @@ public interface Model {
     RoomManager getRoomManager();
 
     boolean isGameOver();
+
+    Shop getShop();
 }

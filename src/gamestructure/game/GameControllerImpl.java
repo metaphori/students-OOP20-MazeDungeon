@@ -158,6 +158,8 @@ public class GameControllerImpl implements GameController {
     @Override
     public void notifyClosedInGameMenu() {
         this.command.setMenuClosed();
+        this.view.renderItems(this.model.getShop().getCart());
+        this.model.getShop().clearCart();
     }
 
     

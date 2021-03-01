@@ -1,7 +1,11 @@
 package gamestructure.game;
 
+import java.util.List;
+import java.util.Set;
+
 import model.common.GameObjectType;
 import model.common.Point2D;
+import model.shop.Items;
 import mvc.View;
 
 public interface GameView extends View {
@@ -18,4 +22,6 @@ public interface GameView extends View {
     void initialize();
 
     void gameOver();
+
+    void renderItems(Set<Items> purchasedItems);
 }

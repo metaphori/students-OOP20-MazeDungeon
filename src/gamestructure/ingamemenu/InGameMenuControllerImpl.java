@@ -10,7 +10,6 @@ import model.shop.ShopImpl;
 import mvc.Model;
 
 public class InGameMenuControllerImpl implements InGameMenuController {
-    private final Model model;
     private final GameController gameController;
 
     private final Shop shopModel;
@@ -23,11 +22,7 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     public InGameMenuControllerImpl(final GameController gameController, final Model model) {
         this.gameController = gameController;
         this.view.show();
-        this.model = model; 
-        final double actualLife = model.getRoomManager().getCurrentRoom().getCharacter().get().getLife();
-        final int actualMoney = model.getRoomManager().getCurrentRoom().getCharacter().get().getMoney();
-        final double maxLife = model.getRoomManager().getCurrentRoom().getCharacter().get().getMaxLife();
-        this.shopModel = new ShopImpl(this.model, maxLife, actualLife, actualMoney);
+        this.shopModel = model.getShop();
     }
 
     /**
@@ -49,6 +44,7 @@ public class InGameMenuControllerImpl implements InGameMenuController {
      * 
      */
     public void openShop() {
+        this.view.setPriceItem(shopModel.addPrice());
         this.view.showShop();
 
     }

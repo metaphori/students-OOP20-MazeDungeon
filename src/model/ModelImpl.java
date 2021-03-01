@@ -8,10 +8,15 @@ import model.common.Point2D;
 import model.gameobject.GameObject;
 import model.room.RoomManager;
 import model.room.RoomManagerImpl;
+import model.shop.Shop;
+import model.shop.ShopImpl;
 import mvc.Model;
+
 
 public class ModelImpl implements Model {
     private final RoomManager roomManager = new RoomManagerImpl();
+    private final Shop shop = new ShopImpl(this, this.roomManager.getCurrentRoom().getCharacter().get());
+    
     /**
      */
     @Override
@@ -52,5 +57,9 @@ public class ModelImpl implements Model {
     @Override
     public boolean isGameOver() {
         return this.roomManager.getCurrentRoom().getCharacter().get().isDead();
+    }
+    @Override
+    public Shop getShop() {
+        return this.shop;
     }
 }
