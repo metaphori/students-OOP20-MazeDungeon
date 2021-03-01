@@ -8,6 +8,10 @@ import java.util.Optional;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.stream.Collectors;
 
+import gamestructure.mainmenu.MainMenuController;
+import gamestructure.mainmenu.MainMenuControllerImpl;
+import gamestructure.mainmenu.MainMenuView;
+import gamestructure.mainmenu.MainMenuViewImpl;
 import input.Command;
 import input.CommandImpl;
 import model.common.BoundingBox;
@@ -59,7 +63,18 @@ public class GameControllerImpl implements GameController {
             waitForNextFrame(current);
             lastTime = current;
         }
+        
+        /**TODO: in questa parte va gestita anche la vittoria, inoltre il codice qui sotto 
+         * va messo in un'altra funzione private nel controller*/
         this.view.gameOver();
+        
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        this.view.hide();
+        this.openMainMenu();
     }
 
     private void waitForNextFrame(final long current) {
@@ -140,15 +155,16 @@ public class GameControllerImpl implements GameController {
     /*
      * 
      */
-
     @Override
     public void notifyClosedInGameMenu() {
         this.command.setMenuClosed();
     }
 
+    
+
     @Override
-    public void gameOver() {
-        this.view.gameOver();
+    public void openMainMenu() {
+        final MainMenuController main = new MainMenuControllerImpl();
     }
 
     @Override

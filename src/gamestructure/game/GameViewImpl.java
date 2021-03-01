@@ -46,7 +46,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private final Map<Integer, Sprite> sprites = new ConcurrentSkipListMap<>();
     private final ResourceLoader resourceLoader = new ResourceLoader();
     private final Timer timer;
-    private boolean gameOver = false;
+    private boolean gameOver;
 
     public GameViewImpl() {
         this.frame = new JFrame();
@@ -112,7 +112,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private class GamePanel extends JLayeredPane implements ActionListener {
         private static final long serialVersionUID = 1L;
         private final JLabel lblCoinCounter = new JLabel();
-        private  Image youLoseImage = adaptImage(new ImageIcon("resources/images/HUD/GameOver/gameOverFinal.png"));
+        private final Image youLoseImage = adaptImage(new ImageIcon("resources/images/HUD/GameOver/gameOverFinal.png"));
         private final Image roomImage = adaptImage(new ImageIcon("resources/images/Room/room.png"));
         private final Image coinImage = adaptImage(new ImageIcon("resources/images/HUD/Coins/coin.png"));
         private JProgressBar life;
@@ -137,7 +137,6 @@ public class GameViewImpl implements GameView, KeyListener {
             final List<Sprite> temp = new ArrayList<>(sprites.values());
             g.drawImage(this.roomImage, 0, 0, null);
             g.drawImage(this.coinImage, 10, 50, null);
-
             temp.forEach(sprite -> {
                 g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
             }); 
@@ -164,6 +163,7 @@ public class GameViewImpl implements GameView, KeyListener {
             this.add(items);
             items.addItem();
         }
+
     }
 
     /**
@@ -246,7 +246,7 @@ public class GameViewImpl implements GameView, KeyListener {
     @Override
     public void gameOver() {
         this.gameOver = true;
-
+       // this.controller.gameOver();
     }
 }
 

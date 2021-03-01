@@ -22,5 +22,6 @@ public interface GameController {
 
     Optional<Character> getCharacter();
 
-    void gameOver();
+
+    void openMainMenu();
 }
