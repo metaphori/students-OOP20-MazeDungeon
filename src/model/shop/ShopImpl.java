@@ -1,6 +1,8 @@
 package model.shop;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import model.gameobject.dinamicobject.character.Character;
@@ -19,6 +21,7 @@ public class ShopImpl implements Shop {
     private static final int PRICE_ORACLEAMULET = 7;
 
     private final Set<Items> purchasedItems = new HashSet<>();
+    private final Set<Items> cart = new HashSet<>();
     private String messageOuput = "";
 
     private final String msgBought;
@@ -28,20 +31,20 @@ public class ShopImpl implements Shop {
     private final double maxLife;
 
     private final Model model;
-
-    public ShopImpl(final Model model, final double maxLife, final double actualLife, final int actualMoney) {
+    public ShopImpl(final Model model, final Character character) {
+      
         this.model = model;
-        this.maxLife = maxLife;
+        this.maxLife = character.getMaxLife();
         //this.actualMoney = actualMoney;
         msgBought = "You bought this item! You have: " + actualMoney + " money";
         msgNoMoney = "You don't have enough coins!";
-        this.actualLife = actualLife;
-        this.actualMoney = actualMoney;
+        this.actualLife = character.getLife();
+        this.actualMoney = character.getMoney();
     }
     /**
      * @return .
      */
-    private void addSkills(Item item) {
+    private void addSkills(final Item item) {
         final Character c = this.model.getRoomManager().getCurrentRoom().getCharacter().get();
         c.setDamage(c.getDamage() + item.getDamage());///////////
         c.setSpeed(c.getSpeed() + item.getSpeed());
@@ -51,7 +54,15 @@ public class ShopImpl implements Shop {
         c.addItem(item);
 
     }
-
+    public Map<Items, Integer> addPrice(){
+        final Map<Items, Integer> mapPrice = new HashMap<>();
+        mapPrice.put(Items.ARTHEMIDEBOW, PRICE_ARTHEMIDEBOW);
+        mapPrice.put(Items.HERMESBOOTS, PRICE_HERMESBOOTS);
+        mapPrice.put(Items.ZEUSBOLT, PRICE_ZEUSBOLT);
+        mapPrice.put(Items.HEALTH, PRICE_HEALTH);
+        mapPrice.put(Items.ORACLEAMULET, PRICE_ORACLEAMULET);
+        return mapPrice;
+    }
     public boolean checkItem(final Items i) {
         if (this.purchasedItems.contains(i)) {
             this.messageOuput = "You already have this item";
@@ -66,6 +77,7 @@ public class ShopImpl implements Shop {
                 if (this.getArthemideBow().getCost() <= this.actualMoney) {
                     this.actualMoney -= this.getArthemideBow().getCost();
                     this.purchasedItems.add(i);
+                    this.cart.add(i);
                     this.addSkills(this.getArthemideBow());
                     this.messageOuput = this.msgBought  + this.actualMoney;
                     return true;
@@ -76,6 +88,7 @@ public class ShopImpl implements Shop {
                 if (this.getHermesBoots().getCost() <= this.actualMoney) {
                     this.actualMoney -= this.getHermesBoots().getCost();
                     this.purchasedItems.add(i);
+                    this.cart.add(i);
                     this.addSkills(this.getHermesBoots());
                     this.messageOuput = this.msgBought + this.actualMoney;
                     return true;
@@ -86,6 +99,7 @@ public class ShopImpl implements Shop {
                 if (this.getZeusBolt().getCost() <= this.actualMoney) {
                     this.actualMoney -= this.getZeusBolt().getCost();
                     this.purchasedItems.add(i);
+                    this.cart.add(i);
                     this.addSkills(getZeusBolt());
                     this.messageOuput = this.msgBought + this.actualMoney;
                     return true;
@@ -98,6 +112,7 @@ public class ShopImpl implements Shop {
                         this.messageOuput = "You have too much life!";
                         return false;
                     }
+                    this.cart.add(i);
                     this.actualMoney -= this.getHealth().getCost();
                     this.addSkills(getHealth());
                     this.messageOuput = this.msgBought + this.actualMoney;
@@ -113,6 +128,7 @@ public class ShopImpl implements Shop {
                     }
                     this.actualMoney -= this.getHealth().getCost();
                     this.purchasedItems.add(i);
+                    this.cart.add(i);
                     this.addSkills(this.getOracleAmulet());
                     this.messageOuput = this.msgBought + this.actualMoney;
                     return true;
@@ -173,6 +189,13 @@ public class ShopImpl implements Shop {
      */
     public Item getOracleAmulet() {
         return new ItemBuilder.Builder(Items.ORACLEAMULET, PRICE_ORACLEAMULET).addDamage(MORE_DAMAGE).addSpeed(MORE_SPEED).addBulletSpeed(MORE_BULLETSPEED).addHelath(MORE_HEALTH).build();
+    }
+    /**
+     * @return .
+     */
+    public void clearCart() {
+        this.cart.clear();
+
     }
 
 }

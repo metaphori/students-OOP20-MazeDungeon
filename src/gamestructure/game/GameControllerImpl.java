@@ -140,7 +140,6 @@ public class GameControllerImpl implements GameController {
     /*
      * 
      */
-
     @Override
     public void notifyClosedInGameMenu() {
         this.command.setMenuClosed();

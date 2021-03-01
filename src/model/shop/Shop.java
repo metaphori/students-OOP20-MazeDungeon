@@ -1,5 +1,7 @@
 package model.shop;
 
+import java.util.Map;
+
 public interface Shop {
 
     String getMessageOuput();
@@ -31,5 +33,7 @@ public interface Shop {
      * @return .
      */
     //int moneyLeft();
+    Map<Items, Integer> addPrice();
 
+    void clearCart();
 }
