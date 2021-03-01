@@ -48,12 +48,8 @@ public class GameViewImpl implements GameView, KeyListener {
     private final Map<Integer, Sprite> sprites = new ConcurrentSkipListMap<>();
     private final ResourceLoader resourceLoader = new ResourceLoader();
     private final Timer timer;
-<<<<<<< HEAD
-    private boolean gameOver;
-=======
     private final ItemPanel items = new ItemPanel();
     private boolean gameOver = false;
->>>>>>> fbbdd2effd3d4802ffd2cf4716079fd01bdd2864
 
     public GameViewImpl() {
         this.frame = new JFrame();
@@ -260,6 +256,13 @@ public class GameViewImpl implements GameView, KeyListener {
     @Override
     public void gameOver() {
         this.gameOver = true;
+    }
+
+    @Override
+    public void renderItems(final Set<Items> purchasedItems) {
+        for (final Items item : purchasedItems) {
+            this.items.addItem(item);
+        }
     }
 }
 
