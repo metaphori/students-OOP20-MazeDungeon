@@ -8,7 +8,7 @@ public interface BulletFactory {
 
    // Bullet createBullet(GameObjectType bulletType, Point2D initialPosition, Vector2D direction);
 
-    Bullet createCharacterBullet(Point2D initialPosition, Vector2D direction);
+    Bullet createCharacterBullet(Point2D initialPosition, Vector2D direction, int bonusDamage);
 
     Bullet createSkeletonBullet(Point2D initialPosition, Vector2D direction);
 

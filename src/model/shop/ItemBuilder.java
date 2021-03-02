@@ -15,7 +15,7 @@ public final class ItemBuilder implements Item {
     private final double health;
 
     private ItemBuilder(final Items name, final int cost, final int damage, final int speed, final int bulletSpeed, final double health) {
-        super();
+        //super();
         this.name = name;
         this.setCost(cost);
         this.damage = damage;
@@ -58,7 +58,7 @@ public final class ItemBuilder implements Item {
 
         private final Items name;
         private final int cost;
-        private final int speed;
+        private int speed;
         private int damage;
         private int bulletSpeed;
         private double health;
@@ -95,7 +95,7 @@ public final class ItemBuilder implements Item {
          * @return .
          */
         public Builder addSpeed(final int speed) {
-            this.damage = speed;
+            this.speed = speed;
             return this;
         }
         /**

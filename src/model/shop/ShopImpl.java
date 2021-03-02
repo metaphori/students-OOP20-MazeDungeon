@@ -9,16 +9,17 @@ import model.gameobject.dinamicobject.character.Character;
 import mvc.Model;
 
 
+
 public class ShopImpl implements Shop {
     private static final double MORE_HEALTH = 15;
-    private static final int MORE_DAMAGE = 50;
-    private static final int MORE_SPEED = 50;
-    private static final int MORE_BULLETSPEED = 40;
-    private static final int PRICE_ARTHEMIDEBOW = 3;
-    private static final int PRICE_HERMESBOOTS = 2;
+    private static final int MORE_DAMAGE = 15;
+    private static final int MORE_SPEED = 150;
+    private static final int MORE_BULLETSPEED = 3;
+    private static final int PRICE_ARTHEMIDEBOW = 0;
+    private static final int PRICE_HERMESBOOTS = 0;
     private static final int PRICE_ZEUSBOLT = 0;
-    private static final int PRICE_HEALTH = 2;
-    private static final int PRICE_ORACLEAMULET = 7;
+    private static final int PRICE_HEALTH = 0;
+    private static final int PRICE_ORACLEAMULET = 0;
 
     private final Set<Items> purchasedItems = new HashSet<>();
     private final Set<Items> cart = new HashSet<>();
@@ -45,12 +46,15 @@ public class ShopImpl implements Shop {
      */
     private void addSkills(final Item item) {
         final Character c = this.model.getRoomManager().getCharacter();
-        c.setDamage(c.getDamage() + item.getDamage());///////////
-        c.setSpeed(c.getSpeed() + item.getSpeed());
-        c.setBulletSpeed(c.getBulletSpeed() + item.getBulletSpeed());
-        System.out.println(c.getLife() + " VITA PRIMA");
-        c.setLife(item.getHealth());
-        System.out.println(c.getLife() + " VITA");
+       // System.out.println(this.character.getDamage()+"danno prima");
+        this.character.setDamage(this.character.getDamage() + item.getDamage());
+        //System.out.println(this.character.getDamage() +"danno dopo");
+        this.character.setSpeed(this.character.getSpeed() + item.getSpeed());
+        System.out.println(this.character.getSpeed()+"");
+        this.character.setBulletSpeed(this.character.getBulletSpeed() + item.getBulletSpeed());
+        //System.out.println(this.character.getLife() + " VITA PRIMA");
+        this.character.setLife(this.character.getLife() + item.getHealth());
+        //System.out.println(this.character.getLife() + " VITA");
         //c.setMoney(actualMoney);
         c.addItem(item);
 

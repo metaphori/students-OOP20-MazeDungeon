@@ -54,4 +54,8 @@ public interface Character extends DinamicObject {
     void setLife(double life);
 
     boolean isDead();
+    
+    //int getSpeed();
+    
+   // void setSpeed(int speed);
 }
