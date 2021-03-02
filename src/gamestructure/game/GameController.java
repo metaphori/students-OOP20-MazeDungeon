@@ -20,8 +20,7 @@ public interface GameController {
 
     void notifyClosedInGameMenu();
 
-    Optional<Character> getCharacter();
-
+    Character getCharacter();
 
     void openMainMenu();
 }

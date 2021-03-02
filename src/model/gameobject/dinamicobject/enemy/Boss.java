@@ -81,15 +81,12 @@ public class Boss extends AbstractEnemy {
 
     @Override
     public void shoot() {
-        if (this.getRoom().getCharacterPosition().isEmpty()) {
-            return;
-        }
         final Bullet bullet;
         if (this.getLife() >=  this.maxLife / 2) {
             bullet = this.getBulletFactory().createBossBullet(this.getPosition().sum(new Vector2D(ALIGN_SHOOT_X, ALIGN_SHOOT_Y)),
                     new Vector2D(0, 1).getNormalized());
         } else {
-            final Point2D characterPosition = this.getRoom().getCharacterPosition().get();
+            final Point2D characterPosition = this.getRoom().getRoomManager().getCharacter().getPosition();
             bullet = this.getBulletFactory().createBossBullet(this.getPosition().sum(new Vector2D(ALIGN_SHOOT_X, ALIGN_SHOOT_Y)),
                     new Vector2D(characterPosition.getX() - ALIGN_SHOOT_X - this.getPosition().getX(), characterPosition.getY() - ALIGN_SHOOT_Y - this.getPosition().getY()).getNormalized());
         }

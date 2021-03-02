@@ -28,10 +28,6 @@ public interface Room {
 
     RoomManager getRoomManager();
 
-    Optional<Point2D> getCharacterPosition();
-
-    Optional<Character> getCharacter();
-
     void addDoor(Direction direction);
 
     boolean isDoorOpen();

@@ -104,28 +104,6 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @return return the position of the character if the character is in the room
-     * @Override 
-     */
-    public Optional<Point2D> getCharacterPosition() {
-        if (getCharacter().isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(this.getCharacter().get().getPosition());
-    }
-
-    /**
-     * @return the character if is in the room
-     * @Override
-     */
-    public Optional<Character> getCharacter() {
-        return dinamicObjects.stream()
-                             .filter(obj -> obj.getGameObjectType() == GameObjectType.CHARACTER) //<- posso essere indipendente da meobjectType e controllare se è castabile a character?
-                             .map(obj -> (Character) obj)
-                             .findAny();
-    }
-
-    /**
      * 
      */
     @Override

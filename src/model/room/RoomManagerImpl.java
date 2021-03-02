@@ -28,7 +28,9 @@ public class RoomManagerImpl implements RoomManager {
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
     private final ObstaclesFactory obstaclesFactory = new ObstaclesFactory(UL_CORNER, BR_CORNER);
     private DoorFactory doorFactory = new DoorFactoryImpl();
-    //private final DoorFactory doorFactory = new DoorFactoryImpl();
+    private final Character character = new CharacterImpl(new Point2D(300, 200), GameObjectType.CHARACTER);
+    
+    
     private final Map<Direction, Point2D> characterSpawnPosition = new HashMap<>() {{
         put(Direction.UP, new Point2D(620, 550));
         put(Direction.DOWN, new Point2D(620, 200));
@@ -74,8 +76,6 @@ public class RoomManagerImpl implements RoomManager {
 
         actualRoom = new RoomImpl(this);
         actualRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
-        //actualRoom.addSimpleObject(obstaclesFactory.createXComposition());
-        final Character character = new CharacterImpl(new Point2D(300, 200), GameObjectType.CHARACTER);
         actualRoom.addDinamicObject(character);
         rooms.put(new Point2D(0, 0), actualRoom);
 
@@ -139,13 +139,22 @@ public class RoomManagerImpl implements RoomManager {
      */
     public void changeRoom(final Direction direction) {
         final Room newRoom = rooms.get(this.getNearbyPoint(this.getRoomPosition(actualRoom), direction));
-        if (newRoom == null || actualRoom.getCharacter().isEmpty()) {
+        if (newRoom == null) {
             return;
         }
-        actualRoom.getCharacter().get().setPosition(characterSpawnPosition.get(direction));
-        newRoom.addDinamicObject(actualRoom.getCharacter().get());
+        this.getCharacter().setPosition(characterSpawnPosition.get(direction));
+        newRoom.addDinamicObject(this.getCharacter());
         actualRoom.clean();
         actualRoom = newRoom;
+    }
+
+    /**
+     * 
+     * @return the character.
+     */
+    @Override
+    public Character getCharacter() {
+        return this.character;
     }
 
 }

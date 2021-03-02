@@ -15,7 +15,7 @@ import mvc.Model;
 
 public class ModelImpl implements Model {
     private final RoomManager roomManager = new RoomManagerImpl();
-    private final Shop shop = new ShopImpl(this, this.roomManager.getCurrentRoom().getCharacter().get());
+    private final Shop shop = new ShopImpl(this, this.roomManager.getCharacter());
     
     /**
      */
@@ -56,7 +56,7 @@ public class ModelImpl implements Model {
 
     @Override
     public boolean isGameOver() {
-        return this.roomManager.getCurrentRoom().getCharacter().get().isDead();
+        return this.roomManager.getCharacter().isDead();
     }
     @Override
     public Shop getShop() {

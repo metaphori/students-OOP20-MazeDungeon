@@ -69,10 +69,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
             }
 
             private void followCharacter() {
-                if (this.getRoom().getCharacterPosition().isEmpty()) {
-                    return;
-                }
-                final Point2D characterPosition = this.getRoom().getCharacterPosition().get();
+                final Point2D characterPosition = this.getRoom().getRoomManager().getCharacter().getPosition();
                 this.setDirection(new Vector2D(characterPosition.getX() - this.getPosition().getX(), 
                         characterPosition.getY() - this.getPosition().getY()).getNormalized());
             }
@@ -95,10 +92,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
 
             @Override
             public void shoot() {
-                if (this.getRoom().getCharacterPosition().isEmpty()) {
-                    return;
-                }
-                final Point2D characterPosition = this.getRoom().getCharacterPosition().get();
+                final Point2D characterPosition = this.getRoom().getRoomManager().getCharacter().getPosition();
                 final Bullet bullet = this.getBulletFactory().createSoulBullet(this.getPosition(),
                         new Vector2D(characterPosition.getX() - this.getPosition().getX(), characterPosition.getY() - this.getPosition().getY()).getNormalized());
                 this.getRoom().addDinamicObject(bullet);

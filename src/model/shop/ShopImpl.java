@@ -44,7 +44,7 @@ public class ShopImpl implements Shop {
      * @return .
      */
     private void addSkills(final Item item) {
-        final Character c = this.model.getRoomManager().getCurrentRoom().getCharacter().get();
+        final Character c = this.model.getRoomManager().getCharacter();
         c.setDamage(c.getDamage() + item.getDamage());///////////
         c.setSpeed(c.getSpeed() + item.getSpeed());
         c.setBulletSpeed(c.getBulletSpeed() + item.getBulletSpeed());

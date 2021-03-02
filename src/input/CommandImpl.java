@@ -67,34 +67,31 @@ public class CommandImpl implements Command {
     @Override
     public void execute() {
 
-        final Optional<Character> character = this.model.getRoomManager().getCurrentRoom().getCharacter();
-        if (character.isEmpty()) {
-            return;
-        }
+        final Character character = this.model.getRoomManager().getCharacter();
         if (this.keysMap.get(KeyEvent.VK_W)) {
-            character.get().moveUp();
+            character.moveUp();
         }
         if (this.keysMap.get(KeyEvent.VK_S)) {
-            character.get().moveDown();
+            character.moveDown();
         }
         if (this.keysMap.get(KeyEvent.VK_D)) {
-            character.get().moveRight();
+            character.moveRight();
         }
         if (this.keysMap.get(KeyEvent.VK_A)) {
-            character.get().moveLeft();
+            character.moveLeft();
         }
 
         if (this.keysMap.get(KeyEvent.VK_UP)) {
-            character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_UP));
+            character.setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_UP));
         }
         if (this.keysMap.get(KeyEvent.VK_DOWN)) {
-            character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_DOWN));
+            character.setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_DOWN));
         }
         if (this.keysMap.get(KeyEvent.VK_LEFT)) {
-            character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_LEFT));
+            character.setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_LEFT));
         }
         if (this.keysMap.get(KeyEvent.VK_RIGHT)) {
-            character.get().setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_RIGHT));
+            character.setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_RIGHT));
         }
 
         if (this.keysMap.get(KeyEvent.VK_ESCAPE) && !this.menuIsOpen) {
@@ -105,11 +102,11 @@ public class CommandImpl implements Command {
 
 
         if (this.checkStopVertical()) {
-            character.get().stopVertical();
+            character.stopVertical();
         }
 
         if (this.checkStopHorizontal()) {
-            character.get().stopHorizontal();
+            character.stopHorizontal();
         }
      }
 

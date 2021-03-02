@@ -148,8 +148,8 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override 
-    public Optional<Character> getCharacter() {
-        return this.model.getRoomManager().getCurrentRoom().getCharacter();
+    public Character getCharacter() {
+        return this.model.getRoomManager().getCharacter();
     }
 
     /*
