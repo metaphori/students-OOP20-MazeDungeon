@@ -22,4 +22,6 @@ public interface Model {
     boolean isGameOver();
 
     Shop getShop();
+
+    boolean isWon();
 }

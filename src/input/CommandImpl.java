@@ -24,6 +24,8 @@ import gamestructure.mainmenu.MainMenuViewImpl;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.dinamicobject.character.Character;
+import model.gameobject.dinamicobject.character.CharacterMovement;
+import model.gameobject.dinamicobject.character.CharacterMovementImpl;
 import mvc.Model;
 
 public class CommandImpl implements Command {
@@ -68,17 +70,19 @@ public class CommandImpl implements Command {
     public void execute() {
 
         final Character character = this.model.getRoomManager().getCharacter();
+        final CharacterMovement chMovement = new CharacterMovementImpl(character);
+        
         if (this.keysMap.get(KeyEvent.VK_W)) {
-            character.moveUp();
+            chMovement.moveUp();
         }
         if (this.keysMap.get(KeyEvent.VK_S)) {
-            character.moveDown();
+            chMovement.moveDown();
         }
         if (this.keysMap.get(KeyEvent.VK_D)) {
-            character.moveRight();
+            chMovement.moveRight();
         }
         if (this.keysMap.get(KeyEvent.VK_A)) {
-            character.moveLeft();
+            chMovement.moveLeft();
         }
 
         if (this.keysMap.get(KeyEvent.VK_UP)) {
@@ -94,19 +98,20 @@ public class CommandImpl implements Command {
             character.setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_RIGHT));
         }
 
-        if (this.keysMap.get(KeyEvent.VK_ESCAPE) && !this.menuIsOpen) {
+        /*if (this.keysMap.get(KeyEvent.VK_ESCAPE) && !this.menuIsOpen) {
             final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController, this.model);
+            menuController.setup();
             this.menuIsOpen = true;
             return;
-        }
+        }*/
 
 
         if (this.checkStopVertical()) {
-            character.stopVertical();
+            chMovement.stopVertical();
         }
 
         if (this.checkStopHorizontal()) {
-            character.stopHorizontal();
+            chMovement.stopHorizontal();
         }
      }
 
@@ -117,6 +122,7 @@ public class CommandImpl implements Command {
     public void setKey(final KeyEvent key, final boolean b) {
         if (key.getKeyCode() == KeyEvent.VK_ESCAPE && !this.menuIsOpen) {
             final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController, this.model);
+            menuController.setup();
             this.menuIsOpen = true;
             return;
         }

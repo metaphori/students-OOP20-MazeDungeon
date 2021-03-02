@@ -13,6 +13,7 @@ public enum GameObjectType {
      * 
      */
     COIN(CollisionType.INTERACTIVE_ELEMENT),
+    FINAL_ARTEFACT(CollisionType.INTERACTIVE_ELEMENT),
     DOOR_LEFT(CollisionType.INTERACTIVE_ELEMENT),
     DOOR_RIGHT(CollisionType.INTERACTIVE_ELEMENT),
     DOOR_UP(CollisionType.INTERACTIVE_ELEMENT),

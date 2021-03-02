@@ -20,16 +20,16 @@ import model.shop.Items;
 
 public class InGameMenuViewImpl implements InGameMenuView  {
     
-    private final JLayeredPane backGroundPanel = new JLayeredPane();
+    //private final JLayeredPane backGroundPanel = new JLayeredPane();
     
     private static final int SIZE_IMAGE_ITEM = 100;
     private static final double WIDTH_RATIO = 0.67; 
     private static final double HEIGHT_RATIO = 0.736;
-    private String priceArthemideBow = "2";
-    private String priceHermesBoots = "2";
-    private String priceZeusBolth = "2";
-    private String priceHelath = "2";
-    private String priceOracleAmulet = "2";
+    private String priceArthemideBow;
+    private String priceHermesBoots;
+    private String priceZeusBolth;
+    private String priceHelath;
+    private String priceOracleAmulet;
     private final JFrame frame = new JFrame();
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 

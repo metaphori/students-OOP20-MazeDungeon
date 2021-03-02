@@ -11,9 +11,9 @@ import model.ModelImpl;
 
 public class TestInGameMenu {
 
-    public static void main(final String[] args){
-        final InGameMenuController controller = new InGameMenuControllerImpl(new GameControllerImpl( new GameViewImpl(), new ModelImpl()), new ModelImpl());
-
+    public static void main(final String[] args) {
+        final InGameMenuController controller = new InGameMenuControllerImpl(new GameControllerImpl(new ModelImpl()), new ModelImpl());
+        controller.setup();
     }
 
 }

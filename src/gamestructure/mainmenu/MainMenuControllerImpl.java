@@ -9,10 +9,14 @@ import mvc.Model;
 
 public class MainMenuControllerImpl implements MainMenuController {
 
-    private final MainMenuView view = new MainMenuViewImpl();
+    private MainMenuView view;
 
-    public MainMenuControllerImpl() {
-        this.view.setController(this);
+    /**
+     * 
+     */
+    @Override
+    public void setup() {
+        this.view = new MainMenuViewImpl(this);
         this.view.show();
     }
 
@@ -26,7 +30,7 @@ public class MainMenuControllerImpl implements MainMenuController {
             public void run() {
                 final GameView view = new GameViewImpl();
                 final Model model = new ModelImpl();
-                final GameController controller = new GameControllerImpl(view, model);
+                final GameController controller = new GameControllerImpl(model);
                 controller.setup();
                 controller.mainLoop();
             }

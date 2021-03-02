@@ -9,9 +9,8 @@ import mvc.Model;
 
 public class TestGame {
     public static void main(final String[] args) {
-        final GameView view = new GameViewImpl();
         final Model model = new ModelImpl();
-        final GameController controller = new GameControllerImpl(view, model);
+        final GameController controller = new GameControllerImpl(model);
         controller.setup();
         controller.mainLoop();
     }

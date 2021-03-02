@@ -29,8 +29,8 @@ public class GameControllerImpl implements GameController {
     private final Command command;
 
 
-    public GameControllerImpl(final GameView view, final Model model) {
-        this.view = view;
+    public GameControllerImpl(final Model model) {
+        this.view = new GameViewImpl();
         this.model = model;
         this.command = new CommandImpl(this.model, this);
     }
@@ -49,7 +49,7 @@ public class GameControllerImpl implements GameController {
      */
     public void mainLoop() {
         long lastTime = System.currentTimeMillis();
-        while (!this.model.isGameOver()) {
+        while (!this.model.isGameOver() && !this.model.isWon()) {
             final long current = System.currentTimeMillis();
             /*if (this.command.isMenuOpen()) {
                 waitForNextFrame(current);
@@ -63,11 +63,12 @@ public class GameControllerImpl implements GameController {
             waitForNextFrame(current);
             lastTime = current;
         }
-        
-        /**TODO: in questa parte va gestita anche la vittoria, inoltre il codice qui sotto 
-         * va messo in un'altra funzione private nel controller*/
-        this.view.gameOver();
-        
+
+        if (this.model.isGameOver()) {
+            this.view.gameOver();
+        } else {
+            this.view.isWon();
+        }
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -89,7 +90,7 @@ public class GameControllerImpl implements GameController {
     }
 
     private void processInput() {
-            this.command.execute();
+        this.command.execute();
     }
 
     private void updateGame(final double elapsed) {
@@ -100,7 +101,7 @@ public class GameControllerImpl implements GameController {
 
     private void render() {
         this.updateSpritePositions();
-        this.view.render();
+        this.view.updateHUD();
     } 
     /**
      * 
@@ -167,6 +168,7 @@ public class GameControllerImpl implements GameController {
     @Override
     public void openMainMenu() {
         final MainMenuController main = new MainMenuControllerImpl();
+        main.setup();
     }
 
     @Override
@@ -175,9 +177,7 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    public void releaseKey(KeyEvent key) {
+    public void releaseKey(final KeyEvent key) {
         this.command.setKey(key, false);
     }
-
-
 }

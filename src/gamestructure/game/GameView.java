@@ -1,6 +1,5 @@
 package gamestructure.game;
 
-import java.util.List;
 import java.util.Set;
 
 import model.common.GameObjectType;
@@ -9,7 +8,7 @@ import model.shop.Items;
 import mvc.View;
 
 public interface GameView extends View {
-    void render();
+    void updateHUD();
 
     void setController(GameController controller);
 
@@ -24,4 +23,6 @@ public interface GameView extends View {
     void gameOver();
 
     void renderItems(Set<Items> purchasedItems);
+
+    void isWon();
 }

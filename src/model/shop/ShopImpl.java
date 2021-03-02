@@ -31,10 +31,8 @@ public class ShopImpl implements Shop {
     //private final double actualLife;
     //private final double maxLife;
     private final Character character;
-    private final Model model;
-    public ShopImpl(final Model model, final Character character) {
+    public ShopImpl(final Character character) {
         this.character = character;
-        this.model = model;
         //this.actualMoney = actualMoney;
         msgBought = "You bought this item! You have coins: ";
         msgNoMoney = "You don't have enough coins!";
@@ -45,18 +43,25 @@ public class ShopImpl implements Shop {
      * @return .
      */
     private void addSkills(final Item item) {
-        final Character c = this.model.getRoomManager().getCharacter();
        // System.out.println(this.character.getDamage()+"danno prima");
-        this.character.setDamage(this.character.getDamage() + item.getDamage());
+        System.out.println(this.character.getBonusDamage() + " DANNO prima");
+        this.character.setBonusDamage(this.character.getBonusDamage() + item.getDamage());
+        System.out.println(this.character.getBonusDamage() + " DANNO dopo");
         //System.out.println(this.character.getDamage() +"danno dopo");
+        System.out.println(this.character.getSpeed()+" VELOCITA prima");
         this.character.setSpeed(this.character.getSpeed() + item.getSpeed());
-        System.out.println(this.character.getSpeed()+"");
+        System.out.println(this.character.getSpeed()+" VELOCITA dopo");
+        
+        System.out.println(this.character.getBulletSpeed()+" VELOCITA BULLET prima");
         this.character.setBulletSpeed(this.character.getBulletSpeed() + item.getBulletSpeed());
+        System.out.println(this.character.getBulletSpeed()+" VELOCITA BULLET dopo");
         //System.out.println(this.character.getLife() + " VITA PRIMA");
+        System.out.println(this.character.getLife()+" LIFE prima");
         this.character.setLife(this.character.getLife() + item.getHealth());
+        System.out.println(this.character.getLife()+" LIFE dopo");
         //System.out.println(this.character.getLife() + " VITA");
         //c.setMoney(actualMoney);
-        c.addItem(item);
+        this.character.addItem(item);
 
     }
     public Map<Items, Integer> addPrice(){
@@ -125,7 +130,7 @@ public class ShopImpl implements Shop {
                 messageOuput = msgNoMoney;
                 break;
             case ORACLEAMULET:
-                if (this.getHealth().getCost() <= this.character.getMoney()) {
+                if (this.getOracleAmulet().getCost() <= this.character.getMoney()) {
                     /*if (this.actualLife + this.getHealth().getHealth() > maxLife) {
                         this.messageOuput = "You have too much life!";
                         return false;
