@@ -75,7 +75,7 @@ public class RoomManagerImpl implements RoomManager {
     private void createGameMap() {
 
         actualRoom = new RoomImpl(this);
-        actualRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
+        actualRoom.addSimpleObject(obstaclesFactory.createSquare(3));
         actualRoom.addDinamicObject(character);
         rooms.put(new Point2D(0, 0), actualRoom);
 
@@ -95,13 +95,17 @@ public class RoomManagerImpl implements RoomManager {
             } else {
                 final Room newRoom = new RoomImpl(this);
 
-                newRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
+                newRoom.addSimpleObject(obstaclesFactory.createSquare(3));
                 newRoom.addDoor(Direction.getOppositeDirection(extractedDirection));
                 newRoom.addSimpleObject(doorFactory.createDoor(newRoom, Direction.getOppositeDirection(extractedDirection)));
-                newRoom.addDinamicObject(this.enemyFactory.createSkeletonSeeker(new Point2D(550, 300)));
                 rooms.put(newRoomPosition, newRoom);
                 extractedRoom.addSimpleObject(doorFactory.createDoor(rooms.get(extractedPosition), extractedDirection));
                 extractedRoom.addDoor(extractedDirection);
+
+                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(266, 168)));
+                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(940, 200)));
+                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(254, 550)));
+                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(940, 550)));
 
             }
         }
