@@ -29,9 +29,10 @@ public class MainMenuViewImpl implements MainMenuView {
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private static final double WIDTH_RATIO = 0.67; 
     private static final double HEIGHT_RATIO = 0.736;
-    private MainMenuController controller;
+    private final MainMenuController controller;
 
-    public MainMenuViewImpl() {
+    public MainMenuViewImpl(final MainMenuController controller) {
+        this.controller = controller;
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 
@@ -85,13 +86,5 @@ public class MainMenuViewImpl implements MainMenuView {
         btn.setBorder(new LineBorder(Color.BLACK));
         btn.setFocusPainted(false);
         this.lblBackground.add(btn);
-    }
-
-    /**
-     * @Override
-     * @param controller : the controller of this view
-     */
-    public void setController(final MainMenuController controller) {
-        this.controller = controller;
     }
 }

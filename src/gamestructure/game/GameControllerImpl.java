@@ -29,8 +29,8 @@ public class GameControllerImpl implements GameController {
     private final Command command;
 
 
-    public GameControllerImpl(final GameView view, final Model model) {
-        this.view = view;
+    public GameControllerImpl(final Model model) {
+        this.view = new GameViewImpl();
         this.model = model;
         this.command = new CommandImpl(this.model, this);
     }
@@ -89,7 +89,7 @@ public class GameControllerImpl implements GameController {
     }
 
     private void processInput() {
-            this.command.execute();
+        this.command.execute();
     }
 
     private void updateGame(final double elapsed) {
@@ -100,7 +100,7 @@ public class GameControllerImpl implements GameController {
 
     private void render() {
         this.updateSpritePositions();
-        this.view.render();
+        this.view.updateHUD();
     } 
     /**
      * 
@@ -175,9 +175,7 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    public void releaseKey(KeyEvent key) {
+    public void releaseKey(final KeyEvent key) {
         this.command.setKey(key, false);
     }
-
-
 }
