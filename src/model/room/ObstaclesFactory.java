@@ -16,10 +16,10 @@ import model.gameobject.simpleobject.SimpleObjectImpl;
 import model.gameobject.simpleobject.Wall;
 
 public class ObstaclesFactory {
-    private static final int obstacleForRow = 24;
-    private static final int obstacleForCol = 14;
-    private static final int freeRows = 4;
-    private static final int freeCols = 3;
+    private static final int OBSTACLE_FOR_ROW = 24;
+    private static final int OBSTACLE_FOR_COL = 14;
+    private static final int FREE_ROWS = 4;
+    private static final int FREE_COLS = 4;
     private final double obstacleWidth;
     private final double obstacleHeight;
     private final Point2D ulCorner;
@@ -32,8 +32,8 @@ public class ObstaclesFactory {
         this.brCorner = brCorner;
         this.width = brCorner.getX() - ulCorner.getX();
         this.height = brCorner.getY() - ulCorner.getY();
-        this.obstacleWidth = this.width / obstacleForRow;
-        this.obstacleHeight = this.height / obstacleForCol;
+        this.obstacleWidth = this.width / OBSTACLE_FOR_ROW;
+        this.obstacleHeight = this.height / OBSTACLE_FOR_COL;
     }
 
     /**
@@ -42,65 +42,30 @@ public class ObstaclesFactory {
     public List<SimpleObject> getEmptyRoom() {
         return this.getWalls();
     }
-    
-    /**
-     * 
-     * @return .
-     */
-    public List<SimpleObject> createXComposition() {
-        final List<SimpleObject> obstacles = new LinkedList<>(getEmptyRoom());
-        obstacles.add(getObstacle(getObstaclePosition(4, 9)));
-        obstacles.add(getObstacle(getObstaclePosition(4, 16)));
-        obstacles.add(getObstacle(getObstaclePosition(5, 10)));
-        obstacles.add(getObstacle(getObstaclePosition(5, 15)));
-        obstacles.add(getObstacle(getObstaclePosition(6, 11)));
-        obstacles.add(getObstacle(getObstaclePosition(6, 14)));
-        obstacles.add(getObstacle(getObstaclePosition(7, 12)));
-        obstacles.add(getObstacle(getObstaclePosition(7, 13)));
-        obstacles.add(getObstacle(getObstaclePosition(8, 12)));
-        obstacles.add(getObstacle(getObstaclePosition(8, 13)));
-        obstacles.add(getObstacle(getObstaclePosition(9, 11)));
-        obstacles.add(getObstacle(getObstaclePosition(9, 14)));
-        obstacles.add(getObstacle(getObstaclePosition(10, 10)));
-        obstacles.add(getObstacle(getObstaclePosition(10, 15)));
-        obstacles.add(getObstacle(getObstaclePosition(11, 9)));
-        obstacles.add(getObstacle(getObstaclePosition(11, 16)));
-        return obstacles;
-    }
 
     /**
      * 
-     * @param n
+     * @param squaresNumber
      * @return .
      */
-    public List<SimpleObject> createRandomComposition(final int n) {
-        final Set<SimpleObject> obstacles = new HashSet<>();
-        final Random rnd = new Random();
-        while (obstacles.size() < n) {
-            obstacles.add(getObstacle(getObstaclePosition(rnd.nextInt(obstacleForCol - 2 * freeRows) + freeRows, 
-                                                          rnd.nextInt(obstacleForRow - 2 * freeCols) + freeCols)));
-        }
-        obstacles.addAll(getEmptyRoom());
-        return new LinkedList<>(obstacles);
-    }
-
-    /**
-     * 
-     * @param size
-     * @return .
-     */
-    public List<SimpleObject> createSquare(final int size) {
+    public List<SimpleObject> createSquare(final int squaresNumber) {
         final List<SimpleObject> obstacles = new LinkedList<>();
         final Random rnd = new Random();
 
-        final int ulX = rnd.nextInt(obstacleForCol - 2 * freeRows - size + 1) + freeRows;
-        final int ulY = rnd.nextInt(obstacleForRow - 2 * freeCols - size + 1) + freeCols;
+        for (int n = 0; n < squaresNumber; n++) {
+            final int size = rnd.nextInt(OBSTACLE_FOR_COL / 2); //7 max
+            final int ulX = rnd.nextInt(OBSTACLE_FOR_COL - 2 * (FREE_ROWS - 1) - size);
+            final int ulY = rnd.nextInt(OBSTACLE_FOR_ROW - 2 * (FREE_COLS - 1) - size);
 
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                obstacles.add(getObstacle(getObstaclePosition(ulX + i, ulY + j)));
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    if (i == 0 || i == size - 1 || j == 0 || j == size - 1) {
+                        obstacles.add(getObstacle(getObstaclePosition(ulX + i, ulY + j)));
+                    }
+                }
             }
         }
+        //obstacles.add(getObstacle(getObstaclePosition(7, 0)));
         obstacles.addAll(getEmptyRoom());
         return new LinkedList<>(obstacles);
     }
@@ -134,7 +99,8 @@ public class ObstaclesFactory {
      * @return
      */
     private Point2D getObstaclePosition(final int x, final int y) {
-        return new Point2D(obstacleWidth * (y - 1) + ulCorner.getX(), obstacleHeight * (x - 1) + ulCorner.getY());
+        return new Point2D(obstacleWidth * (y - 1 + FREE_COLS) + ulCorner.getX(), 
+                           obstacleHeight * (x - 1 + FREE_ROWS) + ulCorner.getY());
     }
 
     private Obstacle getObstacle(final Point2D position) {

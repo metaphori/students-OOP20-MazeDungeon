@@ -75,7 +75,7 @@ public class RoomManagerImpl implements RoomManager {
     private void createGameMap() {
 
         actualRoom = new RoomImpl(this);
-        actualRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
+        actualRoom.addSimpleObject(obstaclesFactory.createSquare(3));
         actualRoom.addDinamicObject(character);
         rooms.put(new Point2D(0, 0), actualRoom);
 
@@ -95,7 +95,7 @@ public class RoomManagerImpl implements RoomManager {
             } else {
                 final Room newRoom = new RoomImpl(this);
 
-                newRoom.addSimpleObject(obstaclesFactory.getEmptyRoom());
+                newRoom.addSimpleObject(obstaclesFactory.createSquare(3));
                 newRoom.addDoor(Direction.getOppositeDirection(extractedDirection));
                 newRoom.addSimpleObject(doorFactory.createDoor(newRoom, Direction.getOppositeDirection(extractedDirection)));
                 rooms.put(newRoomPosition, newRoom);
