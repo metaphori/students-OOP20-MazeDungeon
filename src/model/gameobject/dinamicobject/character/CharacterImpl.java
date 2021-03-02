@@ -48,6 +48,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private long lastShootTime; 
     private boolean shoot;
     private Vector2D shootDirection;
+    private boolean won = false;
 
 
     public CharacterImpl(final Point2D position, final GameObjectType gameObjectType) {
@@ -337,6 +338,22 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
             this.shoot = shoot;
             this.shootDirection = shootDirection;
         }
+    }
+    
+    /**
+     * 
+     */
+    @Override
+    public boolean isWon() {
+        return this.won;
+    }
+    
+    /**
+     * 
+     */
+    @Override
+    public void pickedUpFinalArtefact() {
+        this.won = true;
     }
 }
 

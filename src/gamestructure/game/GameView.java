@@ -23,4 +23,6 @@ public interface GameView extends View {
     void gameOver();
 
     void renderItems(Set<Items> purchasedItems);
+
+    void isWon();
 }

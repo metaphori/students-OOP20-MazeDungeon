@@ -15,7 +15,7 @@ import mvc.Model;
 
 public class ModelImpl implements Model {
     private final RoomManager roomManager = new RoomManagerImpl();
-    private final Shop shop = new ShopImpl(this, this.roomManager.getCharacter());
+    private final Shop shop = new ShopImpl(this.roomManager.getCharacter());
     
     /**
      */
@@ -61,5 +61,10 @@ public class ModelImpl implements Model {
     @Override
     public Shop getShop() {
         return this.shop;
+    }
+
+    @Override
+    public boolean isWon() {
+        return this.roomManager.getCharacter().isWon();
     }
 }

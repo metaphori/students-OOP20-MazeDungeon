@@ -50,6 +50,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private final Timer timer;
     private final ItemPanel items = new ItemPanel();
     private boolean gameOver = false;
+    private boolean won = false;
 
     public GameViewImpl() {
         this.frame = new JFrame();
@@ -136,6 +137,7 @@ public class GameViewImpl implements GameView, KeyListener {
         private static final long serialVersionUID = 1L;
         private final JLabel lblCoinCounter = new JLabel();
         private final Image youLoseImage = adaptImage(new ImageIcon("resources/images/HUD/GameOver/gameOverFinal.png"));
+        private final Image winnerImage = adaptImage(new ImageIcon("resources/images/HUD/Victory/winner.png"));
         private final Image roomImage = adaptImage(new ImageIcon("resources/images/Room/room.png"));
         private final Image coinImage = adaptImage(new ImageIcon("resources/images/HUD/Coins/coin.png"));
         private JProgressBar life;
@@ -163,6 +165,8 @@ public class GameViewImpl implements GameView, KeyListener {
             }); 
             if (gameOver) {
                 g.drawImage(this.youLoseImage, 0, 0, null);
+            } else if (won) {
+                g.drawImage(this.winnerImage, 0, 0, null);
             }
             Toolkit.getDefaultToolkit().sync();
         }
@@ -264,6 +268,11 @@ public class GameViewImpl implements GameView, KeyListener {
         for (final Items item : purchasedItems) {
             this.items.addItem(item);
         }
+    }
+
+    @Override
+    public void isWon() {
+        this.won = true;
     }
 }
 

@@ -31,10 +31,8 @@ public class ShopImpl implements Shop {
     //private final double actualLife;
     //private final double maxLife;
     private final Character character;
-    private final Model model;
-    public ShopImpl(final Model model, final Character character) {
+    public ShopImpl(final Character character) {
         this.character = character;
-        this.model = model;
         //this.actualMoney = actualMoney;
         msgBought = "You bought this item! You have coins: ";
         msgNoMoney = "You don't have enough coins!";
@@ -45,7 +43,6 @@ public class ShopImpl implements Shop {
      * @return .
      */
     private void addSkills(final Item item) {
-        final Character c = this.model.getRoomManager().getCharacter();
        // System.out.println(this.character.getDamage()+"danno prima");
         System.out.println(this.character.getDamage() + " DANNO prima");
         this.character.setDamage(this.character.getDamage() + item.getDamage());
@@ -64,7 +61,7 @@ public class ShopImpl implements Shop {
         System.out.println(this.character.getLife()+" LIFE dopo");
         //System.out.println(this.character.getLife() + " VITA");
         //c.setMoney(actualMoney);
-        c.addItem(item);
+        this.character.addItem(item);
 
     }
     public Map<Items, Integer> addPrice(){

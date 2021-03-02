@@ -49,7 +49,7 @@ public class GameControllerImpl implements GameController {
      */
     public void mainLoop() {
         long lastTime = System.currentTimeMillis();
-        while (!this.model.isGameOver()) {
+        while (!this.model.isGameOver() && !this.model.isWon()) {
             final long current = System.currentTimeMillis();
             /*if (this.command.isMenuOpen()) {
                 waitForNextFrame(current);
@@ -63,11 +63,12 @@ public class GameControllerImpl implements GameController {
             waitForNextFrame(current);
             lastTime = current;
         }
-        
-        /**TODO: in questa parte va gestita anche la vittoria, inoltre il codice qui sotto 
-         * va messo in un'altra funzione private nel controller*/
-        this.view.gameOver();
-        
+
+        if (this.model.isGameOver()) {
+            this.view.gameOver();
+        } else {
+            this.view.isWon();
+        }
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
