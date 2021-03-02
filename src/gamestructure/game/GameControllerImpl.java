@@ -167,6 +167,7 @@ public class GameControllerImpl implements GameController {
     @Override
     public void openMainMenu() {
         final MainMenuController main = new MainMenuControllerImpl();
+        main.setup();
     }
 
     @Override
