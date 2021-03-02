@@ -68,10 +68,19 @@ public class GameViewImpl implements GameView, KeyListener {
      * 
      */
     @Override
+    public void initialize() {
+        this.gamePanel.initialize();
+        this.timer.start();
+    }
+
+    /**
+     * 
+     */
+    @Override
     public void show() {
         this.frame.setVisible(true);
-        this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO),
-                (int) (NATIVE_HEIGHT * HEIGHT_RATIO)));
+        this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO) + this.frame.getInsets().left,
+                (int) (NATIVE_HEIGHT * HEIGHT_RATIO) + this.frame.getInsets().top));
         gamePanel.setSize(this.frame.getSize());
         //this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
         this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2,
@@ -169,7 +178,6 @@ public class GameViewImpl implements GameView, KeyListener {
             life.setForeground(new Color(150, 0, 0));
             this.add(life);
 
-            
             items.setBounds(10, 100, 64, 256);
             this.add(items);
         }
@@ -188,7 +196,7 @@ public class GameViewImpl implements GameView, KeyListener {
      * 
      */
     @Override
-    public void render() {
+    public void updateHUD() {
         gamePanel.updateHUD();
     }
 
@@ -244,14 +252,7 @@ public class GameViewImpl implements GameView, KeyListener {
         // TODO Auto-generated method stub
     }
 
-    /**
-     * 
-     */
-    @Override
-    public void initialize() {
-        this.gamePanel.initialize();
-        this.timer.start();
-    }
+    
 
     @Override
     public void gameOver() {

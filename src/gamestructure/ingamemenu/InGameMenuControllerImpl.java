@@ -21,8 +21,15 @@ public class InGameMenuControllerImpl implements InGameMenuController {
 
     public InGameMenuControllerImpl(final GameController gameController, final Model model) {
         this.gameController = gameController;
-        this.view.show();
         this.shopModel = model.getShop();
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void setup() {
+        this.view.show();
     }
 
     /**
@@ -60,4 +67,6 @@ public class InGameMenuControllerImpl implements InGameMenuController {
         this.view.hide();
         this.gameController.notifyClosedInGameMenu();
     }
+
+    
 }

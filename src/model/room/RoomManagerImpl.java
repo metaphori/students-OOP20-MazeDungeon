@@ -14,6 +14,7 @@ import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.dinamicobject.enemy.EnemyFactory;
 import model.gameobject.dinamicobject.enemy.EnemyFactoryImpl;
+import model.gameobject.simpleobject.FinalArtefact;
 import model.gameobject.dinamicobject.character.Character;
 import model.gameobject.dinamicobject.character.CharacterImpl;
 
@@ -76,6 +77,7 @@ public class RoomManagerImpl implements RoomManager {
 
         actualRoom = new RoomImpl(this);
         actualRoom.addSimpleObject(obstaclesFactory.createSquare(3));
+        actualRoom.addSimpleObject(new FinalArtefact(new Point2D(300, 300), GameObjectType.FINAL_ARTEFACT));
         actualRoom.addDinamicObject(character);
         rooms.put(new Point2D(0, 0), actualRoom);
 
@@ -106,7 +108,6 @@ public class RoomManagerImpl implements RoomManager {
                 newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(940, 200)));
                 newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(254, 550)));
                 newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(940, 550)));
-
             }
         }
     }

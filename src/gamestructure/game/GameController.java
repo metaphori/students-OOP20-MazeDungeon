@@ -5,12 +5,11 @@ import java.util.Optional;
 
 import input.Command;
 import model.common.BoundingBox;
-import model.gameobject.dinamicobject.character.Character;;
+import model.gameobject.dinamicobject.character.Character;
+import mvc.Controller;;
 
-public interface GameController {
+public interface GameController extends Controller {
     void mainLoop();
-
-    void setup();
 
     void setBoundingBox(int id, BoundingBox boundingBox);
 

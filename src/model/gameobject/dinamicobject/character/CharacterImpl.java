@@ -106,7 +106,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     @Override
     public void setLife(final double life) {
-        this.life = this.life + life;
+        this.life = life;
     }
 
     /**

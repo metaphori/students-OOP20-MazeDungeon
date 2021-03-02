@@ -7,6 +7,7 @@ public class TestMainMenu {
 
     public static void main(final String[] args) {
         final MainMenuController controller = new MainMenuControllerImpl();
+        controller.setup();
     }
 
 }

@@ -47,13 +47,21 @@ public class ShopImpl implements Shop {
     private void addSkills(final Item item) {
         final Character c = this.model.getRoomManager().getCharacter();
        // System.out.println(this.character.getDamage()+"danno prima");
+        System.out.println(this.character.getDamage() + " DANNO prima");
         this.character.setDamage(this.character.getDamage() + item.getDamage());
+        System.out.println(this.character.getDamage() + " DANNO dopo");
         //System.out.println(this.character.getDamage() +"danno dopo");
+        System.out.println(this.character.getSpeed()+" VELOCITA prima");
         this.character.setSpeed(this.character.getSpeed() + item.getSpeed());
-        System.out.println(this.character.getSpeed()+"");
+        System.out.println(this.character.getSpeed()+" VELOCITA dopo");
+        
+        System.out.println(this.character.getBulletSpeed()+" VELOCITA BULLET prima");
         this.character.setBulletSpeed(this.character.getBulletSpeed() + item.getBulletSpeed());
+        System.out.println(this.character.getBulletSpeed()+" VELOCITA BULLET dopo");
         //System.out.println(this.character.getLife() + " VITA PRIMA");
+        System.out.println(this.character.getLife()+" LIFE prima");
         this.character.setLife(this.character.getLife() + item.getHealth());
+        System.out.println(this.character.getLife()+" LIFE dopo");
         //System.out.println(this.character.getLife() + " VITA");
         //c.setMoney(actualMoney);
         c.addItem(item);
@@ -125,7 +133,7 @@ public class ShopImpl implements Shop {
                 messageOuput = msgNoMoney;
                 break;
             case ORACLEAMULET:
-                if (this.getHealth().getCost() <= this.character.getMoney()) {
+                if (this.getOracleAmulet().getCost() <= this.character.getMoney()) {
                     /*if (this.actualLife + this.getHealth().getHealth() > maxLife) {
                         this.messageOuput = "You have too much life!";
                         return false;
