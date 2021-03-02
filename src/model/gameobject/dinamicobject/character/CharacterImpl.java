@@ -15,6 +15,7 @@ import model.gameobject.dinamicobject.bullet.*;
 import model.room.Room;
 import model.shop.Item;
 import model.shop.Items;
+import model.gameobject.dinamicobject.character.CharacterMovement;
 
 
 public class CharacterImpl extends AbstractDinamicObject implements Character {
@@ -28,16 +29,14 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private static final int INITIAL_SPEED = 400;
     private static final long INITIAL_SHOOT_SPEED = 3;
     private static final long INITIAL_BULLET_DELAY = 200; 
-    //private static final int INITIAL_BULLET_DAMAGE = 0;
     private static final int INITIAL_MONEY = 0;
 
     /*
      * CHARACTER CHARACTERISTIC.
      */
     private double life;
-    private int bonusDamage = 0;
+    private int bonusDamage;
     private long bulletSpeed;
-   //private int speed;
     private int money;
 
     /**
@@ -48,20 +47,24 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     private long lastShootTime; 
     private boolean shoot;
     private Vector2D shootDirection;
-    private boolean won = false;
+    private boolean won;
+    private CharacterMovement characterMovement;
+
 
 
     public CharacterImpl(final Point2D position, final GameObjectType gameObjectType) {
         super(INITIAL_SPEED, position, gameObjectType);
         this.life = MAX_LIFE;
-        this.money = INITIAL_MONEY;
+        this.bonusDamage = 0;
         this.bulletSpeed = INITIAL_SHOOT_SPEED;
-        //this.bonusDamage = INITIAL_BULLET_DAMAGE;
+        this.money = INITIAL_MONEY;
+
+        this.characterMovement = new CharacterMovementImpl(this);
         this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl();
         this.shoot = false;
         this.lastShootTime = System.currentTimeMillis();
-      //  this.speed = INITIAL_SPEED;
+        this.won = false;
     }
 
 
@@ -122,7 +125,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * @return the current bullet damage.
      */
     @Override
-    public int getDamage() {
+    public int getBonusDamage() {
         return this.bonusDamage;
     }
 
@@ -131,7 +134,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * set the current damage.
      */
     @Override
-    public void setDamage(final int damage) {
+    public void setBonusDamage(final int damage) {
         this.bonusDamage = damage;
     }
 
@@ -167,22 +170,6 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         this.bulletSpeed = bulletSpeed;
     }
 
-    /**
-     * @param speed
-     * set the current character Speed.
-     */
-  
-   /* public void setSpeed(final int speed) {
-        this.speed = speed;
-    }
-    @Override
-   /* public int getSpeed() {
-        return this.speed;
-    }*/
-    /**
-     * @param item
-     * Add to the items list the item passed.
-     */
     @Override
     public void addItem(final Item item) {
         this.items.add(item);
@@ -196,55 +183,6 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         return this.items;
     }
 
-
-    /*METHODS FOR MOVEMENT*/
-    /**
-     * move up the character.
-     */
-    @Override
-    public void moveUp() {
-        this.setDirection(new Vector2D(this.getDirection().getX(), -1));
-    }
-
-    /**
-     * move down the character..
-     */
-    @Override
-    public void moveDown() {
-        this.setDirection(new Vector2D(this.getDirection().getX(), 1));
-    }
-
-    /**
-     * move right the character.
-     */
-    @Override
-    public void moveRight() {
-        this.setDirection(new Vector2D(1, this.getDirection().getY()));
-    }
-
-    /**
-     * move left the character.
-     */
-    @Override
-    public void moveLeft() {
-        this.setDirection(new Vector2D(-1, this.getDirection().getY()));
-    }
-
-    /**
-     * stops the character when moving vertically.
-     */
-    @Override
-    public void stopVertical() {
-        this.setDirection(new Vector2D(this.getDirection().getX(), 0));
-
-    }
-    /**
-     * stops the character when moving horizontally.
-     */
-    @Override
-    public void stopHorizontal() {
-        this.setDirection(new Vector2D(0, this.getDirection().getY()));
-    }
 
     /**
      * @param obj2 

@@ -44,9 +44,9 @@ public class ShopImpl implements Shop {
      */
     private void addSkills(final Item item) {
        // System.out.println(this.character.getDamage()+"danno prima");
-        System.out.println(this.character.getDamage() + " DANNO prima");
-        this.character.setDamage(this.character.getDamage() + item.getDamage());
-        System.out.println(this.character.getDamage() + " DANNO dopo");
+        System.out.println(this.character.getBonusDamage() + " DANNO prima");
+        this.character.setBonusDamage(this.character.getBonusDamage() + item.getDamage());
+        System.out.println(this.character.getBonusDamage() + " DANNO dopo");
         //System.out.println(this.character.getDamage() +"danno dopo");
         System.out.println(this.character.getSpeed()+" VELOCITA prima");
         this.character.setSpeed(this.character.getSpeed() + item.getSpeed());

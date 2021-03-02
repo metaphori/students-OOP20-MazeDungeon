@@ -23,17 +23,7 @@ public interface Character extends DinamicObject {
     /**
      * Methods for movements and shoots.
      */
-    void moveUp();
 
-    void moveDown();
-
-    void moveRight();
-
-    void moveLeft();
-
-    void stopVertical();
-
-    void stopHorizontal();
 
     void setShoot(boolean shoot, Vector2D shootDirection);
 
@@ -43,11 +33,11 @@ public interface Character extends DinamicObject {
 
     void setMoney(int money);
 
-    void setDamage(int damage);
+    void setBonusDamage(int damage);
 
     void setBulletSpeed(long bulletSpeed);
 
-    int getDamage();
+    int getBonusDamage();
 
     long getBulletSpeed();
 
