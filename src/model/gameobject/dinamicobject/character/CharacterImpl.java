@@ -15,7 +15,6 @@ import model.gameobject.dinamicobject.bullet.*;
 import model.room.Room;
 import model.shop.Item;
 import model.shop.Items;
-import java.util.Observable;
 
 
 public class CharacterImpl extends AbstractDinamicObject implements Character {
@@ -23,20 +22,22 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     /**
      * CONSTANTS.
      */
-    private static final double MAX_LIFE = 20;
+
+    private static final double MAX_LIFE = 100;
+
     private static final int INITIAL_SPEED = 400;
     private static final long INITIAL_SHOOT_SPEED = 3;
     private static final long INITIAL_BULLET_DELAY = 200; 
-    private static final int INITIAL_BULLET_DAMAGE = 15;
+    //private static final int INITIAL_BULLET_DAMAGE = 0;
     private static final int INITIAL_MONEY = 0;
 
     /*
      * CHARACTER CHARACTERISTIC.
      */
     private double life;
-    private int damage;
+    private int bonusDamage = 0;
     private long bulletSpeed;
-    private int speed;
+   //private int speed;
     private int money;
 
     /**
@@ -54,11 +55,12 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         this.life = MAX_LIFE;
         this.money = INITIAL_MONEY;
         this.bulletSpeed = INITIAL_SHOOT_SPEED;
-        this.damage = INITIAL_BULLET_DAMAGE;
+        //this.bonusDamage = INITIAL_BULLET_DAMAGE;
         this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl();
         this.shoot = false;
         this.lastShootTime = System.currentTimeMillis();
+      //  this.speed = INITIAL_SPEED;
     }
 
 
@@ -120,7 +122,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     @Override
     public int getDamage() {
-        return this.damage;
+        return this.bonusDamage;
     }
 
     /**
@@ -129,7 +131,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
     @Override
     public void setDamage(final int damage) {
-        this.damage = damage;
+        this.bonusDamage = damage;
     }
 
     /**
@@ -168,11 +170,14 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * @param speed
      * set the current character Speed.
      */
-    @Override
-    public void setSpeed(final int speed) {
+  
+   /* public void setSpeed(final int speed) {
         this.speed = speed;
     }
-
+    @Override
+   /* public int getSpeed() {
+        return this.speed;
+    }*/
     /**
      * @param item
      * Add to the items list the item passed.
@@ -304,7 +309,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public void shoot() {
         Bullet bullet = bulletFactory.createCharacterBullet(
                 new Point2D(getPosition().getX() + this.getBoundingBox().getWidth() / 2, getPosition().getY() + this.getBoundingBox().getHeight() / 2),
-                this.shootDirection.mul(this.bulletSpeed)); 
+                this.shootDirection.mul(this.bulletSpeed), this.bonusDamage); 
         getRoom().addDinamicObject(bullet);
         /*final MP3Player mp3Player = new MP3Player(new File("resources/sounds/characterhoot.mp3"));
         mp3Player.play();*/
