@@ -75,4 +75,11 @@ public class Point2D implements java.io.Serializable {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Point2D [x=" + x + ", y=" + y + "]";
+    }
+    
+    
 }

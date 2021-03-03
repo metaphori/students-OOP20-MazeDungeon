@@ -23,6 +23,7 @@ public class RoomImpl implements Room {
     private final List<DinamicObject> dinamicObjects = new LinkedList<>();
     private final Set<Direction> nearRooms = new HashSet<>();
     private final RoomManager roomManager;
+    private boolean isVisited = false; 
  
     public RoomImpl(final RoomManager roomManager) {
         this.roomManager = roomManager;
@@ -157,6 +158,16 @@ public class RoomImpl implements Room {
     @Override
     public Point2D getBR() {
         return this.BR_CORNER;
+    }
+
+    @Override
+    public boolean isVisited() {
+        return isVisited;
+    }
+
+    @Override
+    public void visit() {
+        this.isVisited = true;
     }
 
 }

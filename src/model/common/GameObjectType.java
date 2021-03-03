@@ -1,5 +1,7 @@
 package model.common;
 
+import java.util.Random;
+
 public enum GameObjectType {
     /**
      * 
@@ -29,6 +31,7 @@ public enum GameObjectType {
     INVISIBLE_OBJECT(CollisionType.OBSTACLE),
     ROCK(CollisionType.OBSTACLE);
 
+    private static final int SIMPLE_ENEMY_NUMBER = 3;
     private final CollisionType collisionType;
 
     GameObjectType(final CollisionType collisionType) {
@@ -37,5 +40,16 @@ public enum GameObjectType {
 
     public CollisionType getCollisionType() {
         return this.collisionType;
+    }
+
+    public static GameObjectType getRandomEnemy() {
+        switch (new Random().nextInt(SIMPLE_ENEMY_NUMBER)) {
+        case 0:
+            return ENEMY_SPROUT;
+        case 1:
+            return ENEMY_SKELETON;
+        default:
+            return ENEMY_SOUL;
+        }
     }
 }

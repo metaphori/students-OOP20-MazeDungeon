@@ -6,13 +6,14 @@ import java.util.Random;
 import java.util.Set;
 
 import model.common.Direction;
+import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.dinamicobject.enemy.EnemyFactory;
 import model.gameobject.dinamicobject.enemy.EnemyFactoryImpl;
 
 public class RoomBuilder {
     private static final int MAX_ENEMY_NUMBER = 4;
-    private DoorFactory doorFactory = new DoorFactoryImpl();
+    private final DoorFactory doorFactory = new DoorFactoryImpl();
     private ObstaclesFactory obstaclesFactory; 
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
     private final List<Point2D> avaiableEnemyPosition = new LinkedList<>(List.of(new Point2D(266, 168), 
@@ -87,11 +88,24 @@ public class RoomBuilder {
         this.canAddBoss = false;
         this.canAddEnemy = false;
         final Random rnd = new Random();
-        for (int i = 0; i < MAX_ENEMY_NUMBER; i++) {
+        final int enemyNumber = rnd.nextInt(MAX_ENEMY_NUMBER - 1) + 2;
+        for (int i = 0; i < enemyNumber; i++) {
             final int pos = rnd.nextInt(this.avaiableEnemyPosition.size());
             final Point2D position = this.avaiableEnemyPosition.get(pos);
             this.avaiableEnemyPosition.remove(pos);
-            this.room.addDinamicObject(this.enemyFactory.createSprout(position));
+            switch (GameObjectType.getRandomEnemy()) {
+            case ENEMY_SKELETON:
+                this.room.addDinamicObject(this.enemyFactory.createSkeletonSeeker(position));
+                break;
+            case ENEMY_SOUL:
+                this.room.addDinamicObject(this.enemyFactory.createSoul(position));
+                break;
+            case ENEMY_SPROUT:
+                this.room.addDinamicObject(this.enemyFactory.createSprout(position));
+                break;
+            default:
+                break;
+            }
         }
         return this;
     }
@@ -107,6 +121,7 @@ public class RoomBuilder {
         this.canAddBoss = false;
         this.canAddEnemy = false;
         this.canAddObstacle = false;
+        this.room.addDinamicObject(this.enemyFactory.createBoss(new Point2D(300, 150)));
         return this;
     }
 

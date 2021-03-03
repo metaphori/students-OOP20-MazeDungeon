@@ -40,4 +40,8 @@ public interface Room {
 
     Point2D getBR();
 
+    boolean isVisited();
+
+    void visit();
+
 }

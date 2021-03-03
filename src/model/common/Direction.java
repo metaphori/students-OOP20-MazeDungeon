@@ -28,4 +28,6 @@ public enum Direction {
             throw new IllegalStateException("not valid direction");
         }
     }
+    
+    
 }
