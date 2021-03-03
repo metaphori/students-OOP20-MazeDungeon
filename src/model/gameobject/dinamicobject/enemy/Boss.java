@@ -106,9 +106,9 @@ public class Boss extends AbstractEnemy {
         super.takesDamage(damage);
         if (this.getLife() <= 0) {
             this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(new Vector2D(this.getBoundingBox().getWidth() / 2 - ALIGN_MONEY,
-                                                    this.getBoundingBox().getHeight() / 2 - ALIGN_MONEY)), GameObjectType.COIN));
+                                                    this.getBoundingBox().getHeight() / 2 - ALIGN_MONEY))));
             this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(new Vector2D(this.getBoundingBox().getWidth() / 2 + ALIGN_MONEY,
-                    this.getBoundingBox().getHeight() / 2 - ALIGN_MONEY)), GameObjectType.COIN));
+                    this.getBoundingBox().getHeight() / 2 - ALIGN_MONEY))));
         }
     }
 

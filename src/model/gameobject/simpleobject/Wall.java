@@ -7,8 +7,8 @@ import model.room.Room;
 
 public class Wall extends SimpleObjectImpl {
 
-    public Wall(final Point2D position, final GameObjectType gameObjectType) {
-        super(position, gameObjectType);
+    public Wall(final Point2D position) {
+        super(position, GameObjectType.INVISIBLE_OBJECT);
     }
 
     @Override
