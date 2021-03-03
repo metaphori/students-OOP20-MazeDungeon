@@ -104,10 +104,10 @@ public class RoomManagerImpl implements RoomManager {
                 extractedRoom.addSimpleObject(doorFactory.createDoor(rooms.get(extractedPosition), extractedDirection));
                 extractedRoom.addDoor(extractedDirection);
 
-                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(266, 168)));
-                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(940, 200)));
-                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(254, 550)));
-                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(940, 550)));
+                newRoom.addDinamicObject(this.enemyFactory.createSkeletonSeeker(new Point2D(266, 168)));
+                newRoom.addDinamicObject(this.enemyFactory.createSkeletonSeeker(new Point2D(940, 200)));
+                newRoom.addDinamicObject(this.enemyFactory.createSkeletonSeeker(new Point2D(254, 550)));
+                newRoom.addDinamicObject(this.enemyFactory.createSkeletonSeeker(new Point2D(940, 550)));
             }
         }
     }

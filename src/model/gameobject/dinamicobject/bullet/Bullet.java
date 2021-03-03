@@ -7,6 +7,5 @@ public interface Bullet extends DinamicObject {
     int getDamage();
 
     void setDamage(int damage);
-    
-    
+  
 }

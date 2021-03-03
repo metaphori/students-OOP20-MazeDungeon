@@ -79,7 +79,7 @@ public class GameViewImpl implements GameView, KeyListener {
      */
     @Override
     public void show() {
-        this.frame.setVisible(true);
+        this.frame.setVisible(true); //QUESTO FA VENIRE LA BARRA BIANCA INIZIALE
         this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO) + this.frame.getInsets().left,
                 (int) (NATIVE_HEIGHT * HEIGHT_RATIO) + this.frame.getInsets().top));
         gamePanel.setSize(this.frame.getSize());
