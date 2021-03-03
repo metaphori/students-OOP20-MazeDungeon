@@ -17,6 +17,8 @@ import model.gameobject.dinamicobject.enemy.AbstractEnemy;
 
 public class RoomImpl implements Room {
 
+    private static final Point2D UL_CORNER = new Point2D(240, 177); //TODO in caso di resize della finestra vanno cambiati!!!!
+    private static final Point2D BR_CORNER = new Point2D(1025, 633);
     private final List<SimpleObject> simpleObjects = new LinkedList<>();
     private final List<DinamicObject> dinamicObjects = new LinkedList<>();
     private final Set<Direction> nearRooms = new HashSet<>();
@@ -145,6 +147,16 @@ public class RoomImpl implements Room {
         for (final SimpleObject simpleObject : objs) {
             this.addSimpleObject(simpleObject);
         }
+    }
+
+    @Override
+    public Point2D getUL() {
+        return this.UL_CORNER;
+    }
+
+    @Override
+    public Point2D getBR() {
+        return this.BR_CORNER;
     }
 
 }

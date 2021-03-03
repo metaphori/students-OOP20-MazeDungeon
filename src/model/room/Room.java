@@ -36,4 +36,8 @@ public interface Room {
 
     void clean();
 
+    Point2D getUL();
+
+    Point2D getBR();
+
 }

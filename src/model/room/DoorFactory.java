@@ -4,14 +4,14 @@ import model.common.Direction;
 import model.gameobject.simpleobject.Door;
 
 public interface DoorFactory {
-    Door createLeftDoor(Room room);
+    Door createLeftDoor();
 
-    Door createRightDoor(Room room);
+    Door createRightDoor();
 
-    Door createUpDoor(Room room);
+    Door createUpDoor();
 
-    Door createDownDoor(Room room);
+    Door createDownDoor();
 
-    Door createDoor(Room room, Direction direction);
+    Door createDoor(Direction direction);
 
 }

@@ -1,11 +1,14 @@
 package model.room;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import java.util.Random;
+import java.util.Set;
 
 import model.common.Direction;
 import model.common.GameObjectType;
@@ -75,41 +78,40 @@ public class RoomManagerImpl implements RoomManager {
 
     private void createGameMap() {
 
-        actualRoom = new RoomImpl(this);
-        actualRoom.addSimpleObject(obstaclesFactory.createSquare(3));
-        actualRoom.addSimpleObject(new FinalArtefact(new Point2D(300, 300), GameObjectType.FINAL_ARTEFACT));
-        actualRoom.addDinamicObject(character);
-        rooms.put(new Point2D(0, 0), actualRoom);
+        final Map<Point2D, Set<Direction>> map = new HashMap<>();
+        map.put(new Point2D(0, 0), new HashSet<Direction>());
 
-        while (rooms.size() < NUMBER_OF_ROOMS) {
+        while (map.size() < NUMBER_OF_ROOMS) {
             final Direction extractedDirection = Direction.getRandomDirection();
-            final Point2D extractedPosition = this.getRandomPointInFloor();
-            final Room extractedRoom = rooms.get(extractedPosition);
+            final Point2D extractedPosition = new LinkedList<>(map.keySet()).get(new Random().nextInt(map.size()));
             final Point2D newRoomPosition = this.getNearbyPoint(extractedPosition, extractedDirection);
             if (rooms.containsKey(newRoomPosition)) {
-                if (!extractedRoom.getDoors().contains(extractedDirection)) {
-                    final Room newRoom = rooms.get(newRoomPosition);
-                    extractedRoom.addSimpleObject(doorFactory.createDoor(rooms.get(extractedRoom), extractedDirection));
-                    extractedRoom.addDoor(extractedDirection);
-                    newRoom.addDoor(Direction.getOppositeDirection(extractedDirection));
-                    newRoom.addSimpleObject(doorFactory.createDoor(rooms.get(newRoom), Direction.getOppositeDirection(extractedDirection)));
-                }
+                map.get(newRoomPosition).add(Direction.getOppositeDirection(extractedDirection));
+                map.get(extractedPosition).add(extractedDirection);
             } else {
-                final Room newRoom = new RoomImpl(this);
-
-                newRoom.addSimpleObject(obstaclesFactory.createSquare(3));
-                newRoom.addDoor(Direction.getOppositeDirection(extractedDirection));
-                newRoom.addSimpleObject(doorFactory.createDoor(newRoom, Direction.getOppositeDirection(extractedDirection)));
-                rooms.put(newRoomPosition, newRoom);
-                extractedRoom.addSimpleObject(doorFactory.createDoor(rooms.get(extractedPosition), extractedDirection));
-                extractedRoom.addDoor(extractedDirection);
-
-                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(266, 168)));
-                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(940, 200)));
-                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(254, 550)));
-                newRoom.addDinamicObject(this.enemyFactory.createSprout(new Point2D(940, 550)));
+                map.put(newRoomPosition, new HashSet<Direction>());
+                map.get(newRoomPosition).add(Direction.getOppositeDirection(extractedDirection));
+                map.get(extractedPosition).add(extractedDirection);
             }
         }
+
+        for (final Entry<Point2D, Set<Direction>> entry : map.entrySet()) {
+            if (entry.getKey().equals(new Point2D(0, 0))) {
+                rooms.put(entry.getKey(), new RoomBuilder().initialize(this).addDoors(entry.getValue()).build());
+                continue;
+            }
+            final Room room = new RoomBuilder().initialize(this)
+                                               .addRandomObstacle()
+                                               .addDoors(entry.getValue())
+                                               .addRandomEnemy()
+                                               .build();
+            rooms.put(entry.getKey(), room);
+        }
+
+        actualRoom = rooms.get(new Point2D(0, 0));
+        //actualRoom.addSimpleObject(new FinalArtefact(new Point2D(300, 300), GameObjectType.FINAL_ARTEFACT));
+        actualRoom.addDinamicObject(character);
+
     }
 
 

@@ -128,7 +128,7 @@ public class GameViewImpl implements GameView, KeyListener {
         protected void paintComponent(final Graphics g) {
             super.paintComponent(g);
             for (int i = 0; i < items.size(); i++) {
-                g.drawImage(items.get(i), 0, i * 64 + 20, null);
+                g.drawImage(items.get(i), 0, i * 64, null);
             }
         }
     }
@@ -136,7 +136,6 @@ public class GameViewImpl implements GameView, KeyListener {
     private class GamePanel extends JLayeredPane implements ActionListener {
         private static final long serialVersionUID = 1L;
         private final JLabel lblCoinCounter = new JLabel();
-        private final JLabel lblSkills = new JLabel();
         private final Image youLoseImage = adaptImage(new ImageIcon("resources/images/HUD/GameOver/gameOverFinal.png"));
         private final Image winnerImage = adaptImage(new ImageIcon("resources/images/HUD/Victory/winner.png"));
         private final Image roomImage = adaptImage(new ImageIcon("resources/images/Room/room.png"));
@@ -148,12 +147,7 @@ public class GameViewImpl implements GameView, KeyListener {
             lblCoinCounter.setText("0");
             lblCoinCounter.setFont(new Font("Helvetica", Font.ITALIC, 25));
             lblCoinCounter.setForeground(Color.white);
-            lblSkills.setBounds(10, 80, 100, 50);
-            lblSkills.setText("Skills:");
-            lblSkills.setFont(new Font("Helvetica", Font.ITALIC, 20));
-            lblSkills.setForeground(Color.red);
             this.add(this.lblCoinCounter, JLayeredPane.DEFAULT_LAYER);
-            this.add(this.lblSkills, JLayeredPane.DEFAULT_LAYER);
         }
 
         @Override
