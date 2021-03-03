@@ -74,19 +74,19 @@ public class ObstaclesFactory {
         final List<SimpleObject> walls = new LinkedList<>();
         SimpleObject tmp;
         //TOP
-        tmp = new Wall(ulCorner, GameObjectType.INVISIBLE_OBJECT);
+        tmp = new Wall(ulCorner);
         tmp.setBoundingBox(new BoundingBox(ulCorner, this.width, 1));
         walls.add(tmp);
         //RIGHT
-        tmp = new Wall(new Point2D(brCorner.getX(), ulCorner.getY()), GameObjectType.INVISIBLE_OBJECT);
+        tmp = new Wall(new Point2D(brCorner.getX(), ulCorner.getY()));
         tmp.setBoundingBox(new BoundingBox(new Point2D(brCorner.getX(), ulCorner.getY()), 1, this.height));
         walls.add(tmp);
         //BOTTOM
-        tmp = new Wall(new Point2D(ulCorner.getX(), brCorner.getY()), GameObjectType.INVISIBLE_OBJECT);
+        tmp = new Wall(new Point2D(ulCorner.getX(), brCorner.getY()));
         tmp.setBoundingBox(new BoundingBox(new Point2D(ulCorner.getX(), brCorner.getY()), this.width, 1));
         walls.add(tmp);
         //LEFT
-        tmp = new Wall(ulCorner, GameObjectType.INVISIBLE_OBJECT);
+        tmp = new Wall(ulCorner);
         tmp.setBoundingBox(new BoundingBox(ulCorner, 1, this.height));
         walls.add(tmp);
         return walls;
@@ -104,7 +104,7 @@ public class ObstaclesFactory {
     }
 
     private Obstacle getObstacle(final Point2D position) {
-        return new Obstacle(position, GameObjectType.ROCK);
+        return new Obstacle(position);
     }
     
     private Obstacle getObstacle(final int x, final int y) {

@@ -8,8 +8,8 @@ import model.room.Room;
 
 public class Coin extends SimpleObjectImpl {
 
-    public Coin(final Point2D position, final GameObjectType gameObjectType) {
-        super(position, gameObjectType);
+    public Coin(final Point2D position) {
+        super(position, GameObjectType.COIN);
     }
 
     /**

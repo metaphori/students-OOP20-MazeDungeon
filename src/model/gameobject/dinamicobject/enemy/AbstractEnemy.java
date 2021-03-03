@@ -49,7 +49,7 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
         System.out.println(this.getID() + ") " + this.getGameObjectType() + " Life: " + this.getLife());
         if (this.life <= 0) {
             this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(new Vector2D(this.getBoundingBox().getWidth() / 2,
-                                                    this.getBoundingBox().getHeight() / 2)), GameObjectType.COIN));
+                                                    this.getBoundingBox().getHeight() / 2))));
             this.getRoom().deleteGameObject(this);
         }
     }

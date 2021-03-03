@@ -33,6 +33,7 @@ public class MainMenuViewImpl implements MainMenuView {
 
     public MainMenuViewImpl(final MainMenuController controller) {
         this.controller = controller;
+        this.frame.setTitle("MazeDungeon");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 
@@ -52,7 +53,7 @@ public class MainMenuViewImpl implements MainMenuView {
         this.configureButton(btnExit);
 
         btnExit.addActionListener(e -> {
-            System.exit(0);
+            this.hide();
         });
 
         lblTitle.setBounds(50, 208, 500, 100);
@@ -69,8 +70,6 @@ public class MainMenuViewImpl implements MainMenuView {
         this.frame.pack();
         this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2, 
                                screen.height / 2 - this.frame.getSize().height / 2);
-        //MP3Player mp3Player = new MP3Player(new File("resources/sounds/undergroundMusic.mp3"));
-        //mp3Player.play();
         this.frame.setVisible(true);
     }
 

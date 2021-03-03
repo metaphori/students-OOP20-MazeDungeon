@@ -248,7 +248,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     public void shoot() {
         Bullet bullet = bulletFactory.createCharacterBullet(
                 new Point2D(getPosition().getX() + this.getBoundingBox().getWidth() / 2, getPosition().getY() + this.getBoundingBox().getHeight() / 2),
-                this.shootDirection.mul(this.bulletSpeed), this.bonusDamage); 
+                this.shootDirection.mul(this.bulletSpeed), this.bonusDamage);
         getRoom().addDinamicObject(bullet);
         /*final MP3Player mp3Player = new MP3Player(new File("resources/sounds/characterhoot.mp3"));
         mp3Player.play();*/
