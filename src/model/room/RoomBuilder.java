@@ -16,7 +16,7 @@ public class RoomBuilder {
     private final DoorFactory doorFactory = new DoorFactoryImpl();
     private ObstaclesFactory obstaclesFactory; 
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
-    private final List<Point2D> avaiableEnemyPosition = new LinkedList<>(List.of(new Point2D(266, 168), 
+    private final List<Point2D> avaiableEnemyPosition = new LinkedList<>(List.of(new Point2D(254, 168), 
                                                                                 new Point2D(940, 200), 
                                                                                 new Point2D(254, 550), 
                                                                                 new Point2D(940, 550)));

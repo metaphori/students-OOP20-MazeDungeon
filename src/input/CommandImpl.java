@@ -120,7 +120,7 @@ public class CommandImpl implements Command {
      */
     @Override
     public void setKey(final KeyEvent key, final boolean b) {
-        if (key.getKeyCode() == KeyEvent.VK_ESCAPE && !this.menuIsOpen) {
+        if (key.getKeyCode() == KeyEvent.VK_ESCAPE && this.canOpenInGameMenu()) {
             final InGameMenuController menuController = new InGameMenuControllerImpl(this.gameController, this.model);
             menuController.setup();
             this.menuIsOpen = true;
@@ -131,6 +131,11 @@ public class CommandImpl implements Command {
         } else {
             System.out.println("Tasto disabilitato");
         }
+    }
+
+    private boolean canOpenInGameMenu() {
+        return !this.menuIsOpen && this.model.getRoomManager().getCurrentRoom().isDoorOpen() 
+                                && !this.model.getRoomManager().getCharacter().isDead();
     }
 
     /**
@@ -162,12 +167,4 @@ public class CommandImpl implements Command {
     public void setMenuClosed() {
         this.menuIsOpen = false;
     }
-
-    @Override
-    public boolean isMenuOpen() {
-       return this.menuIsOpen;
-    }
-
-
-
 }

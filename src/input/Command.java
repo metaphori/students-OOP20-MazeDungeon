@@ -1,11 +1,8 @@
 package input;
 
-import java.awt.Component;
 import java.awt.event.KeyEvent;
-import java.util.List;
 import java.util.Set;
 
-import mvc.Model;
 
 public interface Command {
 
@@ -17,5 +14,5 @@ public interface Command {
     Set<Integer> getPermittedKeys();
     void execute();
     void setMenuClosed();
-    boolean isMenuOpen();
+    
 }
