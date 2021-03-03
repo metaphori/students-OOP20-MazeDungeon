@@ -6,20 +6,17 @@ import java.util.Map;
 import java.util.Set;
 
 import model.gameobject.dinamicobject.character.Character;
-import mvc.Model;
-
-
 
 public class ShopImpl implements Shop {
-    private static final double MORE_HEALTH = 15;
+    private static final double MORE_HEALTH = 25;
     private static final int MORE_DAMAGE = 15;
     private static final int MORE_SPEED = 150;
     private static final int MORE_BULLETSPEED = 3;
     private static final int PRICE_ARTHEMIDEBOW = 0;
-    private static final int PRICE_HERMESBOOTS = 0;
-    private static final int PRICE_ZEUSBOLT = 0;
-    private static final int PRICE_HEALTH = 0;
-    private static final int PRICE_ORACLEAMULET = 0;
+    private static final int PRICE_HERMESBOOTS = 3;
+    private static final int PRICE_ZEUSBOLT = 3;
+    private static final int PRICE_HEALTH = 2;
+    private static final int PRICE_ORACLEAMULET = 7;
 
     private final Set<Items> purchasedItems = new HashSet<>();
     private final Set<Items> cart = new HashSet<>();
@@ -27,40 +24,24 @@ public class ShopImpl implements Shop {
 
     private final String msgBought;
     private final String msgNoMoney;
-    //private int actualMoney;
-    //private final double actualLife;
-    //private final double maxLife;
     private final Character character;
     public ShopImpl(final Character character) {
         this.character = character;
-        //this.actualMoney = actualMoney;
         msgBought = "You bought this item! You have coins: ";
         msgNoMoney = "You don't have enough coins!";
-       // this.actualLife = character.getLife();
-        //this.actualMoney = character.getMoney();
     }
     /**
      * @return .
      */
     private void addSkills(final Item item) {
-       // System.out.println(this.character.getDamage()+"danno prima");
-        System.out.println(this.character.getBonusDamage() + " DANNO prima");
         this.character.setBonusDamage(this.character.getBonusDamage() + item.getDamage());
-        System.out.println(this.character.getBonusDamage() + " DANNO dopo");
-        //System.out.println(this.character.getDamage() +"danno dopo");
-        System.out.println(this.character.getSpeed()+" VELOCITA prima");
         this.character.setSpeed(this.character.getSpeed() + item.getSpeed());
-        System.out.println(this.character.getSpeed()+" VELOCITA dopo");
-        
-        System.out.println(this.character.getBulletSpeed()+" VELOCITA BULLET prima");
         this.character.setBulletSpeed(this.character.getBulletSpeed() + item.getBulletSpeed());
-        System.out.println(this.character.getBulletSpeed()+" VELOCITA BULLET dopo");
-        //System.out.println(this.character.getLife() + " VITA PRIMA");
-        System.out.println(this.character.getLife()+" LIFE prima");
-        this.character.setLife(this.character.getLife() + item.getHealth());
-        System.out.println(this.character.getLife()+" LIFE dopo");
-        //System.out.println(this.character.getLife() + " VITA");
-        //c.setMoney(actualMoney);
+        if (this.character.getLife() + item.getHealth() > this.character.getMaxLife()) {
+            this.character.setLife(this.character.getMaxLife());
+        } else {
+            this.character.setLife(this.character.getLife() + item.getHealth());
+        }
         this.character.addItem(item);
 
     }
@@ -78,10 +59,6 @@ public class ShopImpl implements Shop {
             this.messageOuput = "You already have this item";
             return false;
         }
-        /*if (actualMoney == 0) {
-            messageOuput = msgNoMoney;
-            return false;
-        }*/
         switch (i) {
             case ARTHEMIDEBOW:
                 if (this.getArthemideBow().getCost() <= this.character.getMoney()) {
@@ -118,7 +95,7 @@ public class ShopImpl implements Shop {
                 break;
             case HEALTH:
                 if (this.getHealth().getCost() <= this.character.getMoney()) {
-                    if (this.character.getLife() + this.getHealth().getHealth() > this.character.getMaxLife()) {
+                    if (this.character.getLife() == this.character.getMaxLife()) {
                         this.messageOuput = "You have too much life!";
                         return false;
                     }
@@ -131,10 +108,6 @@ public class ShopImpl implements Shop {
                 break;
             case ORACLEAMULET:
                 if (this.getOracleAmulet().getCost() <= this.character.getMoney()) {
-                    /*if (this.actualLife + this.getHealth().getHealth() > maxLife) {
-                        this.messageOuput = "You have too much life!";
-                        return false;
-                    }*/
                     this.character.setMoney(this.character.getMoney() - this.getOracleAmulet().getCost());
                     this.purchasedItems.add(i);
                     this.cart.add(i);
@@ -158,12 +131,6 @@ public class ShopImpl implements Shop {
     public String getMessageOuput() {
         return messageOuput;
     }
-    /**
-     * @return .
-     */
-    /*public int moneyLeft() {
-        return actualMoney;
-    }*/
 
     /**
      * @return .
