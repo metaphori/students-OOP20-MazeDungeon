@@ -30,9 +30,6 @@ public class ShopImpl implements Shop {
         msgBought = "You bought this item! You have coins: ";
         msgNoMoney = "You don't have enough coins!";
     }
-    /**
-     * @return .
-     */
     private void addSkills(final Item item) {
         this.character.setBonusDamage(this.character.getBonusDamage() + item.getDamage());
         this.character.setSpeed(this.character.getSpeed() + item.getSpeed());
@@ -43,7 +40,16 @@ public class ShopImpl implements Shop {
             this.character.setLife(this.character.getLife() + item.getHealth());
         }
     }
-    public Map<Items, Integer> addPrice(){
+    private void setItem(final Item item) {
+        this.character.setMoney(this.character.getMoney() - item.getCost());
+        this.purchasedItems.add(item.getName());
+        this.cart.add(item.getName());
+        this.messageOuput = this.msgBought  + this.character.getMoney();
+    }
+    /**
+     * @return a map: every Item with its price 
+     */
+    public Map<Items, Integer> addPrice() {
         final Map<Items, Integer> mapPrice = new HashMap<>();
         mapPrice.put(Items.ARTHEMIDEBOW, PRICE_ARTHEMIDEBOW);
         mapPrice.put(Items.HERMESBOOTS, PRICE_HERMESBOOTS);
@@ -52,129 +58,114 @@ public class ShopImpl implements Shop {
         mapPrice.put(Items.ORACLEAMULET, PRICE_ORACLEAMULET);
         return mapPrice;
     }
-    public boolean checkItem(final Items i) {
+    /**
+     * @param i
+     */
+    public void checkItem(final Items i) {
         if (this.purchasedItems.contains(i)) {
             this.messageOuput = "You already have this item";
-            return false;
-        }
-        switch (i) {
-            case ARTHEMIDEBOW:
-                if (this.getArthemideBow().getCost() <= this.character.getMoney()) {
-                    this.character.setMoney(this.character.getMoney() - this.getArthemideBow().getCost());
-                    this.purchasedItems.add(i);
-                    this.cart.add(i);
+        } else {
+            switch (i) {
+                case ARTHEMIDEBOW:
+                    if (this.getArthemideBow().getCost() > this.character.getMoney()) {
+                        this.messageOuput = this.msgNoMoney;
+                        break;
+                    }
+                    this.setItem(this.getArthemideBow());
                     this.addSkills(this.getArthemideBow());
-                    this.messageOuput = this.msgBought  + this.character.getMoney();
-                    return true;
-                }
-                this.messageOuput = this.msgNoMoney;
-                break;
-            case HERMESBOOTS:
-                if (this.getHermesBoots().getCost() <= this.character.getMoney()) {
-                    this.character.setMoney(this.character.getMoney() - this.getHermesBoots().getCost());
-                    this.purchasedItems.add(i);
-                    this.cart.add(i);
+                    break;
+                case HERMESBOOTS:
+                    if (this.getHermesBoots().getCost() > this.character.getMoney()) {
+                        this.messageOuput = this.msgNoMoney;
+                        break;
+                    }
+                    this.setItem(this.getHermesBoots());
                     this.addSkills(this.getHermesBoots());
-                    this.messageOuput = this.msgBought + this.character.getMoney();
-                    return true;
-                }
-                this.messageOuput = this.msgNoMoney;
-                break;
-            case ZEUSBOLT:
-                if (this.getZeusBolt().getCost() <= this.character.getMoney()) {
-                    this.character.setMoney(this.character.getMoney() - this.getZeusBolt().getCost());
-                    this.purchasedItems.add(i);
-                    this.cart.add(i);
+                    break;
+                case ZEUSBOLT:
+                    if (this.getZeusBolt().getCost() > this.character.getMoney()) {
+                        this.messageOuput = this.msgNoMoney;
+                        break;
+                    }
+                    this.setItem(this.getZeusBolt());
                     this.addSkills(getZeusBolt());
-                    this.messageOuput = this.msgBought + this.character.getMoney();
-                    return true;
-                }
-                this.messageOuput = this.msgNoMoney;
-                break;
-            case HEALTH:
-                if (this.getHealth().getCost() <= this.character.getMoney()) {
+                    break;
+                case HEALTH:
+                    if (this.getHealth().getCost() > this.character.getMoney()) {
+                        messageOuput = msgNoMoney;
+                        break;
+                    }
                     if (this.character.getLife() == this.character.getMaxLife()) {
                         this.messageOuput = "You have too much life!";
-                        return false;
+                        break;
                     }
                     this.character.setMoney(this.character.getMoney() - this.getHealth().getCost());
                     this.addSkills(getHealth());
                     this.messageOuput = this.msgBought + this.character.getMoney();
-                    return true;
-                }
-                messageOuput = msgNoMoney;
-                break;
-            case ORACLEAMULET:
-                if (this.getOracleAmulet().getCost() <= this.character.getMoney()) {
-                    this.character.setMoney(this.character.getMoney() - this.getOracleAmulet().getCost());
-                    this.purchasedItems.add(i);
-                    this.cart.add(i);
+                case ORACLEAMULET:
+                    if (this.getOracleAmulet().getCost() <= this.character.getMoney()) {
+                        this.messageOuput = this.msgNoMoney;
+                        break;
+                    }
+                    this.setItem(this.getOracleAmulet());
                     this.addSkills(this.getOracleAmulet());
-                    this.messageOuput = this.msgBought + this.character.getMoney();
-                    return true;
-                }
-                this.messageOuput = this.msgNoMoney;
-                break;
-             default:
-                 messageOuput = "ERROR!";
-                 return false;
-
+                 default:
+                     messageOuput = "ERROR!";
+            }
         }
-        return false;
     }
 
     /**
-     * @return .
+     * @return string for output message
      */
     public String getMessageOuput() {
         return messageOuput;
     }
 
     /**
-     * @return .
+     * @return ArthemideBow Item
      */
     public Item getArthemideBow() {
         return new ItemBuilder.Builder(Items.ARTHEMIDEBOW, PRICE_ARTHEMIDEBOW).addDamage(MORE_DAMAGE).build();
     }
 
     /**
-     * @return Item with features of HermesBoots
+     * @return HermesBoots Item
      */
     public Item getHermesBoots() {
         return new ItemBuilder.Builder(Items.HERMESBOOTS, PRICE_HERMESBOOTS).addSpeed(MORE_SPEED).build();
     }
 
     /**
-     * @return Item with features of ZeusBolt
+     * @return ZeusBolt Item
      */
     public Item getZeusBolt() {
         return new ItemBuilder.Builder(Items.ZEUSBOLT, PRICE_ZEUSBOLT).addBulletSpeed(MORE_BULLETSPEED).build();
     }
 
     /**
-     * @return Item with features more Health
+     * @return Health Item
      */
     public Item getHealth() {
         return new ItemBuilder.Builder(Items.HEALTH, PRICE_HEALTH).addHelath(MORE_HEALTH).build();
     }
     /**
      * 
-     * @return .
+     * @return Oracle Amulet Item
      */
     public Item getOracleAmulet() {
         return new ItemBuilder.Builder(Items.ORACLEAMULET, PRICE_ORACLEAMULET).addDamage(MORE_DAMAGE).addSpeed(MORE_SPEED).addBulletSpeed(MORE_BULLETSPEED).build();
     }
     /**
-     * @return .
+     * 
      */
     public void clearCart() {
         this.cart.clear();
     }
-    
+
     /**
-     * 
+     * @return current cart
      */
-    @Override
     public Set<Items> getCart() {
         return Set.copyOf(this.cart);
     }

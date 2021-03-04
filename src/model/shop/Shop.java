@@ -7,11 +7,7 @@ public interface Shop {
 
     String getMessageOuput();
 
-    /**
-     * @return Item with features of ArthemideBow
-     */
-
-    boolean checkItem(Items i);
+    void checkItem(Items i);
 
     Item getArthemideBow();
 
