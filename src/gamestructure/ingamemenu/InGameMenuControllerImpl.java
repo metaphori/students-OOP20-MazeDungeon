@@ -22,7 +22,8 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     public InGameMenuControllerImpl(final GameController gameController, final Model model) {
         this.gameController = gameController;
         this.shopModel = model.getShop();
-        this.openInGameMenu();
+        this.view.showInGameMenu();
+       // this.openInGameMenu();
     }
 
     /**
