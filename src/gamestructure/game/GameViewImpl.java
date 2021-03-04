@@ -42,6 +42,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private static final double WIDTH_RATIO = 0.666_667; 
     private static final double HEIGHT_RATIO = 0.740_740; 
     private static final double ASPECT_RATIO = 1.6;
+    private final double screenRatio = screen.width /  NATIVE_WIDTH; //0.5;
     private static final Color BACKGROUND = new Color(11, 19, 30);
     private static final int PERIOD = 15;
     private final GamePanel gamePanel;
@@ -52,6 +53,9 @@ public class GameViewImpl implements GameView, KeyListener {
     private boolean gameOver = false;
     private boolean won = false;
 
+    //TODO: tutte le coordinate devono essere costanti e devono essere moltiplicate per screen_ratio
+    // (lifebar, contatore monete, items, ...)
+    
     public GameViewImpl() {
         this.frame = new JFrame();
         this.frame.setResizable(false);
@@ -80,8 +84,8 @@ public class GameViewImpl implements GameView, KeyListener {
     @Override
     public void show() {
         this.frame.setVisible(true); //QUESTO FA VENIRE LA BARRA BIANCA INIZIALE
-        this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO) + this.frame.getInsets().left,
-                (int) (NATIVE_HEIGHT * HEIGHT_RATIO) + this.frame.getInsets().top));
+        this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO * screenRatio) + this.frame.getInsets().left,
+                (int) (NATIVE_HEIGHT * HEIGHT_RATIO * screenRatio) + this.frame.getInsets().top));
         gamePanel.setSize(this.frame.getSize());
         //this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
         this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2,
@@ -207,8 +211,8 @@ public class GameViewImpl implements GameView, KeyListener {
     private Image adaptImage(final ImageIcon img) {
         //return width * (int) screen.getWidth() / NATIVE_WIDTH;
         //return height * (int) screen.getHeight() / NATIVE_HEIGHT;
-        final int width = img.getIconWidth();
-        final int heigth = img.getIconHeight();
+        final int width = (int) (img.getIconWidth() * screenRatio);
+        final int heigth = (int) (img.getIconHeight() * screenRatio);
         return img.getImage().getScaledInstance(width, heigth, Image.SCALE_SMOOTH);
     }
 
@@ -230,7 +234,7 @@ public class GameViewImpl implements GameView, KeyListener {
      */
     @Override
     public void setSpritePosition(final int id, final Point2D position) {
-        this.sprites.get(id).setPosition(position);
+        this.sprites.get(id).setPosition(position.mul(screenRatio));
     }
 
     /**
@@ -255,8 +259,6 @@ public class GameViewImpl implements GameView, KeyListener {
     public void keyTyped(final KeyEvent arg0) {
         // TODO Auto-generated method stub
     }
-
-    
 
     @Override
     public void gameOver() {
