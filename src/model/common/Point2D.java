@@ -25,6 +25,14 @@ public class Point2D implements java.io.Serializable {
      * @param v
      * @return the resultant Point
      */
+    public Point2D mul(final double v) {
+        return new Point2D(this.x * v, this.y * v);
+    }
+
+    /**
+     * @param v
+     * @return the resultant Point
+     */
     public Vector2D sub(final Point2D v) {
         return new Vector2D(this.x - v.getX(), this.y - v.getY());
     }
@@ -80,6 +88,5 @@ public class Point2D implements java.io.Serializable {
     public String toString() {
         return "Point2D [x=" + x + ", y=" + y + "]";
     }
-    
-    
+
 }

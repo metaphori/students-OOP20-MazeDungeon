@@ -10,19 +10,12 @@ import model.shop.Items;
 
 
 public interface Character extends DinamicObject {
-    void shoot();
 
     void takesDamage(int damage);
 
-    void addItem(Item item);
-
-    Set<Item> getItems();
-
     double getLife();
 
-    /**
-     * Methods for movements and shoots.
-     */
+    void setLife(double life);
 
 
     void setShoot(boolean shoot, Vector2D shootDirection);
@@ -35,21 +28,16 @@ public interface Character extends DinamicObject {
 
     void setBonusDamage(int damage);
 
-    void setBulletSpeed(long bulletSpeed);
+    void setBulletSpeed(int bulletSpeed);
 
     int getBonusDamage();
 
-    long getBulletSpeed();
-
-    void setLife(double life);
+    int getBulletSpeed();
 
     boolean isDead();
 
+    void pickedUpFinalArtefact();
+
     boolean isWon();
 
-    void pickedUpFinalArtefact();
-    
-    //int getSpeed();
-    
-   // void setSpeed(int speed);
 }

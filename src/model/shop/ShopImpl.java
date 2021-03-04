@@ -39,8 +39,6 @@ public class ShopImpl implements Shop {
         } else {
             this.character.setLife(this.character.getLife() + item.getHealth());
         }
-        this.character.addItem(item);
-
     }
     private void setItem(final Item item) {
         this.character.setMoney(this.character.getMoney() - item.getCost());

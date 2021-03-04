@@ -16,7 +16,7 @@ import mvc.Model;
 public class ModelImpl implements Model {
     private final RoomManager roomManager = new RoomManagerImpl();
     private final Shop shop = new ShopImpl(this.roomManager.getCharacter());
-    
+
     /**
      */
     @Override
