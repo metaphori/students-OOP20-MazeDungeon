@@ -97,7 +97,7 @@ public class GameViewImpl implements GameView, KeyListener {
      */
     @Override
     public void hide() {
-        this.frame.setVisible(false);
+        this.frame.dispose();
     }
 
     private class ItemPanel extends JPanel {

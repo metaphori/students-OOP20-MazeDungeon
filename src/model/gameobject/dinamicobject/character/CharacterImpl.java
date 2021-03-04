@@ -273,7 +273,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     @Override
     public boolean isWon() {
         // TODO Auto-generated method stub
-        return this.isWon();
+        return this.won;
     }
 }
 
