@@ -42,8 +42,6 @@ public class ShopImpl implements Shop {
         } else {
             this.character.setLife(this.character.getLife() + item.getHealth());
         }
-        this.character.addItem(item);
-
     }
     public Map<Items, Integer> addPrice(){
         final Map<Items, Integer> mapPrice = new HashMap<>();

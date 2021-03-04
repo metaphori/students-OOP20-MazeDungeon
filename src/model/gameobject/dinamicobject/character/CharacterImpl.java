@@ -25,24 +25,24 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      */
 
     private static final double MAX_LIFE = 100;
-
-    private static final int INITIAL_SPEED = 400;
-    private static final long INITIAL_SHOOT_SPEED = 3;
-    private static final long INITIAL_BULLET_DELAY = 200; 
+    private static final int INITIAL_SPEED = 400; 
     private static final int INITIAL_MONEY = 0;
+
+    private static final int INITIAL_BULLET_SPEED = 3;
+    private static final int INITIAL_BULLET_DELAY = 200; 
+
 
     /*
      * CHARACTER CHARACTERISTIC.
      */
     private double life;
     private int bonusDamage;
-    private long bulletSpeed;
+    private int bulletSpeed;
     private int money;
 
     /**
      * VARIABLES.
      */
-    private Set<Item> items;
     private final BulletFactory bulletFactory;
     private long lastShootTime; 
     private boolean shoot;
@@ -56,11 +56,10 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
         super(INITIAL_SPEED, position, gameObjectType);
         this.life = MAX_LIFE;
         this.bonusDamage = 0;
-        this.bulletSpeed = INITIAL_SHOOT_SPEED;
+        this.bulletSpeed = INITIAL_BULLET_SPEED;
         this.money = INITIAL_MONEY;
 
         this.characterMovement = new CharacterMovementImpl(this);
-        this.items = new HashSet<>();
         this.bulletFactory = new BulletFactoryImpl();
         this.shoot = false;
         this.lastShootTime = System.currentTimeMillis();
@@ -157,7 +156,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * @return the bullet speed.
      */
     @Override
-    public long getBulletSpeed() {
+    public int getBulletSpeed() {
         return this.bulletSpeed;
     }
 
@@ -166,24 +165,10 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
      * set the current bullet speed.
      */
     @Override
-    public void setBulletSpeed(final long bulletSpeed) {
+    public void setBulletSpeed(final int bulletSpeed) {
         this.bulletSpeed = bulletSpeed;
     }
-
-    @Override
-    public void addItem(final Item item) {
-        this.items.add(item);
-    }
-
-    /**
-     * @return the items' set
-     */
-    @Override
-    public Set<Item> getItems() {
-        return this.items;
-    }
-
-
+    
     /**
      * @param obj2 
      * the object the character is collide with.
@@ -236,7 +221,6 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
             default:
                 break;
         }
-        /*this.setPosition(this.getLastPosition());*/
     }
 
 
@@ -244,8 +228,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
     /**
      * shoot a bullet.
      */
-    @Override
-    public void shoot() {
+    private void shoot() {
         Bullet bullet = bulletFactory.createCharacterBullet(
                 new Point2D(getPosition().getX() + this.getBoundingBox().getWidth() / 2, getPosition().getY() + this.getBoundingBox().getHeight() / 2),
                 this.shootDirection.mul(this.bulletSpeed), this.bonusDamage);
@@ -277,21 +260,20 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
             this.shootDirection = shootDirection;
         }
     }
-    
-    /**
-     * 
-     */
-    @Override
-    public boolean isWon() {
-        return this.won;
-    }
-    
+
     /**
      * 
      */
     @Override
     public void pickedUpFinalArtefact() {
         this.won = true;
+    }
+
+
+    @Override
+    public boolean isWon() {
+        // TODO Auto-generated method stub
+        return this.isWon();
     }
 }
 
