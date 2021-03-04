@@ -5,10 +5,13 @@ import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.bullet.Bullet;
+import model.gameobject.dinamicobject.bullet.BulletFactory;
+import model.gameobject.dinamicobject.bullet.BulletFactoryImpl;
 import model.gameobject.simpleobject.Coin;
 
 
 public class Boss extends AbstractEnemy {
+    private final BulletFactory bulletFactory = new BulletFactoryImpl();
     private static final long BOSS_SHOOT_DELAY = 500;
     private final double maxLife;
     private static final int MAX_SPEED = 300;
@@ -83,11 +86,11 @@ public class Boss extends AbstractEnemy {
     public void shoot() {
         final Bullet bullet;
         if (this.getLife() >=  this.maxLife / 2) {
-            bullet = this.getBulletFactory().createBossBullet(this.getPosition().sum(new Vector2D(ALIGN_SHOOT_X, ALIGN_SHOOT_Y)),
+            bullet = bulletFactory.createBossBullet(this.getPosition().sum(new Vector2D(ALIGN_SHOOT_X, ALIGN_SHOOT_Y)),
                     new Vector2D(0, 1).getNormalized());
         } else {
             final Point2D characterPosition = this.getRoom().getRoomManager().getCharacter().getPosition();
-            bullet = this.getBulletFactory().createBossBullet(this.getPosition().sum(new Vector2D(ALIGN_SHOOT_X, ALIGN_SHOOT_Y)),
+            bullet = bulletFactory.createBossBullet(this.getPosition().sum(new Vector2D(ALIGN_SHOOT_X, ALIGN_SHOOT_Y)),
                     new Vector2D(characterPosition.getX() - ALIGN_SHOOT_X - this.getPosition().getX(), characterPosition.getY() - ALIGN_SHOOT_Y - this.getPosition().getY()).getNormalized());
         }
         this.getRoom().addDinamicObject(bullet);

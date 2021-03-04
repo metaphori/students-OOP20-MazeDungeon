@@ -22,7 +22,8 @@ public class MainMenuViewImpl implements MainMenuView {
     private final JLabel lblTitle = new JLabel(new ImageIcon(this.imagesPath + "Title.png"));
     private final JButton btnNewGame = new JButton("", new ImageIcon(this.imagesPath + "NewGame.png")); 
     private final JButton btnExit = new JButton("", new ImageIcon(this.imagesPath + "Exit.png")); 
-    private final JButton btnCredits = new JButton("", new ImageIcon(this.imagesPath + "Credits.png")); 
+    private final JButton btnCredits = new JButton("", new ImageIcon(this.imagesPath + "CreditsButton.png")); 
+    private final JLabel creditsLabel = new JLabel(new ImageIcon(this.imagesPath + "Credits.png"));
     private final JFrame frame = new JFrame();
     private final JPanel mainPanel = new JPanel(new GridLayout());
 
@@ -48,6 +49,11 @@ public class MainMenuViewImpl implements MainMenuView {
 
         btnCredits.setBounds(160, 433, 300, 45);
         this.configureButton(btnCredits);
+
+        btnCredits.addActionListener(e -> {
+            creditsLabel.setBounds(50, 610, 335, 122);
+            lblBackground.add(lblTitle);
+        });
 
         btnExit.setBounds(160, 523, 300, 45);
         this.configureButton(btnExit);
