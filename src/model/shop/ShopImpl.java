@@ -12,11 +12,11 @@ public class ShopImpl implements Shop {
     private static final int MORE_DAMAGE = 15;
     private static final int MORE_SPEED = 150;
     private static final int MORE_BULLETSPEED = 3;
-    private static final int PRICE_ARTHEMIDEBOW = 2;
-    private static final int PRICE_HERMESBOOTS = 3;
-    private static final int PRICE_ZEUSBOLT = 3;
-    private static final int PRICE_HEALTH = 2;
-    private static final int PRICE_ORACLEAMULET = 7;
+    private static final int PRICE_ARTHEMIDEBOW = 1;
+    private static final int PRICE_HERMESBOOTS = 1;
+    private static final int PRICE_ZEUSBOLT = 1;
+    private static final int PRICE_HEALTH = 1;
+    private static final int PRICE_ORACLEAMULET = 1;
 
     private final Set<Items> purchasedItems = new HashSet<>();
     private final Set<Items> cart = new HashSet<>();
@@ -102,13 +102,15 @@ public class ShopImpl implements Shop {
                     this.character.setMoney(this.character.getMoney() - this.getHealth().getCost());
                     this.addSkills(getHealth());
                     this.messageOuput = this.msgBought + this.character.getMoney();
+                    break;
                 case ORACLEAMULET:
-                    if (this.getOracleAmulet().getCost() <= this.character.getMoney()) {
+                    if (this.getOracleAmulet().getCost() > this.character.getMoney()) {
                         this.messageOuput = this.msgNoMoney;
                         break;
                     }
                     this.setItem(this.getOracleAmulet());
                     this.addSkills(this.getOracleAmulet());
+                    break;
                  default:
                      messageOuput = "ERROR!";
             }
