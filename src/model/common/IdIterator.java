@@ -4,13 +4,13 @@ import java.util.Iterator;
 
 public class IdIterator implements Iterator<Integer> {
 
-    private int value = 0;
+    private int value;
 
     /**
      * Has always a next value.
-     * @Override
      * @return true
      */
+    @Override
     public boolean hasNext() {
         return true;
     }
@@ -19,8 +19,8 @@ public class IdIterator implements Iterator<Integer> {
      * @Override
      * @return the next value
      */
+    @Override
     public Integer next() {
         return this.value++;
     }
-
 }

@@ -6,17 +6,19 @@ import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
-import model.gameobject.dinamicobject.DinamicObject;
-import model.gameobject.dinamicobject.bullet.BulletFactory;
-import model.gameobject.dinamicobject.bullet.BulletFactoryImpl;
 import model.gameobject.simpleobject.Coin;
-import model.room.Room;
 
 public abstract class AbstractEnemy extends AbstractDinamicObject implements Enemy {
 
     private long lastShootTime = System.currentTimeMillis();
     private double life;
 
+    /**
+     * @param life : the default life of the enemy
+     * @param speed : the default speed of the enemy
+     * @param position : the starting position of the enemy
+     * @param gameObjectType : the type of the gameObject, in particular the type of the enemy
+     */
     public AbstractEnemy(final double life, final int speed, final Point2D position, final GameObjectType gameObjectType) {
         super(speed, position, gameObjectType);
         this.life = life;
@@ -24,7 +26,7 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     }
 
     /**
-     * 
+     * @return the current life of the enemy.
      */
     @Override
     public double getLife() {
@@ -32,7 +34,7 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     }
 
     /**
-     * 
+     * @param damage : the damage to be taken by the enemy.
      */
     @Override
     public void takesDamage(final double damage) {
@@ -46,7 +48,7 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     }
 
     /**
-     * 
+     * @param obj2 : the object with the enemy is colliding with.
      */
     @Override
     public void collideWith(final GameObject obj2) {
@@ -83,9 +85,8 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
         return false;
     }
 
-    protected abstract void changeRoutine();
-
     @Override
     public abstract void shoot();
 
+    protected abstract void changeRoutine();
 }

@@ -3,15 +3,18 @@ package model.gameobject.dinamicobject;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
-import model.gameobject.GameObject;
 import model.gameobject.simpleobject.SimpleObjectImpl;
-import model.room.Room;
 
 public abstract class AbstractDinamicObject extends SimpleObjectImpl implements DinamicObject {
     private Vector2D direction;
     private int speed;
     private Point2D lastPosition;
 
+    /**
+     * @param speed : the initial speed of the DinamicObject
+     * @param position : the initial position of the DinamicObject
+     * @param gameObjectType : the type of the DinamicObject
+     */
     public AbstractDinamicObject(final int speed, final Point2D position, final GameObjectType gameObjectType) {
         super(position, gameObjectType);
         this.speed = speed;
@@ -23,7 +26,6 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
      * @return the speed of the DinamicObject
      */
     @Override
-
     public int getSpeed() {
         return this.speed;
     }
@@ -44,24 +46,24 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
     }
 
     /**
-     * @param direction : set direction value as the direction of the DinamicObject
+     * @param newDirection : set direction value as the direction of the DinamicObject
      */
     @Override
-    public void setDirection(final Vector2D direction) {
-        this.direction = direction;
+    public void setDirection(final Vector2D newDirection) {
+        this.direction = newDirection;
     }
 
     /**
-     * @param position
+     * @param newPosition : set the current position of the DInamicObject to the new position
      */
-    public void setPosition(final Point2D position) {
+    public void setPosition(final Point2D newPosition) {
         this.lastPosition = this.getPosition();
-        super.setPosition(position);
+        super.setPosition(newPosition);
         this.updateBoundingBoxPosition();
     }
 
     /**
-     * 
+     * Move the bounding box, following the DinamicObject movement.
      */
     private void updateBoundingBoxPosition() {
         if (this.getBoundingBox() != null) {
@@ -70,21 +72,19 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
     }
 
     /**
-     * @param elapsed
-     */
-    protected void move(final double elapsed) {
-        this.setPosition(this.getPosition().sum(this.getDirection().mul(speed).mul(elapsed)));
-    }
-
-    /**
-     * 
      * @return last position of the object
      */
     public Point2D getLastPosition() {
         return this.lastPosition;
     }
 
+    /**
+     * @param elapsed : the time passed from the last movement
+     */
+    protected void move(final double elapsed) {
+        this.setPosition(this.getPosition().sum(this.getDirection().mul(speed).mul(elapsed)));
+    }
+
     @Override
     public abstract void updateState(double elapsed);
-
 }

@@ -4,15 +4,11 @@ import java.util.List;
 import java.util.Random;
 
 import model.common.GameObjectType;
-import model.common.IdIterator;
 import model.common.Point2D;
 import model.common.Vector2D;
-import model.gameobject.GameObject;
-import model.gameobject.dinamicobject.AbstractDinamicObject;
 import model.gameobject.dinamicobject.bullet.Bullet;
 import model.gameobject.dinamicobject.bullet.BulletFactory;
 import model.gameobject.dinamicobject.bullet.BulletFactoryImpl;
-import model.room.Room;
 
 public class EnemyFactoryImpl implements EnemyFactory {
 
@@ -29,7 +25,6 @@ public class EnemyFactoryImpl implements EnemyFactory {
     private static final long SOUL_SHOOT_DELAY = 1500;
     private static final long SPROUT_SHOOT_DELAY = 2000;
     private static final long SKELETON_SHOOT_DELAY = 1000;
-    private static final long BOSS_SHOOT_DELAY = 1000;
 
     private final BulletFactory bulletFactory = new BulletFactoryImpl();
     /**

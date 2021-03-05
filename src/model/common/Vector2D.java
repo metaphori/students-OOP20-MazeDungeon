@@ -7,21 +7,25 @@ public class Vector2D implements java.io.Serializable {
         private final double y;
 
         /**
-         * @param x
-         * @param y
+         * @param x : the initial x of the vector.
+         * @param y : the initial y of the vector.
          */
         public Vector2D(final double x, final double y) {
             this.x = x;
             this.y = y;
         }
 
+        /**
+         * @param to : starting point of the vector
+         * @param from : ending point of the vector
+         */
         public Vector2D(final Point2D to, final Point2D from) {
             this.x = to.getX() - from.getX();
             this.y = to.getY() - from.getY();
         }
 
         /**
-         * @param v
+         * @param v : the vector to be added.
          * @return the resultant vector
          */
         public Vector2D sum(final Vector2D v) {
@@ -36,7 +40,7 @@ public class Vector2D implements java.io.Serializable {
         }
 
         /**
-         * @param fact
+         * @param fact : the number to be multiplied.
          * @return  the resultant vector
          */
         public Vector2D mul(final double fact) {
@@ -44,7 +48,6 @@ public class Vector2D implements java.io.Serializable {
         }
 
         /**
-         * 
          * @return the normalized vector
          */
         public Vector2D getNormalized() {
@@ -53,14 +56,14 @@ public class Vector2D implements java.io.Serializable {
         }
 
         /**
-         * @return the Y of the vector
+         * @return the y of the vector
          */
         public double getY() {
             return this.y;
         }
 
         /**
-         * @return the X of the vector
+         * @return the x of the vector
          */
         public double getX() {
             return this.x;

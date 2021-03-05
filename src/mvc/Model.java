@@ -1,7 +1,6 @@
 package mvc;
 
 import java.util.List;
-import java.util.Optional;
 
 import model.common.Point2D;
 import model.gameobject.GameObject;

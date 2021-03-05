@@ -1,20 +1,21 @@
 package model.common;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class Point2D implements java.io.Serializable {
     private static final long serialVersionUID = 4674087395785183468L;
     private final double x;
     private final double y;
 
+    /**
+     * @param x : the x coordinate of the point.
+     * @param y : the y coordinate of the point.
+     */
     public Point2D(final double x, final double y) {
         this.x = x;
         this.y = y;
     }
 
     /**
-     * @param v
+     * @param v : the vector to be added.
      * @return the resultant Point
      */
     public Point2D sum(final Vector2D v) {
@@ -22,7 +23,7 @@ public class Point2D implements java.io.Serializable {
     }
 
     /**
-     * @param v
+     * @param v : the vector to be multiplied.
      * @return the resultant Point
      */
     public Point2D mul(final double v) {
@@ -30,7 +31,7 @@ public class Point2D implements java.io.Serializable {
     }
 
     /**
-     * @param v
+     * @param v : the vector to be subtracted.
      * @return the resultant Point
      */
     public Vector2D sub(final Point2D v) {
@@ -38,19 +39,22 @@ public class Point2D implements java.io.Serializable {
     }
 
     /**
-     * @return the X of the point
+     * @return the x of the point
      */
     public double getX() {
         return this.x;
     }
 
     /**
-     * @return the Y of the point
+     * @return the y of the point
      */
     public double getY() {
         return this.y;
     }
 
+    /**
+     * Generated, helpful for compare two Point2D.
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -63,6 +67,9 @@ public class Point2D implements java.io.Serializable {
         return result;
     }
 
+    /**
+     * Generated, helpful for compare two Point2D.
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -84,9 +91,11 @@ public class Point2D implements java.io.Serializable {
         return true;
     }
 
+    /**
+     * @return the string representation of a Point2D
+     */
     @Override
     public String toString() {
         return "Point2D [x=" + x + ", y=" + y + "]";
     }
-
 }
