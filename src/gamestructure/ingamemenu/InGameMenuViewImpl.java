@@ -10,7 +10,6 @@ import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -22,6 +21,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     private static final int SIZE_IMAGE_ITEM = 100;
     private static final double WIDTH_RATIO = 0.67; 
     private static final double HEIGHT_RATIO = 0.736;
+    private static final String FONT_ALGERIAN = "Algerian";
     private String priceArthemideBow;
     private String priceHermesBoots;
     private String priceZeusBolth;
@@ -65,42 +65,35 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.frame.remove(inGameMenuPanel);
         this.frame.setContentPane(shopPanel);
 
-        btnBackToMenu.setBounds((int) (screen.getWidth()/4), (int) (screen.getHeight()/1.5), 300, 90);
+        btnBackToMenu.setBounds((int) (screen.getWidth() / 4), (int) (screen.getHeight() / 1.5), 300, 90);
         this.configureButton(btnBackToMenu);
         this.lblBackgroundShop.add(btnBackToMenu);
-        btnBackToMenu.addActionListener(e -> {
-            this.controller.openInGameMenu();
-        });
+        btnBackToMenu.addActionListener(e -> this.controller.openInGameMenu());
+
         btnArthemideBowItem.setBounds(45, 180, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnArthemideBowItem);
         this.lblBackgroundShop.add(btnArthemideBowItem);
-        btnArthemideBowItem.addActionListener(e -> {
-            this.controller.buyItem(Items.ARTHEMIDEBOW);
-        });
+        btnArthemideBowItem.addActionListener(e -> this.controller.buyItem(Items.ARTHEMIDEBOW));
+
         btnHermesBootsItem.setBounds(208, 175, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnHermesBootsItem);
         this.lblBackgroundShop.add(btnHermesBootsItem);
-        btnHermesBootsItem.addActionListener(e -> {
-            this.controller.buyItem(Items.HERMESBOOTS);
-        });
+        btnHermesBootsItem.addActionListener(e -> this.controller.buyItem(Items.HERMESBOOTS));
+
         btnZeusBoltItem.setBounds(350, 190, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnZeusBoltItem);
         this.lblBackgroundShop.add(btnZeusBoltItem);
-        btnZeusBoltItem.addActionListener(e -> {
-            this.controller.buyItem(Items.ZEUSBOLT);
-        });
+        btnZeusBoltItem.addActionListener(e -> this.controller.buyItem(Items.ZEUSBOLT));
+
         btnHealthItem.setBounds(510, 180, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnHealthItem);
         this.lblBackgroundShop.add(btnHealthItem);
-        btnHealthItem.addActionListener(e -> {
-            this.controller.buyItem(Items.HEALTH);
-        });
+        btnHealthItem.addActionListener(e -> this.controller.buyItem(Items.HEALTH));
+
         btnOracleAmulet.setBounds(680, 180, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnOracleAmulet);
         this.lblBackgroundShop.add(btnOracleAmulet);
-        btnOracleAmulet.addActionListener(e -> {
-            this.controller.buyItem(Items.ORACLEAMULET);
-        });
+        btnOracleAmulet.addActionListener(e -> this.controller.buyItem(Items.ORACLEAMULET));
 
         this.showPrice();
         this.showItemInformation();
@@ -111,25 +104,20 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.frame.remove(shopPanel);
         this.frame.setContentPane(inGameMenuPanel);
 
-        btnResumeMenu.setBounds((int) (screen.getWidth()/4), 340, 300, 90);
+        btnResumeMenu.setBounds((int) (screen.getWidth() / 4), 340, 300, 90);
         this.configureButton(btnResumeMenu);
         this.lblBackgroundMenu.add(btnResumeMenu);
-        btnResumeMenu.addActionListener(e -> {
-           // System.out.println("Premuto");
-            this.controller.resume();
-        });
-        btnShopMenu.setBounds((int) (screen.getWidth()/4), 433, 300, 90);
+        btnResumeMenu.addActionListener(e -> this.controller.resume());
+
+        btnShopMenu.setBounds((int) (screen.getWidth() / 4), 433, 300, 90);
         this.configureButton(btnShopMenu);
         this.lblBackgroundMenu.add(btnShopMenu);
-        btnShopMenu.addActionListener(e -> {
-            this.controller.openShop();
-        });
-        btnExitMenu.setBounds((int) (screen.getWidth()/4), 523, 300, 90);
+        btnShopMenu.addActionListener(e -> this.controller.openShop());
+
+        btnExitMenu.setBounds((int) (screen.getWidth() / 4), 523, 300, 90);
         this.configureButton(btnExitMenu);
         this.lblBackgroundMenu.add(btnExitMenu);
-        btnExitMenu.addActionListener(e -> {
-            this.controller.exit();
-        });
+        btnExitMenu.addActionListener(e -> this.controller.exit());
         if (start) {
             this.show();
         }
@@ -185,38 +173,33 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         priceOracleAmulet = map.get(Items.ORACLEAMULET).toString();
     }
     private void showPrice() {
+        final int sizeFont = 25;
+        final int widthLabel = 25;
+        final int heightLabel = 25;
         final JLabel labelPriceArthemideBow = new JLabel(priceArthemideBow);
-        labelPriceArthemideBow.setBounds(90, 310, 25, 25);
+        labelPriceArthemideBow.setBounds(90, 310, widthLabel, heightLabel);
         this.lblBackgroundShop.add(labelPriceArthemideBow);
-        //labelPriceArthemideBow.setVisible(true);
-        labelPriceArthemideBow.setFont(new Font("Algerian", Font.ITALIC, 25));
+        labelPriceArthemideBow.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
 
         final JLabel labelPriceHermesBoots = new JLabel(priceHermesBoots);
-        labelPriceHermesBoots.setBounds(250, 310, 25, 25);
+        labelPriceHermesBoots.setBounds(250, 310, widthLabel, heightLabel);
         this.lblBackgroundShop.add(labelPriceHermesBoots);
-        //labelPriceHermesBoots.setVisible(true);
-        labelPriceHermesBoots.setFont(new Font("Algerian", Font.ITALIC, 25));
+        labelPriceHermesBoots.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
 
         final JLabel labelPriceZeusBolt = new JLabel(priceZeusBolth);
-        labelPriceZeusBolt.setBounds(390, 310, 25, 25);
+        labelPriceZeusBolt.setBounds(390, 310, widthLabel, heightLabel);
         this.lblBackgroundShop.add(labelPriceZeusBolt);
-        //labelPriceZeusBolt.setVisible(true);
-        labelPriceZeusBolt.setFont(new Font("", Font.PLAIN, 25));
-        labelPriceZeusBolt.setFont(new Font("Algerian", Font.ITALIC, 25));
+        labelPriceZeusBolt.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
 
         final JLabel labelPriceHealth = new JLabel(priceHelath);
-        labelPriceHealth.setBounds(560, 310, 25, 25);
+        labelPriceHealth.setBounds(560, 310, widthLabel, heightLabel);
         this.lblBackgroundShop.add(labelPriceHealth);
-        //labelPriceHealth.setVisible(true);
-        labelPriceHealth.setFont(new Font("", Font.PLAIN, 25));
-        labelPriceHealth.setFont(new Font("Algerian", Font.ITALIC, 25));
+        labelPriceHealth.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
 
         final JLabel labelPriceOracleAmulet = new JLabel(priceOracleAmulet);
-        labelPriceOracleAmulet.setBounds(710, 310, 25, 25);
+        labelPriceOracleAmulet.setBounds(710, 310, widthLabel, heightLabel);
         this.lblBackgroundShop.add(labelPriceOracleAmulet);
-        //labelPriceOracleAmulet.setVisible(true);
-        labelPriceOracleAmulet.setFont(new Font("", Font.PLAIN, 25));
-        labelPriceOracleAmulet.setFont(new Font("Algerian", Font.ITALIC, 25));
+        labelPriceOracleAmulet.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
     }
     private void showItemInformation() {
         final int sizeFont = 15;
@@ -226,24 +209,27 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         final JLabel labelInfoArthemideBow = new JLabel("+ damage");
         labelInfoArthemideBow.setBounds(45, 385, widthLabel, heightLabel);
         this.lblBackgroundShop.add(labelInfoArthemideBow);
-        labelInfoArthemideBow.setFont(new Font("Algerian", Font.ITALIC, sizeFont));
+        labelInfoArthemideBow.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
 
         final JLabel labelInfoHermesBoots = new JLabel("+ speed");
         labelInfoHermesBoots.setBounds(205, 385, widthLabel, heightLabel);
         this.lblBackgroundShop.add(labelInfoHermesBoots);
-        labelInfoHermesBoots.setFont(new Font("Algerian", Font.ITALIC, sizeFont));
+        labelInfoHermesBoots.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
+
         final JLabel labelInfoZeusBolt = new JLabel("+ bullet speed");
         labelInfoZeusBolt.setBounds(355, 385, widthLabel, heightLabel);
         this.lblBackgroundShop.add(labelInfoZeusBolt);
-        labelInfoZeusBolt.setFont(new Font("Algerian", Font.ITALIC, sizeFont));
+        labelInfoZeusBolt.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
+
         final JLabel labelInfoHealth = new JLabel("+ health");
         labelInfoHealth.setBounds(520, 385, widthLabel, heightLabel);
         this.lblBackgroundShop.add(labelInfoHealth);
-        labelInfoHealth.setFont(new Font("Algerian", Font.ITALIC, sizeFont));
+        labelInfoHealth.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
+
         final JLabel labelInfoOracleAmulet = new JLabel("+ everything");
         labelInfoOracleAmulet.setBounds(665, 385, widthLabel, heightLabel);
         this.lblBackgroundShop.add(labelInfoOracleAmulet);
-        labelInfoOracleAmulet.setFont(new Font("Algerian", Font.ITALIC, sizeFont));
+        labelInfoOracleAmulet.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
     }
 
 }

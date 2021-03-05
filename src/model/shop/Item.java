@@ -15,5 +15,4 @@ public interface Item {
     int getBulletSpeed();
 
     int getDamage();
-
 }

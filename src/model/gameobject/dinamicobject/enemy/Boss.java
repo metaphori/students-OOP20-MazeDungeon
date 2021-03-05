@@ -42,30 +42,25 @@ public class Boss extends AbstractEnemy {
      * 
      */
     public void moveUpWall() {
+        final int incrementSpeed = 5;
         if (this.getSpeed() < MAX_SPEED) {
-            this.setSpeed(this.getSpeed() + 10);
+            this.setSpeed(this.getSpeed() + incrementSpeed);
         }
         if ((int) this.getDirection().getX() == -1 && (int) this.getDirection().getY() == 0) {
             this.setDirection(new Vector2D(1, 0));
             this.setPosition(new Point2D(this.getPosition().getX() + 1, this.getPosition().getY() + 1));
-            //vectorBullet = new Vector2D(0, 1);
-        }
-        else {
+        } else {
             this.setDirection(new Vector2D(-1, 0));
             this.setPosition(new Point2D(this.getPosition().getX() - 1, this.getPosition().getY() + 1));
-            //vectorBullet = new Vector2D(0, 1);
         }
     }
     @Override
     public void collideWith(final GameObject obj2) {
         switch (obj2.getGameObjectType().getCollisionType()) {
         case OBSTACLE:
-            //this.setPosition(this.getLastPosition());
+        case ENTITY:
             this.changeRoutine();
             break;
-        case ENTITY:
-            break;
-
         default:
             break;
         }

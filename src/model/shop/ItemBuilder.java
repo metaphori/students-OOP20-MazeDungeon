@@ -1,17 +1,11 @@
 package model.shop;
 
 public final class ItemBuilder implements Item {
-
     private final Items name;
-
     private int cost;
-
     private final int damage;
-
     private final int speed;
-
     private final int bulletSpeed;
-
     private final double health;
 
     private ItemBuilder(final Items name, final int cost, final int damage, final int speed, final int bulletSpeed, final double health) {
