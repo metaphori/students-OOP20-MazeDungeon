@@ -22,7 +22,8 @@ public class MainMenuViewImpl implements MainMenuView {
     private final JLabel lblTitle = new JLabel(new ImageIcon(this.imagesPath + "Title.png"));
     private final JButton btnNewGame = new JButton("", new ImageIcon(this.imagesPath + "NewGame.png")); 
     private final JButton btnExit = new JButton("", new ImageIcon(this.imagesPath + "Exit.png")); 
-    private final JButton btnCredits = new JButton("", new ImageIcon(this.imagesPath + "Credits.png")); 
+    private final JButton btnCredits = new JButton("", new ImageIcon(this.imagesPath + "CreditsButton.png")); 
+    private final JLabel creditsLabel = new JLabel(new ImageIcon(this.imagesPath + "Credits.png"));
     private final JFrame frame = new JFrame();
     private final JPanel mainPanel = new JPanel(new GridLayout());
 
@@ -49,6 +50,10 @@ public class MainMenuViewImpl implements MainMenuView {
         btnCredits.setBounds(160, 433, 300, 45);
         this.configureButton(btnCredits);
 
+        btnCredits.addActionListener(e -> {
+            this.creditsLabel.setVisible(!this.creditsLabel.isVisible());
+        });
+
         btnExit.setBounds(160, 523, 300, 45);
         this.configureButton(btnExit);
 
@@ -56,10 +61,14 @@ public class MainMenuViewImpl implements MainMenuView {
             this.hide();
         });
 
-        lblTitle.setBounds(50, 208, 500, 100);
-        lblBackground.add(lblTitle);
+        this.creditsLabel.setBounds(140, 595, 335, 122);
+        this.creditsLabel.setVisible(false);
+        this.lblBackground.add(creditsLabel);
 
-        mainPanel.add(lblBackground, JLayeredPane.FRAME_CONTENT_LAYER);
+        this.lblTitle.setBounds(50, 208, 500, 100);
+        this.lblBackground.add(lblTitle);
+
+        this.mainPanel.add(lblBackground, JLayeredPane.FRAME_CONTENT_LAYER);
         this.frame.setContentPane(mainPanel);
     }
 

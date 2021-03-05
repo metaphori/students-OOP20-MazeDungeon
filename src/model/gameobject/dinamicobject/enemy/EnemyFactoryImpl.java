@@ -10,6 +10,8 @@ import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dinamicobject.AbstractDinamicObject;
 import model.gameobject.dinamicobject.bullet.Bullet;
+import model.gameobject.dinamicobject.bullet.BulletFactory;
+import model.gameobject.dinamicobject.bullet.BulletFactoryImpl;
 import model.room.Room;
 
 public class EnemyFactoryImpl implements EnemyFactory {
@@ -29,6 +31,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     private static final long SKELETON_SHOOT_DELAY = 1000;
     private static final long BOSS_SHOOT_DELAY = 1000;
 
+    private final BulletFactory bulletFactory = new BulletFactoryImpl();
     /**
      * @return an enemy of type: Sprout
      */
@@ -55,7 +58,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
             @Override
             public void shoot() {
                 final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
-                final Bullet bullet = this.getBulletFactory().createSproutBullet(newPosition, this.getDirection().getNormalized());
+                final Bullet bullet = bulletFactory.createSproutBullet(newPosition, this.getDirection().getNormalized());
                 this.getRoom().addDinamicObject(bullet);
             }
 
@@ -93,7 +96,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
             @Override
             public void shoot() {
                 final Point2D characterPosition = this.getRoom().getRoomManager().getCharacter().getPosition();
-                final Bullet bullet = this.getBulletFactory().createSoulBullet(this.getPosition(),
+                final Bullet bullet = bulletFactory.createSoulBullet(this.getPosition(),
                         new Vector2D(characterPosition.getX() - this.getPosition().getX(), characterPosition.getY() - this.getPosition().getY()).getNormalized());
                 this.getRoom().addDinamicObject(bullet);
             }
@@ -141,10 +144,10 @@ public class EnemyFactoryImpl implements EnemyFactory {
             @Override
             public void shoot() {
                 final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
-                final Bullet bulletNorth = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(0, -1));
-                final Bullet bulletSouth = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(0, 1));
-                final Bullet bulletEast = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(1, 0));
-                final Bullet bulletWest = this.getBulletFactory().createSkeletonBullet(newPosition, new Vector2D(-1, 0));
+                final Bullet bulletNorth = bulletFactory.createSkeletonBullet(newPosition, new Vector2D(0, -1));
+                final Bullet bulletSouth = bulletFactory.createSkeletonBullet(newPosition, new Vector2D(0, 1));
+                final Bullet bulletEast = bulletFactory.createSkeletonBullet(newPosition, new Vector2D(1, 0));
+                final Bullet bulletWest = bulletFactory.createSkeletonBullet(newPosition, new Vector2D(-1, 0));
                 this.getRoom().addDinamicObject(List.of(bulletNorth, bulletEast, bulletWest, bulletSouth));
             }
 

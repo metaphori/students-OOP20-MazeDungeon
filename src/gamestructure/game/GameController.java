@@ -20,6 +20,4 @@ public interface GameController extends Controller {
     void notifyClosedInGameMenu();
 
     Character getCharacter();
-
-    void openMainMenu();
 }

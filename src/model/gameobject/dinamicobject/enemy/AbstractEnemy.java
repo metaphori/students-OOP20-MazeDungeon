@@ -16,12 +16,10 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
 
     private long lastShootTime = System.currentTimeMillis();
     private double life;
-    private final BulletFactory bulletFactory;
 
     public AbstractEnemy(final double life, final int speed, final Point2D position, final GameObjectType gameObjectType) {
         super(speed, position, gameObjectType);
         this.life = life;
-        this.bulletFactory = new BulletFactoryImpl();
         this.changeRoutine();
     }
 
@@ -31,13 +29,6 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     @Override
     public double getLife() {
         return this.life;
-    }
-
-    /**
-     * @return the factory of bullet
-     */
-    protected BulletFactory getBulletFactory() {
-        return this.bulletFactory;
     }
 
     /**
@@ -61,9 +52,6 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     public void collideWith(final GameObject obj2) {
         switch (obj2.getGameObjectType().getCollisionType()) {
         case OBSTACLE:
-            /*this.setPosition(new Point2D(this.getPosition().getX() - (this.getDirection().getX() * 1),
-                    this.getPosition().getY()  - (this.getDirection().getY() * 1)));*/
-            //this.setPosition(this.getLastPosition());
             final int footHeight = 15;
             final Point2D footColliderUL = new Point2D(this.getBoundingBox().getULCorner().getX(), this.getBoundingBox().getBRCorner().getY() - footHeight);
             final BoundingBox footCollider = new BoundingBox(footColliderUL, this.getBoundingBox().getWidth(), footHeight);
@@ -73,9 +61,6 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
             }
             break;
         case ENTITY:
-            /*this.setPosition(new Point2D(this.getPosition().getX() - (this.getDirection().getX() * 1),
-                    this.getPosition().getY()  - (this.getDirection().getY() * 1)));*/
-            //this.setPosition(this.getLastPosition());
             final AbstractDinamicObject dinamicObject = (AbstractDinamicObject) obj2;
             dinamicObject.setPosition(dinamicObject.getLastPosition());
             this.changeRoutine();
