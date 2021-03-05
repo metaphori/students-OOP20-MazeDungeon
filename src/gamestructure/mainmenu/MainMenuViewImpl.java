@@ -51,8 +51,7 @@ public class MainMenuViewImpl implements MainMenuView {
         this.configureButton(btnCredits);
 
         btnCredits.addActionListener(e -> {
-            creditsLabel.setBounds(50, 610, 335, 122);
-            lblBackground.add(lblTitle);
+            this.creditsLabel.setVisible(!this.creditsLabel.isVisible());
         });
 
         btnExit.setBounds(160, 523, 300, 45);
@@ -62,10 +61,14 @@ public class MainMenuViewImpl implements MainMenuView {
             this.hide();
         });
 
-        lblTitle.setBounds(50, 208, 500, 100);
-        lblBackground.add(lblTitle);
+        this.creditsLabel.setBounds(140, 595, 335, 122);
+        this.creditsLabel.setVisible(false);
+        this.lblBackground.add(creditsLabel);
 
-        mainPanel.add(lblBackground, JLayeredPane.FRAME_CONTENT_LAYER);
+        this.lblTitle.setBounds(50, 208, 500, 100);
+        this.lblBackground.add(lblTitle);
+
+        this.mainPanel.add(lblBackground, JLayeredPane.FRAME_CONTENT_LAYER);
         this.frame.setContentPane(mainPanel);
     }
 
