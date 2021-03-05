@@ -1,5 +1,7 @@
 package model.gameobject.dinamicobject.enemy;
 
+import java.util.Random;
+
 import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
@@ -41,10 +43,14 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
         this.life = this.life - damage;
         System.out.println(this.getID() + ") " + this.getGameObjectType() + " Life: " + this.getLife());
         if (this.life <= 0) {
-            this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(new Vector2D(this.getBoundingBox().getWidth() / 2,
-                                                    this.getBoundingBox().getHeight() / 2))));
+            this.spawnCoin();
             this.getRoom().deleteGameObject(this);
         }
+    }
+
+    private void spawnCoin() {
+        this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(new Vector2D(this.getBoundingBox().getWidth() / 2,
+                this.getBoundingBox().getHeight() / 2))));
     }
 
     /**
@@ -74,7 +80,7 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
 
     /**
      * @param shootFrequency the frequency of shoot
-     * @return .
+     * @return true if the enemy can shoot.
      */
     protected boolean canShoot(final long shootFrequency) {
         final long currentTime = System.currentTimeMillis();
@@ -83,6 +89,16 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
             return true;
         }
         return false;
+    }
+
+    /**
+     * @return a random direction.
+     */
+    protected Vector2D getRndDirection() {
+        final Random rndFlipDirection = new Random();
+        final double newX = rndFlipDirection.nextBoolean() ? -1 : 1;
+        final double newY = rndFlipDirection.nextBoolean() ? -1 : 1;
+        return new Vector2D(newX, newY);
     }
 
     @Override

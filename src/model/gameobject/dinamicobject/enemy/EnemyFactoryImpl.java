@@ -60,10 +60,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
             @Override
             protected void changeRoutine() {
                 this.lastHitTime = System.currentTimeMillis();
-                final Random rndFlipDirection = new Random();
-                final double newX = this.getDirection().getX() * (rndFlipDirection.nextBoolean() ? -1 : 1);
-                final double newY = this.getDirection().getY() * (rndFlipDirection.nextBoolean() ? -1 : 1);
-                this.setDirection(new Vector2D(newX, newY));
+                this.setDirection(this.getRndDirection());
             }
 
             private void followCharacter() {
@@ -98,10 +95,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
 
             @Override
             protected void changeRoutine() {
-                final Random rndFlipDirection = new Random();
-                final double newX = rndFlipDirection.nextBoolean() ? -1 : 1;
-                final double newY = rndFlipDirection.nextBoolean() ? -1 : 1;
-                this.setDirection(new Vector2D(newX, newY));
+                this.getRndDirection();
             }
         };
     }
@@ -148,10 +142,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
 
             @Override
             protected void changeRoutine() {
-                final Random rndFlipDirection = new Random();
-                final double newX = rndFlipDirection.nextBoolean() ? -1 : 1;
-                final double newY = rndFlipDirection.nextBoolean() ? -1 : 1;
-                this.setDirection(new Vector2D(newX, newY));
+                this.setDirection(this.getRndDirection());
             }
 
             private void stopMovement() {
