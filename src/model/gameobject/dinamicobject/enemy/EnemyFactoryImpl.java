@@ -20,7 +20,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     private static final int SOUL_SPEED = 90;
     private static final int SPROUT_SPEED = 50;
     private static final int SKELETON_SPEED = 90;
-    private static final int BOSS_SPEED = 70;
+    private static final int BOSS_SPEED = 150;
 
     private static final long SOUL_SHOOT_DELAY = 1500;
     private static final long SPROUT_SHOOT_DELAY = 2000;

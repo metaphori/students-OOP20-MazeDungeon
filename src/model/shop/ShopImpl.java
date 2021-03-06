@@ -21,15 +21,16 @@ public class ShopImpl implements Shop {
     private final Set<Items> purchasedItems = new HashSet<>();
     private final Set<Items> cart = new HashSet<>();
     private String messageOuput = "";
-
     private final String msgBought;
     private final String msgNoMoney;
     private final Character character;
+
     public ShopImpl(final Character character) {
         this.character = character;
         msgBought = "You bought this item! You have coins: ";
         msgNoMoney = "You don't have enough coins!";
     }
+
     private void addSkills(final Item item) {
         this.character.setBonusDamage(this.character.getBonusDamage() + item.getDamage());
         this.character.setSpeed(this.character.getSpeed() + item.getSpeed());
@@ -40,13 +41,15 @@ public class ShopImpl implements Shop {
             this.character.setLife(this.character.getLife() + item.getHealth());
         }
     }
+
     private void setItem(final Item item) {
         this.character.setMoney(this.character.getMoney() - item.getCost());
         this.purchasedItems.add(item.getName());
         this.cart.add(item.getName());
         this.messageOuput = this.msgBought  + this.character.getMoney();
     }
-    /**
+
+    /** 
      * @return a map: every Item with its price 
      */
     public Map<Items, Integer> addPrice() {
@@ -59,7 +62,7 @@ public class ShopImpl implements Shop {
         return mapPrice;
     }
     /**
-     * @param i
+     * @param i : item selected, to check if the item is affordable
      */
     public void checkItem(final Items i) {
         if (this.purchasedItems.contains(i)) {
@@ -159,14 +162,15 @@ public class ShopImpl implements Shop {
         return new ItemBuilder.Builder(Items.ORACLEAMULET, PRICE_ORACLEAMULET).addDamage(MORE_DAMAGE).addSpeed(MORE_SPEED).addBulletSpeed(MORE_BULLETSPEED).build();
     }
     /**
-     * 
+     * empty the current cart.
      */
     public void clearCart() {
         this.cart.clear();
     }
 
     /**
-     * @return current cart
+     * 
+     * @return a copy of current cart
      */
     public Set<Items> getCart() {
         return Set.copyOf(this.cart);

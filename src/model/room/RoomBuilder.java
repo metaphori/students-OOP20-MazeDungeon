@@ -121,7 +121,7 @@ public class RoomBuilder {
         this.canAddBoss = false;
         this.canAddEnemy = false;
         this.canAddObstacle = false;
-        this.room.addDinamicObject(this.enemyFactory.createBoss(new Point2D(300, 150)));
+        this.room.addDinamicObject(this.enemyFactory.createBoss(new Point2D(256, 54)));
         return this;
     }
 

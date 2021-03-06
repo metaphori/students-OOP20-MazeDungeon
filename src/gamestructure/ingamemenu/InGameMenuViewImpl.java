@@ -59,7 +59,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.frame.setTitle("MazeDungeon");
     }
     /**
-     * 
+     * show shop panel and set button and label.
      */
     public void showShop() {
         this.frame.remove(inGameMenuPanel);
@@ -99,7 +99,9 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.showItemInformation();
         this.show();
     }
-
+    /**
+     * open in game menu panel and set button and label.
+     */
     public void showInGameMenu() {
         this.frame.remove(shopPanel);
         this.frame.setContentPane(inGameMenuPanel);
@@ -123,7 +125,9 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         }
     }
 
-    @Override
+    /**
+     * @Override
+     */
     public void show() {
         this.frame.pack();
         if (!start) {
@@ -134,7 +138,9 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.frame.setVisible(true);
     }
 
-    @Override
+    /**
+     * @Override
+     */
     public void hide() {
         this.frame.setVisible(false);
     }
@@ -146,7 +152,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     }
 
     /**
-     * 
+     * create and set message label, for output information.
      */
     public void returnMessage(final String messageOuput) {
         msg.setBounds(150, 580, 420, 50);
@@ -156,14 +162,14 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         msg.setVisible(true);
     }
     /**
-     * 
+     * clear message label.
      */
     public void removeMessage() {
         msg.setText("");
     }
 
     /**
-     * 
+     * set output price item.
      */
     public void setPriceItem(final Map<Items, Integer> map) {
         priceArthemideBow = map.get(Items.ARTHEMIDEBOW).toString();
@@ -172,6 +178,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         priceHelath = map.get(Items.HEALTH).toString();
         priceOracleAmulet = map.get(Items.ORACLEAMULET).toString();
     }
+
     private void showPrice() {
         final int sizeFont = 25;
         final int widthLabel = 25;
