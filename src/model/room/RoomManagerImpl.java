@@ -29,6 +29,7 @@ public class RoomManagerImpl implements RoomManager {
     private final Map<Point2D, Room> rooms = new HashMap<>();
     private Room actualRoom;
     private final Character character = new CharacterImpl(new Point2D(300, 200), GameObjectType.CHARACTER);
+    private int exploredRooms = 1;
 
     private final Map<Direction, Point2D> characterSpawnPosition = new HashMap<>() {{
         put(Direction.UP, new Point2D(620, 550));
@@ -159,6 +160,9 @@ public class RoomManagerImpl implements RoomManager {
         if (newRoom == null) {
             return;
         }
+        if (!actualRoom.isVisited()) {
+            exploredRooms++;
+        }
         this.getCharacter().setPosition(characterSpawnPosition.get(direction));
         newRoom.addDinamicObject(this.getCharacter());
         actualRoom.clean();
@@ -194,6 +198,16 @@ public class RoomManagerImpl implements RoomManager {
             }
         }
         return true;
+    }
+    
+    @Override
+    public int getVisitedRooms() {
+        return exploredRooms;
+    }
+    
+    @Override
+    public int getRoomsNumber() {
+        return NUMBER_OF_ROOMS;
     }
 
 }

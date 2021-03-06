@@ -14,4 +14,8 @@ public interface RoomManager {
     void changeRoom(Direction direction);
 
     Character getCharacter();
+
+    int getVisitedRooms();
+
+    int getRoomsNumber();
 }

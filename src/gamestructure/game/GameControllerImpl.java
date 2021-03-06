@@ -40,8 +40,8 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void setup() {
-        view.setController(this);
         view.show();
+        view.setController(this);
     }
     /**
      * @Override

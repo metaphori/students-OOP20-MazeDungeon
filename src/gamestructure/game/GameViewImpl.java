@@ -42,14 +42,14 @@ public class GameViewImpl implements GameView, KeyListener {
     private static final double WIDTH_RATIO = 0.666_667; 
     private static final double HEIGHT_RATIO = 0.740_740; 
     private static final double ASPECT_RATIO = 1.6;
-    private final double screenRatio = screen.width /  NATIVE_WIDTH; //0.5;
+    private final double screenRatio = screen.getWidth() / NATIVE_WIDTH;
     private static final Color BACKGROUND = new Color(11, 19, 30);
     private static final int PERIOD = 15;
     private final GamePanel gamePanel;
     private final Map<Integer, Sprite> sprites = new ConcurrentSkipListMap<>();
     private final ResourceLoader resourceLoader = new ResourceLoader();
     private final Timer timer;
-    private final ItemPanel items = new ItemPanel();
+    private final HUDPanel hudPanel = new HUDPanel(screenRatio);
     private boolean gameOver = false;
     private boolean won = false;
 
@@ -100,58 +100,11 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.dispose();
     }
 
-    private class ItemPanel extends JPanel {
-
-        private final List<Image> items = new LinkedList<>();
-
-        ItemPanel() {
-            this.setOpaque(false);
-        }
-
-        public void addItem(final Items item) {
-            switch (item) {
-            case ARTHEMIDEBOW:
-                items.add(new ImageIcon("resources/images/Item/arthemideBow.png").getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-                break;
-            case HERMESBOOTS:
-                items.add(new ImageIcon("resources/images/Item/hermesBoots.png").getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-                break;
-            case ZEUSBOLT:
-                items.add(new ImageIcon("resources/images/Item/zeusBolt.png").getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-                break;
-            case ORACLEAMULET:
-                items.add(new ImageIcon("resources/images/Item/oracleAmulet.png").getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-                break;
-            default:
-                break;
-            }
-        }
-
-        @Override
-        protected void paintComponent(final Graphics g) {
-            super.paintComponent(g);
-            for (int i = 0; i < items.size(); i++) {
-                g.drawImage(items.get(i), 10, i * 64, null);
-            }
-        }
-    }
-
     private class GamePanel extends JLayeredPane implements ActionListener {
         private static final long serialVersionUID = 1L;
-        private final JLabel lblCoinCounter = new JLabel();
         private final Image youLoseImage = adaptImage(new ImageIcon("resources/images/HUD/GameOver/gameOverFinal.png"));
         private final Image winnerImage = adaptImage(new ImageIcon("resources/images/HUD/Victory/winner.png"));
         private final Image roomImage = adaptImage(new ImageIcon("resources/images/Room/room.png"));
-        private final Image coinImage = adaptImage(new ImageIcon("resources/images/HUD/Coins/coin.png"));
-        private JProgressBar life;
-
-        GamePanel() {
-            lblCoinCounter.setBounds(60, 50, 50, 50);
-            lblCoinCounter.setText("0");
-            lblCoinCounter.setFont(new Font("Helvetica", Font.ITALIC, 25));
-            lblCoinCounter.setForeground(Color.white);
-            this.add(this.lblCoinCounter, JLayeredPane.DEFAULT_LAYER);
-        }
 
         @Override
         public void actionPerformed(final ActionEvent e) {
@@ -162,7 +115,6 @@ public class GameViewImpl implements GameView, KeyListener {
         protected void paintComponent(final Graphics g) {
             final List<Sprite> temp = new ArrayList<>(sprites.values());
             g.drawImage(this.roomImage, 0, 0, null);
-            g.drawImage(this.coinImage, 10, 50, null);
             temp.forEach(sprite -> {
                 g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
             }); 
@@ -174,19 +126,10 @@ public class GameViewImpl implements GameView, KeyListener {
             Toolkit.getDefaultToolkit().sync();
         }
 
-        public void updateHUD() {
-            this.life.setValue((int) (controller.getCharacter().getLife()));
-            this.lblCoinCounter.setText(controller.getCharacter().getMoney() + "$");
-        }
-
         public void initialize() {
-            life = new JProgressBar(0, (int) controller.getCharacter().getMaxLife());
-            life.setBounds(10, 10, 200, 30);
-            life.setForeground(new Color(150, 0, 0));
-            this.add(life);
-
-            items.setBounds(10, 100, 64, 256);
-            this.add(items);
+            hudPanel.initialize(controller.getCharacter().getLife());
+            hudPanel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+            this.add(hudPanel);
         }
 
     }
@@ -205,7 +148,8 @@ public class GameViewImpl implements GameView, KeyListener {
      */
     @Override
     public void updateHUD() {
-        gamePanel.updateHUD();
+        hudPanel.updateLife(this.controller.getCharacter().getLife());
+        hudPanel.updateCoinCounter(this.controller.getCharacter().getMoney());
     }
 
     private Image adaptImage(final ImageIcon img) {
@@ -268,7 +212,7 @@ public class GameViewImpl implements GameView, KeyListener {
     @Override
     public void renderItems(final Set<Items> purchasedItems) {
         for (final Items item : purchasedItems) {
-            this.items.addItem(item);
+            this.hudPanel.addItem(item);
         }
     }
 
