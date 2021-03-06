@@ -27,7 +27,7 @@ public abstract class SimpleObjectImpl implements SimpleObject {
     }
 
     /**
-     * 
+     * @param id : set the id of the GameObject
      */
     @Override
     public void setID(final int id) {
@@ -43,7 +43,6 @@ public abstract class SimpleObjectImpl implements SimpleObject {
     }
 
     /**
-     * 
      * @param position
      */
     protected void setPosition(final Point2D position) {
@@ -51,7 +50,7 @@ public abstract class SimpleObjectImpl implements SimpleObject {
     }
 
     /**
-     * 
+     * @return the type of the GameObject
      */
     @Override
     public GameObjectType getGameObjectType() {

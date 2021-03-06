@@ -19,4 +19,8 @@ public interface GameController extends Controller {
     double getCharacterLife();
 
     int getCharacterMoney();
+
+    int getVisitedRoom();
+
+    int getTotalRooms();
 }

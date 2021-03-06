@@ -160,7 +160,7 @@ public class RoomManagerImpl implements RoomManager {
         if (newRoom == null) {
             return;
         }
-        if (!actualRoom.isVisited()) {
+        if (!newRoom.isVisited()) {
             exploredRooms++;
         }
         this.getCharacter().setPosition(characterSpawnPosition.get(direction));
@@ -206,7 +206,7 @@ public class RoomManagerImpl implements RoomManager {
     }
     
     @Override
-    public int getRoomsNumber() {
+    public int getTotalRooms() {
         return NUMBER_OF_ROOMS;
     }
 

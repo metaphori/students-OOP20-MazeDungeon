@@ -183,4 +183,20 @@ public class GameControllerImpl implements GameController {
     public void releaseKey(final KeyEvent key) {
         this.command.setKey(key, false);
     }
+
+    /**
+     * @return the number of visited rooms.
+     */
+    @Override
+    public int getVisitedRoom() {
+        return this.model.getRoomManager().getVisitedRooms();
+    }
+
+    /**
+     * @return the total number of visited rooms.
+     */
+    @Override
+    public int getTotalRooms() {
+        return this.model.getRoomManager().getTotalRooms();
+    }
 }

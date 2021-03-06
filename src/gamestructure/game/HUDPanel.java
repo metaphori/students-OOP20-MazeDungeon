@@ -23,6 +23,7 @@ public class HUDPanel extends JLayeredPane {
     private int itemSize = 64;
     private final Point2D coinPosition;
     private final JLabel lblCoinCounter = new JLabel();
+    private final JLabel lblRoomVisited;
     private final Image coinImage; 
     private JProgressBar life;
     private final double screenRatio;
@@ -39,9 +40,15 @@ public class HUDPanel extends JLayeredPane {
         this.coinImage = adaptImage(coin);
         this.setOpaque(false);
 
+        this.lblRoomVisited = new JLabel();
+        this.lblRoomVisited.setBounds(1000, 10, 200, 20);
+        this.lblRoomVisited.setFont(new Font("Helvetica", Font.ITALIC, (int) (20 * screenRatio)));
+        this.lblRoomVisited.setForeground(Color.white);
+
         lblCoinCounter.setText("0");
         lblCoinCounter.setFont(new Font("Helvetica", Font.ITALIC, (int) (25 * screenRatio)));
         lblCoinCounter.setForeground(Color.white);
+        this.add(this.lblRoomVisited);
         this.add(this.lblCoinCounter);
     }
 
@@ -69,6 +76,14 @@ public class HUDPanel extends JLayeredPane {
      */
     public void updateLife(final double life) {
         this.life.setValue((int) (life));
+    }
+
+    /**
+     * @param nRooms
+     * @param totalRooms
+     */
+    public void updateVisitedRooms(final int nRooms, final int totalRooms) {
+        this.lblRoomVisited.setText("Visited Rooms: " + nRooms + "/" + totalRooms);
     }
 
     /**

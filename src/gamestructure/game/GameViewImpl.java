@@ -149,6 +149,7 @@ public class GameViewImpl implements GameView, KeyListener {
     public void updateHUD() {
         hudPanel.updateLife(this.controller.getCharacterLife());
         hudPanel.updateCoinCounter(this.controller.getCharacterMoney());
+        hudPanel.updateVisitedRooms(this.controller.getVisitedRoom(), this.controller.getTotalRooms());
     }
 
     private Image adaptImage(final ImageIcon img) {

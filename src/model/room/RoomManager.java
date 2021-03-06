@@ -17,5 +17,5 @@ public interface RoomManager {
 
     int getVisitedRooms();
 
-    int getRoomsNumber();
+    int getTotalRooms();
 }
