@@ -175,12 +175,12 @@ public class GameViewImpl implements GameView, KeyListener {
         }
 
         public void updateHUD() {
-            this.life.setValue((int) (controller.getCharacter().getLife()));
-            this.lblCoinCounter.setText(controller.getCharacter().getMoney() + "$");
+            this.life.setValue((int) (controller.getCharacterLife()));
+            this.lblCoinCounter.setText(controller.getCharacterMoney() + "$");
         }
 
         public void initialize() {
-            life = new JProgressBar(0, (int) controller.getCharacter().getMaxLife());
+            life = new JProgressBar(0, (int) controller.getCharacterLife());
             life.setBounds(10, 10, 200, 30);
             life.setForeground(new Color(150, 0, 0));
             this.add(life);
