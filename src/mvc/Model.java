@@ -14,7 +14,7 @@ public interface Model {
 
     List<GameObject> getActualGameObjects();
 
-    void update(double elapsed);
+    void updateGameWorld(double elapsed);
 
     RoomManager getRoomManager();
 

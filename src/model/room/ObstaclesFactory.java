@@ -10,6 +10,7 @@ import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.IdIterator;
 import model.common.Point2D;
+import model.common.Vector2D;
 import model.gameobject.simpleobject.Obstacle;
 import model.gameobject.simpleobject.SimpleObject;
 import model.gameobject.simpleobject.SimpleObjectImpl;
@@ -26,6 +27,7 @@ public class ObstaclesFactory {
     private final Point2D brCorner;
     private final double width;
     private final double height;
+    private static final int WALL_DEPTH = 100;
 
     public ObstaclesFactory(final Point2D ulCorner, final Point2D brCorner) {
         this.ulCorner = ulCorner;
@@ -75,19 +77,19 @@ public class ObstaclesFactory {
         SimpleObject tmp;
         //TOP
         tmp = new Wall(ulCorner);
-        tmp.setBoundingBox(new BoundingBox(ulCorner, this.width, 1));
+        tmp.setBoundingBox(new BoundingBox(ulCorner.sum(new Vector2D(0, -WALL_DEPTH)), this.width, WALL_DEPTH));
         walls.add(tmp);
         //RIGHT
         tmp = new Wall(new Point2D(brCorner.getX(), ulCorner.getY()));
-        tmp.setBoundingBox(new BoundingBox(new Point2D(brCorner.getX(), ulCorner.getY()), 1, this.height));
+        tmp.setBoundingBox(new BoundingBox(new Point2D(brCorner.getX(), ulCorner.getY()), WALL_DEPTH, this.height));
         walls.add(tmp);
         //BOTTOM
         tmp = new Wall(new Point2D(ulCorner.getX(), brCorner.getY()));
-        tmp.setBoundingBox(new BoundingBox(new Point2D(ulCorner.getX(), brCorner.getY()), this.width, 1));
+        tmp.setBoundingBox(new BoundingBox(new Point2D(ulCorner.getX(), brCorner.getY()), this.width, WALL_DEPTH));
         walls.add(tmp);
         //LEFT
         tmp = new Wall(ulCorner);
-        tmp.setBoundingBox(new BoundingBox(ulCorner, 1, this.height));
+        tmp.setBoundingBox(new BoundingBox(ulCorner.sum(new Vector2D(-WALL_DEPTH, 0)), WALL_DEPTH, this.height));
         walls.add(tmp);
         return walls;
     }

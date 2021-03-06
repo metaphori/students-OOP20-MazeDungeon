@@ -1,5 +1,6 @@
 package model.gameobject.dinamicobject.bullet;
 
+import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
@@ -10,6 +11,7 @@ import model.gameobject.dinamicobject.character.Character;
 
 public class BulletImpl extends AbstractDinamicObject implements Bullet {
 
+    private BoundingBox safeZone;
     private int damage;
 
     public BulletImpl(final int speed, final Point2D position, final Vector2D direction, final GameObjectType gameObjectType, final int damage) {
@@ -43,10 +45,20 @@ public class BulletImpl extends AbstractDinamicObject implements Bullet {
     }
 
     /**
+     * @param safeZone
+     */
+    public void setSafeZone(final BoundingBox safeZone) {
+        this.safeZone = safeZone;
+    }
+
+    /**
      * 
      */
     @Override
     public void collideWith(final GameObject obj2) {
+        if (this.getBoundingBox().intersectWith(this.safeZone) && this.getDirection().getY() > 0) { 
+            return;
+        }
         switch (obj2.getGameObjectType().getCollisionType()) {
         case OBSTACLE:
             this.getRoom().deleteGameObject(this);
