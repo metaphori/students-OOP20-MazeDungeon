@@ -42,7 +42,6 @@ public class GameControllerImpl implements GameController {
     public void setup() {
         view.setController(this);
         view.show();
-        view.initialize();
     }
     /**
      * @Override

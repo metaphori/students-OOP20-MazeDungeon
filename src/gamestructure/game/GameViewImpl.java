@@ -102,7 +102,6 @@ public class GameViewImpl implements GameView, KeyListener {
 
     private class ItemPanel extends JPanel {
 
-        private final Image item = new ImageIcon("resources/images/Item/hermesBoots.png").getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
         private final List<Image> items = new LinkedList<>();
 
         ItemPanel() {
@@ -132,7 +131,7 @@ public class GameViewImpl implements GameView, KeyListener {
         protected void paintComponent(final Graphics g) {
             super.paintComponent(g);
             for (int i = 0; i < items.size(); i++) {
-                g.drawImage(items.get(i), 0, i * 64, null);
+                g.drawImage(items.get(i), 10, i * 64, null);
             }
         }
     }
@@ -198,6 +197,7 @@ public class GameViewImpl implements GameView, KeyListener {
     @Override
     public void setController(final GameController controller) {
        this.controller = controller;
+       this.initialize();
     }
 
     /**
