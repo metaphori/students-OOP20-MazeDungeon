@@ -3,32 +3,29 @@ package gamestructure.game;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Observer;
-import java.util.Optional;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.stream.Collectors;
 
 import gamestructure.mainmenu.MainMenuController;
 import gamestructure.mainmenu.MainMenuControllerImpl;
-import gamestructure.mainmenu.MainMenuView;
-import gamestructure.mainmenu.MainMenuViewImpl;
 import input.Command;
 import input.CommandImpl;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
-import model.gameobject.dinamicobject.character.Character;
-import model.common.Point2D;
 import model.gameobject.GameObject;
 import mvc.Model;
 
 public class GameControllerImpl implements GameController {
     private static final long PERIOD = 1;
+    private static final double MILLISECOND_TO_SECOND = 0.001;
+    private static final int END_GAME_WAITING = 2000;
     private final GameView view;
     private final Model model;
     private final List<Integer> lastGameObjectsID = new LinkedList<>();
     private final Command command;
 
-
+    /**
+     * @param model : an instance of the model
+     */
     public GameControllerImpl(final Model model) {
         this.view = new GameViewImpl();
         this.model = model;
@@ -36,28 +33,25 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * 
+     * set up the controller, viewing the GameView.
      */
     @Override
     public void setup() {
         view.show();
         view.setController(this);
     }
+
     /**
-     * @Override
+     * The main loop of the game.
      */
+    @Override
     public void mainLoop() {
         long lastTime = System.currentTimeMillis();
         while (!this.model.isGameOver() && !this.model.isWon()) {
             final long current = System.currentTimeMillis();
-            /*if (this.command.isMenuOpen()) {
-                waitForNextFrame(current);
-                lastTime = current;
-                continue;
-            }*/
             final int elapsed = (int) (current - lastTime);
             processInput();
-            updateGame(elapsed * 0.001);
+            updateGame(elapsed * MILLISECOND_TO_SECOND);
             render();
             waitForNextFrame(current);
             lastTime = current;
@@ -69,7 +63,7 @@ public class GameControllerImpl implements GameController {
             this.view.isWon();
         }
         try {
-            Thread.sleep(2000);
+            Thread.sleep(END_GAME_WAITING);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -93,7 +87,7 @@ public class GameControllerImpl implements GameController {
     }
 
     private void updateGame(final double elapsed) {
-        this.model.update(elapsed);
+        this.model.updateGameWorld(elapsed);
         this.checkDeletedObject();
         this.checkNewGameObjects();
     }
@@ -102,9 +96,7 @@ public class GameControllerImpl implements GameController {
         this.updateSpritePositions();
         this.view.updateHUD();
     } 
-    /**
-     * 
-     */
+
     private void updateSpritePositions() {
         for (final Integer id : this.lastGameObjectsID) {
             this.view.setSpritePosition(id, model.getGameObjectPosition(id));
@@ -124,9 +116,6 @@ public class GameControllerImpl implements GameController {
         }
     }
 
-    /**
-     * 
-     */
     private void checkNewGameObjects() {
         final List<Integer> gameObjectsID = this.getActualObjectsID();
         for (final Integer id : gameObjectsID) {
@@ -140,20 +129,32 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * 
+     * @param id : the id of the GameObject 
+     * @param boundingBox : the BoundingBox to set at the GameObject
      */
     @Override
     public void setBoundingBox(final int id, final BoundingBox boundingBox) {
         this.model.getGameObject(id).setBoundingBox(boundingBox);
     }
 
+    /**
+     * @return the character current life.
+     */
     @Override 
-    public Character getCharacter() {
-        return this.model.getRoomManager().getCharacter();
+    public double getCharacterLife() {
+        return this.model.getRoomManager().getCharacter().getLife();
     }
 
-    /*
-     * 
+    /**
+     * @return the character current money.
+     */
+    @Override 
+    public int getCharacterMoney() {
+        return this.model.getRoomManager().getCharacter().getMoney();
+    }
+
+    /**
+     * notify that the InGameMenu is closed.
      */
     @Override
     public void notifyClosedInGameMenu() {
@@ -162,18 +163,22 @@ public class GameControllerImpl implements GameController {
         this.model.getShop().clearCart();
     }
 
-    
-
     private void openMainMenu() {
         final MainMenuController main = new MainMenuControllerImpl();
         main.setup();
     }
 
+    /**
+     * @param key : the key pressed
+     */
     @Override
     public void pressKey(final KeyEvent key) {
         this.command.setKey(key, true);
     }
 
+    /**
+     * @param key : the key released
+     */
     @Override
     public void releaseKey(final KeyEvent key) {
         this.command.setKey(key, false);

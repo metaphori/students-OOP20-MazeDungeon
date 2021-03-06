@@ -24,7 +24,7 @@ import model.gameobject.dinamicobject.character.CharacterImpl;
 
 public class RoomManagerImpl implements RoomManager {
 
-    private static final int NUMBER_OF_ROOMS = 10;
+    private static final int NUMBER_OF_ROOMS = 3;
     private final IdIterator idIterator = new IdIterator();
     private final Map<Point2D, Room> rooms = new HashMap<>();
     private Room actualRoom;

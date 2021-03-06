@@ -1,7 +1,6 @@
 package model.gameobject.dinamicobject.enemy;
 
 import java.util.List;
-import java.util.Random;
 
 import model.common.GameObjectType;
 import model.common.Point2D;
@@ -20,7 +19,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     private static final int SOUL_SPEED = 90;
     private static final int SPROUT_SPEED = 50;
     private static final int SKELETON_SPEED = 90;
-    private static final int BOSS_SPEED = 70;
+    private static final int BOSS_SPEED = 150;
 
     private static final long SOUL_SHOOT_DELAY = 1500;
     private static final long SPROUT_SHOOT_DELAY = 2000;
@@ -54,6 +53,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
             public void shoot() {
                 final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
                 final Bullet bullet = bulletFactory.createSproutBullet(newPosition, this.getDirection().getNormalized());
+                bullet.setSafeZone(this.getBoundingBox());
                 this.getRoom().addDinamicObject(bullet);
             }
 
@@ -90,12 +90,13 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 final Point2D characterPosition = this.getRoom().getRoomManager().getCharacter().getPosition();
                 final Bullet bullet = bulletFactory.createSoulBullet(this.getPosition(),
                         new Vector2D(characterPosition.getX() - this.getPosition().getX(), characterPosition.getY() - this.getPosition().getY()).getNormalized());
+                bullet.setSafeZone(this.getBoundingBox());
                 this.getRoom().addDinamicObject(bullet);
             }
 
             @Override
             protected void changeRoutine() {
-                this.getRndDirection();
+                this.setDirection(this.getRndDirection());
             }
         };
     }
@@ -137,6 +138,10 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 final Bullet bulletSouth = bulletFactory.createSkeletonBullet(newPosition, new Vector2D(0, 1));
                 final Bullet bulletEast = bulletFactory.createSkeletonBullet(newPosition, new Vector2D(1, 0));
                 final Bullet bulletWest = bulletFactory.createSkeletonBullet(newPosition, new Vector2D(-1, 0));
+                bulletNorth.setBoundingBox(this.getBoundingBox());
+                bulletSouth.setBoundingBox(this.getBoundingBox());
+                bulletEast.setBoundingBox(this.getBoundingBox());
+                bulletWest.setBoundingBox(this.getBoundingBox());
                 this.getRoom().addDinamicObject(List.of(bulletNorth, bulletEast, bulletWest, bulletSouth));
             }
 

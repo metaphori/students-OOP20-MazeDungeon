@@ -127,11 +127,10 @@ public class GameViewImpl implements GameView, KeyListener {
         }
 
         public void initialize() {
-            hudPanel.initialize(controller.getCharacter().getLife());
+            hudPanel.initialize(controller.getCharacterLife());
             hudPanel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
             this.add(hudPanel);
         }
-
     }
 
     /**
@@ -148,8 +147,8 @@ public class GameViewImpl implements GameView, KeyListener {
      */
     @Override
     public void updateHUD() {
-        hudPanel.updateLife(this.controller.getCharacter().getLife());
-        hudPanel.updateCoinCounter(this.controller.getCharacter().getMoney());
+        hudPanel.updateLife(this.controller.getCharacterLife());
+        hudPanel.updateCoinCounter(this.controller.getCharacterMoney());
     }
 
     private Image adaptImage(final ImageIcon img) {

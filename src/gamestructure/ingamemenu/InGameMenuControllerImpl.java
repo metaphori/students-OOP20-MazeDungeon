@@ -1,12 +1,8 @@
 package gamestructure.ingamemenu;
 
 import gamestructure.game.GameController;
-import input.Command;
-import model.ModelImpl;
-import model.shop.Item;
 import model.shop.Items;
 import model.shop.Shop;
-import model.shop.ShopImpl;
 import mvc.Model;
 
 public class InGameMenuControllerImpl implements InGameMenuController {
@@ -28,34 +24,37 @@ public class InGameMenuControllerImpl implements InGameMenuController {
         this.view.show();
     }
 
-    @Override
+    /**
+     * Set new message and check the item.
+    * @param itemSelected 
+    */
     public void buyItem(final Items itemSelected) {
         this.view.removeMessage();
         shopModel.checkItem(itemSelected);
         this.view.returnMessage(shopModel.getMessageOuput());
     }
     /**
-     * 
+     * open the shop view.
      */
     public void openShop() {
         this.view.setPriceItem(shopModel.addPrice());
         this.view.showShop();
     }
     /**
-     * 
+     * open the in game menu view.
      */
     public void openInGameMenu() {
         this.view.removeMessage();
         this.view.showInGameMenu();
     }
     /**
-     * 
+     * close the game.
      */
     public void exit() {
        System.exit(0);
     }
     /**
-     * 
+     * resume the game and closes the menu in game.
      */
     public void resume() {
         this.view.hide();
