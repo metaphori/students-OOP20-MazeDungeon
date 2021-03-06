@@ -11,25 +11,14 @@ public interface Shop {
 
     Item getArthemideBow();
 
-    /**
-     * @return Item with features of HermesBoots
-     */
     Item getHermesBoots();
 
-    /**
-     * @return Item with features of ZeusBolt
-     */
     Item getZeusBolt();
 
-    /**
-     * @return Item with features more Health
-     */
     Item getHealth();
-    /**
-     * 
-     * @return .
-     */
-    //int moneyLeft();
+
+    Item getOracleAmulet();
+
     Map<Items, Integer> addPrice();
 
     void clearCart();

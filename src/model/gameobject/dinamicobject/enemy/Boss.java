@@ -8,7 +8,6 @@ import model.gameobject.dinamicobject.bullet.BulletFactory;
 import model.gameobject.dinamicobject.bullet.BulletFactoryImpl;
 import model.gameobject.simpleobject.Coin;
 
-
 public class Boss extends AbstractEnemy {
     private final BulletFactory bulletFactory = new BulletFactoryImpl();
     private static final long BOSS_SHOOT_DELAY = 500;
@@ -16,7 +15,7 @@ public class Boss extends AbstractEnemy {
     private static final int MAX_SPEED = 300;
     private static final int ALIGN_SHOOT_X = 110;
     private static final int ALIGN_SHOOT_Y = 140;
-    private static final int ALIGN_MONEY = 20;
+    private static final int ALIGN_MONEY = 40;
     private static final int MODIFY_ALIGN_MONEY = 10;
     public Boss(final double life, final int speed, final Point2D position, final GameObjectType gameObjectType) {
         super(life, speed, position, gameObjectType);
@@ -99,14 +98,12 @@ public class Boss extends AbstractEnemy {
     /**
      * @Override
      */
-    public void takesDamage(final double damage) {
-        super.takesDamage(damage);
-        if (this.getLife() <= 0) {
-            this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(new Vector2D(this.getBoundingBox().getWidth() / 2 - ALIGN_MONEY,
-                                                    this.getBoundingBox().getHeight() / 2 - ALIGN_MONEY))));
-            this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(new Vector2D(this.getBoundingBox().getWidth() / 2 + ALIGN_MONEY,
-                    this.getBoundingBox().getHeight() / 2 - ALIGN_MONEY))));
-        }
+    protected void spawnCoin() {
+        this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(new Vector2D(this.getBoundingBox().getWidth() / 2 - ALIGN_MONEY,
+                this.getBoundingBox().getHeight() / 2 + ALIGN_MONEY))));
+        this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(new Vector2D(this.getBoundingBox().getWidth() / 2 + ALIGN_MONEY,
+                this.getBoundingBox().getHeight() / 2 + ALIGN_MONEY))));
+        this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(new Vector2D(this.getBoundingBox().getWidth() / 2,
+                this.getBoundingBox().getHeight() / 2 + ALIGN_MONEY))));
     }
-
 }

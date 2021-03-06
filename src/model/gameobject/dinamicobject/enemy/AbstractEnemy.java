@@ -48,7 +48,7 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
         }
     }
 
-    private void spawnCoin() {
+    protected void spawnCoin() {
         this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(new Vector2D(this.getBoundingBox().getWidth() / 2,
                 this.getBoundingBox().getHeight() / 2))));
     }
