@@ -1,4 +1,4 @@
-package model.gameobject.dinamicobject.enemy;
+package model.gameobject.dynamicobject.enemy;
 
 import model.common.Point2D;
 

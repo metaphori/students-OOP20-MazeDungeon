@@ -1,4 +1,4 @@
-package model.gameobject.dinamicobject.enemy;
+package model.gameobject.dynamicobject.enemy;
 
 import java.util.Random;
 
@@ -7,10 +7,10 @@ import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
-import model.gameobject.dinamicobject.AbstractDinamicObject;
+import model.gameobject.dynamicobject.AbstractDynamicObject;
 import model.gameobject.simpleobject.Coin;
 
-public abstract class AbstractEnemy extends AbstractDinamicObject implements Enemy {
+public abstract class AbstractEnemy extends AbstractDynamicObject implements Enemy {
 
     private long lastShootTime = System.currentTimeMillis();
     private double life;
@@ -41,13 +41,15 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
     @Override
     public void takesDamage(final double damage) {
         this.life = this.life - damage;
-        System.out.println(this.getID() + ") " + this.getGameObjectType() + " Life: " + this.getLife());
         if (this.life <= 0) {
             this.spawnCoin();
             this.getRoom().deleteGameObject(this);
         }
     }
 
+    /**
+     * Spawn a new coin in the room. 
+     */
     protected void spawnCoin() {
         this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(new Vector2D(this.getBoundingBox().getWidth() / 2,
                 this.getBoundingBox().getHeight() / 2))));
@@ -69,7 +71,7 @@ public abstract class AbstractEnemy extends AbstractDinamicObject implements Ene
             }
             break;
         case ENTITY:
-            final AbstractDinamicObject dinamicObject = (AbstractDinamicObject) obj2;
+            final AbstractDynamicObject dinamicObject = (AbstractDynamicObject) obj2;
             dinamicObject.setPosition(dinamicObject.getLastPosition());
             this.changeRoutine();
             break;

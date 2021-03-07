@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import model.gameobject.dinamicobject.character.Character;
+import model.gameobject.dynamicobject.character.Character;
 
 public class ShopImpl implements Shop {
     private static final double MORE_HEALTH = 25;

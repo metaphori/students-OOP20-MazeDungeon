@@ -1,6 +1,7 @@
 package model.common;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class IdIterator implements Iterator<Integer> {
 
@@ -21,6 +22,9 @@ public class IdIterator implements Iterator<Integer> {
      */
     @Override
     public Integer next() {
-        return this.value++;
+        if (!this.hasNext()) {
+            throw new NoSuchElementException();
+        }
+        return this.value++; 
     }
 }

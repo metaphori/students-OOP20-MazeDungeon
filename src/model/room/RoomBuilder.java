@@ -8,8 +8,8 @@ import java.util.Set;
 import model.common.Direction;
 import model.common.GameObjectType;
 import model.common.Point2D;
-import model.gameobject.dinamicobject.enemy.EnemyFactory;
-import model.gameobject.dinamicobject.enemy.EnemyFactoryImpl;
+import model.gameobject.dynamicobject.enemy.EnemyFactory;
+import model.gameobject.dynamicobject.enemy.EnemyFactoryImpl;
 
 public class RoomBuilder {
     private static final int MAX_ENEMY_NUMBER = 4;
@@ -95,13 +95,13 @@ public class RoomBuilder {
             this.avaiableEnemyPosition.remove(pos);
             switch (GameObjectType.getRandomEnemy()) {
             case ENEMY_SKELETON:
-                this.room.addDinamicObject(this.enemyFactory.createSkeletonSeeker(position));
+                this.room.addDynamicObject(this.enemyFactory.createSkeletonSeeker(position));
                 break;
             case ENEMY_SOUL:
-                this.room.addDinamicObject(this.enemyFactory.createSoul(position));
+                this.room.addDynamicObject(this.enemyFactory.createSoul(position));
                 break;
             case ENEMY_SPROUT:
-                this.room.addDinamicObject(this.enemyFactory.createSprout(position));
+                this.room.addDynamicObject(this.enemyFactory.createSprout(position));
                 break;
             default:
                 break;
@@ -121,7 +121,7 @@ public class RoomBuilder {
         this.canAddBoss = false;
         this.canAddEnemy = false;
         this.canAddObstacle = false;
-        this.room.addDinamicObject(this.enemyFactory.createBoss(new Point2D(256, 54)));
+        this.room.addDynamicObject(this.enemyFactory.createBoss(new Point2D(256, 54)));
         return this;
     }
 

@@ -1,10 +1,10 @@
-package model.gameobject.dinamicobject;
+package model.gameobject.dynamicobject;
 
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
 
-public interface DinamicObject extends GameObject {
+public interface DynamicObject extends GameObject {
     int getSpeed();
 
     void setSpeed(int speed);

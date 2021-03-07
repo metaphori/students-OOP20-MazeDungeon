@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import model.common.BoundingBox;
 import model.common.Point2D;
-import model.gameobject.dinamicobject.enemy.Enemy;
-import model.gameobject.dinamicobject.enemy.EnemyFactory;
-import model.gameobject.dinamicobject.enemy.EnemyFactoryImpl;
+import model.gameobject.dynamicobject.enemy.Enemy;
+import model.gameobject.dynamicobject.enemy.EnemyFactory;
+import model.gameobject.dynamicobject.enemy.EnemyFactoryImpl;
 import model.room.Room;
 import model.room.RoomImpl;
 import model.room.RoomManagerImpl;

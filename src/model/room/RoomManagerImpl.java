@@ -16,11 +16,11 @@ import model.common.GameObjectType;
 import model.common.IdIterator;
 import model.common.Point2D;
 import model.common.Vector2D;
-import model.gameobject.dinamicobject.enemy.EnemyFactory;
-import model.gameobject.dinamicobject.enemy.EnemyFactoryImpl;
+import model.gameobject.dynamicobject.character.Character;
+import model.gameobject.dynamicobject.character.CharacterImpl;
+import model.gameobject.dynamicobject.enemy.EnemyFactory;
+import model.gameobject.dynamicobject.enemy.EnemyFactoryImpl;
 import model.gameobject.simpleobject.FinalArtefact;
-import model.gameobject.dinamicobject.character.Character;
-import model.gameobject.dinamicobject.character.CharacterImpl;
 
 public class RoomManagerImpl implements RoomManager {
 
@@ -103,7 +103,7 @@ public class RoomManagerImpl implements RoomManager {
         }
 
         actualRoom = rooms.get(new Point2D(0, 0));
-        actualRoom.addDinamicObject(character);
+        actualRoom.addDynamicObject(character);
         actualRoom.visit();
     }
 
@@ -164,7 +164,7 @@ public class RoomManagerImpl implements RoomManager {
             exploredRooms++;
         }
         this.getCharacter().setPosition(characterSpawnPosition.get(direction));
-        newRoom.addDinamicObject(this.getCharacter());
+        newRoom.addDynamicObject(this.getCharacter());
         actualRoom.clean();
         actualRoom = newRoom;
         actualRoom.visit();

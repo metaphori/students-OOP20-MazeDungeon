@@ -1,11 +1,11 @@
-package model.gameobject.dinamicobject;
+package model.gameobject.dynamicobject;
 
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.simpleobject.SimpleObjectImpl;
 
-public abstract class AbstractDinamicObject extends SimpleObjectImpl implements DinamicObject {
+public abstract class AbstractDynamicObject extends SimpleObjectImpl implements DynamicObject {
     private Vector2D direction;
     private int speed;
     private Point2D lastPosition;
@@ -15,7 +15,7 @@ public abstract class AbstractDinamicObject extends SimpleObjectImpl implements 
      * @param position : the initial position of the DinamicObject
      * @param gameObjectType : the type of the DinamicObject
      */
-    public AbstractDinamicObject(final int speed, final Point2D position, final GameObjectType gameObjectType) {
+    public AbstractDynamicObject(final int speed, final Point2D position, final GameObjectType gameObjectType) {
         super(position, gameObjectType);
         this.speed = speed;
         this.lastPosition = this.getPosition();

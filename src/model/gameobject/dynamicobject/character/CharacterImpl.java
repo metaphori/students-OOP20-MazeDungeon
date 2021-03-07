@@ -1,4 +1,4 @@
-package model.gameobject.dinamicobject.character;
+package model.gameobject.dynamicobject.character;
 
 import java.io.File;
 import java.util.HashSet;
@@ -10,15 +10,15 @@ import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
-import model.gameobject.dinamicobject.AbstractDinamicObject;
-import model.gameobject.dinamicobject.bullet.*;
+import model.gameobject.dynamicobject.AbstractDynamicObject;
+import model.gameobject.dynamicobject.bullet.*;
+import model.gameobject.dynamicobject.character.CharacterMovement;
 import model.room.Room;
 import model.shop.Item;
 import model.shop.Items;
-import model.gameobject.dinamicobject.character.CharacterMovement;
 
 
-public class CharacterImpl extends AbstractDinamicObject implements Character {
+public class CharacterImpl extends AbstractDynamicObject implements Character {
 
     /**
      * CONSTANTS.
@@ -207,7 +207,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
                 /*this.setPosition(new Point2D(this.getPosition().getX() - (this.getDirection().getX() * 1),
                         this.getPosition().getY()  - (this.getDirection().getY() * 1)));*/
                 //this.setPosition(this.getLastPosition());
-                final AbstractDinamicObject dinamicObject = (AbstractDinamicObject) obj2;
+                final AbstractDynamicObject dinamicObject = (AbstractDynamicObject) obj2;
                 dinamicObject.setPosition(dinamicObject.getLastPosition());
                 break;
             case INTERACTIVE_ELEMENT:
@@ -233,7 +233,7 @@ public class CharacterImpl extends AbstractDinamicObject implements Character {
                 new Point2D(getPosition().getX() + this.getBoundingBox().getWidth() / 2, getPosition().getY() + this.getBoundingBox().getHeight() / 2),
                 this.shootDirection.mul(this.bulletSpeed), this.bonusDamage);
         bullet.setSafeZone(this.getBoundingBox());
-        getRoom().addDinamicObject(bullet);
+        getRoom().addDynamicObject(bullet);
         /*final MP3Player mp3Player = new MP3Player(new File("resources/sounds/characterhoot.mp3"));
         mp3Player.play();*/
         this.shoot = false;

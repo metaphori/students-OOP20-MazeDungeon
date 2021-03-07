@@ -1,4 +1,4 @@
-package model.gameobject.dinamicobject.bullet;
+package model.gameobject.dynamicobject.bullet;
 
 import model.common.Point2D;
 import model.common.Vector2D;

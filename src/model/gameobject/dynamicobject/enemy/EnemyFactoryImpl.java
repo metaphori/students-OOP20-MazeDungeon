@@ -1,13 +1,13 @@
-package model.gameobject.dinamicobject.enemy;
+package model.gameobject.dynamicobject.enemy;
 
 import java.util.List;
 
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
-import model.gameobject.dinamicobject.bullet.Bullet;
-import model.gameobject.dinamicobject.bullet.BulletFactory;
-import model.gameobject.dinamicobject.bullet.BulletFactoryImpl;
+import model.gameobject.dynamicobject.bullet.Bullet;
+import model.gameobject.dynamicobject.bullet.BulletFactory;
+import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
 
 public class EnemyFactoryImpl implements EnemyFactory {
 
@@ -54,7 +54,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
                 final Bullet bullet = bulletFactory.createSproutBullet(newPosition, this.getDirection().getNormalized());
                 bullet.setSafeZone(this.getBoundingBox());
-                this.getRoom().addDinamicObject(bullet);
+                this.getRoom().addDynamicObject(bullet);
             }
 
             @Override
@@ -91,7 +91,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 final Bullet bullet = bulletFactory.createSoulBullet(this.getPosition(),
                         new Vector2D(characterPosition.getX() - this.getPosition().getX(), characterPosition.getY() - this.getPosition().getY()).getNormalized());
                 bullet.setSafeZone(this.getBoundingBox());
-                this.getRoom().addDinamicObject(bullet);
+                this.getRoom().addDynamicObject(bullet);
             }
 
             @Override
@@ -142,7 +142,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 bulletSouth.setBoundingBox(this.getBoundingBox());
                 bulletEast.setBoundingBox(this.getBoundingBox());
                 bulletWest.setBoundingBox(this.getBoundingBox());
-                this.getRoom().addDinamicObject(List.of(bulletNorth, bulletEast, bulletWest, bulletSouth));
+                this.getRoom().addDynamicObject(List.of(bulletNorth, bulletEast, bulletWest, bulletSouth));
             }
 
             @Override

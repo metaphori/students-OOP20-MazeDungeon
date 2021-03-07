@@ -1,4 +1,4 @@
-package model.gameobject.dinamicobject.character;
+package model.gameobject.dynamicobject.character;
 
 public interface CharacterMovement {
     void moveUp();

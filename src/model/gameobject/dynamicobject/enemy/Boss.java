@@ -1,11 +1,11 @@
-package model.gameobject.dinamicobject.enemy;
+package model.gameobject.dynamicobject.enemy;
 
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
-import model.gameobject.dinamicobject.bullet.Bullet;
-import model.gameobject.dinamicobject.bullet.BulletFactory;
-import model.gameobject.dinamicobject.bullet.BulletFactoryImpl;
+import model.gameobject.dynamicobject.bullet.Bullet;
+import model.gameobject.dynamicobject.bullet.BulletFactory;
+import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
 import model.gameobject.simpleobject.Coin;
 
 public class Boss extends AbstractEnemy {
@@ -79,7 +79,7 @@ public class Boss extends AbstractEnemy {
             bullet = bulletFactory.createBossBullet(this.getPosition().sum(new Vector2D(ALIGN_SHOOT_X, ALIGN_SHOOT_Y - modifyAlignShootY)),
                     new Vector2D(characterPosition.getX() - ALIGN_SHOOT_X - this.getPosition().getX(), characterPosition.getY() - ALIGN_SHOOT_Y - this.getPosition().getY()).getNormalized());
         }
-        this.getRoom().addDinamicObject(bullet);
+        this.getRoom().addDynamicObject(bullet);
     }
 
     /**

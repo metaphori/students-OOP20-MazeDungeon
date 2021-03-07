@@ -1,15 +1,15 @@
-package model.gameobject.dinamicobject.character;
+package model.gameobject.dynamicobject.character;
 
 import java.util.Set;
 
 import model.common.Vector2D;
-import model.gameobject.dinamicobject.DinamicObject;
+import model.gameobject.dynamicobject.DynamicObject;
 import model.shop.Item;
 import model.shop.ItemBuilder;
 import model.shop.Items;
 
 
-public interface Character extends DinamicObject {
+public interface Character extends DynamicObject {
 
     void takesDamage(int damage);
 

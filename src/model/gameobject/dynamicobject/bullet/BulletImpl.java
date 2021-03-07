@@ -1,15 +1,15 @@
-package model.gameobject.dinamicobject.bullet;
+package model.gameobject.dynamicobject.bullet;
 
 import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
-import model.gameobject.dinamicobject.AbstractDinamicObject;
-import model.gameobject.dinamicobject.enemy.Enemy;
-import model.gameobject.dinamicobject.character.Character;
+import model.gameobject.dynamicobject.AbstractDynamicObject;
+import model.gameobject.dynamicobject.character.Character;
+import model.gameobject.dynamicobject.enemy.Enemy;
 
-public class BulletImpl extends AbstractDinamicObject implements Bullet {
+public class BulletImpl extends AbstractDynamicObject implements Bullet {
 
     private BoundingBox safeZone;
     private int damage;

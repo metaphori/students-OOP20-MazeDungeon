@@ -2,7 +2,7 @@ package model.room;
 
 import model.common.Direction;
 import model.common.IdIterator;
-import model.gameobject.dinamicobject.character.Character;
+import model.gameobject.dynamicobject.character.Character;
 
 public interface RoomManager {
     Room getCurrentRoom();

@@ -1,4 +1,4 @@
-package model.gameobject.dinamicobject.character;
+package model.gameobject.dynamicobject.character;
 
 import model.common.Vector2D;
 

@@ -23,9 +23,9 @@ import gamestructure.mainmenu.MainMenuView;
 import gamestructure.mainmenu.MainMenuViewImpl;
 import model.common.Point2D;
 import model.common.Vector2D;
-import model.gameobject.dinamicobject.character.Character;
-import model.gameobject.dinamicobject.character.CharacterMovement;
-import model.gameobject.dinamicobject.character.CharacterMovementImpl;
+import model.gameobject.dynamicobject.character.Character;
+import model.gameobject.dynamicobject.character.CharacterMovement;
+import model.gameobject.dynamicobject.character.CharacterMovementImpl;
 import mvc.Model;
 
 public class CommandImpl implements Command {

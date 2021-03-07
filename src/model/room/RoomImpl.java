@@ -3,24 +3,22 @@ package model.room;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import model.common.Direction;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.GameObject;
-import model.gameobject.dinamicobject.DinamicObject;
+import model.gameobject.dynamicobject.DynamicObject;
+import model.gameobject.dynamicobject.enemy.AbstractEnemy;
 import model.gameobject.simpleobject.SimpleObject;
-import model.gameobject.dinamicobject.character.Character;
-import model.gameobject.dinamicobject.enemy.AbstractEnemy;
 
 public class RoomImpl implements Room {
 
     private static final Point2D UL_CORNER = new Point2D(240, 177); //TODO in caso di resize della finestra vanno cambiati!!!!
     private static final Point2D BR_CORNER = new Point2D(1025, 633);
     private final List<SimpleObject> simpleObjects = new LinkedList<>();
-    private final List<DinamicObject> dinamicObjects = new LinkedList<>();
+    private final List<DynamicObject> dynamicObjects = new LinkedList<>();
     private final Set<Direction> nearRooms = new HashSet<>();
     private final RoomManager roomManager;
     private boolean isVisited = false; 
@@ -34,7 +32,7 @@ public class RoomImpl implements Room {
      */
     @Override
     public void update(final double elapsed) {
-        final List<DinamicObject> temp = new LinkedList<>(List.copyOf(this.dinamicObjects));
+        final List<DynamicObject> temp = new LinkedList<>(List.copyOf(this.dynamicObjects));
         temp.iterator().forEachRemaining(obj -> {
             obj.updateState(elapsed);
         });
@@ -44,10 +42,10 @@ public class RoomImpl implements Room {
     /**
      * @param obj : the dynamic object to add in the room
      */
-    public void addDinamicObject(final DinamicObject obj) {
+    public void addDynamicObject(final DynamicObject obj) {
         obj.setRoom(this);
         obj.setID(this.roomManager.getIdIterator().next());
-        dinamicObjects.add(obj);
+        dynamicObjects.add(obj);
     }
 
     /**
@@ -64,7 +62,7 @@ public class RoomImpl implements Room {
      */
     @Override
     public void clean() {
-        this.dinamicObjects.clear();
+        this.dynamicObjects.clear();
     }
 
     /**
@@ -72,7 +70,7 @@ public class RoomImpl implements Room {
      */
     public List<GameObject> getCurrentGameObjects() {
         final List<GameObject> gameObjects = new LinkedList<>(simpleObjects);
-        gameObjects.addAll(dinamicObjects);
+        gameObjects.addAll(dynamicObjects);
         return gameObjects;
     }
 
@@ -82,7 +80,7 @@ public class RoomImpl implements Room {
     @Override
     public void deleteGameObject(final GameObject gameObject) {
         simpleObjects.remove(gameObject);
-        dinamicObjects.remove(gameObject);
+        dynamicObjects.remove(gameObject);
     }
 
     private void checkCollisions() {
@@ -128,7 +126,7 @@ public class RoomImpl implements Room {
      */
     @Override
     public boolean isDoorOpen() {
-        for (final DinamicObject dinamicObject : dinamicObjects) {
+        for (final DynamicObject dinamicObject : dynamicObjects) {
             if (AbstractEnemy.class.isAssignableFrom(dinamicObject.getClass()) && dinamicObject.getGameObjectType() != GameObjectType.CHARACTER) {
                 return false;
             }
@@ -137,9 +135,9 @@ public class RoomImpl implements Room {
     }
 
     @Override
-    public void addDinamicObject(final List<DinamicObject> objs) {
-        for (final DinamicObject dinamicObject : objs) {
-            this.addDinamicObject(dinamicObject);
+    public void addDynamicObject(final List<DynamicObject> objs) {
+        for (final DynamicObject dinamicObject : objs) {
+            this.addDynamicObject(dinamicObject);
         }
     }
 
@@ -152,12 +150,12 @@ public class RoomImpl implements Room {
 
     @Override
     public Point2D getUL() {
-        return this.UL_CORNER;
+        return UL_CORNER;
     }
 
     @Override
     public Point2D getBR() {
-        return this.BR_CORNER;
+        return BR_CORNER;
     }
 
     @Override
