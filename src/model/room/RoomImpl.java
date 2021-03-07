@@ -30,7 +30,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @param elapsed the time passed
+     * @param elapsed : the time passed
      */
     @Override
     public void update(final double elapsed) {
@@ -42,7 +42,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @param obj
+     * @param obj : the dynamic object to add in the room
      */
     public void addDinamicObject(final DinamicObject obj) {
         obj.setRoom(this);
@@ -51,7 +51,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @param obj
+     * @param obj : the simple object to add in the room
      */
     public void addSimpleObject(final SimpleObject obj) {
         obj.setRoom(this);
@@ -60,7 +60,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * 
+     * delete all dynamic objects.
      */
     @Override
     public void clean() {
@@ -68,7 +68,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @return .
+     * @return the list of the objects in the rooms
      */
     public List<GameObject> getCurrentGameObjects() {
         final List<GameObject> gameObjects = new LinkedList<>(simpleObjects);
@@ -77,9 +77,9 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @param gameObject
-     * @Override
+     * @param gameObject : the GameObject to remove from the room
      */
+    @Override
     public void deleteGameObject(final GameObject gameObject) {
         simpleObjects.remove(gameObject);
         dinamicObjects.remove(gameObject);
@@ -99,9 +99,9 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @return .
-     * @Override
+     * @return the RoomManager
      */
+    @Override
     public RoomManager getRoomManager() {
         return roomManager;
     }

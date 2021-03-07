@@ -6,6 +6,11 @@ public class BoundingBox {
     private final double width;
     private final double height;
 
+    /**
+     * @param upperLeft : the upper left corner
+     * @param width : the width of the BoundingBox
+     * @param height : the height of the BoundingBox
+     */
     public BoundingBox(final Point2D upperLeft, final double width, final double height) {
         this.width = width;
         this.height = height;
@@ -14,37 +19,35 @@ public class BoundingBox {
     }
 
     /**
-     * @return .
+     * @return the upper left corner
      */
     public Point2D getULCorner() {
             return upperLeft;
     }
 
     /**
-     * @return .
+     * @return the bottom right corner
      */
     public Point2D getBRCorner() {
             return bottomRight;
     }
 
     /**
-     * 
-     * @return .
+     * @return the height of the BoundingBox
      */
     public double getHeight() {
         return this.height;
     }
 
     /**
-     * 
-     * @return .
+     * @return the width of the BoundingBox
      */
     public double getWidth() {
         return this.width;
     }
 
     /**
-     * @param upperLeft
+     * @param upperLeft : the new upper left corner
      */
     public void move(final Point2D upperLeft) {
         this.upperLeft = upperLeft;
@@ -52,19 +55,14 @@ public class BoundingBox {
     }
 
     /**
-     * @param box
-     * @return .
+     * @param box : the BoundingBox to check collision with
+     * @return true if the two BoundingBox collide, false otherwise
      */
     public boolean intersectWith(final BoundingBox box) {
         if (box == null) {
             return false;
         }
-        if (this.upperLeft.getX() >= box.bottomRight.getX() || box.upperLeft.getX() >= this.bottomRight.getX()) { 
-            return false; 
-        } 
-        if (this.upperLeft.getY() >= box.bottomRight.getY() || box.upperLeft.getY() >= this.bottomRight.getY()) { 
-            return false; 
-        }
-        return true;
+        return !(this.upperLeft.getX() >= box.bottomRight.getX() || box.upperLeft.getX() >= this.bottomRight.getX()
+                || this.upperLeft.getY() >= box.bottomRight.getY() || box.upperLeft.getY() >= this.bottomRight.getY());
     }
 }
