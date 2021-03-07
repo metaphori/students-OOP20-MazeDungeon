@@ -52,10 +52,9 @@ public class GameViewImpl implements GameView, KeyListener {
     private final HUDPanel hudPanel = new HUDPanel(screenRatio);
     private boolean gameOver = false;
     private boolean won = false;
+    private final JLabel lblStartInstruction = new JLabel(new ImageIcon("resources/images/HUD/StartIstruction.png"));
+    private static final int ISTRUCTION_TIME = 4000;
 
-    //TODO: tutte le coordinate devono essere costanti e devono essere moltiplicate per screen_ratio
-    // (lifebar, contatore monete, items, ...)
-    
     public GameViewImpl() {
         this.frame = new JFrame();
         this.frame.setResizable(false);
@@ -65,6 +64,7 @@ public class GameViewImpl implements GameView, KeyListener {
         gamePanel.setBackground(BACKGROUND);
         this.frame.add(gamePanel);
         this.frame.addKeyListener(this);
+        this.frame.remove(this.lblStartInstruction);
         timer = new Timer(PERIOD, gamePanel);
         timer.start();
     }
@@ -86,10 +86,16 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.setVisible(true); //QUESTO FA VENIRE LA BARRA BIANCA INIZIALE
         this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO * screenRatio) + this.frame.getInsets().left,
                 (int) (NATIVE_HEIGHT * HEIGHT_RATIO * screenRatio) + this.frame.getInsets().top));
-        gamePanel.setSize(this.frame.getSize());
         //this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
         this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2,
                                screen.height / 2 - this.frame.getSize().height / 2);
+        this.frame.add(this.lblStartInstruction);
+        try {
+            Thread.sleep(ISTRUCTION_TIME);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        gamePanel.setSize(this.frame.getSize());
     }
 
     /**
@@ -191,12 +197,16 @@ public class GameViewImpl implements GameView, KeyListener {
 
     @Override
     public void keyPressed(final KeyEvent key) {
-       this.controller.pressKey(key);
+        if (this.controller != null) {
+            this.controller.pressKey(key);
+        }
     }
 
     @Override
     public void keyReleased(final KeyEvent key) {
-       this.controller.releaseKey(key);
+        if (this.controller != null) {
+            this.controller.releaseKey(key);
+        }
     }
 
     @Override
