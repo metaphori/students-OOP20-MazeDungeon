@@ -23,6 +23,7 @@ public class HUDPanel extends JLayeredPane {
     private int itemSize = 64;
     private final Point2D coinPosition;
     private final JLabel lblCoinCounter = new JLabel();
+    private final JLabel lblFinalArtefactSpawned;
     private final JLabel lblRoomVisited;
     private final Image coinImage; 
     private JProgressBar life;
@@ -40,6 +41,10 @@ public class HUDPanel extends JLayeredPane {
         this.coinImage = adaptImage(coin);
         this.setOpaque(false);
 
+        this.lblFinalArtefactSpawned = new JLabel(new ImageIcon("resources/images/Objects/FinalItem/spawned.png"));
+        this.lblFinalArtefactSpawned.setBounds(1000, 40, 170, 63);
+        this.lblFinalArtefactSpawned.setVisible(false);
+
         this.lblRoomVisited = new JLabel();
         this.lblRoomVisited.setBounds(1000, 10, 200, 20);
         this.lblRoomVisited.setFont(new Font("Helvetica", Font.ITALIC, (int) (20 * screenRatio)));
@@ -50,6 +55,7 @@ public class HUDPanel extends JLayeredPane {
         lblCoinCounter.setForeground(Color.white);
         this.add(this.lblRoomVisited);
         this.add(this.lblCoinCounter);
+        this.add(this.lblFinalArtefactSpawned);
     }
 
     /**
@@ -84,6 +90,9 @@ public class HUDPanel extends JLayeredPane {
      */
     public void updateVisitedRooms(final int nRooms, final int totalRooms) {
         this.lblRoomVisited.setText("Visited Rooms: " + nRooms + "/" + totalRooms);
+        if (nRooms == totalRooms) {
+            this.lblFinalArtefactSpawned.setVisible(true);
+        }
     }
 
     /**
