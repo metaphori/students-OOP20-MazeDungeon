@@ -11,12 +11,12 @@ import model.gameobject.simpleobject.Coin;
 public class Boss extends AbstractEnemy {
     private final BulletFactory bulletFactory = new BulletFactoryImpl();
     private static final long BOSS_SHOOT_DELAY = 500;
-    private final double maxLife;
-    private static final int MAX_SPEED = 300;
+    private static final int MAX_SPEED = 400;
     private static final int ALIGN_SHOOT_X = 110;
     private static final int ALIGN_SHOOT_Y = 140;
     private static final int ALIGN_MONEY = 40;
     private static final int MODIFY_ALIGN_MONEY = 10;
+    private final double maxLife;
     public Boss(final double life, final int speed, final Point2D position, final GameObjectType gameObjectType) {
         super(life, speed, position, gameObjectType);
         this.maxLife = life;
@@ -38,10 +38,6 @@ public class Boss extends AbstractEnemy {
         }
     }
     private void moveUpWall() {
-        final int incrementSpeed = 5;
-        if (this.getSpeed() < MAX_SPEED) {
-            this.setSpeed(this.getSpeed() + incrementSpeed);
-        }
         if ((int) this.getDirection().getX() == -1 && (int) this.getDirection().getY() == 0) {
             this.setDirection(new Vector2D(1, 0));
             this.setPosition(new Point2D(this.getPosition().getX() + 1, this.getPosition().getY()));
@@ -54,13 +50,14 @@ public class Boss extends AbstractEnemy {
      * @Override
      */
     protected void changeRoutine() {
+        if (this.getSpeed() < MAX_SPEED) {
+            final int incrementSpeed = 10;
+            this.setSpeed(this.getSpeed() + incrementSpeed);
+        }
         if (this.getLife() >=  this.maxLife / 2) {
             moveUpWall();
         } else {
             moveAroundWall();
-            if (this.getSpeed() < Boss.MAX_SPEED) {
-                this.setSpeed(this.getSpeed() + 10);
-            }
         }
 
     }

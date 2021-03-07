@@ -14,7 +14,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     private static final int SOUL_LIFE = 50;
     private static final int SPROUT_LIFE = 50;
     private static final int SKELETON_LIFE = 75;
-    private static final int BOSS_LIFE = 150;
+    private static final int BOSS_LIFE = 300;
 
     private static final int SOUL_SPEED = 90;
     private static final int SPROUT_SPEED = 50;

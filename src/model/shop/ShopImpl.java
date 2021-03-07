@@ -12,11 +12,11 @@ public class ShopImpl implements Shop {
     private static final int MORE_DAMAGE = 15;
     private static final int MORE_SPEED = 150;
     private static final int MORE_BULLETSPEED = 3;
-    private static final int PRICE_ARTHEMIDEBOW = 1;
-    private static final int PRICE_HERMESBOOTS = 1;
-    private static final int PRICE_ZEUSBOLT = 1;
-    private static final int PRICE_HEALTH = 1;
-    private static final int PRICE_ORACLEAMULET = 1;
+    private static final int PRICE_ARTHEMIDEBOW = 4;
+    private static final int PRICE_HERMESBOOTS = 3;
+    private static final int PRICE_ZEUSBOLT = 4;
+    private static final int PRICE_HEALTH = 2;
+    private static final int PRICE_ORACLEAMULET = 7;
 
     private final Set<Items> purchasedItems = new HashSet<>();
     private final Set<Items> cart = new HashSet<>();
