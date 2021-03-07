@@ -20,17 +20,16 @@ import model.shop.Items;
 public class HUDPanel extends JLayeredPane {
 
     private static final long serialVersionUID = 1L;
-    private int margin = 10;
-    private int itemSize = 64;
-    private final ResizableRectangle coinPosition = new ResizableRectangle(margin, 50, 50, 50);
+    private static final int MARGIN = 10;
+    private final ResizableRectangle coinPosition = new ResizableRectangle(MARGIN, 50, 50, 50);
     private final ResizableRectangle coinCounterPosition = new ResizableRectangle((int) coinPosition.getX() + (int) coinPosition.getWidth(), 
                                                                                   (int) coinPosition.getY(), 50, 50);
     private final ResizableRectangle roomVisitedPosition = new ResizableRectangle(1000, 10, 200, 20);
     private final ResizableRectangle finalArtefactPosition = new ResizableRectangle((int) roomVisitedPosition.getX(),
-                                                                                    (int) roomVisitedPosition.getY() + (int) roomVisitedPosition.getHeight() + margin,
+                                                                                    (int) roomVisitedPosition.getY() + (int) roomVisitedPosition.getHeight() + MARGIN,
                                                                                     170, 60);
-    private final ResizableRectangle lifeBarPosition = new ResizableRectangle(margin, margin, 200, 30);
-    private final ResizableRectangle itemsPosition = new ResizableRectangle(margin, (int) coinPosition.getY() + (int) coinPosition.getHeight() + margin, 
+    private final ResizableRectangle lifeBarPosition = new ResizableRectangle(MARGIN, MARGIN, 200, 30);
+    private final ResizableRectangle itemsPosition = new ResizableRectangle(MARGIN, (int) coinPosition.getY() + (int) coinPosition.getHeight() + MARGIN, 
                                                                             64, 64);
     private static final int ROOM_VISITED_FONT_SIZE = 20;
     private static final int COIN_COUNTER_FONT_SIZE = 25;
@@ -51,14 +50,13 @@ public class HUDPanel extends JLayeredPane {
         roomVisitedPosition.mul(screenRatio);
         lifeBarPosition.mul(screenRatio);
         itemsPosition.mul(screenRatio);
-        itemSize *= screenRatio;
+
         this.coinImage = new ImageIcon("resources/images/HUD/Coins/coin.png").getImage().getScaledInstance((int) coinPosition.getWidth(),
                                                                                                            (int) coinPosition.getHeight(), 
                                                                                                            Image.SCALE_SMOOTH);
         this.finalArtefactImage = new ImageIcon("resources/images/Objects/FinalItem/spawned.png").getImage().getScaledInstance((int) finalArtefactPosition.getWidth(), 
                                                                                                                                (int) finalArtefactPosition.getHeight(), 
                                                                                                                                Image.SCALE_SMOOTH);
-        this.setOpaque(false);
 
         this.lblRoomVisited = new JLabel();
         this.lblRoomVisited.setBounds(roomVisitedPosition);
@@ -71,6 +69,7 @@ public class HUDPanel extends JLayeredPane {
         lblCoinCounter.setBounds(coinCounterPosition);
         this.add(this.lblRoomVisited);
         this.add(this.lblCoinCounter);
+        this.setOpaque(false);
     }
 
     /**

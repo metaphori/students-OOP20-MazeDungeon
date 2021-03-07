@@ -2,7 +2,6 @@ package gamestructure.game;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -42,7 +41,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private static final double WIDTH_RATIO = 0.666_667; 
     private static final double HEIGHT_RATIO = 0.740_740; 
     private static final double ASPECT_RATIO = 1.6;
-    private final double screenRatio = 0.5;//screen.getWidth() / NATIVE_WIDTH;
+    private final double screenRatio = screen.getWidth() / NATIVE_WIDTH;
     private static final Color BACKGROUND = new Color(11, 19, 30);
     private static final int PERIOD = 15;
     private final GamePanel gamePanel;
