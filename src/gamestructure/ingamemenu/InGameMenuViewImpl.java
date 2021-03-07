@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Map;
 
 import javax.swing.JButton;
@@ -45,6 +47,8 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     private final JPanel inGameMenuPanel = new JPanel(new GridBagLayout());
     private final JPanel shopPanel = new JPanel(new GridBagLayout());
     private final JLabel msg = new JLabel();
+
+    private static final Color COLOR_BACKGROUND = new Color(11, 23, 30, 255);
     private boolean start;
 
     private final InGameMenuController controller;
@@ -69,35 +73,53 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.configureButton(btnBackToMenu);
         this.lblBackgroundShop.add(btnBackToMenu);
         btnBackToMenu.addActionListener(e -> this.controller.openInGameMenu());
+        showSelectButton(btnBackToMenu);
 
         btnArthemideBowItem.setBounds(45, 180, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnArthemideBowItem);
         this.lblBackgroundShop.add(btnArthemideBowItem);
         btnArthemideBowItem.addActionListener(e -> this.controller.buyItem(Items.ARTHEMIDEBOW));
+        showSelectButton(btnArthemideBowItem);
 
         btnHermesBootsItem.setBounds(208, 175, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnHermesBootsItem);
         this.lblBackgroundShop.add(btnHermesBootsItem);
         btnHermesBootsItem.addActionListener(e -> this.controller.buyItem(Items.HERMESBOOTS));
+        showSelectButton(btnHermesBootsItem);
 
         btnZeusBoltItem.setBounds(350, 190, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnZeusBoltItem);
         this.lblBackgroundShop.add(btnZeusBoltItem);
         btnZeusBoltItem.addActionListener(e -> this.controller.buyItem(Items.ZEUSBOLT));
+        showSelectButton(btnZeusBoltItem);
 
         btnHealthItem.setBounds(510, 180, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnHealthItem);
         this.lblBackgroundShop.add(btnHealthItem);
         btnHealthItem.addActionListener(e -> this.controller.buyItem(Items.HEALTH));
+        showSelectButton(btnHealthItem);
+
 
         btnOracleAmulet.setBounds(680, 180, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
         this.configureButton(btnOracleAmulet);
         this.lblBackgroundShop.add(btnOracleAmulet);
         btnOracleAmulet.addActionListener(e -> this.controller.buyItem(Items.ORACLEAMULET));
+        showSelectButton(btnOracleAmulet);
+
 
         this.showPrice();
         this.showItemInformation();
         this.show();
+    }
+    private void showSelectButton(final JButton btn) {
+        btn.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(final MouseEvent e) {
+                btn.setBackground(new Color(Color.TRANSLUCENT));
+            }
+            public void mouseExited(final MouseEvent e) {
+                btn.setBackground(COLOR_BACKGROUND);
+            }
+        });
     }
     /**
      * open in game menu panel and set button and label.
@@ -110,16 +132,19 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.configureButton(btnResumeMenu);
         this.lblBackgroundMenu.add(btnResumeMenu);
         btnResumeMenu.addActionListener(e -> this.controller.resume());
+        showSelectButton(btnResumeMenu);
 
         btnShopMenu.setBounds((int) (screen.getWidth() / 4), 433, 300, 90);
         this.configureButton(btnShopMenu);
         this.lblBackgroundMenu.add(btnShopMenu);
         btnShopMenu.addActionListener(e -> this.controller.openShop());
+        showSelectButton(btnShopMenu);
 
         btnExitMenu.setBounds((int) (screen.getWidth() / 4), 523, 300, 90);
         this.configureButton(btnExitMenu);
         this.lblBackgroundMenu.add(btnExitMenu);
         btnExitMenu.addActionListener(e -> this.controller.exit());
+        showSelectButton(btnExitMenu);
         if (start) {
             this.show();
         }
@@ -146,19 +171,20 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     }
 
     private void configureButton(final JButton btn) {
-        btn.setBackground(new Color(11,23,30,255));
-        btn.setBorder(new LineBorder(new Color(11,23,30,255))); //Colore del bordo del bottone
+        btn.setBackground(COLOR_BACKGROUND);
+        btn.setBorder(new LineBorder(COLOR_BACKGROUND)); //Colore del bordo del bottone
         btn.setFocusPainted(false); //Disabilita il paint del focus sul testo del bottone
     }
 
     /**
      * create and set message label, for output information.
+     * @param messageOutput : set message in JLabel
      */
-    public void returnMessage(final String messageOuput) {
+    public void returnMessage(final String messageOutput) {
         msg.setBounds(150, 580, 420, 50);
         this.lblBackgroundShop.add(msg);
         msg.setFont(new Font("Algerian", Font.ITALIC, 20));
-        msg.setText(messageOuput);
+        msg.setText(messageOutput);
         msg.setVisible(true);
     }
     /**
