@@ -52,7 +52,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private final HUDPanel hudPanel = new HUDPanel(screenRatio);
     private boolean gameOver = false;
     private boolean won = false;
-    private final JLabel lblStartInstruction = new JLabel(new ImageIcon("resources/images/HUD/StartIstruction.png"));
+    private final JLabel lblStartInstruction = new JLabel(new ImageIcon(adaptImage(new ImageIcon("resources/images/HUD/StartIstruction.png"))));
     private static final int ISTRUCTION_TIME = 4000;
 
     public GameViewImpl() {
