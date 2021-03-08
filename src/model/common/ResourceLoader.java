@@ -35,7 +35,7 @@ public class ResourceLoader {
         /*OBSTACLE*/
         resources.put(GameObjectType.ROCK, imagesPath + "Obstacle" + sep + "Rock1.png");
 
-        resources.put(GameObjectType.FINAL_ARTEFACT, imagesPath + "Objects" + sep + "FinalItem" + sep + "WinnerSkull.png");
+        resources.put(GameObjectType.FINAL_ARTIFACT, imagesPath + "Objects" + sep + "FinalItem" + sep + "WinnerSkull.png");
     }
 
     /**

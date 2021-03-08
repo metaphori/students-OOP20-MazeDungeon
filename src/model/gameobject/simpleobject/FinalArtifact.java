@@ -4,10 +4,10 @@ import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.GameObject;
 
-public class FinalArtefact extends SimpleObjectImpl {
+public class FinalArtifact extends SimpleObjectImpl {
 
-    public FinalArtefact(final Point2D position) {
-        super(position, GameObjectType.FINAL_ARTEFACT);
+    public FinalArtifact(final Point2D position) {
+        super(position, GameObjectType.FINAL_ARTIFACT);
     }
 
     /**

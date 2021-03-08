@@ -17,7 +17,4 @@ public interface BulletFactory {
     Bullet createSproutBullet(Point2D initialPosition, Vector2D direction);
 
     Bullet createBossBullet(Point2D initialPosition, Vector2D direction);
-
-    Bullet createOldGuardianBullet(Point2D initialPosition, Vector2D direction);
-
 }

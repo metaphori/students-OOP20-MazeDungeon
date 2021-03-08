@@ -20,7 +20,7 @@ import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.dynamicobject.character.CharacterImpl;
 import model.gameobject.dynamicobject.enemy.EnemyFactory;
 import model.gameobject.dynamicobject.enemy.EnemyFactoryImpl;
-import model.gameobject.simpleobject.FinalArtefact;
+import model.gameobject.simpleobject.FinalArtifact;
 
 public class RoomManagerImpl implements RoomManager {
 
@@ -174,7 +174,7 @@ public class RoomManagerImpl implements RoomManager {
             final Room startRoom = this.rooms.get(new Point2D(0, 0));
             final double x = (startRoom.getUL().getX() + startRoom.getBR().getX()) / 2;
             final double y = (startRoom.getUL().getY() + startRoom.getBR().getY()) / 2;
-            startRoom.addSimpleObject(new FinalArtefact(new Point2D(x, y)));
+            startRoom.addSimpleObject(new FinalArtifact(new Point2D(x, y)));
         }
     }
 
