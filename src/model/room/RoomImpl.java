@@ -135,14 +135,14 @@ public class RoomImpl implements Room {
     }
 
     @Override
-    public void addDynamicObject(final List<DynamicObject> objs) {
+    public void addAllDynamicObject(final List<DynamicObject> objs) {
         for (final DynamicObject dinamicObject : objs) {
             this.addDynamicObject(dinamicObject);
         }
     }
 
     @Override
-    public void addSimpleObject(final List<SimpleObject> objs) {
+    public void addAllSimpleObject(final List<SimpleObject> objs) {
         for (final SimpleObject simpleObject : objs) {
             this.addSimpleObject(simpleObject);
         }

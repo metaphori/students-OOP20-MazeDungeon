@@ -45,7 +45,7 @@ public class RoomBuilder {
         this.isInitialize = true;
         this.room = new RoomImpl(roomManager);
         this.obstaclesFactory = new ObstaclesFactory(this.room.getUL(), this.room.getBR());
-        this.room.addSimpleObject(obstaclesFactory.getEmptyRoom());
+        this.room.addAllSimpleObject(obstaclesFactory.getEmptyRoom());
         return this;
     }
 
@@ -73,7 +73,7 @@ public class RoomBuilder {
             throw new IllegalStateException("cannot add obstacle");
         }
         this.canAddBoss = false;
-        this.room.addSimpleObject(this.obstaclesFactory.createSquare(3));
+        this.room.addAllSimpleObject(this.obstaclesFactory.createSquare(3));
         return this;
     }
 

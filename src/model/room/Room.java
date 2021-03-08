@@ -14,11 +14,11 @@ public interface Room {
 
     void addDynamicObject(DynamicObject obj);
 
-    void addDynamicObject(List<DynamicObject> objs);
+    void addAllDynamicObject(List<DynamicObject> objs);
 
     void addSimpleObject(SimpleObject obj);
 
-    void addSimpleObject(List<SimpleObject> objs);
+    void addAllSimpleObject(List<SimpleObject> objs);
 
     List<GameObject> getCurrentGameObjects();
 

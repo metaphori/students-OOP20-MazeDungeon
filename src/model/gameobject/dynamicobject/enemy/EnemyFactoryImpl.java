@@ -142,7 +142,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 bulletSouth.setBoundingBox(this.getBoundingBox());
                 bulletEast.setBoundingBox(this.getBoundingBox());
                 bulletWest.setBoundingBox(this.getBoundingBox());
-                this.getRoom().addDynamicObject(List.of(bulletNorth, bulletEast, bulletWest, bulletSouth));
+                this.getRoom().addAllDynamicObject(List.of(bulletNorth, bulletEast, bulletWest, bulletSouth));
             }
 
             @Override
