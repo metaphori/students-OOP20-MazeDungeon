@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,8 +19,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.Timer;
 
 import model.common.BoundingBox;
@@ -40,7 +37,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private static final int NATIVE_HEIGHT = 1080;
     private static final double WIDTH_RATIO = 0.666_667; 
     private static final double HEIGHT_RATIO = 0.740_740; 
-    private static final double ASPECT_RATIO = 1.6;
+    //private static final double ASPECT_RATIO = 1.6;
     private final double screenRatio = screen.getWidth() / NATIVE_WIDTH;
     private static final Color BACKGROUND = new Color(11, 19, 30);
     private static final int PERIOD = 15;
@@ -49,8 +46,8 @@ public class GameViewImpl implements GameView, KeyListener {
     private final ResourceLoader resourceLoader = new ResourceLoader();
     private final Timer timer;
     private final HUDPanel hudPanel = new HUDPanel(screenRatio);
-    private boolean gameOver = false;
-    private boolean won = false;
+    private boolean gameOver;
+    private boolean won;
     private final JLabel lblStartInstruction = new JLabel(new ImageIcon(adaptImage(new ImageIcon("resources/images/HUD/StartIstruction.png"))));
     private static final int ISTRUCTION_TIME = 0;
 
@@ -69,7 +66,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * 
+     * Initialize the GameView by initializing the gamePanel and starting the timer.
      */
     @Override
     public void initialize() {
@@ -78,11 +75,11 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * 
+     * It show the GameView.
      */
     @Override
     public void show() {
-        this.frame.setVisible(true); //QUESTO FA VENIRE LA BARRA BIANCA INIZIALE
+        this.frame.setVisible(true);
         this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO * screenRatio) + this.frame.getInsets().left,
                 (int) (NATIVE_HEIGHT * HEIGHT_RATIO * screenRatio) + this.frame.getInsets().top));
         //this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
@@ -98,7 +95,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * 
+     * Destroy the GameView.
      */
     @Override
     public void hide() {
@@ -139,7 +136,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @param controller 
+     * @param controller : set controller ad the controller of the GameView
      */
     @Override
     public void setController(final GameController controller) {
@@ -148,7 +145,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * 
+     * Update the Heads Up Display.
      */
     @Override
     public void updateHUD() {
@@ -167,7 +164,9 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * 
+     * @param id : the id of the GameObject to load the sprite of.
+     * @param gameObjectType : the type of the GameObject for the correct loading of it's image.
+     * @param position : the position where to print the image.
      */
     @Override
     public void addSprite(final Integer id, final GameObjectType gameObjectType, final Point2D position) {
@@ -179,8 +178,8 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @param id the id of the sprite to update.
-     * @param position the new position of the sprite.
+     * @param id : the id of the sprite to update.
+     * @param position : the new position of the sprite.
      */
     @Override
     public void setSpritePosition(final int id, final Point2D position) {
@@ -188,13 +187,17 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @param id the id of the sprite that has to been removed.
+     * @param id : the id of the sprite that has to been removed.
      */
     @Override
     public void removeSprite(final int id) {
         this.sprites.remove(id);
     }
 
+    /**
+     * @param key : the KeyEvent of the key pressed
+     * it's notify the event at the controller
+     */
     @Override
     public void keyPressed(final KeyEvent key) {
         if (this.controller != null) {
@@ -202,6 +205,10 @@ public class GameViewImpl implements GameView, KeyListener {
         }
     }
 
+    /**
+     * @param key : the KeyEvent of the key released
+     * it's notify the event at the controller
+     */
     @Override
     public void keyReleased(final KeyEvent key) {
         if (this.controller != null) {
@@ -214,11 +221,18 @@ public class GameViewImpl implements GameView, KeyListener {
         // TODO Auto-generated method stub
     }
 
+    /**
+     * When called set the gameOvervariable at true.
+     */
     @Override
     public void gameOver() {
         this.gameOver = true;
     }
 
+    /**
+     * @param purchasedItems : the Set of the item purchased by the player.
+     * It add all the item purchased to the HUD panel
+     */
     @Override
     public void renderItems(final Set<Items> purchasedItems) {
         for (final Items item : purchasedItems) {
@@ -226,6 +240,9 @@ public class GameViewImpl implements GameView, KeyListener {
         }
     }
 
+    /**
+     * When called set the won at true.
+     */
     @Override
     public void isWon() {
         this.won = true;

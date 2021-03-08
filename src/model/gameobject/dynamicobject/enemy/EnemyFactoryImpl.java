@@ -26,6 +26,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     private static final long SKELETON_SHOOT_DELAY = 1000;
 
     private final BulletFactory bulletFactory = new BulletFactoryImpl();
+
     /**
      * @return an enemy of type: Sprout
      */
@@ -122,7 +123,6 @@ public class EnemyFactoryImpl implements EnemyFactory {
                         this.inMovement = false;
                     } else {
                         this.changeRoutine();
-                        this.inMovement = true;
                     }
                 }
                 if (this.canShoot(SKELETON_SHOOT_DELAY) && !this.inMovement) {
@@ -138,15 +138,16 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 final Bullet bulletSouth = bulletFactory.createSkeletonBullet(newPosition, new Vector2D(0, 1));
                 final Bullet bulletEast = bulletFactory.createSkeletonBullet(newPosition, new Vector2D(1, 0));
                 final Bullet bulletWest = bulletFactory.createSkeletonBullet(newPosition, new Vector2D(-1, 0));
-                bulletNorth.setBoundingBox(this.getBoundingBox());
-                bulletSouth.setBoundingBox(this.getBoundingBox());
-                bulletEast.setBoundingBox(this.getBoundingBox());
-                bulletWest.setBoundingBox(this.getBoundingBox());
+                bulletNorth.setSafeZone(this.getBoundingBox());
+                bulletSouth.setSafeZone(this.getBoundingBox());
+                bulletEast.setSafeZone(this.getBoundingBox());
+                bulletWest.setSafeZone(this.getBoundingBox());
                 this.getRoom().addAllDynamicObject(List.of(bulletNorth, bulletEast, bulletWest, bulletSouth));
             }
 
             @Override
             protected void changeRoutine() {
+                this.inMovement = true;
                 this.setDirection(this.getRndDirection());
             }
 
@@ -163,5 +164,4 @@ public class EnemyFactoryImpl implements EnemyFactory {
     public Enemy createBoss(final Point2D position) {
         return new Boss(BOSS_LIFE, BOSS_SPEED, position, GameObjectType.ENEMY_BOSS);
     }
-
 }

@@ -202,6 +202,9 @@ public class GameControllerImpl implements GameController {
         return this.model.getRoomManager().getTotalRooms();
     }
 
+    /**
+     * return the Optional of the boss life.
+     */
     @Override
     public Optional<Double> getBossLife() {
         final Optional<Integer> bossID = this.model.getRoomManager().getCurrentRoom().getBossID();

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.LinkedList;
 import java.util.List;
@@ -43,7 +42,7 @@ public class HUDPanel extends JLayeredPane {
     private final Image finalArtefactImage;
     private JProgressBar characterLifeBar;
     private Optional<JProgressBar> bossLifeBar = Optional.empty();
-    private boolean finalArtefactVisible = false;
+    private boolean finalArtefactVisible;
 
     private final List<Image> items = new LinkedList<>();
 
