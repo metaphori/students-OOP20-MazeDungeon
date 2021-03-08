@@ -52,7 +52,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private boolean gameOver = false;
     private boolean won = false;
     private final JLabel lblStartInstruction = new JLabel(new ImageIcon(adaptImage(new ImageIcon("resources/images/HUD/StartIstruction.png"))));
-    private static final int ISTRUCTION_TIME = 4000;
+    private static final int ISTRUCTION_TIME = 0;
 
     public GameViewImpl() {
         this.frame = new JFrame();
@@ -155,6 +155,7 @@ public class GameViewImpl implements GameView, KeyListener {
         hudPanel.updateLife(this.controller.getCharacterLife());
         hudPanel.updateCoinCounter(this.controller.getCharacterMoney());
         hudPanel.updateVisitedRooms(this.controller.getVisitedRoom(), this.controller.getTotalRooms());
+        hudPanel.updateBossLife(this.controller.getBossLife());
     }
 
     private Image adaptImage(final ImageIcon img) {

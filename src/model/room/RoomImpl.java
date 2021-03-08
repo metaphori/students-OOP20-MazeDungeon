@@ -3,6 +3,7 @@ package model.room;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import model.common.Direction;
@@ -15,13 +16,13 @@ import model.gameobject.simpleobject.SimpleObject;
 
 public class RoomImpl implements Room {
 
-    private static final Point2D UL_CORNER = new Point2D(240, 177); //TODO in caso di resize della finestra vanno cambiati!!!!
+    private static final Point2D UL_CORNER = new Point2D(240, 177);
     private static final Point2D BR_CORNER = new Point2D(1025, 633);
     private final List<SimpleObject> simpleObjects = new LinkedList<>();
     private final List<DynamicObject> dynamicObjects = new LinkedList<>();
     private final Set<Direction> nearRooms = new HashSet<>();
     private final RoomManager roomManager;
-    private boolean isVisited = false; 
+    private boolean isVisited = false;
  
     public RoomImpl(final RoomManager roomManager) {
         this.roomManager = roomManager;
@@ -105,7 +106,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * 
+     * @param direction : direction of the door.
      */
     @Override
     public void addDoor(final Direction direction) {
@@ -113,8 +114,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * 
-     * @return . 
+     * @return all the directions in the room that have a door
      */
     @Override
     public Set<Direction> getDoors() {
@@ -122,7 +122,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * 
+     * @return true if character can cross the door
      */
     @Override
     public boolean isDoorOpen() {
@@ -134,6 +134,9 @@ public class RoomImpl implements Room {
         return true;
     }
 
+    /**
+     * @param objs : dynamic objects to add in the room
+     */
     @Override
     public void addAllDynamicObject(final List<DynamicObject> objs) {
         for (final DynamicObject dinamicObject : objs) {
@@ -141,6 +144,9 @@ public class RoomImpl implements Room {
         }
     }
 
+    /**
+     * @param objs : simple objects to add in the room
+     */
     @Override
     public void addAllSimpleObject(final List<SimpleObject> objs) {
         for (final SimpleObject simpleObject : objs) {
@@ -148,6 +154,9 @@ public class RoomImpl implements Room {
         }
     }
 
+    /**
+     * @return the upper left point of the room
+     */
     @Override
     public Point2D getUL() {
         return UL_CORNER;
@@ -166,6 +175,16 @@ public class RoomImpl implements Room {
     @Override
     public void visit() {
         this.isVisited = true;
+    }
+
+    @Override
+    public Optional<Integer> getBossID() {
+        for (final GameObject gameObject : getCurrentGameObjects()) {
+            if (gameObject.getGameObjectType() == GameObjectType.ENEMY_BOSS) {
+                return Optional.of(gameObject.getID());
+            }
+        }
+        return Optional.empty();
     }
 
 }

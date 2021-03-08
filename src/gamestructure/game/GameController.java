@@ -1,6 +1,7 @@
 package gamestructure.game;
 
 import java.awt.event.KeyEvent;
+import java.util.Optional;
 
 import model.common.BoundingBox;
 import mvc.Controller;
@@ -23,4 +24,6 @@ public interface GameController extends Controller {
     int getVisitedRoom();
 
     int getTotalRooms();
+
+    Optional<Double> getBossLife();
 }

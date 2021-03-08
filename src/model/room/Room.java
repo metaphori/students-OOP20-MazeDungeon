@@ -1,6 +1,7 @@
 package model.room;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import model.common.Direction;
@@ -42,4 +43,5 @@ public interface Room {
 
     void visit();
 
+    Optional<Integer> getBossID();
 }

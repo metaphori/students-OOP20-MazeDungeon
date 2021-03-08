@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -28,17 +29,20 @@ public class HUDPanel extends JLayeredPane {
     private final ResizableRectangle finalArtefactPosition = new ResizableRectangle((int) roomVisitedPosition.getX(),
                                                                                     (int) roomVisitedPosition.getY() + (int) roomVisitedPosition.getHeight() + MARGIN,
                                                                                     170, 60);
-    private final ResizableRectangle lifeBarPosition = new ResizableRectangle(MARGIN, MARGIN, 200, 30);
+    private final ResizableRectangle characterLifeBarPosition = new ResizableRectangle(MARGIN, MARGIN, 200, 30);
     private final ResizableRectangle itemsPosition = new ResizableRectangle(MARGIN, (int) coinPosition.getY() + (int) coinPosition.getHeight() + MARGIN, 
                                                                             64, 64);
+    private final ResizableRectangle bossLifeBarPosition = new ResizableRectangle(360, MARGIN, 500, 30);
     private static final int ROOM_VISITED_FONT_SIZE = 20;
     private static final int COIN_COUNTER_FONT_SIZE = 25;
-    private static final Color LIFEBAR_FOREGROUND = new Color(150, 0, 0);
+    private static final Color CHAR_LIFEBAR_FOREGROUND = new Color(150, 0, 0);
+    private static final Color BOSS_LIFEBAR_FOREGROUND = new Color(167, 142, 13);
     private final JLabel lblCoinCounter = new JLabel();
     private final JLabel lblRoomVisited;
     private final Image coinImage;
     private final Image finalArtefactImage;
-    private JProgressBar life;
+    private JProgressBar characterLifeBar;
+    private Optional<JProgressBar> bossLifeBar = Optional.empty();
     private boolean finalArtefactVisible = false;
 
     private final List<Image> items = new LinkedList<>();
@@ -48,8 +52,9 @@ public class HUDPanel extends JLayeredPane {
         coinCounterPosition.mul(screenRatio);
         finalArtefactPosition.mul(screenRatio);
         roomVisitedPosition.mul(screenRatio);
-        lifeBarPosition.mul(screenRatio);
+        characterLifeBarPosition.mul(screenRatio);
         itemsPosition.mul(screenRatio);
+        bossLifeBarPosition.mul(screenRatio);
 
         this.coinImage = new ImageIcon("resources/images/HUD/Coins/coin.png").getImage().getScaledInstance((int) coinPosition.getWidth(),
                                                                                                            (int) coinPosition.getHeight(), 
@@ -77,10 +82,32 @@ public class HUDPanel extends JLayeredPane {
      * @param maxLife
      */
     public void initialize(final double maxLife) {
-        life = new JProgressBar(0, (int) maxLife);
-        life.setBounds(lifeBarPosition);
-        life.setForeground(LIFEBAR_FOREGROUND);
-        this.add(life);
+        characterLifeBar = new JProgressBar(0, (int) maxLife);
+        characterLifeBar.setBounds(characterLifeBarPosition);
+        characterLifeBar.setForeground(CHAR_LIFEBAR_FOREGROUND);
+        this.add(characterLifeBar);
+    }
+
+    /**
+     * 
+     * @param life
+     */
+    public void updateBossLife(final Optional<Double> life) {
+        if (life.isEmpty() && bossLifeBar.isEmpty()) {
+            return;
+        }
+        if (life.isEmpty() && bossLifeBar.isPresent()) {
+            this.remove(bossLifeBar.get());
+            bossLifeBar = Optional.empty();
+            return;
+        }
+        if (life.isPresent() && bossLifeBar.isEmpty()) {
+            bossLifeBar = Optional.of(new JProgressBar(0, life.get().intValue()));
+            bossLifeBar.get().setBounds(bossLifeBarPosition);
+            bossLifeBar.get().setForeground(BOSS_LIFEBAR_FOREGROUND);
+            this.add(bossLifeBar.get());
+        }
+        this.bossLifeBar.get().setValue(life.get().intValue());
     }
 
     /**
@@ -95,7 +122,7 @@ public class HUDPanel extends JLayeredPane {
      * @param life
      */
     public void updateLife(final double life) {
-        this.life.setValue((int) (life));
+        this.characterLifeBar.setValue((int) (life));
     }
 
     /**
@@ -133,6 +160,9 @@ public class HUDPanel extends JLayeredPane {
         items.add(tmpImage.getImage().getScaledInstance((int) itemsPosition.getWidth(), (int) itemsPosition.getHeight(), Image.SCALE_SMOOTH));
     }
 
+    /**
+     * 
+     */
     @Override
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);

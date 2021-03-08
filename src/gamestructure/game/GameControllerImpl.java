@@ -3,6 +3,7 @@ package gamestructure.game;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import gamestructure.mainmenu.MainMenuController;
@@ -12,6 +13,7 @@ import input.CommandImpl;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.gameobject.GameObject;
+import model.gameobject.dynamicobject.enemy.AbstractEnemy;
 import mvc.Model;
 
 public class GameControllerImpl implements GameController {
@@ -198,5 +200,14 @@ public class GameControllerImpl implements GameController {
     @Override
     public int getTotalRooms() {
         return this.model.getRoomManager().getTotalRooms();
+    }
+
+    @Override
+    public Optional<Double> getBossLife() {
+        final Optional<Integer> bossID = this.model.getRoomManager().getCurrentRoom().getBossID();
+        if (bossID.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(((AbstractEnemy) this.model.getGameObject(bossID.get())).getLife());
     }
 }
