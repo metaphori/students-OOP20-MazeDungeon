@@ -36,6 +36,7 @@ public class HUDPanel extends JLayeredPane {
     private static final int COIN_COUNTER_FONT_SIZE = 25;
     private static final Color CHAR_LIFEBAR_FOREGROUND = new Color(150, 0, 0);
     private static final Color BOSS_LIFEBAR_FOREGROUND = new Color(167, 142, 13);
+    private final JLabel lblBossIcon = new JLabel(new ImageIcon("resources/images/Boss/BossIcon.png"));
     private final JLabel lblCoinCounter = new JLabel();
     private final JLabel lblRoomVisited;
     private final Image coinImage;
@@ -67,10 +68,13 @@ public class HUDPanel extends JLayeredPane {
         this.lblRoomVisited.setFont(new Font("Helvetica", Font.ITALIC, (int) (ROOM_VISITED_FONT_SIZE * screenRatio)));
         this.lblRoomVisited.setForeground(Color.white);
 
+        this.lblBossIcon.setBounds(320, 0, 74, 49);
+        this.lblBossIcon.setVisible(false);
         lblCoinCounter.setText("0");
         lblCoinCounter.setFont(new Font("Helvetica", Font.ITALIC, (int) (COIN_COUNTER_FONT_SIZE * screenRatio)));
         lblCoinCounter.setForeground(Color.white);
         lblCoinCounter.setBounds(coinCounterPosition);
+        this.add(this.lblBossIcon);
         this.add(this.lblRoomVisited);
         this.add(this.lblCoinCounter);
         this.setOpaque(false);
@@ -98,6 +102,7 @@ public class HUDPanel extends JLayeredPane {
         if (life.isEmpty() && bossLifeBar.isPresent()) {
             this.remove(bossLifeBar.get());
             bossLifeBar = Optional.empty();
+            this.lblBossIcon.setVisible(false);
             return;
         }
         if (life.isPresent() && bossLifeBar.isEmpty()) {
@@ -105,6 +110,7 @@ public class HUDPanel extends JLayeredPane {
             bossLifeBar.get().setBounds(bossLifeBarPosition);
             bossLifeBar.get().setForeground(BOSS_LIFEBAR_FOREGROUND);
             this.add(bossLifeBar.get());
+            this.lblBossIcon.setVisible(true);
         }
         this.bossLifeBar.get().setValue(life.get().intValue());
     }

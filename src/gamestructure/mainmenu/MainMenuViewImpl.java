@@ -14,7 +14,12 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import model.common.ResizableRectangle;
+
 public class MainMenuViewImpl implements MainMenuView {
+
+    private final JFrame frame = new JFrame();
+    private final JPanel mainPanel = new JPanel(new GridLayout());
 
     private final String sep = File.separator;
     private final String imagesPath = "resources" + sep + "images" + sep + "MainMenu" + sep;
@@ -24,8 +29,12 @@ public class MainMenuViewImpl implements MainMenuView {
     private final JButton btnExit = new JButton("", new ImageIcon(this.imagesPath + "Exit.png")); 
     private final JButton btnCredits = new JButton("", new ImageIcon(this.imagesPath + "CreditsButton.png")); 
     private final JLabel creditsLabel = new JLabel(new ImageIcon(this.imagesPath + "Credits.png"));
-    private final JFrame frame = new JFrame();
-    private final JPanel mainPanel = new JPanel(new GridLayout());
+
+    private final ResizableRectangle newGamePosition = new ResizableRectangle(160, 340, 300, 45);
+    private final ResizableRectangle creditsPosition = new ResizableRectangle(160, 433, 300, 45);
+    private final ResizableRectangle exitPosition = new ResizableRectangle(160, 523, 300, 45);
+    private final ResizableRectangle titlePosition = new ResizableRectangle(50, 208, 500, 100);
+    private final ResizableRectangle lblCreditsPosition = new ResizableRectangle(140, 595, 335, 122);
 
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private static final double WIDTH_RATIO = 0.67; 
@@ -40,32 +49,32 @@ public class MainMenuViewImpl implements MainMenuView {
         this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 
                 (int) (screen.getHeight() * HEIGHT_RATIO)));
 
-        btnNewGame.setBounds(160, 340, 300, 45);
+        btnNewGame.setBounds(this.newGamePosition);
         this.configureButton(btnNewGame);
 
         btnNewGame.addActionListener(e -> {
             this.controller.newGame();
         });
 
-        btnCredits.setBounds(160, 433, 300, 45);
+        btnCredits.setBounds(this.creditsPosition);
         this.configureButton(btnCredits);
 
         btnCredits.addActionListener(e -> {
             this.creditsLabel.setVisible(!this.creditsLabel.isVisible());
         });
 
-        btnExit.setBounds(160, 523, 300, 45);
+        btnExit.setBounds(this.exitPosition);
         this.configureButton(btnExit);
 
         btnExit.addActionListener(e -> {
             this.hide();
         });
 
-        this.creditsLabel.setBounds(140, 595, 335, 122);
+        this.creditsLabel.setBounds(this.lblCreditsPosition);
         this.creditsLabel.setVisible(false);
         this.lblBackground.add(creditsLabel);
 
-        this.lblTitle.setBounds(50, 208, 500, 100);
+        this.lblTitle.setBounds(this.titlePosition);
         this.lblBackground.add(lblTitle);
 
         this.mainPanel.add(lblBackground, JLayeredPane.FRAME_CONTENT_LAYER);
