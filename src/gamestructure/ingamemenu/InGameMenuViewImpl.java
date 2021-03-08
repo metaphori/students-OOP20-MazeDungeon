@@ -113,9 +113,11 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     }
     private void showSelectButton(final JButton btn) {
         btn.addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseEntered(final MouseEvent e) {
                 btn.setBackground(new Color(Color.TRANSLUCENT));
             }
+            @Override
             public void mouseExited(final MouseEvent e) {
                 btn.setBackground(COLOR_BACKGROUND);
             }
@@ -153,6 +155,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     /**
      * @Override
      */
+    @Override
     public void show() {
         this.frame.pack();
         if (!start) {
@@ -164,8 +167,9 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     }
 
     /**
-     * @Override
+     * 
      */
+    @Override
     public void hide() {
         this.frame.setVisible(false);
     }
