@@ -65,7 +65,7 @@ public class Boss extends AbstractEnemy {
     /**
      * @Override
      */
-    public void shoot() {
+    protected void shoot() {
         final Bullet bullet;
         if (this.getLife() >=  this.maxLife / 2) {
             bullet = bulletFactory.createBossBullet(this.getPosition().sum(new Vector2D(ALIGN_SHOOT_X, ALIGN_SHOOT_Y)),

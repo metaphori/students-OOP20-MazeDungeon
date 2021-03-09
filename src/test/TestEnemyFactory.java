@@ -38,7 +38,7 @@ public class TestEnemyFactory {
         final Room room = new RoomImpl(new RoomManagerImpl());
         sprout.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
         sprout.setRoom(room);
-        sprout.shoot();
+        sprout.tryToShoot();
         assertFalse(room.getCurrentGameObjects().isEmpty());
         sprout.takesDamage(10);
         assertEquals((int) SPROUT_LIFE - 10, (int) sprout.getLife());
@@ -55,7 +55,7 @@ public class TestEnemyFactory {
         final Room room = new RoomImpl(new RoomManagerImpl());
         soul.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
         soul.setRoom(room);
-        soul.shoot();
+        soul.tryToShoot();
         assertFalse(room.getCurrentGameObjects().isEmpty());
         soul.takesDamage(10);
         assertEquals((int) SOUL_LIFE - 10, (int) soul.getLife());
@@ -72,7 +72,7 @@ public class TestEnemyFactory {
         final Room room = new RoomImpl(new RoomManagerImpl());
         skeleton.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
         skeleton.setRoom(room);
-        skeleton.shoot();
+        skeleton.tryToShoot();
         assertFalse(room.getCurrentGameObjects().isEmpty());
         skeleton.takesDamage(10);
         assertEquals((int) SKELETON_LIFE - 10, (int) skeleton.getLife());

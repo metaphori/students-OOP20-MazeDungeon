@@ -39,7 +39,7 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
     }
 
     /**
-     * 
+     * The enemy shoot if he can.
      */
     @Override
     public void tryToShoot() {
@@ -116,8 +116,7 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
         return new Vector2D(newX, newY);
     }
 
-    @Override
-    public abstract void shoot();
+    protected abstract void shoot();
 
     protected abstract void changeRoutine();
 }
