@@ -1,19 +1,14 @@
 package model.room;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import model.common.BoundingBox;
-import model.common.GameObjectType;
-import model.common.IdIterator;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.simpleobject.Obstacle;
 import model.gameobject.simpleobject.SimpleObject;
-import model.gameobject.simpleobject.SimpleObjectImpl;
 import model.gameobject.simpleobject.Wall;
 
 public class ObstaclesFactory {
@@ -29,6 +24,10 @@ public class ObstaclesFactory {
     private final double height;
     private static final int WALL_DEPTH = 100;
 
+    /**
+     * @param ulCorner : upper left corner of the room
+     * @param brCorner : : bottom right corner of the room
+     */
     public ObstaclesFactory(final Point2D ulCorner, final Point2D brCorner) {
         this.ulCorner = ulCorner;
         this.brCorner = brCorner;
@@ -39,7 +38,7 @@ public class ObstaclesFactory {
     }
 
     /**
-     * @return a room that contain only walls
+     * @return a list contains walls
      */
     public List<SimpleObject> getEmptyRoom() {
         return this.getWalls();
@@ -47,8 +46,8 @@ public class ObstaclesFactory {
 
     /**
      * 
-     * @param squaresNumber
-     * @return .
+     * @param squaresNumber : the number of squares to create
+     * @return a list of obstacles
      */
     public List<SimpleObject> createSquare(final int squaresNumber) {
         final List<SimpleObject> obstacles = new LinkedList<>();
@@ -67,8 +66,6 @@ public class ObstaclesFactory {
                 }
             }
         }
-        //obstacles.add(getObstacle(getObstaclePosition(7, 0)));
-        obstacles.addAll(getEmptyRoom());
         return new LinkedList<>(obstacles);
     }
 
@@ -94,12 +91,6 @@ public class ObstaclesFactory {
         return walls;
     }
 
-    /**
-     * 
-     * @param x
-     * @param y
-     * @return
-     */
     private Point2D getObstaclePosition(final int x, final int y) {
         return new Point2D(obstacleWidth * (y - 1 + FREE_COLS) + ulCorner.getX(), 
                            obstacleHeight * (x - 1 + FREE_ROWS) + ulCorner.getY());
@@ -107,10 +98,6 @@ public class ObstaclesFactory {
 
     private Obstacle getObstacle(final Point2D position) {
         return new Obstacle(position);
-    }
-    
-    private Obstacle getObstacle(final int x, final int y) {
-        return this.getObstacle(new Point2D(x, y));
     }
 
 }

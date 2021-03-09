@@ -9,6 +9,7 @@ import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.AbstractDynamicObject;
 import model.gameobject.simpleobject.Coin;
+import model.gameobject.dynamicobject.character.Character;
 
 public abstract class AbstractEnemy extends AbstractDynamicObject implements Enemy {
 

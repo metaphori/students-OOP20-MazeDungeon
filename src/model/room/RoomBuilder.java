@@ -13,6 +13,7 @@ import model.gameobject.dynamicobject.enemy.EnemyFactoryImpl;
 
 public class RoomBuilder {
     private static final int MAX_ENEMY_NUMBER = 4;
+    private static final Point2D BOSS_SPAWN_POSITION = new Point2D(256, 54);
     private final DoorFactory doorFactory = new DoorFactoryImpl();
     private ObstaclesFactory obstaclesFactory; 
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
@@ -35,8 +36,8 @@ public class RoomBuilder {
 
     /**
      * 
-     * @param roomManager
-     * @return . 
+     * @param roomManager : the roomManager of the room
+     * @return the builder object
      */
     public RoomBuilder initialize(final RoomManager roomManager) {
         if (isInitialize) {
@@ -51,8 +52,8 @@ public class RoomBuilder {
 
     /**
      * 
-     * @param doors
-     * @return .
+     * @param doors : the direction of each door
+     * @return the builder object
      */
     public RoomBuilder addDoors(final Set<Direction> doors) {
         this.checkInitialize();
@@ -64,8 +65,8 @@ public class RoomBuilder {
     }
 
     /**
-     * 
-     * @return .
+     * add some obstacles to the room. cannot add with boss.
+     * @return the builder object
      */
     public RoomBuilder addRandomObstacle() {
         this.checkInitialize();
@@ -78,7 +79,8 @@ public class RoomBuilder {
     }
 
     /**
-     * @return .
+     * add some enemy to the room. cannot add with boss.
+     * @return the builder object
      */
     public RoomBuilder addRandomEnemy() {
         this.checkInitialize();
@@ -111,7 +113,8 @@ public class RoomBuilder {
     }
 
     /**
-     * @return . 
+     * add th boss in the room. cannot add with obstacles or enemies.
+     * @return the builder object 
      */
     public RoomBuilder addBoss() {
         this.checkInitialize();
@@ -121,13 +124,12 @@ public class RoomBuilder {
         this.canAddBoss = false;
         this.canAddEnemy = false;
         this.canAddObstacle = false;
-        this.room.addDynamicObject(this.enemyFactory.createBoss(new Point2D(256, 54)));
+        this.room.addDynamicObject(this.enemyFactory.createBoss(BOSS_SPAWN_POSITION));
         return this;
     }
 
     /**
-     * 
-     * @return . 
+     * @return the room initialized with the builder 
      */
     public Room build() {
         this.checkInitialize();

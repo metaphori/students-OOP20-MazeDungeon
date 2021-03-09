@@ -3,7 +3,6 @@ package model.room;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Map.Entry;
@@ -15,16 +14,17 @@ import model.common.Direction;
 import model.common.GameObjectType;
 import model.common.IdIterator;
 import model.common.Point2D;
-import model.common.Vector2D;
 import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.dynamicobject.character.CharacterImpl;
-import model.gameobject.dynamicobject.enemy.EnemyFactory;
-import model.gameobject.dynamicobject.enemy.EnemyFactoryImpl;
 import model.gameobject.simpleobject.FinalArtifact;
 
 public class RoomManagerImpl implements RoomManager {
 
     private static final int NUMBER_OF_ROOMS = 3;
+    private static final Point2D CHARACTER_UP_SPAWN_POSITION = new Point2D(620, 550);
+    private static final Point2D CHARACTER_DOWN_SPAWN_POSITION = new Point2D(620, 200);
+    private static final Point2D CHARACTER_RIGHT_SPAWN_POSITION = new Point2D(265, 360);
+    private static final Point2D CHARACTER_LEFT_SPAWN_POSITION = new Point2D(975, 360);
     private final IdIterator idIterator = new IdIterator();
     private final Map<Point2D, Room> rooms = new HashMap<>();
     private Room actualRoom;
@@ -32,10 +32,10 @@ public class RoomManagerImpl implements RoomManager {
     private int exploredRooms = 1;
 
     private final Map<Direction, Point2D> characterSpawnPosition = new HashMap<>() {{
-        put(Direction.UP, new Point2D(620, 550));
-        put(Direction.DOWN, new Point2D(620, 200));
-        put(Direction.LEFT, new Point2D(975, 360));
-        put(Direction.RIGHT, new Point2D(265, 360));
+        put(Direction.UP, CHARACTER_UP_SPAWN_POSITION);
+        put(Direction.DOWN, CHARACTER_DOWN_SPAWN_POSITION);
+        put(Direction.LEFT, CHARACTER_LEFT_SPAWN_POSITION);
+        put(Direction.RIGHT, CHARACTER_RIGHT_SPAWN_POSITION);
     }};
 
     public RoomManagerImpl() {
@@ -43,18 +43,10 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     /**
-     * @param elapsed the time passed
+     * @param elapsed : the time elapsed from the last call
      */
     public void update(final double elapsed) {
         this.actualRoom.update(elapsed);
-    }
-
-    /**
-     * @return a random point in the floor
-     */
-    private Point2D getRandomPointInFloor() {
-        final Random rnd = new Random();
-        return new LinkedList<>(rooms.keySet()).get(rnd.nextInt(rooms.size()));
     }
 
     private Point2D getNearbyPoint(final Point2D point, final Direction direction) {
@@ -128,14 +120,14 @@ public class RoomManagerImpl implements RoomManager {
 
     /**
      * 
-     * @return actual room
+     * @return the actual room
      */
     public Room getCurrentRoom() {
         return actualRoom;
     }
 
     /**
-     * 
+     * @return the id iterator
      */
     @Override
     public IdIterator getIdIterator() {
@@ -148,13 +140,13 @@ public class RoomManagerImpl implements RoomManager {
                 return entry.getKey();
             }
         }
-        return null; //TODO non deve restituire null
+        throw new IllegalStateException("the room parameter is not part of the floor");
     }
 
     /**
-     * @param direction .
-     * @Override
+     * @param direction : the direction of the new room in relation at the actual room
      */
+    @Override
     public void changeRoom(final Direction direction) {
         final Room newRoom = rooms.get(this.getNearbyPoint(this.getRoomPosition(actualRoom), direction));
         if (newRoom == null) {
@@ -179,8 +171,7 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     /**
-     * 
-     * @return the character.
+     * @return the character
      */
     @Override
     public Character getCharacter() {
@@ -188,8 +179,7 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     /**
-     * 
-     * @return
+     * @return true if all the room has been visited
      */
     private boolean allVisited() {
         for (final Room room : rooms.values()) {
@@ -199,12 +189,18 @@ public class RoomManagerImpl implements RoomManager {
         }
         return true;
     }
-    
+
+    /**
+     * @return the number of visited rooms
+     */
     @Override
     public int getVisitedRooms() {
         return exploredRooms;
     }
-    
+
+    /**
+     * @return the number of total rooms
+     */
     @Override
     public int getTotalRooms() {
         return NUMBER_OF_ROOMS;

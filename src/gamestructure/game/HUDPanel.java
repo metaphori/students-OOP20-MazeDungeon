@@ -32,15 +32,17 @@ public class HUDPanel extends JLayeredPane {
     private final ResizableRectangle itemsPosition = new ResizableRectangle(MARGIN, (int) coinPosition.getY() + (int) coinPosition.getHeight() + MARGIN, 
                                                                             64, 64);
     private final ResizableRectangle bossLifeBarPosition = new ResizableRectangle(360, MARGIN, 500, 30);
+    private final ResizableRectangle bossIconPosition = new ResizableRectangle(290, 0, 74, 49);
     private static final int ROOM_VISITED_FONT_SIZE = 20;
     private static final int COIN_COUNTER_FONT_SIZE = 25;
     private static final Color CHAR_LIFEBAR_FOREGROUND = new Color(150, 0, 0);
     private static final Color BOSS_LIFEBAR_FOREGROUND = new Color(167, 142, 13);
-    private final JLabel lblBossIcon = new JLabel(new ImageIcon("resources/images/Boss/BossIcon.png"));
+    //private final JLabel lblBossIcon = new JLabel(new ImageIcon("resources/images/Boss/BossIcon.png"));
     private final JLabel lblCoinCounter = new JLabel();
     private final JLabel lblRoomVisited;
     private final Image coinImage;
     private final Image finalArtefactImage;
+    private final Image bossIconImage;
     private JProgressBar characterLifeBar;
     private Optional<JProgressBar> bossLifeBar = Optional.empty();
     private boolean finalArtefactVisible;
@@ -55,6 +57,7 @@ public class HUDPanel extends JLayeredPane {
         characterLifeBarPosition.mul(screenRatio);
         itemsPosition.mul(screenRatio);
         bossLifeBarPosition.mul(screenRatio);
+        bossIconPosition.mul(screenRatio);
 
         this.coinImage = new ImageIcon("resources/images/HUD/Coins/coin.png").getImage().getScaledInstance((int) coinPosition.getWidth(),
                                                                                                            (int) coinPosition.getHeight(), 
@@ -62,19 +65,18 @@ public class HUDPanel extends JLayeredPane {
         this.finalArtefactImage = new ImageIcon("resources/images/Objects/FinalItem/spawned.png").getImage().getScaledInstance((int) finalArtefactPosition.getWidth(), 
                                                                                                                                (int) finalArtefactPosition.getHeight(), 
                                                                                                                                Image.SCALE_SMOOTH);
-
+        this.bossIconImage = new ImageIcon("resources/images/Boss/BossIcon.png").getImage().getScaledInstance((int) bossIconPosition.getWidth(), 
+                                                                                                               (int) bossIconPosition.getHeight(), 
+                                                                                                               Image.SCALE_SMOOTH);
         this.lblRoomVisited = new JLabel();
         this.lblRoomVisited.setBounds(roomVisitedPosition);
         this.lblRoomVisited.setFont(new Font("Helvetica", Font.ITALIC, (int) (ROOM_VISITED_FONT_SIZE * screenRatio)));
         this.lblRoomVisited.setForeground(Color.white);
 
-        this.lblBossIcon.setBounds(320, 0, 74, 49);
-        this.lblBossIcon.setVisible(false);
         lblCoinCounter.setText("0");
         lblCoinCounter.setFont(new Font("Helvetica", Font.ITALIC, (int) (COIN_COUNTER_FONT_SIZE * screenRatio)));
         lblCoinCounter.setForeground(Color.white);
         lblCoinCounter.setBounds(coinCounterPosition);
-        this.add(this.lblBossIcon);
         this.add(this.lblRoomVisited);
         this.add(this.lblCoinCounter);
         this.setOpaque(false);
@@ -102,7 +104,6 @@ public class HUDPanel extends JLayeredPane {
         if (life.isEmpty() && bossLifeBar.isPresent()) {
             this.remove(bossLifeBar.get());
             bossLifeBar = Optional.empty();
-            this.lblBossIcon.setVisible(false);
             return;
         }
         if (life.isPresent() && bossLifeBar.isEmpty()) {
@@ -110,7 +111,6 @@ public class HUDPanel extends JLayeredPane {
             bossLifeBar.get().setBounds(bossLifeBarPosition);
             bossLifeBar.get().setForeground(BOSS_LIFEBAR_FOREGROUND);
             this.add(bossLifeBar.get());
-            this.lblBossIcon.setVisible(true);
         }
         this.bossLifeBar.get().setValue(life.get().intValue());
     }
@@ -177,6 +177,9 @@ public class HUDPanel extends JLayeredPane {
         g.drawImage(this.coinImage, (int) coinPosition.getX(), (int) coinPosition.getY(), null);
         if (finalArtefactVisible) {
             g.drawImage(this.finalArtefactImage, (int) finalArtefactPosition.getX(), (int) finalArtefactPosition.getY(), null);
+        }
+        if (bossLifeBar.isPresent()) {
+            g.drawImage(this.bossIconImage, (int) bossIconPosition.getX(), (int) bossIconPosition.getY(), null);
         }
         Toolkit.getDefaultToolkit().sync();
     }

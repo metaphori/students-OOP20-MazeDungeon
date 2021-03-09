@@ -155,28 +155,41 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @return the upper left point of the room
+     * @return the upper left corner of the room
      */
     @Override
     public Point2D getUL() {
         return UL_CORNER;
     }
 
+    /**
+     * @return the bottom right corner of the room
+     */
     @Override
     public Point2D getBR() {
         return BR_CORNER;
     }
 
+    /**
+     * @return true if the room has been visited
+     */
     @Override
     public boolean isVisited() {
         return isVisited;
     }
 
+    /**
+     * set the visited attribute true.
+     */
     @Override
     public void visit() {
         this.isVisited = true;
     }
 
+    /**
+     * @return an empty optional if the room doesn't contain the boss.
+     *         the boss ID otherwise
+     */
     @Override
     public Optional<Integer> getBossID() {
         for (final GameObject gameObject : getCurrentGameObjects()) {
