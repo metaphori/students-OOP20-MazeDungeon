@@ -33,7 +33,7 @@ public class TestEnemyFactory {
     public void testSprout() {
         final Enemy sprout = ef.createSprout(new Point2D(100, 100));
         assertEquals(sprout.getPosition(), new Point2D(100, 100));
-        assertEquals(sprout.getLife(), SPROUT_LIFE);
+        assertEquals((int) sprout.getLife(), (int) SPROUT_LIFE);
         assertEquals(sprout.getSpeed(), SPROUT_SPEED);
         final Room room = new RoomImpl(new RoomManagerImpl());
         sprout.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
@@ -41,7 +41,7 @@ public class TestEnemyFactory {
         sprout.shoot();
         assertFalse(room.getCurrentGameObjects().isEmpty());
         sprout.takesDamage(10);
-        assertEquals(SPROUT_LIFE - 10, sprout.getLife());
+        assertEquals((int) SPROUT_LIFE - 10, (int) sprout.getLife());
         sprout.takesDamage(SPROUT_LIFE);
         assertFalse(room.getCurrentGameObjects().contains(sprout));
     }
@@ -50,7 +50,7 @@ public class TestEnemyFactory {
     public void testSoul() {
         final Enemy soul = ef.createSoul(new Point2D(200, 200));
         assertEquals(soul.getPosition(), new Point2D(200, 200));
-        assertEquals(soul.getLife(), SOUL_LIFE);
+        assertEquals((int) soul.getLife(), (int) SOUL_LIFE);
         assertEquals(soul.getSpeed(), SOUL_SPEED);
         final Room room = new RoomImpl(new RoomManagerImpl());
         soul.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
@@ -58,7 +58,7 @@ public class TestEnemyFactory {
         soul.shoot();
         assertFalse(room.getCurrentGameObjects().isEmpty());
         soul.takesDamage(10);
-        assertEquals(SOUL_LIFE - 10, soul.getLife());
+        assertEquals((int) SOUL_LIFE - 10, (int) soul.getLife());
         soul.takesDamage(SOUL_LIFE);
         assertFalse(room.getCurrentGameObjects().contains(soul));
     }
@@ -67,7 +67,7 @@ public class TestEnemyFactory {
     public void testSkeleton() {
         final Enemy skeleton = ef.createSkeletonSeeker(new Point2D(300, 300));
         assertEquals(skeleton.getPosition(), new Point2D(300, 300));
-        assertEquals(skeleton.getLife(), SKELETON_LIFE);
+        assertEquals((int) skeleton.getLife(), (int) SKELETON_LIFE);
         assertEquals(skeleton.getSpeed(), SKELETON_SPEED);
         final Room room = new RoomImpl(new RoomManagerImpl());
         skeleton.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
@@ -75,7 +75,7 @@ public class TestEnemyFactory {
         skeleton.shoot();
         assertFalse(room.getCurrentGameObjects().isEmpty());
         skeleton.takesDamage(10);
-        assertEquals(SKELETON_LIFE - 10, skeleton.getLife());
+        assertEquals((int) SKELETON_LIFE - 10, (int) skeleton.getLife());
         skeleton.takesDamage(SKELETON_LIFE);
         assertFalse(room.getCurrentGameObjects().contains(skeleton));
     }

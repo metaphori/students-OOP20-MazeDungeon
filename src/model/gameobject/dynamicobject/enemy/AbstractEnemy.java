@@ -9,21 +9,23 @@ import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.AbstractDynamicObject;
 import model.gameobject.simpleobject.Coin;
-import model.gameobject.dynamicobject.character.Character;
 
 public abstract class AbstractEnemy extends AbstractDynamicObject implements Enemy {
 
     private long lastShootTime = System.currentTimeMillis();
     private double life;
+    private final long shootDelay;
 
     /**
      * @param life : the default life of the enemy
      * @param speed : the default speed of the enemy
      * @param position : the starting position of the enemy
      * @param gameObjectType : the type of the gameObject, in particular the type of the enemy
+     * @param shootDelay : the specific delay of the enemy shoot.
      */
-    public AbstractEnemy(final double life, final int speed, final Point2D position, final GameObjectType gameObjectType) {
+    public AbstractEnemy(final double life, final int speed, final Point2D position, final GameObjectType gameObjectType, final long shootDelay) {
         super(speed, position, gameObjectType);
+        this.shootDelay = shootDelay;
         this.life = life;
         this.changeRoutine();
     }
@@ -34,6 +36,16 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
     @Override
     public double getLife() {
         return this.life;
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void tryToShoot() {
+        if (canShoot(this.shootDelay)) {
+            this.shoot();
+        }
     }
 
     /**

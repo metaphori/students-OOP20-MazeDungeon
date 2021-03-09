@@ -33,22 +33,20 @@ public class EnemyFactoryImpl implements EnemyFactory {
      */
     @Override
     public Enemy createSprout(final Point2D position) {
-        return new AbstractEnemy(SPROUT_LIFE, SPROUT_SPEED, position, GameObjectType.ENEMY_SPROUT) {
+        return new AbstractEnemy(SPROUT_LIFE, SPROUT_SPEED, position, GameObjectType.ENEMY_SPROUT, SPROUT_SHOOT_DELAY) {
 
             private static final int ROUTINE_CHANGE_TIME = 1000;
             private long lastHitTime;
 
             @Override
             public void updateState(final double elapsed) {
+                this.tryToShoot();
                 final long currentTime = System.currentTimeMillis();
                 if (currentTime - this.lastHitTime > ROUTINE_CHANGE_TIME) {
                     this.lastHitTime = currentTime;
                     this.followCharacter();
                 }
                 this.move(elapsed);
-                if (canShoot(SPROUT_SHOOT_DELAY)) {
-                    this.shoot();
-                }
             }
 
             @Override
@@ -78,13 +76,11 @@ public class EnemyFactoryImpl implements EnemyFactory {
      */
     @Override
     public Enemy createSoul(final Point2D position) {
-        return new AbstractEnemy(SOUL_LIFE, SOUL_SPEED, position, GameObjectType.ENEMY_SOUL) {
+        return new AbstractEnemy(SOUL_LIFE, SOUL_SPEED, position, GameObjectType.ENEMY_SOUL, SOUL_SHOOT_DELAY) {
             @Override
             public void updateState(final double elapsed) {
+                this.tryToShoot();
                 this.move(elapsed);
-                if (this.canShoot(SOUL_SHOOT_DELAY)) {
-                    this.shoot();
-                }
             }
 
             @Override
@@ -108,7 +104,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      */
     @Override
     public Enemy createSkeletonSeeker(final Point2D position) {
-        return new AbstractEnemy(SKELETON_LIFE, SKELETON_SPEED, position, GameObjectType.ENEMY_SKELETON) {
+        return new AbstractEnemy(SKELETON_LIFE, SKELETON_SPEED, position, GameObjectType.ENEMY_SKELETON, SKELETON_SHOOT_DELAY) {
 
             private long lastChangeTime = System.currentTimeMillis();
             private static final int ROUTINE_CHANGE_TIME = 5000;
@@ -126,8 +122,8 @@ public class EnemyFactoryImpl implements EnemyFactory {
                         this.changeRoutine();
                     }
                 }
-                if (this.canShoot(SKELETON_SHOOT_DELAY) && !this.inMovement) {
-                    this.shoot();
+                if (!this.inMovement) {
+                    this.tryToShoot();
                 }
                 this.move(elapsed);
             }

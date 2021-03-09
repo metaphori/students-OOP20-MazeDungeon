@@ -18,7 +18,7 @@ public class Boss extends AbstractEnemy {
     private static final int MODIFY_ALIGN_MONEY = 10;
     private final double maxLife;
     public Boss(final double life, final int speed, final Point2D position, final GameObjectType gameObjectType) {
-        super(life, speed, position, gameObjectType);
+        super(life, speed, position, gameObjectType, BOSS_SHOOT_DELAY);
         this.maxLife = life;
     }
 
@@ -83,14 +83,12 @@ public class Boss extends AbstractEnemy {
     }
 
     /**
+     * @param elapsed
      * @Override
      */
     public void updateState(final double elapsed) {
         this.move(elapsed);
-        if (this.canShoot(BOSS_SHOOT_DELAY)) {
-            this.shoot();
-        }
-
+        this.tryToShoot();
     }
     /**
      * @Override
