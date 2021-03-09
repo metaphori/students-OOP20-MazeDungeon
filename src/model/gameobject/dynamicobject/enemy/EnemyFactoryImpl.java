@@ -1,5 +1,6 @@
 package model.gameobject.dynamicobject.enemy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.common.GameObjectType;
@@ -134,15 +135,15 @@ public class EnemyFactoryImpl implements EnemyFactory {
             @Override
             public void shoot() {
                 final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
-                final Bullet bulletNorth = bulletFactory.createSkeletonBullet(newPosition, new Vector2D(0, -1));
-                final Bullet bulletSouth = bulletFactory.createSkeletonBullet(newPosition, new Vector2D(0, 1));
-                final Bullet bulletEast = bulletFactory.createSkeletonBullet(newPosition, new Vector2D(1, 0));
-                final Bullet bulletWest = bulletFactory.createSkeletonBullet(newPosition, new Vector2D(-1, 0));
-                bulletNorth.setSafeZone(this.getBoundingBox());
-                bulletSouth.setSafeZone(this.getBoundingBox());
-                bulletEast.setSafeZone(this.getBoundingBox());
-                bulletWest.setSafeZone(this.getBoundingBox());
-                this.getRoom().addAllDynamicObject(List.of(bulletNorth, bulletEast, bulletWest, bulletSouth));
+                final List<Bullet> bullets = new ArrayList<>();
+                bullets.add(bulletFactory.createSkeletonBullet(newPosition, new Vector2D(0, -1)));
+                bullets.add(bulletFactory.createSkeletonBullet(newPosition, new Vector2D(0, 1)));
+                bullets.add(bulletFactory.createSkeletonBullet(newPosition, new Vector2D(1, 0)));
+                bullets.add(bulletFactory.createSkeletonBullet(newPosition, new Vector2D(-1, 0)));
+                bullets.forEach(b -> {
+                    b.setSafeZone(this.getBoundingBox());
+                    this.getRoom().addDynamicObject(b);
+                });
             }
 
             @Override
