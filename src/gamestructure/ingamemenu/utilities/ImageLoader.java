@@ -15,14 +15,14 @@ public class ImageLoader {
     private final String sep = File.separator;
     private final String imagesPathInGameMenu = "resources" + sep + "images" + sep + "InGameMenu" + sep;
     private final String imagesPathItem = "resources" + sep + "images" + sep + "Item" + sep;
-
+    private static final String NAME_BTN_FOLDER = "button";
     public ImageLoader() {
         images.put(Images.BACKGROUNDMENU, new ImageIcon(imagesPathInGameMenu + "ingamemenu.png").getImage());
         images.put(Images.BACKGROUNDSHOP, new ImageIcon(imagesPathInGameMenu + sep + "shop.png").getImage());
-        images.put(Images.BTNRESUME, new ImageIcon(imagesPathInGameMenu + sep + "resume.png").getImage().getScaledInstance(WIDTH_BTN, HEIGHT_BTN, Image.SCALE_SMOOTH));
-        images.put(Images.BTNEXIT, new ImageIcon(imagesPathInGameMenu + sep + "exit.png").getImage().getScaledInstance(WIDTH_BTN, HEIGHT_BTN, Image.SCALE_SMOOTH));
-        images.put(Images.BTNSHOP, new ImageIcon(imagesPathInGameMenu + sep + "shopBTN.png").getImage().getScaledInstance(WIDTH_BTN, HEIGHT_BTN, Image.SCALE_SMOOTH));
-        images.put(Images.BTNRETURNMENU, new ImageIcon(imagesPathInGameMenu + sep + "backToMenu.png").getImage().getScaledInstance(WIDTH_BTN, HEIGHT_BTN, Image.SCALE_SMOOTH));
+        images.put(Images.BTNRESUME, new ImageIcon(imagesPathInGameMenu + sep + NAME_BTN_FOLDER + sep + "resume.png").getImage().getScaledInstance(WIDTH_BTN, HEIGHT_BTN, Image.SCALE_SMOOTH));
+        images.put(Images.BTNEXIT, new ImageIcon(imagesPathInGameMenu + sep + NAME_BTN_FOLDER + sep + "exit.png").getImage().getScaledInstance(WIDTH_BTN, HEIGHT_BTN, Image.SCALE_SMOOTH));
+        images.put(Images.BTNSHOP, new ImageIcon(imagesPathInGameMenu + sep + NAME_BTN_FOLDER + sep + "shopBTN.png").getImage().getScaledInstance(WIDTH_BTN, HEIGHT_BTN, Image.SCALE_SMOOTH));
+        images.put(Images.BTNRETURNMENU, new ImageIcon(imagesPathInGameMenu + sep + NAME_BTN_FOLDER + sep + "backToMenu.png").getImage().getScaledInstance(WIDTH_BTN, HEIGHT_BTN, Image.SCALE_SMOOTH));
         images.put(Images.BTNARTHEMIDEBOW, new ImageIcon(imagesPathItem + sep + "arthemideBow.png").getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, Image.SCALE_SMOOTH));
         images.put(Images.BTNHEALTH, new ImageIcon(imagesPathItem + sep + "health.png").getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, Image.SCALE_SMOOTH));
         images.put(Images.BTNHERMESBOOTS, new ImageIcon(imagesPathItem + sep + "hermesBoots.png").getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, Image.SCALE_SMOOTH));

@@ -67,8 +67,8 @@ public final class ItemBuilder implements Item {
         }
 
         /**
-         * @param health
-         * @return this
+         * @param health : value that increase the health
+         * @return this, for create Item
          */
         public Builder addHelath(final double health) {
             this.health = health;
@@ -76,8 +76,8 @@ public final class ItemBuilder implements Item {
         }
         /**
          * 
-         * @param damage
-         * @return .
+         * @param damage : value that increase the damage
+         * @return this, for create Item
          */
         public Builder addDamage(final int damage) {
             this.damage = damage;
@@ -85,23 +85,23 @@ public final class ItemBuilder implements Item {
         }
         /**
          * 
-         * @param speed
-         * @return .
+         * @param speed : value that increase the Speed
+         * @return this, for create Item
          */
         public Builder addSpeed(final int speed) {
             this.speed = speed;
             return this;
         }
         /**
-         * 
-         * @param speedAttack
-         * @return .
+         * @param bulletSpeed : value that increase the Bullet Speed
+         * @return this, for create Item
          */
         public Builder addBulletSpeed(final int bulletSpeed) {
             this.bulletSpeed = bulletSpeed;
             return this;
         }
         /**
+         * Complete Item.
          * @return Item
          */
         public Item build() {
