@@ -21,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.Timer;
 
+import gamestructure.PathGetter;
+import gamestructure.WindowUtilities;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
@@ -31,21 +33,16 @@ import model.shop.Items;
 public class GameViewImpl implements GameView, KeyListener {
 
     private GameController controller;
-    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final JFrame frame;
-    private static final int NATIVE_WIDTH = 1920;
-    private static final int NATIVE_HEIGHT = 1080;
-    private static final double WIDTH_RATIO = 0.666_667; 
-    private static final double HEIGHT_RATIO = 0.740_740; 
-    //private static final double ASPECT_RATIO = 1.6;
-    private final double screenRatio = screen.getWidth() / NATIVE_WIDTH;
+    private final WindowUtilities windowUtilities = new WindowUtilities();
+    private final PathGetter pathGetter = new PathGetter();
     private static final Color BACKGROUND = new Color(11, 19, 30);
     private static final int PERIOD = 15;
     private final GamePanel gamePanel;
     private final Map<Integer, Sprite> sprites = new ConcurrentSkipListMap<>();
     private final ResourceLoader resourceLoader = new ResourceLoader();
     private final Timer timer;
-    private final HUDPanel hudPanel = new HUDPanel(screenRatio);
+    private final HUDPanel hudPanel = new HUDPanel(windowUtilities.getScreenRatio());
     private boolean gameOver;
     private boolean won;
     private final JLabel lblStartInstruction = new JLabel(new ImageIcon(adaptImage(new ImageIcon("resources/images/HUD/StartIstruction.png"))));
@@ -80,11 +77,11 @@ public class GameViewImpl implements GameView, KeyListener {
     @Override
     public void show() {
         this.frame.setVisible(true);
-        this.frame.setSize(new Dimension((int) (NATIVE_WIDTH * WIDTH_RATIO * screenRatio) + this.frame.getInsets().left,
-                (int) (NATIVE_HEIGHT * HEIGHT_RATIO * screenRatio) + this.frame.getInsets().top));
+        this.frame.setSize(new Dimension((int) (WindowUtilities.NATIVE_WIDTH * WindowUtilities.WIDTH_RATIO * windowUtilities.getScreenRatio()) + this.frame.getInsets().left,
+                (int) (WindowUtilities.NATIVE_HEIGHT * WindowUtilities.HEIGHT_RATIO * windowUtilities.getScreenRatio()) + this.frame.getInsets().top));
         //this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
-        this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2,
-                               screen.height / 2 - this.frame.getSize().height / 2);
+        this.frame.setLocation(windowUtilities.getScreen().width / 2 - this.frame.getSize().width / 2,
+                               windowUtilities.getScreen().height / 2 - this.frame.getSize().height / 2);
         this.frame.add(this.lblStartInstruction);
         try {
             Thread.sleep(ISTRUCTION_TIME);
@@ -156,10 +153,8 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     private Image adaptImage(final ImageIcon img) {
-        //return width * (int) screen.getWidth() / NATIVE_WIDTH;
-        //return height * (int) screen.getHeight() / NATIVE_HEIGHT;
-        final int width = (int) (img.getIconWidth() * screenRatio);
-        final int heigth = (int) (img.getIconHeight() * screenRatio);
+        final int width = (int) (img.getIconWidth() * windowUtilities.getScreenRatio());
+        final int heigth = (int) (img.getIconHeight() * windowUtilities.getScreenRatio());
         return img.getImage().getScaledInstance(width, heigth, Image.SCALE_SMOOTH);
     }
 
@@ -183,7 +178,7 @@ public class GameViewImpl implements GameView, KeyListener {
      */
     @Override
     public void setSpritePosition(final int id, final Point2D position) {
-        this.sprites.get(id).setPosition(position.mul(screenRatio));
+        this.sprites.get(id).setPosition(position.mul(windowUtilities.getScreenRatio()));
     }
 
     /**
