@@ -62,7 +62,7 @@ public class HUDPanel extends JLayeredPane {
         this.coinImage = new ImageIcon("resources/images/HUD/Coins/coin.png").getImage().getScaledInstance((int) coinPosition.getWidth(),
                                                                                                            (int) coinPosition.getHeight(), 
                                                                                                            Image.SCALE_SMOOTH);
-        this.finalArtefactImage = new ImageIcon("resources/images/Objects/FinalItem/spawned.png").getImage().getScaledInstance((int) finalArtefactPosition.getWidth(), 
+        this.finalArtefactImage = new ImageIcon("resources/images/Objects/FinalArtifact/spawned.png").getImage().getScaledInstance((int) finalArtefactPosition.getWidth(), 
                                                                                                                                (int) finalArtefactPosition.getHeight(), 
                                                                                                                                Image.SCALE_SMOOTH);
         this.bossIconImage = new ImageIcon("resources/images/Boss/BossIcon.png").getImage().getScaledInstance((int) bossIconPosition.getWidth(), 

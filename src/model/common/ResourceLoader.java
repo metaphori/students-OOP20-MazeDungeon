@@ -1,6 +1,5 @@
 package model.common;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,36 +8,34 @@ import gamestructure.PathGetter;
 public class ResourceLoader {
     private final Map<GameObjectType, String> resources = new HashMap<>();
 
-    private final String sep = File.separator;
-    private final String imagesPath = "resources" + sep + "images" + sep;
     private final PathGetter pathGetter = new PathGetter();
 
     public ResourceLoader() {
-        resources.put(GameObjectType.COIN, imagesPath + "Objects" + sep + "Coin" + sep + "coin4.png");
+        resources.put(GameObjectType.COIN, pathGetter.getPortablePath("resources/images/Objects/Coin/coin4.png"));
         resources.put(GameObjectType.CHARACTER, pathGetter.getPortablePath("resources/images/Character/CharacterStopped.png"));
-        resources.put(GameObjectType.ENEMY_SOUL, imagesPath + "Enemies" + sep + "Soul" + sep + "MoveLeft" + sep + "Soul1.png");
-        resources.put(GameObjectType.ENEMY_SKELETON, imagesPath + "Enemies" + sep + "Skeleton_Seeker" + sep + "Spawn" + sep + "Skeleton9.png");
-        resources.put(GameObjectType.ENEMY_SPROUT, imagesPath + "Enemies" + sep + "Sprout" + sep + "Death" + sep + "Sprout1.png");
-        resources.put(GameObjectType.ENEMY_BOSS, imagesPath + "Boss" + sep + "Boss.png");
+        resources.put(GameObjectType.ENEMY_SOUL, pathGetter.getPortablePath("resources/images/Enemies/Soul/AttackLeft/Soul1.png"));
+        resources.put(GameObjectType.ENEMY_SKELETON, pathGetter.getPortablePath("resources/images/Enemies/Skeleton_Seeker/AttackLeft/Skeleton1.png"));
+        resources.put(GameObjectType.ENEMY_SPROUT, pathGetter.getPortablePath("resources/images/Enemies/Sprout/AttackLeft/Sprout1.png"));
+        resources.put(GameObjectType.ENEMY_BOSS, pathGetter.getPortablePath("resources/images/Boss/Boss.png"));
 
 
         /*LOAD BULLET IMAGE*/
-        resources.put(GameObjectType.SOUL_BULLET, imagesPath + "Bullets" + sep + "TestBullet.png");
-        resources.put(GameObjectType.CHARACTER_BULLET, imagesPath + "Bullets" + sep + "characterBullet.png");
-        resources.put(GameObjectType.SKELETON_BULLET, imagesPath + "Bullets" + sep + "TestSkull1.png");
-        resources.put(GameObjectType.BOSS_BULLET, imagesPath + "Bullets" + sep + "bossBullet.png");
-        resources.put(GameObjectType.SPROUT_BULLET, imagesPath + "Bullets" + sep + "TestSprout1.png");
+        resources.put(GameObjectType.SOUL_BULLET, pathGetter.getPortablePath("resources/images/Bullets/soulBullet.png"));
+        resources.put(GameObjectType.CHARACTER_BULLET, pathGetter.getPortablePath("resources/images/Bullets/characterBullet.png"));
+        resources.put(GameObjectType.SKELETON_BULLET, pathGetter.getPortablePath("resources/images/Bullets/skeletonBullet.png"));
+        resources.put(GameObjectType.BOSS_BULLET, pathGetter.getPortablePath("resources/images/Bullets/bossBullet.png"));
+        resources.put(GameObjectType.SPROUT_BULLET, pathGetter.getPortablePath("resources/images/Bullets/sproutBullet.png"));
 
         /*DOOR*/
-        resources.put(GameObjectType.DOOR_UP, imagesPath + "Door" + sep + "topDoor.png");
-        resources.put(GameObjectType.DOOR_DOWN, imagesPath + "Door" + sep + "bottomDoor.png");
-        resources.put(GameObjectType.DOOR_LEFT, imagesPath + "Door" + sep + "leftDoor.png");
-        resources.put(GameObjectType.DOOR_RIGHT, imagesPath + "Door" + sep + "rightDoor.png");
+        resources.put(GameObjectType.DOOR_UP, pathGetter.getPortablePath("resources/images/Room/Door/topDoor.png"));
+        resources.put(GameObjectType.DOOR_DOWN, pathGetter.getPortablePath("resources/images/Room/Door/bottomDoor.png"));
+        resources.put(GameObjectType.DOOR_LEFT, pathGetter.getPortablePath("resources/images/Room/Door/leftDoor.png"));
+        resources.put(GameObjectType.DOOR_RIGHT, pathGetter.getPortablePath("resources/images/Room/Door/rightDoor.png"));
 
         /*OBSTACLE*/
-        resources.put(GameObjectType.ROCK, imagesPath + "Obstacle" + sep + "Rock1.png");
+        resources.put(GameObjectType.ROCK, pathGetter.getPortablePath("resources/images/Room/Obstacle/Rock.png"));
 
-        resources.put(GameObjectType.FINAL_ARTIFACT, imagesPath + "Objects" + sep + "FinalItem" + sep + "WinnerSkull.png");
+        resources.put(GameObjectType.FINAL_ARTIFACT, pathGetter.getPortablePath("resources/images/Objects/FinalArtifact/WinnerSkull.png"));
     }
 
     /**

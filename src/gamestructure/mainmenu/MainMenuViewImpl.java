@@ -23,7 +23,7 @@ public class MainMenuViewImpl implements MainMenuView {
 
     private final String sep = File.separator;
     private final String imagesPath = "resources" + sep + "images" + sep + "MainMenu" + sep;
-    private final JLabel lblBackground = new JLabel(new ImageIcon(this.imagesPath + "MainMenu3.png"));
+    private final JLabel lblBackground = new JLabel(new ImageIcon(this.imagesPath + "MainMenuBackground.png"));
     private final JLabel lblTitle = new JLabel(new ImageIcon(this.imagesPath + "Title.png"));
     private final JButton btnNewGame = new JButton("", new ImageIcon(this.imagesPath + "NewGame.png")); 
     private final JButton btnExit = new JButton("", new ImageIcon(this.imagesPath + "Exit.png")); 
