@@ -2,11 +2,8 @@ package model.gameobject.dynamicobject.bullet;
 
 import model.common.Point2D;
 import model.common.Vector2D;
-import model.room.Room;
 
 public interface BulletFactory {
-
-   // Bullet createBullet(GameObjectType bulletType, Point2D initialPosition, Vector2D direction);
 
     Bullet createCharacterBullet(Point2D initialPosition, Vector2D direction, int bonusDamage);
 

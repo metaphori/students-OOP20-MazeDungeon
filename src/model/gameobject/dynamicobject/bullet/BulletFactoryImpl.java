@@ -2,10 +2,8 @@ package model.gameobject.dynamicobject.bullet;
 
 
 import model.common.GameObjectType;
-import model.common.IdIterator;
 import model.common.Point2D;
 import model.common.Vector2D;
-import model.room.Room;
 
 public class BulletFactoryImpl implements BulletFactory {
 
@@ -27,25 +25,36 @@ public class BulletFactoryImpl implements BulletFactory {
     private static final int BOSS_BULLET_DAMAGE = 30;
 
     /**
-     * fields.
-     **/
-
+     * @return characterBullet.
+     */
     @Override
     public Bullet createCharacterBullet(final Point2D initialPosition, final  Vector2D direction, final int bonusDamage) {
         return new BulletImpl(CHARACTER_BULLET_SPEED, initialPosition, direction, GameObjectType.CHARACTER_BULLET, bonusDamage + CHARACTER_BULLET_DAMAGE);
     }
+    /**
+     * @return skeletonBullet.
+     */
     @Override
     public Bullet createSkeletonBullet(final Point2D initialPosition, final Vector2D direction) {
         return new BulletImpl(SKELETON_BULLET_SPEED, initialPosition, direction, GameObjectType.SKELETON_BULLET, SKELETON_BULLET_DAMAGE);
     }
+    /**
+     * @return soulBullet.
+     */
     @Override
     public Bullet createSoulBullet(final Point2D initialPosition, final Vector2D direction) {
         return new BulletImpl(SOUL_BULLET_SPEED, initialPosition, direction, GameObjectType.SOUL_BULLET, SOUL_BULLET_DAMAGE);
     }
+    /**
+     * @return sproutBullet.
+     */
     @Override
     public Bullet createSproutBullet(final Point2D initialPosition, final Vector2D direction) {
         return new BulletImpl(SPROUT_BULLET_SPEED, initialPosition, direction, GameObjectType.SPROUT_BULLET, SPROUT_BULLET_DAMAGE);
     }
+    /**
+     * @return bossBullet.
+     */
     @Override
     public Bullet createBossBullet(final Point2D initialPosition, final Vector2D direction) {
         return new BulletImpl(BOSS_BULLET_SPEED, initialPosition, direction, GameObjectType.BOSS_BULLET, BOSS_BULLET_DAMAGE);

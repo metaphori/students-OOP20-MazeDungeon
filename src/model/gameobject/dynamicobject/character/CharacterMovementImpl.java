@@ -6,10 +6,13 @@ public class CharacterMovementImpl implements CharacterMovement {
 
     private final Character character;
 
-    public CharacterMovementImpl(Character character) {
+    public CharacterMovementImpl(final Character character) {
       this.character = character;
     }
 
+    /**
+     * move up the character.
+     */
     @Override
     public void moveUp() {
         this.character.setDirection(new Vector2D(this.character.getDirection().getX(), -1));
@@ -54,6 +57,4 @@ public class CharacterMovementImpl implements CharacterMovement {
     public void stopHorizontal() {
         this.character.setDirection(new Vector2D(0, this.character.getDirection().getY()));
     }
-
-
 }

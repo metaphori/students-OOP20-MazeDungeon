@@ -7,5 +7,4 @@ public interface CharacterMovement {
     void moveRight();
     void stopVertical();
     void stopHorizontal();
-    
 }
