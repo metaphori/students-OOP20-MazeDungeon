@@ -32,9 +32,9 @@ public class ShopImpl implements Shop {
     }
 
     private void addSkills(final Item item) {
-        this.character.setBonusDamage(this.character.getBonusDamage() + item.getDamage());
-        this.character.setSpeed(this.character.getSpeed() + item.getSpeed());
-        this.character.setBulletSpeed(this.character.getBulletSpeed() + item.getBulletSpeed());
+        this.character.increaseDamage(item.getDamage());
+        this.character.increaseSpeed(item.getSpeed());
+        this.character.increaseBulletSpeed(item.getBulletSpeed());
         if (this.character.getLife() + item.getHealth() > this.character.getMaxLife()) {
             this.character.setLife(this.character.getMaxLife());
         } else {

@@ -1,43 +1,34 @@
 package model.gameobject.dynamicobject.character;
 
-import java.util.Set;
-
 import model.common.Vector2D;
 import model.gameobject.dynamicobject.DynamicObject;
-import model.shop.Item;
-import model.shop.ItemBuilder;
-import model.shop.Items;
-
 
 public interface Character extends DynamicObject {
 
-    void takesDamage(int damage);
+    double getMaxLife();
 
     double getLife();
 
-    void setLife(double life);
-
-
-    void setShoot(boolean shoot, Vector2D shootDirection);
-
-    double getMaxLife();
-
     int getMoney();
+
+    void setLife(double life);
 
     void setMoney(int money);
 
-    void setBonusDamage(int damage);
+    void increaseDamage(int damage);
 
-    void setBulletSpeed(int bulletSpeed);
+    void increaseSpeed(int speed);
 
-    int getBonusDamage();
+    void increaseBulletSpeed(int bulletSpeed);
 
-    int getBulletSpeed();
+    void takesDamage(int damage);
 
-    boolean isDead();
+    void setShoot(boolean shoot, Vector2D shootDirection);
 
     void pickedUpFinalArtefact();
 
     boolean isWon();
+
+    boolean isDead();
 
 }
