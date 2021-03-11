@@ -12,7 +12,7 @@ public class ResourceLoader {
 
     public ResourceLoader() {
         resources.put(GameObjectType.COIN, pathGetter.getPortablePath("resources/images/Objects/Coin/coin4.png"));
-        resources.put(GameObjectType.CHARACTER, pathGetter.getPortablePath("resources/images/Character/CharacterStopped.png"));
+        resources.put(GameObjectType.CHARACTER, pathGetter.getPortablePath("resources/images/Character/Stopped/CharacterStopped.png"));
         resources.put(GameObjectType.ENEMY_SOUL, pathGetter.getPortablePath("resources/images/Enemies/Soul/AttackLeft/Soul1.png"));
         resources.put(GameObjectType.ENEMY_SKELETON, pathGetter.getPortablePath("resources/images/Enemies/Skeleton_Seeker/AttackLeft/Skeleton1.png"));
         resources.put(GameObjectType.ENEMY_SPROUT, pathGetter.getPortablePath("resources/images/Enemies/Sprout/AttackLeft/Sprout1.png"));
