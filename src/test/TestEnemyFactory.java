@@ -37,7 +37,7 @@ public class TestEnemyFactory {
         assertEquals(sprout.getSpeed(), SPROUT_SPEED);
         final Room room = new RoomImpl(new RoomManagerImpl());
         sprout.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
-        sprout.setRoom(room);
+        room.addDynamicObject(sprout);
         sprout.tryToShoot();
         assertFalse(room.getCurrentGameObjects().isEmpty());
         sprout.takesDamage(10);
@@ -54,7 +54,7 @@ public class TestEnemyFactory {
         assertEquals(soul.getSpeed(), SOUL_SPEED);
         final Room room = new RoomImpl(new RoomManagerImpl());
         soul.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
-        soul.setRoom(room);
+        room.addDynamicObject(soul);
         soul.tryToShoot();
         assertFalse(room.getCurrentGameObjects().isEmpty());
         soul.takesDamage(10);
@@ -71,7 +71,7 @@ public class TestEnemyFactory {
         assertEquals(skeleton.getSpeed(), SKELETON_SPEED);
         final Room room = new RoomImpl(new RoomManagerImpl());
         skeleton.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
-        skeleton.setRoom(room);
+        room.addDynamicObject(skeleton);
         skeleton.tryToShoot();
         assertFalse(room.getCurrentGameObjects().isEmpty());
         skeleton.takesDamage(10);

@@ -2,43 +2,25 @@ package gamestructure.mainmenu;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.io.File;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import gamestructure.PathGetter;
+import gamestructure.WindowUtilities;
 import model.common.ResizableRectangle;
 
 public class MainMenuViewImpl implements MainMenuView {
 
+    private final WindowUtilities windowUtilities = new WindowUtilities();
+    private final PathGetter pathGetter = new PathGetter();
     private final JFrame frame = new JFrame();
-    private final JPanel mainPanel = new JPanel(new GridLayout());
 
-    private final String sep = File.separator;
-    private final String imagesPath = "resources" + sep + "images" + sep + "MainMenu" + sep;
-    private final JLabel lblBackground = new JLabel(new ImageIcon(this.imagesPath + "MainMenuBackground.png"));
-    private final JLabel lblTitle = new JLabel(new ImageIcon(this.imagesPath + "Title.png"));
-    private final JButton btnNewGame = new JButton("", new ImageIcon(this.imagesPath + "NewGame.png")); 
-    private final JButton btnExit = new JButton("", new ImageIcon(this.imagesPath + "Exit.png")); 
-    private final JButton btnCredits = new JButton("", new ImageIcon(this.imagesPath + "CreditsButton.png")); 
-    private final JLabel creditsLabel = new JLabel(new ImageIcon(this.imagesPath + "Credits.png"));
-
-    private final ResizableRectangle newGamePosition = new ResizableRectangle(160, 340, 300, 45);
-    private final ResizableRectangle creditsPosition = new ResizableRectangle(160, 433, 300, 45);
-    private final ResizableRectangle exitPosition = new ResizableRectangle(160, 523, 300, 45);
-    private final ResizableRectangle titlePosition = new ResizableRectangle(50, 208, 500, 100);
-    private final ResizableRectangle lblCreditsPosition = new ResizableRectangle(140, 595, 335, 122);
-
-    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-    private static final double WIDTH_RATIO = 0.67; 
-    private static final double HEIGHT_RATIO = 0.736;
     private final MainMenuController controller;
 
     public MainMenuViewImpl(final MainMenuController controller) {
@@ -46,49 +28,20 @@ public class MainMenuViewImpl implements MainMenuView {
         this.frame.setTitle("MazeDungeon");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
-        this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 
-                (int) (screen.getHeight() * HEIGHT_RATIO)));
 
-        btnNewGame.setBounds(this.newGamePosition);
-        this.configureButton(btnNewGame);
-
-        btnNewGame.addActionListener(e -> {
-            this.controller.newGame();
-        });
-
-        btnCredits.setBounds(this.creditsPosition);
-        this.configureButton(btnCredits);
-
-        btnCredits.addActionListener(e -> {
-            this.creditsLabel.setVisible(!this.creditsLabel.isVisible());
-        });
-
-        btnExit.setBounds(this.exitPosition);
-        this.configureButton(btnExit);
-
-        btnExit.addActionListener(e -> {
-            this.hide();
-        });
-
-        this.creditsLabel.setBounds(this.lblCreditsPosition);
-        this.creditsLabel.setVisible(false);
-        this.lblBackground.add(creditsLabel);
-
-        this.lblTitle.setBounds(this.titlePosition);
-        this.lblBackground.add(lblTitle);
-
-        this.mainPanel.add(lblBackground, JLayeredPane.FRAME_CONTENT_LAYER);
-        this.frame.setContentPane(mainPanel);
+        final MenuPanel mainPanel = new MenuPanel();
+        this.frame.add(mainPanel);
     }
 
     /**
      * @Override
      */
     public void show() {
-        this.frame.pack();
-        this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2, 
-                               screen.height / 2 - this.frame.getSize().height / 2);
         this.frame.setVisible(true);
+        this.frame.setSize(new Dimension((int) (613 * windowUtilities.getScreenRatio() + this.frame.getInsets().right + this.frame.getInsets().left), 
+                            (int) (727 * windowUtilities.getScreenRatio() + this.frame.getInsets().top + this.frame.getInsets().bottom)));
+        this.frame.setLocation((int) (windowUtilities.getScreen().getWidth()) / 2 - this.frame.getSize().width / 2, 
+                (int) (windowUtilities.getScreen().getHeight()) / 2 - this.frame.getSize().height / 2);
     }
 
     /**
@@ -98,10 +51,81 @@ public class MainMenuViewImpl implements MainMenuView {
         this.frame.dispose();
     }
 
-    private void configureButton(final JButton btn) {
-        btn.setBackground(Color.DARK_GRAY);
-        btn.setBorder(new LineBorder(Color.BLACK));
-        btn.setFocusPainted(false);
-        this.lblBackground.add(btn);
+    private class MenuPanel extends JLayeredPane {
+        private static final long serialVersionUID = 6848873930359078496L;
+
+        private final String imagesPath = pathGetter.getPortablePath("resources/images/MainMenu/");
+
+        private final JButton btnNewGame; 
+        private final JButton btnExit; 
+        private final JButton btnCredits; 
+        private final JLabel lblBackground;
+        private final JLabel lblCredits;
+
+        MenuPanel() {
+            final ResizableRectangle backgroundPosition = new ResizableRectangle(0, 0, 613, 727);
+            final ResizableRectangle newGamePosition = new ResizableRectangle(160, 340, 300, 45);
+            final ResizableRectangle creditsPosition = new ResizableRectangle(160, 430, 300, 45);
+            final ResizableRectangle exitPosition = new ResizableRectangle(160, 520, 300, 45);
+            final ResizableRectangle lblCreditsPosition = new ResizableRectangle(140, 595, 335, 122);
+
+            newGamePosition.mul(windowUtilities.getScreenRatio());
+            creditsPosition.mul(windowUtilities.getScreenRatio());
+            exitPosition.mul(windowUtilities.getScreenRatio());
+            backgroundPosition.mul(windowUtilities.getScreenRatio());
+            lblCreditsPosition.mul(windowUtilities.getScreenRatio());
+
+            this.btnNewGame = new JButton("", this.resizeImage(new ImageIcon(this.imagesPath + "NewGame.png"), newGamePosition));
+            this.btnCredits = new JButton("", this.resizeImage(new ImageIcon(this.imagesPath + "CreditsButton.png"), creditsPosition));
+            this.btnExit = new JButton("", this.resizeImage(new ImageIcon(this.imagesPath + "Exit.png"), exitPosition));
+            this.lblBackground = new JLabel(this.resizeImage(new ImageIcon(this.imagesPath + "MainMenuBackground.png"), backgroundPosition));
+            this.lblCredits = new JLabel(this.resizeImage(new ImageIcon(this.imagesPath + "lblCredits.png"), lblCreditsPosition));
+
+            btnNewGame.setBounds(newGamePosition);
+            btnCredits.setBounds(creditsPosition);
+            btnExit.setBounds(exitPosition);
+            lblBackground.setBounds(backgroundPosition);
+            lblCredits.setBounds(lblCreditsPosition);
+
+            this.addAllButtonsEvents();
+            this.lblCredits.setVisible(false);
+
+            this.add(lblBackground, JLayeredPane.DEFAULT_LAYER);
+            this.add(btnNewGame, JLayeredPane.PALETTE_LAYER);
+            this.add(btnCredits, JLayeredPane.PALETTE_LAYER);
+            this.add(btnExit, JLayeredPane.PALETTE_LAYER);
+            this.add(lblCredits, JLayeredPane.PALETTE_LAYER);
+        }
+
+        private ImageIcon resizeImage(final ImageIcon startImgIcon, final ResizableRectangle rectangle) {
+            final Image img = startImgIcon.getImage().getScaledInstance((int) rectangle.getWidth(), (int) rectangle.getHeight(), Image.SCALE_SMOOTH);
+            return new ImageIcon(img);
+        }
+
+        private void addAllButtonsEvents() {
+            this.configureButton(btnNewGame);
+
+            btnNewGame.addActionListener(e -> {
+                controller.newGame();
+            });
+
+            this.configureButton(btnCredits);
+
+            btnCredits.addActionListener(e -> {
+                this.lblCredits.setVisible(!this.lblCredits.isVisible());
+            });
+
+            this.configureButton(btnExit);
+
+            btnExit.addActionListener(e -> {
+                MainMenuViewImpl.this.hide();
+            });
+        }
+
+        private void configureButton(final JButton btn) {
+            btn.setBackground(Color.DARK_GRAY);
+            btn.setBorder(new LineBorder(Color.BLACK));
+            btn.setFocusPainted(false);
+        }
     }
 }
