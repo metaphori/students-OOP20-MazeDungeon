@@ -3,9 +3,11 @@ package model.gameobject.dynamicobject.enemy;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
+import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.bullet.Bullet;
 import model.gameobject.dynamicobject.bullet.BulletFactory;
 import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
+import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.simpleobject.Coin;
 
 public class Boss extends AbstractEnemy {
@@ -17,6 +19,8 @@ public class Boss extends AbstractEnemy {
     private static final int ALIGN_MONEY = 40;
     private static final int MODIFY_ALIGN_MONEY = 10;
     private final double maxLife;
+    private long lastHitTime;
+
     public Boss(final double life, final int speed, final Point2D position, final GameObjectType gameObjectType) {
         super(life, speed, position, gameObjectType, BOSS_SHOOT_DELAY);
         this.maxLife = life;
@@ -47,8 +51,9 @@ public class Boss extends AbstractEnemy {
         }
     }
     /**
-     * @Override
+     * 
      */
+    @Override
     protected void changeRoutine() {
         if (this.getSpeed() < MAX_SPEED) {
             final int incrementSpeed = 10;
@@ -61,10 +66,26 @@ public class Boss extends AbstractEnemy {
         }
 
     }
-
     /**
-     * @Override
+     * 
      */
+    @Override
+    public void collideWith(final GameObject obj2) {
+        final int takeDamage = 10;
+        final int hitDelay = 1000;
+        super.collideWith(obj2);
+        if (obj2.getGameObjectType() == GameObjectType.CHARACTER) {
+            final long currentTime = System.currentTimeMillis();
+            if (currentTime - this.lastHitTime > hitDelay) {
+                ((Character) obj2).takesDamage(takeDamage);
+                this.lastHitTime = currentTime;
+            }
+        }
+    }
+    /**
+     * 
+     */
+    @Override
     protected void shoot() {
         final Bullet bullet;
         if (this.getLife() >=  this.maxLife / 2) {
