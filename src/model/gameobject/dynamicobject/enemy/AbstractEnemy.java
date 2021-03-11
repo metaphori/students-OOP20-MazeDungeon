@@ -116,7 +116,13 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
         return new Vector2D(newX, newY);
     }
 
+    /**
+     * method that all Enemy must implements for shoot.
+     */
     protected abstract void shoot();
 
+    /**
+     * method that all Enemy must implements for change their routine.
+     */
     protected abstract void changeRoutine();
 }

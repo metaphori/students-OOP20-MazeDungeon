@@ -2,8 +2,6 @@ package test;
 
 import gamestructure.game.GameController;
 import gamestructure.game.GameControllerImpl;
-import gamestructure.game.GameView;
-import gamestructure.game.GameViewImpl;
 import model.ModelImpl;
 import mvc.Model;
 
