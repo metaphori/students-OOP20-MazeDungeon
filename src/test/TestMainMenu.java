@@ -9,5 +9,4 @@ public class TestMainMenu {
         final MainMenuController controller = new MainMenuControllerImpl();
         controller.setup();
     }
-
 }
