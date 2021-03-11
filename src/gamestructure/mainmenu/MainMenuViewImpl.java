@@ -17,6 +17,8 @@ import model.common.ResizableRectangle;
 
 public class MainMenuViewImpl implements MainMenuView {
 
+    private static final int MENU_WIDTH = 613;
+    private static final int MENU_HEIGHT = 727;
     private final WindowUtilities windowUtilities = new WindowUtilities();
     private final PathGetter pathGetter = new PathGetter();
     private final JFrame frame = new JFrame();
@@ -38,8 +40,8 @@ public class MainMenuViewImpl implements MainMenuView {
      */
     public void show() {
         this.frame.setVisible(true);
-        this.frame.setSize(new Dimension((int) (613 * windowUtilities.getScreenRatio() + this.frame.getInsets().right + this.frame.getInsets().left), 
-                            (int) (727 * windowUtilities.getScreenRatio() + this.frame.getInsets().top + this.frame.getInsets().bottom)));
+        this.frame.setSize(new Dimension((int) (MENU_WIDTH * windowUtilities.getScreenRatio() + this.frame.getInsets().right + this.frame.getInsets().left), 
+                            (int) (MENU_HEIGHT * windowUtilities.getScreenRatio() + this.frame.getInsets().top + this.frame.getInsets().bottom)));
         this.frame.setLocation((int) (windowUtilities.getScreen().getWidth()) / 2 - this.frame.getSize().width / 2, 
                 (int) (windowUtilities.getScreen().getHeight()) / 2 - this.frame.getSize().height / 2);
     }
@@ -88,6 +90,7 @@ public class MainMenuViewImpl implements MainMenuView {
             lblCredits.setBounds(lblCreditsPosition);
 
             this.addAllButtonsEvents();
+
             this.lblCredits.setVisible(false);
 
             this.add(lblBackground, JLayeredPane.DEFAULT_LAYER);
