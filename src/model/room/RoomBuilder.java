@@ -113,7 +113,7 @@ public class RoomBuilder {
     }
 
     /**
-     * add th boss in the room. cannot add with obstacles or enemies.
+     * add the boss in the room. cannot add with obstacles or enemies.
      * @return the builder object 
      */
     public RoomBuilder addBoss() {

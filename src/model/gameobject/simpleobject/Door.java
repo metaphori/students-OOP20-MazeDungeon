@@ -4,7 +4,6 @@ import model.common.Direction;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.GameObject;
-import model.room.Room;
 
 public class Door extends SimpleObjectImpl {
 
@@ -13,7 +12,7 @@ public class Door extends SimpleObjectImpl {
     }
 
     /**
-     * 
+     * it doesn't interact with anything at the moment.
      */
     @Override
     public void collideWith(final GameObject obj2) {
