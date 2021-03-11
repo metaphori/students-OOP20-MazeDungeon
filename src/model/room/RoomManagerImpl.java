@@ -66,11 +66,11 @@ public class RoomManagerImpl implements RoomManager {
 
     private void initializeRooms(final Map<Point2D, Set<Direction>> map) {
         final Point2D spawnRoom = new Point2D(0, 0);
-        Optional<Point2D> bossRoom = map.entrySet().stream()
-                                         .filter(entry -> !entry.getKey().equals(spawnRoom))
-                                         .filter(entry -> !entry.getValue().contains(Direction.UP))
-                                         .map(entry -> entry.getKey())
-                                         .findAny();
+        final Optional<Point2D> bossRoom = map.entrySet().stream()
+                                              .filter(entry -> !entry.getKey().equals(spawnRoom))
+                                              .filter(entry -> !entry.getValue().contains(Direction.UP))
+                                              .map(entry -> entry.getKey())
+                                              .findAny();
 
         for (final Entry<Point2D, Set<Direction>> entry : map.entrySet()) {
             if (entry.getKey().equals(spawnRoom)) {
