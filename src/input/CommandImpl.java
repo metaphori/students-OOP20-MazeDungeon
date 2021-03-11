@@ -81,6 +81,9 @@ public class CommandImpl implements Command {
             character.setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_RIGHT));
         }
 
+        /**
+         *@TODO movements
+         * METTERE QUESTI METODI NEL MOVEMENT*/
         if (this.checkStopVertical()) {
             chMovement.stopVertical();
         }

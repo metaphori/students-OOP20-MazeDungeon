@@ -45,8 +45,8 @@ public class GameViewImpl implements GameView, KeyListener {
     private final HUDPanel hudPanel = new HUDPanel(windowUtilities.getScreenRatio());
     private boolean gameOver;
     private boolean won;
-    private final JLabel lblStartInstruction = new JLabel(new ImageIcon(adaptImage(new ImageIcon("resources/images/HUD/StartIstruction.png"))));
-    private static final int ISTRUCTION_TIME = 0;
+    private final JLabel lblStartInstruction = new JLabel(new ImageIcon(adaptImage(new ImageIcon(pathGetter.getPortablePath("resources/images/HUD/StartIstruction.png")))));
+    private static final int ISTRUCTION_TIME = 3000;
 
     public GameViewImpl() {
         this.frame = new JFrame();
@@ -101,9 +101,9 @@ public class GameViewImpl implements GameView, KeyListener {
 
     private class GamePanel extends JLayeredPane implements ActionListener {
         private static final long serialVersionUID = 1L;
-        private final Image youLoseImage = adaptImage(new ImageIcon("resources/images/HUD/GameOver/gameOverFinal.png"));
-        private final Image winnerImage = adaptImage(new ImageIcon("resources/images/HUD/Victory/winner.png"));
-        private final Image roomImage = adaptImage(new ImageIcon("resources/images/Room/room.png"));
+        private final Image youLoseImage = adaptImage(new ImageIcon(pathGetter.getPortablePath("resources/images/HUD/GameOver/gameOverFinal.png")));
+        private final Image winnerImage = adaptImage(new ImageIcon(pathGetter.getPortablePath("resources/images/HUD/Victory/winner.png")));
+        private final Image roomImage = adaptImage(new ImageIcon(pathGetter.getPortablePath("resources/images/Room/room.png")));
 
         @Override
         public void actionPerformed(final ActionEvent e) {

@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JProgressBar;
 
+import gamestructure.PathGetter;
 import model.common.ResizableRectangle;
 import model.shop.Items;
 
@@ -21,6 +22,7 @@ public class HUDPanel extends JLayeredPane {
 
     private static final long serialVersionUID = 1L;
     private static final int MARGIN = 10;
+    private final PathGetter pathGetter = new PathGetter();
     private final ResizableRectangle coinPosition = new ResizableRectangle(MARGIN, 50, 50, 50);
     private final ResizableRectangle coinCounterPosition = new ResizableRectangle((int) coinPosition.getX() + (int) coinPosition.getWidth(), 
                                                                                   (int) coinPosition.getY(), 50, 50);
@@ -37,7 +39,6 @@ public class HUDPanel extends JLayeredPane {
     private static final int COIN_COUNTER_FONT_SIZE = 25;
     private static final Color CHAR_LIFEBAR_FOREGROUND = new Color(150, 0, 0);
     private static final Color BOSS_LIFEBAR_FOREGROUND = new Color(167, 142, 13);
-    //private final JLabel lblBossIcon = new JLabel(new ImageIcon("resources/images/Boss/BossIcon.png"));
     private final JLabel lblCoinCounter = new JLabel();
     private final JLabel lblRoomVisited;
     private final Image coinImage;
@@ -59,13 +60,13 @@ public class HUDPanel extends JLayeredPane {
         bossLifeBarPosition.mul(screenRatio);
         bossIconPosition.mul(screenRatio);
 
-        this.coinImage = new ImageIcon("resources/images/HUD/Coins/coin.png").getImage().getScaledInstance((int) coinPosition.getWidth(),
+        this.coinImage = new ImageIcon(pathGetter.getPortablePath("resources/images/HUD/Coins/coin.png")).getImage().getScaledInstance((int) coinPosition.getWidth(),
                                                                                                            (int) coinPosition.getHeight(), 
                                                                                                            Image.SCALE_SMOOTH);
-        this.finalArtefactImage = new ImageIcon("resources/images/Objects/FinalArtifact/spawned.png").getImage().getScaledInstance((int) finalArtefactPosition.getWidth(), 
+        this.finalArtefactImage = new ImageIcon(pathGetter.getPortablePath("resources/images/Objects/FinalArtifact/spawned.png")).getImage().getScaledInstance((int) finalArtefactPosition.getWidth(), 
                                                                                                                                (int) finalArtefactPosition.getHeight(), 
                                                                                                                                Image.SCALE_SMOOTH);
-        this.bossIconImage = new ImageIcon("resources/images/Boss/BossIcon.png").getImage().getScaledInstance((int) bossIconPosition.getWidth(), 
+        this.bossIconImage = new ImageIcon(pathGetter.getPortablePath("resources/images/Boss/BossIcon.png")).getImage().getScaledInstance((int) bossIconPosition.getWidth(), 
                                                                                                                (int) bossIconPosition.getHeight(), 
                                                                                                                Image.SCALE_SMOOTH);
         this.lblRoomVisited = new JLabel();
@@ -148,16 +149,16 @@ public class HUDPanel extends JLayeredPane {
         final ImageIcon tmpImage;
         switch (item) {
         case ARTHEMIDEBOW:
-            tmpImage = new ImageIcon("resources/images/Item/arthemideBow.png");
+            tmpImage = new ImageIcon(pathGetter.getPortablePath("resources/images/Item/arthemideBow.png"));
             break;
         case HERMESBOOTS:
-            tmpImage = new ImageIcon("resources/images/Item/hermesBoots.png");
+            tmpImage = new ImageIcon(pathGetter.getPortablePath("resources/images/Item/hermesBoots.png"));
             break;
         case ZEUSBOLT:
-            tmpImage = new ImageIcon("resources/images/Item/zeusBolt.png");
+            tmpImage = new ImageIcon(pathGetter.getPortablePath("resources/images/Item/zeusBolt.png"));
             break;
         case ORACLEAMULET:
-            tmpImage = new ImageIcon("resources/images/Item/oracleAmulet.png");
+            tmpImage = new ImageIcon(pathGetter.getPortablePath("resources/images/Item/oracleAmulet.png"));
             break;
         default:
             return;
