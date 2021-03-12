@@ -76,7 +76,8 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
         switch (obj2.getGameObjectType().getCollisionType()) {
         case OBSTACLE:
             final int footHeight = 15;
-            final Point2D footColliderUL = new Point2D(this.getBoundingBox().getULCorner().getX(), this.getBoundingBox().getBRCorner().getY() - footHeight);
+            final Point2D footColliderUL = new Point2D(this.getBoundingBox().getULCorner().getX(), 
+                                                       this.getBoundingBox().getBRCorner().getY() - footHeight);
             final BoundingBox footCollider = new BoundingBox(footColliderUL, this.getBoundingBox().getWidth(), footHeight);
             if (footCollider.intersectWith(obj2.getBoundingBox())) {
                 this.setPosition(this.getLastPosition());

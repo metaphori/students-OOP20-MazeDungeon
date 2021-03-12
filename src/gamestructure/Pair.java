@@ -1,4 +1,4 @@
-package gamestructure.mainmenu;
+package gamestructure;
 
 public class Pair<X, Y> {
     private final X x;

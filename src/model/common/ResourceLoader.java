@@ -27,10 +27,10 @@ public class ResourceLoader {
         resources.put(GameObjectType.SPROUT_BULLET, pathGetter.getPortablePath("resources/images/Bullets/sproutBullet.png"));
 
         /*DOOR*/
-        resources.put(GameObjectType.DOOR_UP, pathGetter.getPortablePath("resources/images/Room/Door/topDoor.png"));
-        resources.put(GameObjectType.DOOR_DOWN, pathGetter.getPortablePath("resources/images/Room/Door/bottomDoor.png"));
-        resources.put(GameObjectType.DOOR_LEFT, pathGetter.getPortablePath("resources/images/Room/Door/leftDoor.png"));
-        resources.put(GameObjectType.DOOR_RIGHT, pathGetter.getPortablePath("resources/images/Room/Door/rightDoor.png"));
+        resources.put(GameObjectType.DOOR_TOP, pathGetter.getPortablePath("resources/images/Room/Door/topDoor.png"));
+        resources.put(GameObjectType.DOOR_SOUTH, pathGetter.getPortablePath("resources/images/Room/Door/bottomDoor.png"));
+        resources.put(GameObjectType.DOOR_WEST, pathGetter.getPortablePath("resources/images/Room/Door/leftDoor.png"));
+        resources.put(GameObjectType.DOOR_EAST, pathGetter.getPortablePath("resources/images/Room/Door/rightDoor.png"));
 
         /*OBSTACLE*/
         resources.put(GameObjectType.ROCK, pathGetter.getPortablePath("resources/images/Room/Obstacle/Rock.png"));

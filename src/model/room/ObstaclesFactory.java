@@ -18,21 +18,13 @@ public class ObstaclesFactory {
     private static final int FREE_COLS = 4;
     private final double obstacleWidth;
     private final double obstacleHeight;
-    private final Point2D ulCorner;
-    private final Point2D brCorner;
     private final double width;
     private final double height;
     private static final int WALL_DEPTH = 100;
 
-    /**
-     * @param ulCorner : upper left corner of the room
-     * @param brCorner : : bottom right corner of the room
-     */
-    public ObstaclesFactory(final Point2D ulCorner, final Point2D brCorner) {
-        this.ulCorner = ulCorner;
-        this.brCorner = brCorner;
-        this.width = brCorner.getX() - ulCorner.getX();
-        this.height = brCorner.getY() - ulCorner.getY();
+    public ObstaclesFactory() {
+        this.width = Rooms.BR_CORNER.getX() - Rooms.UL_CORNER.getX();
+        this.height = Rooms.BR_CORNER.getY() - Rooms.UL_CORNER.getY();
         this.obstacleWidth = this.width / OBSTACLE_FOR_ROW;
         this.obstacleHeight = this.height / OBSTACLE_FOR_COL;
     }
@@ -73,27 +65,27 @@ public class ObstaclesFactory {
         final List<SimpleObject> walls = new LinkedList<>();
         SimpleObject tmp;
         //TOP
-        tmp = new Wall(ulCorner);
-        tmp.setBoundingBox(new BoundingBox(ulCorner.sum(new Vector2D(0, -WALL_DEPTH)), this.width, WALL_DEPTH));
+        tmp = new Wall(Rooms.UL_CORNER);
+        tmp.setBoundingBox(new BoundingBox(Rooms.UL_CORNER.sum(new Vector2D(0, -WALL_DEPTH)), this.width, WALL_DEPTH));
         walls.add(tmp);
         //RIGHT
-        tmp = new Wall(new Point2D(brCorner.getX(), ulCorner.getY()));
-        tmp.setBoundingBox(new BoundingBox(new Point2D(brCorner.getX(), ulCorner.getY()), WALL_DEPTH, this.height));
+        tmp = new Wall(new Point2D(Rooms.BR_CORNER.getX(), Rooms.UL_CORNER.getY()));
+        tmp.setBoundingBox(new BoundingBox(new Point2D(Rooms.BR_CORNER.getX(), Rooms.UL_CORNER.getY()), WALL_DEPTH, this.height));
         walls.add(tmp);
         //BOTTOM
-        tmp = new Wall(new Point2D(ulCorner.getX(), brCorner.getY()));
-        tmp.setBoundingBox(new BoundingBox(new Point2D(ulCorner.getX(), brCorner.getY()), this.width, WALL_DEPTH));
+        tmp = new Wall(new Point2D(Rooms.UL_CORNER.getX(), Rooms.BR_CORNER.getY()));
+        tmp.setBoundingBox(new BoundingBox(new Point2D(Rooms.UL_CORNER.getX(), Rooms.BR_CORNER.getY()), this.width, WALL_DEPTH));
         walls.add(tmp);
         //LEFT
-        tmp = new Wall(ulCorner);
-        tmp.setBoundingBox(new BoundingBox(ulCorner.sum(new Vector2D(-WALL_DEPTH, 0)), WALL_DEPTH, this.height));
+        tmp = new Wall(Rooms.UL_CORNER);
+        tmp.setBoundingBox(new BoundingBox(Rooms.UL_CORNER.sum(new Vector2D(-WALL_DEPTH, 0)), WALL_DEPTH, this.height));
         walls.add(tmp);
         return walls;
     }
 
     private Point2D getObstaclePosition(final int x, final int y) {
-        return new Point2D(obstacleWidth * (y - 1 + FREE_COLS) + ulCorner.getX(), 
-                           obstacleHeight * (x - 1 + FREE_ROWS) + ulCorner.getY());
+        return new Point2D(obstacleWidth * (y - 1 + FREE_COLS) + Rooms.UL_CORNER.getX(), 
+                           obstacleHeight * (x - 1 + FREE_ROWS) + Rooms.UL_CORNER.getY());
     }
 
     private Obstacle getObstacle(final Point2D position) {

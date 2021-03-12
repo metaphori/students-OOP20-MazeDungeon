@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
-import model.common.Direction;
+import model.common.CardinalPoint;
 import model.common.GameObjectType;
 import model.common.IdIterator;
 import model.common.Point2D;
@@ -20,22 +20,21 @@ import model.gameobject.simpleobject.FinalArtifact;
 
 public class RoomManagerImpl implements RoomManager {
 
-    private static final int NUMBER_OF_ROOMS = 3;
-    private static final Point2D CHARACTER_UP_SPAWN_POSITION = new Point2D(620, 550);
-    private static final Point2D CHARACTER_DOWN_SPAWN_POSITION = new Point2D(620, 200);
-    private static final Point2D CHARACTER_RIGHT_SPAWN_POSITION = new Point2D(265, 360);
-    private static final Point2D CHARACTER_LEFT_SPAWN_POSITION = new Point2D(975, 360);
+    private static final Point2D CHARACTER_NORTH_SPAWN_POSITION = new Point2D(620, 550);
+    private static final Point2D CHARACTER_SOUTH_SPAWN_POSITION = new Point2D(620, 200);
+    private static final Point2D CHARACTER_EAST_SPAWN_POSITION = new Point2D(265, 360);
+    private static final Point2D CHARACTER_WEST_SPAWN_POSITION = new Point2D(975, 360);
     private final IdIterator idIterator = new IdIterator();
     private final Map<Point2D, Room> rooms = new HashMap<>();
     private Room actualRoom;
     private final Character character = new CharacterImpl(new Point2D(300, 200), GameObjectType.CHARACTER);
     private int exploredRooms = 1;
 
-    private final Map<Direction, Point2D> characterSpawnPosition = new HashMap<>() {{
-        put(Direction.UP, CHARACTER_UP_SPAWN_POSITION);
-        put(Direction.DOWN, CHARACTER_DOWN_SPAWN_POSITION);
-        put(Direction.LEFT, CHARACTER_LEFT_SPAWN_POSITION);
-        put(Direction.RIGHT, CHARACTER_RIGHT_SPAWN_POSITION);
+    private final Map<CardinalPoint, Point2D> characterSpawnPosition = new HashMap<>() {{
+        put(CardinalPoint.NORTH, CHARACTER_NORTH_SPAWN_POSITION);
+        put(CardinalPoint.SOUTH, CHARACTER_SOUTH_SPAWN_POSITION);
+        put(CardinalPoint.WEST, CHARACTER_WEST_SPAWN_POSITION);
+        put(CardinalPoint.EAST, CHARACTER_EAST_SPAWN_POSITION);
     }};
 
     public RoomManagerImpl() {
@@ -49,44 +48,44 @@ public class RoomManagerImpl implements RoomManager {
         this.actualRoom.update(elapsed);
     }
 
-    private Point2D getNearbyPoint(final Point2D point, final Direction direction) {
-        switch (direction) {
-        case UP:
+    private Point2D getNearbyPoint(final Point2D point, final CardinalPoint cardinalPoint) {
+        switch (cardinalPoint) {
+        case NORTH:
             return new Point2D(point.getX(), point.getY() + 1);
-        case DOWN:
+        case SOUTH:
             return new Point2D(point.getX(), point.getY() - 1);
-        case LEFT:
+        case WEST:
             return new Point2D(point.getX() - 1, point.getY());
-        case RIGHT:
+        case EAST:
             return new Point2D(point.getX() + 1, point.getY());
         default:
-            throw new IllegalStateException("not valid direction");
+            throw new IllegalStateException("not valid cardinal point");
         }
     }
 
-    private void initializeRooms(final Map<Point2D, Set<Direction>> map) {
+    private void initializeRooms(final Map<Point2D, Set<CardinalPoint>> map) {
         final Point2D spawnRoom = new Point2D(0, 0);
         final Optional<Point2D> bossRoom = map.entrySet().stream()
                                               .filter(entry -> !entry.getKey().equals(spawnRoom))
-                                              .filter(entry -> !entry.getValue().contains(Direction.UP))
+                                              .filter(entry -> !entry.getValue().contains(CardinalPoint.NORTH))
                                               .map(entry -> entry.getKey())
                                               .findAny();
 
-        for (final Entry<Point2D, Set<Direction>> entry : map.entrySet()) {
+        for (final Entry<Point2D, Set<CardinalPoint>> entry : map.entrySet()) {
             if (entry.getKey().equals(spawnRoom)) {
-                rooms.put(entry.getKey(), new RoomBuilder().initialize(this)
+                rooms.put(entry.getKey(), new RoomBuilderImpl().initialize(this)
                                                            .addDoors(entry.getValue())
                                                            .build());
                 continue;
             }
             if (!bossRoom.isEmpty() && entry.getKey().equals(bossRoom.get())) {
-                rooms.put(entry.getKey(), new RoomBuilder().initialize(this)
+                rooms.put(entry.getKey(), new RoomBuilderImpl().initialize(this)
                                                            .addDoors(entry.getValue())
                                                            .addBoss()
                                                            .build());
                 continue;
             }
-            final Room room = new RoomBuilder().initialize(this)
+            final Room room = new RoomBuilderImpl().initialize(this)
                                                .addRandomObstacle()
                                                .addDoors(entry.getValue())
                                                .addRandomEnemy()
@@ -99,20 +98,20 @@ public class RoomManagerImpl implements RoomManager {
         actualRoom.visit();
     }
 
-    private Map<Point2D, Set<Direction>> createGameMap() {
+    private Map<Point2D, Set<CardinalPoint>> createGameMap() {
 
-        final Map<Point2D, Set<Direction>> map = new HashMap<>();
-        map.put(new Point2D(0, 0), new HashSet<Direction>());
+        final Map<Point2D, Set<CardinalPoint>> map = new HashMap<>();
+        map.put(new Point2D(0, 0), new HashSet<CardinalPoint>());
 
-        while (map.size() < NUMBER_OF_ROOMS) {
-            final Direction extractedDirection = Direction.getRandomDirection();
+        while (map.size() < Rooms.NUMBER_OF_ROOMS) {
+            final CardinalPoint extractedCP = CardinalPoint.getAny();
             final Point2D extractedPosition = new LinkedList<>(map.keySet()).get(new Random().nextInt(map.size()));
-            final Point2D newRoomPosition = this.getNearbyPoint(extractedPosition, extractedDirection);
+            final Point2D newRoomPosition = this.getNearbyPoint(extractedPosition, extractedCP);
             if (!map.containsKey(newRoomPosition)) {
-                map.put(newRoomPosition, new HashSet<Direction>());
+                map.put(newRoomPosition, new HashSet<CardinalPoint>());
             }
-            map.get(newRoomPosition).add(Direction.getOppositeDirection(extractedDirection));
-            map.get(extractedPosition).add(extractedDirection);
+            map.get(newRoomPosition).add(CardinalPoint.getOpposite(extractedCP));
+            map.get(extractedPosition).add(extractedCP);
         }
         return map;
     }
@@ -147,7 +146,7 @@ public class RoomManagerImpl implements RoomManager {
      * @param direction : the direction of the new room in relation at the actual room
      */
     @Override
-    public void changeRoom(final Direction direction) {
+    public void changeRoom(final CardinalPoint direction) {
         final Room newRoom = rooms.get(this.getNearbyPoint(this.getRoomPosition(actualRoom), direction));
         if (newRoom == null) {
             return;
@@ -164,8 +163,8 @@ public class RoomManagerImpl implements RoomManager {
 
         if (this.allVisited()) {
             final Room startRoom = this.rooms.get(new Point2D(0, 0));
-            final double x = (startRoom.getUL().getX() + startRoom.getBR().getX()) / 2;
-            final double y = (startRoom.getUL().getY() + startRoom.getBR().getY()) / 2;
+            final double x = (Rooms.UL_CORNER.getX() + Rooms.BR_CORNER.getX()) / 2;
+            final double y = (Rooms.UL_CORNER.getX() + Rooms.BR_CORNER.getY()) / 2;
             startRoom.addSimpleObject(new FinalArtifact(new Point2D(x, y)));
         }
     }
@@ -196,14 +195,6 @@ public class RoomManagerImpl implements RoomManager {
     @Override
     public int getVisitedRooms() {
         return exploredRooms;
-    }
-
-    /**
-     * @return the number of total rooms
-     */
-    @Override
-    public int getTotalRooms() {
-        return NUMBER_OF_ROOMS;
     }
 
 }

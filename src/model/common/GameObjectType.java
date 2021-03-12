@@ -41,22 +41,22 @@ public enum GameObjectType {
     /**
      * The Left Door. Collision type : INTERACTIVE_ELEMENT.
      */
-    DOOR_LEFT(CollisionType.INTERACTIVE_ELEMENT),
+    DOOR_WEST(CollisionType.INTERACTIVE_ELEMENT),
 
     /**
      * The Right Door. Collision type : INTERACTIVE_ELEMENT.
      */
-    DOOR_RIGHT(CollisionType.INTERACTIVE_ELEMENT),
+    DOOR_EAST(CollisionType.INTERACTIVE_ELEMENT),
 
     /**
      * The Up Door. Collision type : INTERACTIVE_ELEMENT.
      */
-    DOOR_UP(CollisionType.INTERACTIVE_ELEMENT),
+    DOOR_TOP(CollisionType.INTERACTIVE_ELEMENT),
 
     /**
      * The Down Door. Collision type : INTERACTIVE_ELEMENT.
      */
-    DOOR_DOWN(CollisionType.INTERACTIVE_ELEMENT),
+    DOOR_SOUTH(CollisionType.INTERACTIVE_ELEMENT),
 
     /**
      * The Character Bullet. Collision type : INTERACTIVE_ELEMENT.

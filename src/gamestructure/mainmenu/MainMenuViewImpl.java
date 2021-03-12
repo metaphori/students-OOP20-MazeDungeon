@@ -2,7 +2,6 @@ package gamestructure.mainmenu;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -15,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.border.LineBorder;
 
+import gamestructure.Pair;
 import gamestructure.PathGetter;
 import gamestructure.WindowUtilities;
 import model.common.ResizableRectangle;
@@ -23,6 +23,7 @@ public class MainMenuViewImpl implements MainMenuView {
 
     private static final int MENU_WIDTH = 613;
     private static final int MENU_HEIGHT = 727;
+    private static final Color BACKGROUND_COLOR = new Color(11, 19, 30);
     private final WindowUtilities windowUtilities = new WindowUtilities();
     private final PathGetter pathGetter = new PathGetter();
     private final JFrame frame = new JFrame();
@@ -36,6 +37,7 @@ public class MainMenuViewImpl implements MainMenuView {
         this.frame.setResizable(false);
 
         final MenuPanel mainPanel = new MenuPanel();
+        mainPanel.setBackground(BACKGROUND_COLOR);
         this.frame.add(mainPanel);
     }
 
@@ -61,22 +63,22 @@ public class MainMenuViewImpl implements MainMenuView {
         private static final long serialVersionUID = 6848873930359078496L;
 
         private final String imagesPath = pathGetter.getPortablePath("resources/images/MainMenu/");
+        private final ResizableRectangle newGameButtonPosition = new ResizableRectangle(160, 340, 300, 45);
+        private final ResizableRectangle creditsButtonPosition = new ResizableRectangle(160, 430, 300, 45);
+        private final ResizableRectangle exitButtonPosition = new ResizableRectangle(160, 520, 300, 45);
+        private final ResizableRectangle lblBackgroundPosition = new ResizableRectangle(0, 0, 613, 727);
+        private final ResizableRectangle lblCreditsPosition = new ResizableRectangle(130, 595, 335, 122);
         private boolean lblCreditsIsVisible;
 
-        private final Map<MainMenuComponent, Pair<JComponent, ResizableRectangle>> componentsMap = new HashMap<>() {{
-          put(MainMenuComponent.BTN_NEW_GAME, new Pair<>(new JButton(), new ResizableRectangle(160, 340, 300, 45)));
-          put(MainMenuComponent.BTN_CREDITS, new Pair<>(new JButton(), new ResizableRectangle(160, 430, 300, 45)));
-          put(MainMenuComponent.BTN_EXIT, new Pair<>(new JButton(), new ResizableRectangle(160, 520, 300, 45)));
-          put(MainMenuComponent.LBL_BACKGROUND, new Pair<>(new JLabel(), new ResizableRectangle(0, 0, 613, 727)));
-          put(MainMenuComponent.LBL_CREDITS, new Pair<>(new JLabel(), new ResizableRectangle(140, 595, 335, 122)));
-        }};
+        private final Map<MainMenuComponent, Pair<JComponent, ResizableRectangle>> componentsMap = new HashMap<>();
 
         MenuPanel() {
+            this.initializeComponentsMap();
             this.componentsMap.entrySet().stream().forEach(e -> {
                 e.getValue().getY().mul(windowUtilities.getScreenRatio());
                 this.configureComponents(e);
                 e.getValue().getX().setBounds(e.getValue().getY());
-                this.add(e.getValue().getX(), JLayeredPane.PALETTE_LAYER);
+                this.add(e.getValue().getX(), e.getKey().equals(MainMenuComponent.LBL_BACKGROUND) ? JLayeredPane.DEFAULT_LAYER : JLayeredPane.PALETTE_LAYER);
             });
 
             
@@ -122,6 +124,14 @@ public class MainMenuViewImpl implements MainMenuView {
                 lblCredits.setIcon(windowUtilities.resizeImage(new ImageIcon(this.imagesPath + "lblCredits.png"), componentEntry.getValue().getY()));
                 break;
             }
+        }
+
+        private void initializeComponentsMap() {
+            this.componentsMap.put(MainMenuComponent.BTN_NEW_GAME, new Pair<>(new JButton(), newGameButtonPosition));
+            this.componentsMap.put(MainMenuComponent.BTN_CREDITS, new Pair<>(new JButton(), creditsButtonPosition));
+            this.componentsMap.put(MainMenuComponent.BTN_EXIT, new Pair<>(new JButton(), exitButtonPosition));
+            this.componentsMap.put(MainMenuComponent.LBL_BACKGROUND, new Pair<>(new JLabel(), lblBackgroundPosition));
+            this.componentsMap.put(MainMenuComponent.LBL_CREDITS, new Pair<>(new JLabel(), lblCreditsPosition));
         }
 
         private void configureButtonGraphics(final JButton btn) {

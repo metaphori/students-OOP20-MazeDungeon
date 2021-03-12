@@ -1,17 +1,17 @@
 package model.room;
 
-import model.common.Direction;
+import model.common.CardinalPoint;
 import model.gameobject.simpleobject.Door;
 
 public interface DoorFactory {
-    Door createLeftDoor();
+    Door createWestDoor();
 
-    Door createRightDoor();
+    Door createEastDoor();
 
-    Door createUpDoor();
+    Door createNorthDoor();
 
-    Door createDownDoor();
+    Door createSouthDoor();
 
-    Door createDoor(Direction direction);
+    Door createDoor(CardinalPoint direction);
 
 }

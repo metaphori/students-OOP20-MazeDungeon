@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import model.common.Direction;
+import model.common.CardinalPoint;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.GameObject;
@@ -16,11 +16,9 @@ import model.gameobject.simpleobject.SimpleObject;
 
 public class RoomImpl implements Room {
 
-    private static final Point2D UL_CORNER = new Point2D(240, 177);
-    private static final Point2D BR_CORNER = new Point2D(1025, 633);
     private final List<SimpleObject> simpleObjects = new LinkedList<>();
     private final List<DynamicObject> dynamicObjects = new LinkedList<>();
-    private final Set<Direction> nearRooms = new HashSet<>();
+    private final Set<CardinalPoint> nearRooms = new HashSet<>();
     private final RoomManager roomManager;
     private boolean isVisited = false;
  
@@ -109,7 +107,7 @@ public class RoomImpl implements Room {
      * @param direction : direction of the door.
      */
     @Override
-    public void addDoor(final Direction direction) {
+    public void addDoor(final CardinalPoint direction) {
         nearRooms.add(direction);
     }
 
@@ -117,8 +115,8 @@ public class RoomImpl implements Room {
      * @return all the directions in the room that have a door
      */
     @Override
-    public Set<Direction> getDoors() {
-        return new HashSet<Direction>(nearRooms);
+    public Set<CardinalPoint> getDoors() {
+        return new HashSet<CardinalPoint>(nearRooms);
     }
 
     /**
@@ -135,16 +133,6 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @param objs : dynamic objects to add in the room
-     */
-    @Override
-    public void addAllDynamicObject(final List<DynamicObject> objs) {
-        for (final DynamicObject dinamicObject : objs) {
-            this.addDynamicObject(dinamicObject);
-        }
-    }
-
-    /**
      * @param objs : simple objects to add in the room
      */
     @Override
@@ -152,22 +140,6 @@ public class RoomImpl implements Room {
         for (final SimpleObject simpleObject : objs) {
             this.addSimpleObject(simpleObject);
         }
-    }
-
-    /**
-     * @return the upper left corner of the room
-     */
-    @Override
-    public Point2D getUL() {
-        return UL_CORNER;
-    }
-
-    /**
-     * @return the bottom right corner of the room
-     */
-    @Override
-    public Point2D getBR() {
-        return BR_CORNER;
     }
 
     /**
