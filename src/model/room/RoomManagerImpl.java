@@ -73,19 +73,19 @@ public class RoomManagerImpl implements RoomManager {
 
         for (final Entry<Point2D, Set<CardinalPoint>> entry : map.entrySet()) {
             if (entry.getKey().equals(spawnRoom)) {
-                rooms.put(entry.getKey(), new RoomBuilder().initialize(this)
+                rooms.put(entry.getKey(), new RoomBuilderImpl().initialize(this)
                                                            .addDoors(entry.getValue())
                                                            .build());
                 continue;
             }
             if (!bossRoom.isEmpty() && entry.getKey().equals(bossRoom.get())) {
-                rooms.put(entry.getKey(), new RoomBuilder().initialize(this)
+                rooms.put(entry.getKey(), new RoomBuilderImpl().initialize(this)
                                                            .addDoors(entry.getValue())
                                                            .addBoss()
                                                            .build());
                 continue;
             }
-            final Room room = new RoomBuilder().initialize(this)
+            final Room room = new RoomBuilderImpl().initialize(this)
                                                .addRandomObstacle()
                                                .addDoors(entry.getValue())
                                                .addRandomEnemy()
