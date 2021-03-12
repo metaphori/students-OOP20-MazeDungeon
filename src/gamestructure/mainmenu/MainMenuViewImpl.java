@@ -78,7 +78,7 @@ public class MainMenuViewImpl implements MainMenuView {
                 e.getValue().getY().mul(windowUtilities.getScreenRatio());
                 this.configureComponents(e);
                 e.getValue().getX().setBounds(e.getValue().getY());
-                this.add(e.getValue().getX(), JLayeredPane.PALETTE_LAYER);
+                this.add(e.getValue().getX(), e.getKey().equals(MainMenuComponent.LBL_BACKGROUND) ? JLayeredPane.DEFAULT_LAYER : JLayeredPane.PALETTE_LAYER);
             });
 
             this.componentsMap.entrySet().stream().filter(e -> e.getValue().getX() instanceof JButton).forEach(e -> {
