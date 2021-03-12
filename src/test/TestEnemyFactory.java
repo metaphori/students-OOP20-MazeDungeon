@@ -16,12 +16,12 @@ public class TestEnemyFactory {
     private static final int SOUL_LIFE = 50;
     private static final int SPROUT_LIFE = 50;
     private static final int SKELETON_LIFE = 75;
-    private static final int BOSS_LIFE = 300;
+    //private static final int BOSS_LIFE = 300;
 
     private static final int SOUL_SPEED = 90;
     private static final int SPROUT_SPEED = 50;
     private static final int SKELETON_SPEED = 90;
-    private static final int BOSS_SPEED = 150;
+    //private static final int BOSS_SPEED = 150;
     private EnemyFactory ef;
 
     @org.junit.Before
@@ -48,8 +48,8 @@ public class TestEnemyFactory {
 
     @org.junit.Test
     public void testSoul() {
-        final Enemy soul = ef.createSoul(new Point2D(200, 200));
-        assertEquals(soul.getPosition(), new Point2D(200, 200));
+        final Enemy soul = ef.createSoul(new Point2D(100, 100));
+        assertEquals(soul.getPosition(), new Point2D(100, 100));
         assertEquals((int) soul.getLife(), (int) SOUL_LIFE);
         assertEquals(soul.getSpeed(), SOUL_SPEED);
         final Room room = new RoomImpl(new RoomManagerImpl());
@@ -65,8 +65,8 @@ public class TestEnemyFactory {
 
     @org.junit.Test
     public void testSkeleton() {
-        final Enemy skeleton = ef.createSkeletonSeeker(new Point2D(300, 300));
-        assertEquals(skeleton.getPosition(), new Point2D(300, 300));
+        final Enemy skeleton = ef.createSkeletonSeeker(new Point2D(100, 100));
+        assertEquals(skeleton.getPosition(), new Point2D(100, 100));
         assertEquals((int) skeleton.getLife(), (int) SKELETON_LIFE);
         assertEquals(skeleton.getSpeed(), SKELETON_SPEED);
         final Room room = new RoomImpl(new RoomManagerImpl());

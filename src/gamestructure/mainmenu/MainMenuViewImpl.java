@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.border.LineBorder;
 
+import gamestructure.Pair;
 import gamestructure.PathGetter;
 import gamestructure.WindowUtilities;
 import model.common.ResizableRectangle;
@@ -22,6 +23,7 @@ public class MainMenuViewImpl implements MainMenuView {
 
     private static final int MENU_WIDTH = 613;
     private static final int MENU_HEIGHT = 727;
+    private static final Color BACKGROUND_COLOR = new Color(11, 19, 30);
     private final WindowUtilities windowUtilities = new WindowUtilities();
     private final PathGetter pathGetter = new PathGetter();
     private final JFrame frame = new JFrame();
@@ -35,6 +37,7 @@ public class MainMenuViewImpl implements MainMenuView {
         this.frame.setResizable(false);
 
         final MenuPanel mainPanel = new MenuPanel();
+        mainPanel.setBackground(BACKGROUND_COLOR);
         this.frame.add(mainPanel);
     }
 
@@ -64,7 +67,7 @@ public class MainMenuViewImpl implements MainMenuView {
         private final ResizableRectangle creditsButtonPosition = new ResizableRectangle(160, 430, 300, 45);
         private final ResizableRectangle exitButtonPosition = new ResizableRectangle(160, 520, 300, 45);
         private final ResizableRectangle lblBackgroundPosition = new ResizableRectangle(0, 0, 613, 727);
-        private final ResizableRectangle lblCreditsPosition = new ResizableRectangle(140, 595, 335, 122);
+        private final ResizableRectangle lblCreditsPosition = new ResizableRectangle(130, 595, 335, 122);
         private boolean lblCreditsIsVisible;
 
         private final Map<MainMenuComponent, Pair<JComponent, ResizableRectangle>> componentsMap = new HashMap<>();
