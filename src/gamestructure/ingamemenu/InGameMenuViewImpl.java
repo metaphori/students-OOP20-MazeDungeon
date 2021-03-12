@@ -3,28 +3,22 @@ package gamestructure.ingamemenu;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-
 import gamestructure.WindowUtilities;
 import gamestructure.ingamemenu.utilities.ImageLoader;
 import gamestructure.ingamemenu.utilities.Images;
 import gamestructure.ingamemenu.utilities.MenuShopComponents;
-import gamestructure.mainmenu.MainMenuComponent;
-import gamestructure.mainmenu.Pair;
+import gamestructure.Pair;
 import model.common.ResizableRectangle;
 import model.shop.Items;
 
