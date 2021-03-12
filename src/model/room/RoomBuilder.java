@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import model.common.Direction;
+import model.common.CardinalPoint;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.dynamicobject.enemy.EnemyFactory;
@@ -45,7 +45,7 @@ public class RoomBuilder {
         }
         this.isInitialize = true;
         this.room = new RoomImpl(roomManager);
-        this.obstaclesFactory = new ObstaclesFactory(this.room.getUL(), this.room.getBR());
+        this.obstaclesFactory = new ObstaclesFactory(Rooms.UL_CORNER, Rooms.BR_CORNER);
         this.room.addAllSimpleObject(obstaclesFactory.getEmptyRoom());
         return this;
     }
@@ -55,9 +55,9 @@ public class RoomBuilder {
      * @param doors : the direction of each door
      * @return the builder object
      */
-    public RoomBuilder addDoors(final Set<Direction> doors) {
+    public RoomBuilder addDoors(final Set<CardinalPoint> doors) {
         this.checkInitialize();
-        for (final Direction direction : doors) {
+        for (final CardinalPoint direction : doors) {
             this.room.addDoor(direction);
             this.room.addSimpleObject(doorFactory.createDoor(direction));
         }

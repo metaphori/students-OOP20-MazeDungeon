@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import model.common.Direction;
+import model.common.CardinalPoint;
 import model.common.Point2D;
 import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.DynamicObject;
@@ -15,29 +15,23 @@ public interface Room {
 
     void addDynamicObject(DynamicObject obj);
 
-    void addAllDynamicObject(List<DynamicObject> objs);
-
     void addSimpleObject(SimpleObject obj);
 
     void addAllSimpleObject(List<SimpleObject> objs);
 
-    List<GameObject> getCurrentGameObjects();
-
     void deleteGameObject(GameObject gameObject);
+
+    List<GameObject> getCurrentGameObjects();
 
     RoomManager getRoomManager();
 
-    void addDoor(Direction direction);
+    void addDoor(CardinalPoint direction);
 
     boolean isDoorOpen();
 
-    Set<Direction> getDoors();
+    Set<CardinalPoint> getDoors();
 
     void clean();
-
-    Point2D getUL();
-
-    Point2D getBR();
 
     boolean isVisited();
 
