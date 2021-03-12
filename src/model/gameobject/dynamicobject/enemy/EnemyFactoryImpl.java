@@ -15,7 +15,6 @@ public class EnemyFactoryImpl implements EnemyFactory {
     private static final int SOUL_LIFE = 50;
     private static final int SPROUT_LIFE = 50;
     private static final int SKELETON_LIFE = 75;
-    private static final int BOSS_LIFE = 300;
 
     private static final int SOUL_SPEED = 90;
     private static final int SPROUT_SPEED = 50;
@@ -159,6 +158,6 @@ public class EnemyFactoryImpl implements EnemyFactory {
      */
     @Override
     public Enemy createBoss(final Point2D position) {
-        return new Boss(BOSS_LIFE, BOSS_SPEED, position, GameObjectType.ENEMY_BOSS);
+        return new Boss(BOSS_SPEED, position, GameObjectType.ENEMY_BOSS);
     }
 }

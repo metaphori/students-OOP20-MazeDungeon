@@ -14,6 +14,7 @@ import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.enemy.AbstractEnemy;
+import model.room.Rooms;
 import mvc.Model;
 
 public class GameControllerImpl implements GameController {
@@ -200,7 +201,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public int getTotalRooms() {
-        return this.model.getRoomManager().getTotalRooms();
+        return Rooms.NUMBER_OF_ROOMS;
     }
 
     /**

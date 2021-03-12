@@ -3,123 +3,109 @@ package gamestructure.ingamemenu;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Map.Entry;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JLayeredPane;
 import javax.swing.border.LineBorder;
-
+import gamestructure.WindowUtilities;
 import gamestructure.ingamemenu.utilities.ImageLoader;
 import gamestructure.ingamemenu.utilities.Images;
+import gamestructure.ingamemenu.utilities.MenuShopComponents;
+import gamestructure.Pair;
+import model.common.ResizableRectangle;
 import model.shop.Items;
 
 public class InGameMenuViewImpl implements InGameMenuView  {
     private static final int SIZE_IMAGE_ITEM = 100;
-    private static final double WIDTH_RATIO = 0.67; 
-    private static final double HEIGHT_RATIO = 0.736;
+    private JLabel lblBackGroundShop;
+    private final WindowUtilities windowUtilities = new WindowUtilities();
+
     private static final String FONT_ALGERIAN = "Algerian";
     private String priceArthemideBow;
     private String priceHermesBoots;
     private String priceZeusBolth;
-    private String priceHelath;
+    private String priceHealth;
     private String priceOracleAmulet;
     private final JFrame frame = new JFrame();
-    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+
     private final ImageLoader  imageIconSources = new ImageLoader();
-    private final JLabel lblBackgroundMenu = new JLabel(imageIconSources.getImage(Images.BACKGROUNDMENU));
-    private final JLabel lblBackgroundShop = new JLabel(imageIconSources.getImage(Images.BACKGROUNDSHOP));
-    private final JButton btnResumeMenu = new JButton("", imageIconSources.getImage(Images.BTNRESUME));
-    private final JButton btnExitMenu = new JButton("", imageIconSources.getImage(Images.BTNEXIT)); 
-    private final JButton btnShopMenu = new JButton("", imageIconSources.getImage(Images.BTNSHOP)); 
-    private final JButton btnArthemideBowItem = new JButton("", imageIconSources.getImage(Images.BTNARTHEMIDEBOW)); 
-    private final JButton btnHermesBootsItem = new JButton("", imageIconSources.getImage(Images.BTNHERMESBOOTS)); 
-    private final JButton btnZeusBoltItem = new JButton("", imageIconSources.getImage(Images.BTNZEUSBOLT)); 
-    private final JButton btnHealthItem = new JButton("", imageIconSources.getImage(Images.BTNHEALTH)); 
-    private final JButton btnOracleAmulet = new JButton("", imageIconSources.getImage(Images.BTNORACLEAMULET)); 
-    private final JButton btnBackToMenu = new JButton("", imageIconSources.getImage(Images.BTNRETURNMENU)); 
-    private final JPanel inGameMenuPanel = new JPanel(new GridBagLayout());
-    private final JPanel shopPanel = new JPanel(new GridBagLayout());
+
+    private final JLayeredPane inGameMenuPanel = new JLayeredPane();
+    private final JLayeredPane shopPanel = new JLayeredPane();
     private final JLabel msg = new JLabel();
 
     private static final Color COLOR_BACKGROUND = new Color(11, 23, 30, 255);
-    private boolean start;
+    private boolean startMenu = true;
+    private boolean startShop = true;
 
     private final InGameMenuController controller;
+    private static final int WIDTHBTN = 300; 
+    private static final int HEIGHTBTN = 90;
+    private static final int POS_Y_BTN_ITEM = 180;
+
+    private final Map<MenuShopComponents, Pair<JComponent, ResizableRectangle>> componentMapMenu = new HashMap<>() {{
+        put(MenuShopComponents.BTN_RESUME, new Pair<>(new JButton(), new ResizableRectangle(320, 340, WIDTHBTN, HEIGHTBTN)));
+        put(MenuShopComponents.BTN_EXIT, new Pair<>(new JButton(), new ResizableRectangle(320, 523, WIDTHBTN, HEIGHTBTN)));
+        put(MenuShopComponents.BTN_SHOP, new Pair<>(new JButton(), new ResizableRectangle(320, 433, WIDTHBTN, HEIGHTBTN)));
+        put(MenuShopComponents.LBL_BACKGROUND_MENU, new Pair<>( new JLabel(), new ResizableRectangle(0, 0, 1280, 800)));
+    }};
+    private static final int WIDTH_LABEL = 25;
+    private static final int HEIGHT_LABEL = 25;
+    private static final int POS_Y_LBL_PRICE = 310;
+
+    private final Map<MenuShopComponents, Pair<JComponent, ResizableRectangle>> componentMapShop = new HashMap<>() {{
+        put(MenuShopComponents.BTN_ARTHEMIDE_BOW, new Pair<>( new JButton(), new ResizableRectangle(45, POS_Y_BTN_ITEM, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM)));
+        put(MenuShopComponents.BTN_HERMES_BOOTS, new Pair<>(new JButton(), new ResizableRectangle(208, POS_Y_BTN_ITEM, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM)));
+        put(MenuShopComponents.BTN_ZEUS_BOLT, new Pair<>(new JButton(), new ResizableRectangle(350, POS_Y_BTN_ITEM, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM)));
+        put(MenuShopComponents.BTN_HEALTH, new Pair<>(new JButton(), new ResizableRectangle(510, POS_Y_BTN_ITEM, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM)));
+        put(MenuShopComponents.BTN_ORACLE_AMULET, new Pair<>(new JButton(), new ResizableRectangle(680, POS_Y_BTN_ITEM, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM)));
+        put(MenuShopComponents.BTN_BACK, new Pair<>(new JButton(), new ResizableRectangle(320, 533, 300, 90)));
+        put(MenuShopComponents.LBL_BACKGROUND_SHOP, new Pair<>(new JLabel(), new ResizableRectangle(0, 0, 1280, 800)));
+        put(MenuShopComponents.LBL_PRICE_AB, new Pair<>(new JLabel(), new ResizableRectangle(90, POS_Y_LBL_PRICE, WIDTH_LABEL, HEIGHT_LABEL)));
+        put(MenuShopComponents.LBL_PRICE_H, new Pair<>(new JLabel(), new ResizableRectangle(560, POS_Y_LBL_PRICE, WIDTH_LABEL, HEIGHT_LABEL)));
+        put(MenuShopComponents.LBL_PRICE_HB, new Pair<>(new JLabel(), new ResizableRectangle(250, POS_Y_LBL_PRICE, WIDTH_LABEL, HEIGHT_LABEL)));
+        put(MenuShopComponents.LBL_PRICE_OA, new Pair<>(new JLabel(), new ResizableRectangle(710, POS_Y_LBL_PRICE, WIDTH_LABEL, HEIGHT_LABEL)));
+        put(MenuShopComponents.LBL_PRICE_ZB, new Pair<>(new JLabel(), new ResizableRectangle(390, POS_Y_LBL_PRICE, WIDTH_LABEL, HEIGHT_LABEL)));
+        put(MenuShopComponents.LBL_MSG, new Pair<>(new JLabel(), new ResizableRectangle(390, POS_Y_LBL_PRICE, WIDTH_LABEL, HEIGHT_LABEL)));
+    }};
     public InGameMenuViewImpl(final InGameMenuController controller) {
         this.controller = controller;
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
-        this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), 
-                (int) (screen.getHeight() * HEIGHT_RATIO)));
-        inGameMenuPanel.add(lblBackgroundMenu);
-        shopPanel.add(lblBackgroundShop);
         this.frame.setTitle("MazeDungeon");
+
     }
     /**
      * show shop panel and set button and label.
      */
     public void showShop() {
-        final int posYBtnItem = 180;
         this.frame.remove(inGameMenuPanel);
+
+        if (startShop) {
+            this.componentMapShop.entrySet().stream().forEach(e -> {
+                e.getValue().getY().mul(windowUtilities.getScreenRatio());
+                e.getValue().getX().setBounds(e.getValue().getY());
+                this.configureShopComponent(e);
+                if (e.getValue().getX() instanceof JButton) {
+                    this.configureButton((JButton) e.getValue().getX());
+                    this.shopPanel.add(e.getValue().getX(), JLayeredPane.PALETTE_LAYER);
+                } else if (e.getKey().equals(MenuShopComponents.LBL_BACKGROUND_SHOP)) {
+                    this.shopPanel.add(e.getValue().getX(), JLayeredPane.DEFAULT_LAYER);
+                } else {
+                    this.shopPanel.add(e.getValue().getX(), JLayeredPane.PALETTE_LAYER);
+                }
+            });
+            startShop = false;
+        }
         this.frame.setContentPane(shopPanel);
-
-        btnBackToMenu.setBounds((int) (screen.getWidth() / 4), (int) (screen.getHeight() / 1.5), 300, 90);
-        this.configureButton(btnBackToMenu);
-        this.lblBackgroundShop.add(btnBackToMenu);
-        btnBackToMenu.addActionListener(e -> this.controller.openInGameMenu());
-        showSelectButton(btnBackToMenu);
-
-        btnArthemideBowItem.setBounds(45, posYBtnItem, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
-        this.configureButton(btnArthemideBowItem);
-        this.lblBackgroundShop.add(btnArthemideBowItem);
-        btnArthemideBowItem.addActionListener(e -> this.controller.buyItem(Items.ARTHEMIDEBOW));
-        showSelectButton(btnArthemideBowItem);
-
-        btnHermesBootsItem.setBounds(208, posYBtnItem, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
-        this.configureButton(btnHermesBootsItem);
-        this.lblBackgroundShop.add(btnHermesBootsItem);
-        btnHermesBootsItem.addActionListener(e -> this.controller.buyItem(Items.HERMESBOOTS));
-        showSelectButton(btnHermesBootsItem);
-
-        btnZeusBoltItem.setBounds(350, posYBtnItem, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
-        this.configureButton(btnZeusBoltItem);
-        this.lblBackgroundShop.add(btnZeusBoltItem);
-        btnZeusBoltItem.addActionListener(e -> this.controller.buyItem(Items.ZEUSBOLT));
-        showSelectButton(btnZeusBoltItem);
-
-        btnHealthItem.setBounds(510, posYBtnItem, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
-        this.configureButton(btnHealthItem);
-        this.lblBackgroundShop.add(btnHealthItem);
-        btnHealthItem.addActionListener(e -> this.controller.buyItem(Items.HEALTH));
-        showSelectButton(btnHealthItem);
-
-        btnOracleAmulet.setBounds(680, posYBtnItem, SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM);
-        this.configureButton(btnOracleAmulet);
-        this.lblBackgroundShop.add(btnOracleAmulet);
-        btnOracleAmulet.addActionListener(e -> this.controller.buyItem(Items.ORACLEAMULET));
-        showSelectButton(btnOracleAmulet);
-
-        this.showPrice();
-        this.showItemInformation();
         this.show();
-    }
-    private void showSelectButton(final JButton btn) {
-        btn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(final MouseEvent e) {
-                btn.setBackground(new Color(Color.TRANSLUCENT));
-            }
-            @Override
-            public void mouseExited(final MouseEvent e) {
-                btn.setBackground(COLOR_BACKGROUND);
-            }
-        });
     }
     /**
      * open in game menu panel and set button and label.
@@ -127,41 +113,33 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     public void showInGameMenu() {
         this.frame.remove(shopPanel);
         this.frame.setContentPane(inGameMenuPanel);
-        final int widthBtn = 300; 
-        final int heightBtn = 90;
-        btnResumeMenu.setBounds((int) (screen.getWidth() / 4), 340, widthBtn, heightBtn);
-        this.configureButton(btnResumeMenu);
-        this.lblBackgroundMenu.add(btnResumeMenu);
-        btnResumeMenu.addActionListener(e -> this.controller.resume());
-        showSelectButton(btnResumeMenu);
+        if (startMenu) {
+            this.componentMapMenu.entrySet().stream().forEach(e -> {
+                e.getValue().getY().mul(windowUtilities.getScreenRatio());
+                e.getValue().getX().setBounds(e.getValue().getY());
+                this.configureMenuComponent(e);
+                if (e.getValue().getX() instanceof JButton) {
+                    this.configureButton((JButton) e.getValue().getX());
+                    this.inGameMenuPanel.add(e.getValue().getX(), JLayeredPane.PALETTE_LAYER);
+                } else {
+                    this.inGameMenuPanel.add(e.getValue().getX(), JLayeredPane.DEFAULT_LAYER);
+                }
 
-        btnShopMenu.setBounds((int) (screen.getWidth() / 4), 433, widthBtn, heightBtn);
-        this.configureButton(btnShopMenu);
-        this.lblBackgroundMenu.add(btnShopMenu);
-        btnShopMenu.addActionListener(e -> this.controller.openShop());
-        showSelectButton(btnShopMenu);
-
-        btnExitMenu.setBounds((int) (screen.getWidth() / 4), 523, widthBtn, heightBtn);
-        this.configureButton(btnExitMenu);
-        this.lblBackgroundMenu.add(btnExitMenu);
-        btnExitMenu.addActionListener(e -> this.controller.exit());
-        showSelectButton(btnExitMenu);
-        if (start) {
-            this.show();
+            });
+            startMenu = false;
         }
+        this.show();
     }
     /**
      * 
      */
     @Override
     public void show() {
-        this.frame.pack();
-        if (!start) {
-            this.frame.setLocation(screen.width / 2 - this.frame.getSize().width / 2, 
-                                 screen.height / 2 - this.frame.getSize().height / 2);
-            start = true;
-        }
+        this.frame.setLocation(windowUtilities.getScreen().width / 2 - this.frame.getSize().width / 2,
+                windowUtilities.getScreen().height / 2 - this.frame.getSize().height / 2);
         this.frame.setVisible(true);
+        this.frame.setSize(new Dimension((int) (WindowUtilities.NATIVE_WIDTH * WindowUtilities.WIDTH_RATIO * windowUtilities.getScreenRatio()) + this.frame.getInsets().left  + this.frame.getInsets().right,
+                (int) (WindowUtilities.NATIVE_HEIGHT * WindowUtilities.HEIGHT_RATIO * windowUtilities.getScreenRatio()) + this.frame.getInsets().top + this.frame.getInsets().bottom));
     }
     /**
      * 
@@ -175,6 +153,16 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         btn.setBackground(COLOR_BACKGROUND);
         btn.setBorder(new LineBorder(COLOR_BACKGROUND));
         btn.setFocusPainted(false);
+        btn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(final MouseEvent e) {
+                btn.setBackground(new Color(Color.TRANSLUCENT));
+            }
+            @Override
+            public void mouseExited(final MouseEvent e) {
+                btn.setBackground(COLOR_BACKGROUND);
+            }
+        });
     }
     /**
      * create and set message label, for output information.
@@ -183,7 +171,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     public void returnMessage(final String messageOutput) {
         final int sizeFont = 20;
         msg.setBounds(150, 580, 420, 50);
-        this.lblBackgroundShop.add(msg);
+        this.lblBackGroundShop.add(msg);
         msg.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
         msg.setText(messageOutput);
         msg.setVisible(true);
@@ -202,41 +190,102 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         priceArthemideBow = map.get(Items.ARTHEMIDEBOW).toString();
         priceHermesBoots = map.get(Items.HERMESBOOTS).toString();
         priceZeusBolth = map.get(Items.ZEUSBOLT).toString();
-        priceHelath = map.get(Items.HEALTH).toString();
+        priceHealth = map.get(Items.HEALTH).toString();
         priceOracleAmulet = map.get(Items.ORACLEAMULET).toString();
     }
-
-    private void showPrice() {
-        final int sizeFont = 25;
-        final int widthLabel = 25;
-        final int heightLabel = 25;
-        final int posYlabelPrice = 310;
-        final JLabel labelPriceArthemideBow = new JLabel(priceArthemideBow);
-        labelPriceArthemideBow.setBounds(90, posYlabelPrice, widthLabel, heightLabel);
-        this.lblBackgroundShop.add(labelPriceArthemideBow);
-        labelPriceArthemideBow.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
-
-        final JLabel labelPriceHermesBoots = new JLabel(priceHermesBoots);
-        labelPriceHermesBoots.setBounds(250, posYlabelPrice, widthLabel, heightLabel);
-        this.lblBackgroundShop.add(labelPriceHermesBoots);
-        labelPriceHermesBoots.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
-
-        final JLabel labelPriceZeusBolt = new JLabel(priceZeusBolth);
-        labelPriceZeusBolt.setBounds(390, posYlabelPrice, widthLabel, heightLabel);
-        this.lblBackgroundShop.add(labelPriceZeusBolt);
-        labelPriceZeusBolt.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
-
-        final JLabel labelPriceHealth = new JLabel(priceHelath);
-        labelPriceHealth.setBounds(560, posYlabelPrice, widthLabel, heightLabel);
-        this.lblBackgroundShop.add(labelPriceHealth);
-        labelPriceHealth.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
-
-        final JLabel labelPriceOracleAmulet = new JLabel(priceOracleAmulet);
-        labelPriceOracleAmulet.setBounds(710, posYlabelPrice, widthLabel, heightLabel);
-        this.lblBackgroundShop.add(labelPriceOracleAmulet);
-        labelPriceOracleAmulet.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
+    private void configureMenuComponent(final Entry<MenuShopComponents, Pair<JComponent, ResizableRectangle>> entry) {
+        switch (entry.getKey()) {
+        case BTN_EXIT:
+            final JButton btnExitMenu = (JButton) entry.getValue().getX();
+            btnExitMenu.addActionListener(e -> this.controller.exit());
+            btnExitMenu.setIcon(windowUtilities.resizeImage(imageIconSources.getImage(Images.BTNEXIT), entry.getValue().getY()));
+            break;
+        case BTN_RESUME:
+            final JButton btnResume = (JButton) entry.getValue().getX();
+            btnResume.addActionListener(e -> this.controller.resume());
+            btnResume.setIcon(windowUtilities.resizeImage(imageIconSources.getImage(Images.BTNRESUME), entry.getValue().getY()));
+            break;
+        case BTN_SHOP:
+            final JButton btnShop = (JButton) entry.getValue().getX();
+            btnShop.addActionListener(e -> this.controller.openShop());
+            btnShop.setIcon(windowUtilities.resizeImage(imageIconSources.getImage(Images.BTNSHOP), entry.getValue().getY()));
+            break;
+        case LBL_BACKGROUND_MENU:
+            final JLabel lblBackGround = (JLabel) entry.getValue().getX();
+            lblBackGround.setIcon(windowUtilities.resizeImage(imageIconSources.getImage(Images.BACKGROUNDMENU), entry.getValue().getY()));
+            break;
+        default:
+            break;
+        }
     }
-    private void showItemInformation() {
+    private void configureShopComponent(final Entry<MenuShopComponents, Pair<JComponent, ResizableRectangle>> entry) {
+        final int sizeFont = 25;
+        switch (entry.getKey()) {
+        case BTN_ARTHEMIDE_BOW:
+            final JButton btnArthemideBow = (JButton) entry.getValue().getX();
+            btnArthemideBow.addActionListener(e -> this.controller.buyItem(Items.ARTHEMIDEBOW));
+            btnArthemideBow.setIcon(windowUtilities.resizeImage(imageIconSources.getImage(Images.BTNARTHEMIDEBOW), entry.getValue().getY()));
+            break;
+        case BTN_BACK:
+            final JButton btnReturn = (JButton) entry.getValue().getX();
+            btnReturn.addActionListener(e -> this.controller.openInGameMenu());
+            btnReturn.setIcon(windowUtilities.resizeImage(imageIconSources.getImage(Images.BTNRETURNMENU), entry.getValue().getY()));
+            break;
+        case BTN_HEALTH:
+            final JButton btnHealth = (JButton) entry.getValue().getX();
+            btnHealth.addActionListener(e -> this.controller.buyItem(Items.HEALTH));
+            btnHealth.setIcon(windowUtilities.resizeImage(imageIconSources.getImage(Images.BTNHEALTH), entry.getValue().getY()));
+            break;
+        case BTN_HERMES_BOOTS:
+            final JButton btnHermesBoots = (JButton) entry.getValue().getX();
+            btnHermesBoots.addActionListener(e -> this.controller.buyItem(Items.HERMESBOOTS));
+            btnHermesBoots.setIcon(windowUtilities.resizeImage(imageIconSources.getImage(Images.BTNHERMESBOOTS), entry.getValue().getY()));
+            break;
+        case BTN_ORACLE_AMULET:
+            final JButton btnOracleAmulet = (JButton) entry.getValue().getX();
+            btnOracleAmulet.addActionListener(e -> this.controller.buyItem(Items.ORACLEAMULET));
+            btnOracleAmulet.setIcon(windowUtilities.resizeImage(imageIconSources.getImage(Images.BTNORACLEAMULET), entry.getValue().getY()));
+            break;
+        case BTN_ZEUS_BOLT:
+            final JButton btnZeusBolt = (JButton) entry.getValue().getX();
+            btnZeusBolt.addActionListener(e -> this.controller.buyItem(Items.ZEUSBOLT));
+            btnZeusBolt.setIcon(windowUtilities.resizeImage(imageIconSources.getImage(Images.BTNZEUSBOLT), entry.getValue().getY()));
+            break;
+        case LBL_BACKGROUND_SHOP:
+            lblBackGroundShop = (JLabel) entry.getValue().getX();
+            lblBackGroundShop.setIcon(windowUtilities.resizeImage(imageIconSources.getImage(Images.BACKGROUNDSHOP), entry.getValue().getY()));
+            break;
+        case LBL_PRICE_AB:
+            final JLabel lblPriceArthemideBow = (JLabel) entry.getValue().getX();
+            lblPriceArthemideBow.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
+            lblPriceArthemideBow.setText(priceArthemideBow);
+            break;
+        case LBL_PRICE_H:
+            final JLabel lblPriceHealth = (JLabel) entry.getValue().getX();
+            lblPriceHealth.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
+            lblPriceHealth.setText(priceHealth);
+            break;
+        case LBL_PRICE_HB:
+            final JLabel lblPriceHermesBoots = (JLabel) entry.getValue().getX();
+            lblPriceHermesBoots.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
+            lblPriceHermesBoots.setText(priceHermesBoots);
+            break;
+        case LBL_PRICE_OA:
+            final JLabel lblPriceOracleAmulet = (JLabel) entry.getValue().getX();
+            lblPriceOracleAmulet.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
+            lblPriceOracleAmulet.setText(priceOracleAmulet);
+            break;
+        case LBL_PRICE_ZB:
+            final JLabel lblPriceZeusBolt = (JLabel) entry.getValue().getX();
+            lblPriceZeusBolt.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
+            lblPriceZeusBolt.setText(priceZeusBolth);
+            break;
+        default:
+            break;
+        }
+    }
+    /////POSSIBILE TOGLIERE QUESTO METODO
+   /* private void showItemInformation() {
         final int sizeFont = 15;
         final int widthLabel = 140;
         final int heightLabel = 20;
@@ -265,5 +314,5 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         labelInfoOracleAmulet.setBounds(665, 385, widthLabel, heightLabel);
         this.lblBackgroundShop.add(labelInfoOracleAmulet);
         labelInfoOracleAmulet.setFont(new Font(FONT_ALGERIAN, Font.ITALIC, sizeFont));
-    }
+    }*/
 }

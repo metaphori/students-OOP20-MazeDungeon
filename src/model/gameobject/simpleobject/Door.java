@@ -1,6 +1,6 @@
 package model.gameobject.simpleobject;
 
-import model.common.Direction;
+import model.common.CardinalPoint;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.GameObject;
@@ -21,19 +21,19 @@ public class Door extends SimpleObjectImpl {
         }
         switch (obj2.getGameObjectType()) {
         case CHARACTER:
-            final Direction direction;
+            final CardinalPoint direction;
             switch (this.getGameObjectType()) {
-            case DOOR_DOWN:
-                direction = Direction.DOWN;
+            case DOOR_SOUTH:
+                direction = CardinalPoint.SOUTH;
                 break;
-            case DOOR_UP:
-                direction = Direction.UP;
+            case DOOR_TOP:
+                direction = CardinalPoint.NORTH;
                 break;
-            case DOOR_LEFT:
-                direction = Direction.LEFT;
+            case DOOR_WEST:
+                direction = CardinalPoint.WEST;
                 break;
-            case DOOR_RIGHT:
-                direction = Direction.RIGHT;
+            case DOOR_EAST:
+                direction = CardinalPoint.EAST;
                 break;
             default:
                 return;

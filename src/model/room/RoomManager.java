@@ -1,6 +1,6 @@
 package model.room;
 
-import model.common.Direction;
+import model.common.CardinalPoint;
 import model.common.IdIterator;
 import model.gameobject.dynamicobject.character.Character;
 
@@ -11,11 +11,9 @@ public interface RoomManager {
 
     IdIterator getIdIterator();
 
-    void changeRoom(Direction direction);
+    void changeRoom(CardinalPoint direction);
 
     Character getCharacter();
 
     int getVisitedRooms();
-
-    int getTotalRooms();
 }

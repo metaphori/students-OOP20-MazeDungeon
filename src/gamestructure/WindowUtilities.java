@@ -1,7 +1,12 @@
 package gamestructure;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
+
+import model.common.ResizableRectangle;
 
 public class WindowUtilities {
 
@@ -39,5 +44,15 @@ public class WindowUtilities {
      */
     public double getScreenRatio() {
         return screenRatio;
+    }
+
+    /**
+     * @param startImgIcon the start image to resize
+     * @param rectangle the dimension for resize the image
+     * @return the resized image
+     */
+    public ImageIcon resizeImage(final ImageIcon startImgIcon, final ResizableRectangle rectangle) {
+        final Image img = startImgIcon.getImage().getScaledInstance((int) rectangle.getWidth(), (int) rectangle.getHeight(), Image.SCALE_SMOOTH);
+        return new ImageIcon(img);
     }
 }
