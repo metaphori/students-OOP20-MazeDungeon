@@ -79,6 +79,7 @@ public class MainMenuViewImpl implements MainMenuView {
                 this.add(e.getValue().getX(), JLayeredPane.PALETTE_LAYER);
             });
 
+            
             this.componentsMap.entrySet().stream().filter(e -> e.getValue().getX() instanceof JButton).forEach(e -> {
                 this.configureButtonGraphics((JButton) e.getValue().getX());
             });

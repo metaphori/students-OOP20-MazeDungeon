@@ -18,12 +18,12 @@ public class Boss extends AbstractEnemy {
     private static final int ALIGN_SHOOT_Y = 140;
     private static final int ALIGN_MONEY = 40;
     private static final int MODIFY_ALIGN_MONEY = 10;
-    private final double maxLife;
+    private static final int BOSS_LIFE = 300;
+
     private long lastHitTime;
 
-    public Boss(final double life, final int speed, final Point2D position, final GameObjectType gameObjectType) {
-        super(life, speed, position, gameObjectType, BOSS_SHOOT_DELAY);
-        this.maxLife = life;
+    public Boss(final int speed, final Point2D position, final GameObjectType gameObjectType) {
+        super(BOSS_LIFE, speed, position, gameObjectType, BOSS_SHOOT_DELAY);
     }
 
     private void moveAroundWall() {
@@ -59,7 +59,7 @@ public class Boss extends AbstractEnemy {
             final int incrementSpeed = 10;
             this.setSpeed(this.getSpeed() + incrementSpeed);
         }
-        if (this.getLife() >=  this.maxLife / 2) {
+        if (this.getLife() >=  BOSS_LIFE / 2) {
             moveUpWall();
         } else {
             moveAroundWall();
@@ -88,7 +88,7 @@ public class Boss extends AbstractEnemy {
     @Override
     protected void shoot() {
         final Bullet bullet;
-        if (this.getLife() >=  this.maxLife / 2) {
+        if (this.getLife() >=  BOSS_LIFE / 2) {
             bullet = bulletFactory.createBossBullet(this.getPosition().sum(new Vector2D(ALIGN_SHOOT_X, ALIGN_SHOOT_Y)),
                     new Vector2D(0, 1).getNormalized());
         } else {
