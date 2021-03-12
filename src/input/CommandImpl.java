@@ -1,13 +1,22 @@
 package input;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import gamestructure.game.GameController;
 import gamestructure.ingamemenu.InGameMenuController;
 import gamestructure.ingamemenu.InGameMenuControllerImpl;
 import model.common.Vector2D;
+import model.common.VectorDirection;
 import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.dynamicobject.character.CharacterMovement;
 import model.gameobject.dynamicobject.character.CharacterMovementImpl;
@@ -18,27 +27,24 @@ public class CommandImpl implements Command {
     private final Model model;
     private final GameController gameController;
     private final Character character;
-    private final CharacterMovement chMovement;
-
-    private final Map<Integer, Boolean> keysMap = new HashMap<>() {{
-        put(KeyEvent.VK_UP, false);
-        put(KeyEvent.VK_DOWN, false); 
-        put(KeyEvent.VK_LEFT, false);
-        put(KeyEvent.VK_RIGHT, false); 
-        put(KeyEvent.VK_W, false);
-        put(KeyEvent.VK_S, false);
-        put(KeyEvent.VK_D, false);
-        put(KeyEvent.VK_A, false);
-        put(KeyEvent.VK_ESCAPE, false); 
-     }};
-
-    private final Map<Integer, Vector2D> keyDirectionMap = new HashMap<>() {{
-        put(KeyEvent.VK_UP, new Vector2D(0, -1));
-        put(KeyEvent.VK_DOWN, new Vector2D(0, 1));
-        put(KeyEvent.VK_LEFT, new Vector2D(-1, 0));
-        put(KeyEvent.VK_RIGHT, new Vector2D(1, 0));
-    }};
+    private final CharacterMovement chMovement; 
     private boolean menuIsOpen;
+    private Trio<Integer, Boolean, Optional<VectorDirection>> command;
+
+
+    private final List<Trio<Integer, Boolean, Optional<VectorDirection>>> keysList = new ArrayList<>() 
+    {{
+       add(new Trio<>(KeyEvent.VK_UP, false, Optional.of(VectorDirection.UP)));
+       add(new Trio<>(KeyEvent.VK_DOWN, false, Optional.of(VectorDirection.DOWN))); 
+       add(new Trio<>(KeyEvent.VK_LEFT, false, Optional.of(VectorDirection.LEFT))); 
+       add(new Trio<>(KeyEvent.VK_RIGHT, false, Optional.of(VectorDirection.RIGHT)));
+
+       add(new Trio<>(KeyEvent.VK_W, false, Optional.of(VectorDirection.UP)));
+       add(new Trio<>(KeyEvent.VK_S, false, Optional.of(VectorDirection.DOWN)));
+       add(new Trio<>(KeyEvent.VK_D, false, Optional.of(VectorDirection.RIGHT)));
+       add(new Trio<>(KeyEvent.VK_A, false, Optional.of(VectorDirection.LEFT)));
+    }};
+
 
 
     public CommandImpl(final Model model, final GameController gameController) {
@@ -54,37 +60,25 @@ public class CommandImpl implements Command {
      */
     @Override
     public void execute() {
-
-        if (this.keysMap.get(KeyEvent.VK_W)) {
-            chMovement.moveUp();
-        }
-        if (this.keysMap.get(KeyEvent.VK_S)) {
-            chMovement.moveDown();
-        }
-        if (this.keysMap.get(KeyEvent.VK_D)) {
-            chMovement.moveRight();
-        }
-        if (this.keysMap.get(KeyEvent.VK_A)) {
-            chMovement.moveLeft();
-        }
-
-        if (this.keysMap.get(KeyEvent.VK_UP)) {
-            character.setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_UP));
-        }
-        if (this.keysMap.get(KeyEvent.VK_DOWN)) {
-            character.setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_DOWN));
-        }
-        if (this.keysMap.get(KeyEvent.VK_LEFT)) {
-            character.setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_LEFT));
-        }
-        if (this.keysMap.get(KeyEvent.VK_RIGHT)) {
-            character.setShoot(true, this.keyDirectionMap.get(KeyEvent.VK_RIGHT));
+        int keyCode;
+        for (final Trio<Integer, Boolean, Optional<VectorDirection>> trio : this.keysList) {
+            if (trio.getY()) {
+                keyCode = trio.getX();
+                this.command = findObjectFromStream(keyCode).get();
+                if (this.command != null) {
+                    if (isArrow(command)) {
+                       this.character.setShoot(true, this.command.getZ().get());
+                    } else {
+                        this.chMovement.move(this.command.getZ().get());
+                    }
+                }
+            }
         }
 
         /**
          *@TODO movements
          * METTERE QUESTI METODI NEL MOVEMENT*/
-        if (this.checkStopVertical()) {
+       if (this.checkStopVertical()) {
             chMovement.stopVertical();
         }
 
@@ -92,6 +86,21 @@ public class CommandImpl implements Command {
             chMovement.stopHorizontal();
         }
      }
+
+
+
+    private boolean isArrow(final Trio<Integer, Boolean, Optional<VectorDirection>> obj) {
+        return obj.getX() == KeyEvent.VK_UP || obj.getX() == KeyEvent.VK_DOWN || obj.getX() == KeyEvent.VK_LEFT 
+                || obj.getX() == KeyEvent.VK_RIGHT;
+    }
+
+    private Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> findObjectFromStream(final int key) {
+        final Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> object = this.keysList.stream().filter(t -> t.getX() == key).findFirst();
+        if (object.isPresent()) {
+            return object;
+        }
+       return Optional.empty();
+    }
 
     /**
      * 
@@ -104,8 +113,9 @@ public class CommandImpl implements Command {
             this.menuIsOpen = true;
             return;
         }
-        if (this.keysMap.keySet().contains(key.getKeyCode())) {
-             this.keysMap.put(key.getKeyCode(), b);
+        final Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> trio = this.keysList.stream().filter(t -> t.getX() == key.getKeyCode()).findFirst();
+        if (trio.isPresent()) {
+            trio.get().setY(b);
         }
     }
 
@@ -119,7 +129,10 @@ public class CommandImpl implements Command {
      */
     @Override
     public boolean checkStopVertical() {
-        return !this.keysMap.get(KeyEvent.VK_W) && !this.keysMap.get(KeyEvent.VK_S);
+        if (this.command != null) {
+            return !this.findObjectFromStream(KeyEvent.VK_S).get().getY() && !this.findObjectFromStream(KeyEvent.VK_W).get().getY();
+        }
+        return true;
     }
 
     /**
@@ -127,7 +140,10 @@ public class CommandImpl implements Command {
      */
     @Override
     public boolean checkStopHorizontal() {
-        return !this.keysMap.get(KeyEvent.VK_A) && !this.keysMap.get(KeyEvent.VK_D);
+        if (this.command != null) {
+            return  !this.findObjectFromStream(KeyEvent.VK_D).get().getY() && !this.findObjectFromStream(KeyEvent.VK_A).get().getY();
+        }
+        return true;
     }
 
     /**

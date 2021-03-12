@@ -1,6 +1,7 @@
 package model.gameobject.dynamicobject.character;
 
 import model.common.Vector2D;
+import model.common.VectorDirection;
 import model.gameobject.dynamicobject.DynamicObject;
 
 public interface Character extends DynamicObject {
@@ -23,7 +24,7 @@ public interface Character extends DynamicObject {
 
     void takesDamage(int damage);
 
-    void setShoot(boolean shoot, Vector2D shootDirection);
+    void setShoot(boolean shoot, VectorDirection vectorDirection);
 
     void pickedUpFinalArtefact();
 

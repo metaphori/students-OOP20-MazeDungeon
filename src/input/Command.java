@@ -7,12 +7,14 @@ public interface Command {
 
     void setKey(KeyEvent key, boolean b);
 
-    boolean checkStopVertical();
+    //void execute();
 
-    boolean checkStopHorizontal();
+    void setMenuClosed();
 
     void execute();
 
-    void setMenuClosed();
+    boolean checkStopVertical();
+
+    boolean checkStopHorizontal();
 
 }

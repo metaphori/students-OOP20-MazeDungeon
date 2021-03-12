@@ -1,6 +1,7 @@
 package model.gameobject.dynamicobject.character;
 
 import model.common.Vector2D;
+import model.common.VectorDirection;
 
 public class CharacterMovementImpl implements CharacterMovement {
 
@@ -48,6 +49,7 @@ public class CharacterMovementImpl implements CharacterMovement {
     @Override
     public void stopVertical() {
         this.character.setDirection(new Vector2D(this.character.getDirection().getX(), 0));
+        //this.character.setDirection(new Vector2D(0, this.character.getDirection().getY()));
 
     }
     /**
@@ -56,5 +58,29 @@ public class CharacterMovementImpl implements CharacterMovement {
     @Override
     public void stopHorizontal() {
         this.character.setDirection(new Vector2D(0, this.character.getDirection().getY()));
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void move(final VectorDirection vectorDirection) {
+        System.out.println(vectorDirection);
+        switch (vectorDirection) {
+            case UP:
+                this.moveUp();
+                break;
+            case DOWN:
+                this.moveDown();
+                break;
+            case LEFT:
+                this.moveLeft();
+                break;
+            case RIGHT:
+                this.moveRight();
+                break;
+            default:
+                break;
+        }
     }
 }

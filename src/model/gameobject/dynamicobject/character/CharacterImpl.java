@@ -4,6 +4,7 @@ import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
+import model.common.VectorDirection;
 import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.AbstractDynamicObject;
 import model.gameobject.dynamicobject.bullet.Bullet;
@@ -126,7 +127,6 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     @Override
     public void takesDamage(final int damage) {
         this.life = this.life - damage;
-        System.out.println(this.getID() + ") " + this.getGameObjectType() + " Life: " + this.life);
     }
 
     /**
@@ -134,10 +134,10 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
      * set a shoot and his direction.
      */
     @Override
-    public void setShoot(final boolean shoot, final Vector2D shootDirection) {
+    public void setShoot(final boolean shoot, final VectorDirection shootDirection) {
         if (this.canShoot()) {
             this.shoot = shoot;
-            this.shootDirection = shootDirection;
+            this.shootDirection = shootDirection.getDirection();
         }
     }
 
@@ -187,9 +187,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
                 break;
             case INTERACTIVE_ELEMENT:
                 if (obj2.getGameObjectType().equals(GameObjectType.COIN)) {
-                    System.out.println("COLLECT A COIN");
                     this.money++;
-                    System.out.println("CURRENT MONEY BADGE: " + this.money);
                     this.getRoom().deleteGameObject(obj2);
                 }
                 break;
