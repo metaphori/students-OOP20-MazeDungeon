@@ -85,8 +85,9 @@ public class EnemyFactoryImpl implements EnemyFactory {
             @Override
             protected void shoot() {
                 final Point2D characterPosition = this.getRoom().getRoomManager().getCharacter().getPosition();
-                final Bullet bullet = bulletFactory.createSoulBullet(this.getPosition(),
-                        new Vector2D(characterPosition.getX() - this.getPosition().getX(), characterPosition.getY() - this.getPosition().getY()).getNormalized());
+                final Vector2D bulletDIrection = new Vector2D(characterPosition.getX() - this.getPosition().getX(), 
+                                                              characterPosition.getY() - this.getPosition().getY()).getNormalized();
+                final Bullet bullet = bulletFactory.createSoulBullet(this.getPosition(), bulletDIrection);
                 bullet.setSafeZone(this.getBoundingBox());
                 this.getRoom().addDynamicObject(bullet);
             }

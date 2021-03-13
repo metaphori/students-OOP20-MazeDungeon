@@ -35,7 +35,6 @@ public class MainMenuViewImpl implements MainMenuView {
         this.frame.setBackground(BACKGROUND_COLOR);
 
         final MenuPanel mainPanel = new MenuPanel();
-        mainPanel.setBackground(BACKGROUND_COLOR);
         this.frame.add(mainPanel);
     }
 

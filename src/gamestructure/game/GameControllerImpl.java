@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import gamestructure.ingamemenu.InGameMenuController;
-import gamestructure.ingamemenu.InGameMenuControllerImpl;
 import gamestructure.mainmenu.MainMenuController;
 import gamestructure.mainmenu.MainMenuControllerImpl;
 import input.Command;
