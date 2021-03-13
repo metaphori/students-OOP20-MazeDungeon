@@ -54,7 +54,7 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.setTitle("MazeDungeon");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gamePanel = new GamePanel();
-        gamePanel.setBackground(BACKGROUND);
+        this.frame.setBackground(BACKGROUND);
         this.frame.add(gamePanel);
         this.frame.addKeyListener(this);
         this.frame.remove(this.lblStartInstruction);
@@ -77,9 +77,10 @@ public class GameViewImpl implements GameView, KeyListener {
     @Override
     public void show() {
         this.frame.setVisible(true);
-        this.frame.setSize(new Dimension((int) (WindowUtilities.NATIVE_WIDTH * WindowUtilities.WIDTH_RATIO * windowUtilities.getScreenRatio()) + this.frame.getInsets().left,
-                (int) (WindowUtilities.NATIVE_HEIGHT * WindowUtilities.HEIGHT_RATIO * windowUtilities.getScreenRatio()) + this.frame.getInsets().top));
-        //this.frame.setSize(new Dimension((int) (screen.getWidth() * WIDTH_RATIO), (int) (screen.getHeight() * HEIGHT_RATIO)));
+        final double frameWidth = WindowUtilities.NATIVE_WIDTH * WindowUtilities.WIDTH_RATIO * windowUtilities.getScreenRatio();
+        final double frameHeigth = WindowUtilities.NATIVE_HEIGHT * WindowUtilities.HEIGHT_RATIO * windowUtilities.getScreenRatio();
+        this.frame.setSize(new Dimension((int) (frameWidth) + this.frame.getInsets().left + this.frame.getInsets().right,
+                (int) (frameHeigth) + this.frame.getInsets().top + this.frame.getInsets().bottom));
         this.frame.setLocation(windowUtilities.getScreen().width / 2 - this.frame.getSize().width / 2,
                                windowUtilities.getScreen().height / 2 - this.frame.getSize().height / 2);
         this.frame.add(this.lblStartInstruction);
