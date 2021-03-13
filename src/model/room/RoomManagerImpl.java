@@ -139,7 +139,7 @@ public class RoomManagerImpl implements RoomManager {
                 return entry.getKey();
             }
         }
-        throw new IllegalStateException("the room parameter is not part of the floor");
+        throw new IllegalStateException("the parameter is not part of the floor");
     }
 
     /**
