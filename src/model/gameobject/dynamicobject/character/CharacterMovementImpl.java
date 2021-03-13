@@ -11,35 +11,20 @@ public class CharacterMovementImpl implements CharacterMovement {
       this.character = character;
     }
 
-    /**
-     * move up the character.
-     */
-    @Override
-    public void moveUp() {
+
+    private void moveUp() {
         this.character.setDirection(new Vector2D(this.character.getDirection().getX(), -1));
     }
 
-    /**
-     * move down the character.
-     */
-    @Override
-    public void moveDown() {
+    private void moveDown() {
         this.character.setDirection(new Vector2D(this.character.getDirection().getX(), 1));
     }
 
-    /**
-     * move right the character.
-     */
-    @Override
-    public void moveRight() {
+    private void moveRight() {
         this.character.setDirection(new Vector2D(1, this.character.getDirection().getY()));
     }
 
-    /**
-     * move left the character.
-     */
-    @Override
-    public void moveLeft() {
+    private void moveLeft() {
         this.character.setDirection(new Vector2D(-1, this.character.getDirection().getY()));
     }
 
@@ -49,8 +34,6 @@ public class CharacterMovementImpl implements CharacterMovement {
     @Override
     public void stopVertical() {
         this.character.setDirection(new Vector2D(this.character.getDirection().getX(), 0));
-        //this.character.setDirection(new Vector2D(0, this.character.getDirection().getY()));
-
     }
     /**
      * stops the character when moving horizontally.
