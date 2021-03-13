@@ -18,32 +18,30 @@ public final class ItemBuilder implements Item {
         this.health = health;
     }
 
-    @Override
     public int getCost() {
         return cost;
     }
 
-    @Override
     public void setCost(final int cost) {
         this.cost = cost;
     }
-    @Override
+
     public Items getName() {
         return this.name;
     }
-    @Override
+
     public double getHealth() {
         return health;
     }
-    @Override
+
     public int getSpeed() {
         return this.speed;
     }
-    @Override
+
     public int getBulletSpeed() {
         return this.bulletSpeed;
     }
-    @Override
+
     public int getDamage() {
         return this.damage;
     }
