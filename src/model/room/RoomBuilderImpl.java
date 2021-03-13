@@ -15,7 +15,7 @@ public class RoomBuilderImpl implements RoomBuilder {
     private static final int MAX_ENEMY_NUMBER = 4;
     private static final Point2D BOSS_SPAWN_POSITION = new Point2D(256, 54);
     private final DoorFactory doorFactory = new DoorFactoryImpl();
-    private ObstaclesFactory obstaclesFactory; 
+    private final ObstacleFactory obstaclesFactory = new ObstaclesFactoryImpl(); 
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
     private final List<Point2D> avaiableEnemyPosition = new LinkedList<>(List.of(new Point2D(254, 200), 
                                                                                 new Point2D(940, 200), 
@@ -40,14 +40,13 @@ public class RoomBuilderImpl implements RoomBuilder {
      * @return the builder object
      */
     @Override
-    public RoomBuilderImpl initialize(final RoomManager roomManager) {
+    public RoomBuilder initialize(final RoomManager roomManager) {
         if (isInitialize) {
            throw new IllegalStateException("cannot initialize twice"); 
         }
         this.isInitialize = true;
         this.room = new RoomImpl(roomManager);
-        this.obstaclesFactory = new ObstaclesFactory();
-        this.room.addAllSimpleObject(obstaclesFactory.getEmptyRoom());
+        this.room.addAllSimpleObject(obstaclesFactory.createEmptyRoom());
         return this;
     }
 
@@ -57,7 +56,7 @@ public class RoomBuilderImpl implements RoomBuilder {
      * @return the builder object
      */
     @Override
-    public RoomBuilderImpl addDoors(final Set<CardinalPoint> doors) {
+    public RoomBuilder addDoors(final Set<CardinalPoint> doors) {
         this.checkInitialize();
         for (final CardinalPoint direction : doors) {
             this.room.addDoor(direction);
@@ -71,7 +70,7 @@ public class RoomBuilderImpl implements RoomBuilder {
      * @return the builder object
      */
     @Override
-    public RoomBuilderImpl addRandomObstacle() {
+    public RoomBuilder addObstacle() {
         this.checkInitialize();
         if (!canAddObstacle) {
             throw new IllegalStateException("cannot add obstacle");
@@ -86,7 +85,7 @@ public class RoomBuilderImpl implements RoomBuilder {
      * @return the builder object
      */
     @Override
-    public RoomBuilderImpl addRandomEnemy() {
+    public RoomBuilder addEnemy() {
         this.checkInitialize();
         if (!canAddEnemy) {
             throw new IllegalStateException("cannot add enemy");
@@ -121,7 +120,7 @@ public class RoomBuilderImpl implements RoomBuilder {
      * @return the builder object 
      */
     @Override
-    public RoomBuilderImpl addBoss() {
+    public RoomBuilder addBoss() {
         this.checkInitialize();
         if (!canAddBoss) {
             throw new IllegalStateException("cannot add boss");

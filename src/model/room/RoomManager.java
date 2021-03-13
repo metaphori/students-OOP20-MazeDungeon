@@ -11,7 +11,7 @@ public interface RoomManager {
 
     IdIterator getIdIterator();
 
-    void changeRoom(CardinalPoint direction);
+    void changeRoom(CardinalPoint cp);
 
     Character getCharacter();
 

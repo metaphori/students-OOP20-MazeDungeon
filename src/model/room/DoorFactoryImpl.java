@@ -12,35 +12,19 @@ public class DoorFactoryImpl implements DoorFactory {
     private static final Point2D EAST_DOOR_POSITION = new Point2D(1010, 360);
     private static final Point2D SOUTH_DOOR_POSITION = new Point2D(590, 615);
 
-    /**
-     * @return the left door
-     */
-    @Override
-    public Door createWestDoor() {
+    private Door createWestDoor() {
         return new Door(WEST_DOOR_POSITION, GameObjectType.DOOR_WEST);
     }
 
-    /**
-     * @return the right door
-     */
-    @Override
-    public Door createEastDoor() {
+    private Door createEastDoor() {
         return new Door(EAST_DOOR_POSITION, GameObjectType.DOOR_EAST);
     }
 
-    /**
-     * @return the up door
-     */
-    @Override
-    public Door createNorthDoor() {
+    private Door createNorthDoor() {
         return new Door(NORTH_DOOR_POSITION, GameObjectType.DOOR_TOP);
     }
 
-    /**
-     * @return the down door
-     */
-    @Override
-    public Door createSouthDoor() {
+    private Door createSouthDoor() {
         return new Door(SOUTH_DOOR_POSITION, GameObjectType.DOOR_SOUTH);
     }
 

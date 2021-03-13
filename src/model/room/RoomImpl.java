@@ -104,11 +104,11 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @param direction : direction of the door.
+     * @param cardinalPoint : cardinalPoint of the door.
      */
     @Override
-    public void addDoor(final CardinalPoint direction) {
-        nearRooms.add(direction);
+    public void addDoor(final CardinalPoint cardinalPoint) {
+        nearRooms.add(cardinalPoint);
     }
 
     /**

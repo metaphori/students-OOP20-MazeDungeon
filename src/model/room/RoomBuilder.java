@@ -6,15 +6,15 @@ import model.common.CardinalPoint;
 
 public interface RoomBuilder {
 
-    RoomBuilderImpl initialize(RoomManager roomManager);
+    RoomBuilder initialize(RoomManager roomManager);
 
-    RoomBuilderImpl addDoors(Set<CardinalPoint> doors);
+    RoomBuilder addDoors(Set<CardinalPoint> doors);
 
-    RoomBuilderImpl addRandomObstacle();
+    RoomBuilder addObstacle();
 
-    RoomBuilderImpl addRandomEnemy();
+    RoomBuilder addEnemy();
 
-    RoomBuilderImpl addBoss();
+    RoomBuilder addBoss();
 
     Room build();
 }

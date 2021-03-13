@@ -47,10 +47,10 @@ public class BoundingBox {
     }
 
     /**
-     * @param upperLeft : the new upper left corner
+     * @param newUL : the new upper left corner
      */
-    public void move(final Point2D upperLeft) {
-        this.upperLeft = upperLeft;
+    public void move(final Point2D newUL) {
+        this.upperLeft = newUL;
         this.bottomRight = new Point2D(this.upperLeft.getX() + this.width, this.upperLeft.getY() + this.height);
     }
 

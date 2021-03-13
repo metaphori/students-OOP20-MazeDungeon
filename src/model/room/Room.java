@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import model.common.CardinalPoint;
-import model.common.Point2D;
 import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.DynamicObject;
 import model.gameobject.simpleobject.SimpleObject;
@@ -25,7 +24,7 @@ public interface Room {
 
     RoomManager getRoomManager();
 
-    void addDoor(CardinalPoint direction);
+    void addDoor(CardinalPoint cardinalPoint);
 
     boolean isDoorOpen();
 

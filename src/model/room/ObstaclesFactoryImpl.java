@@ -11,7 +11,7 @@ import model.gameobject.simpleobject.Obstacle;
 import model.gameobject.simpleobject.SimpleObject;
 import model.gameobject.simpleobject.Wall;
 
-public class ObstaclesFactory {
+public class ObstaclesFactoryImpl implements ObstacleFactory {
     private static final int OBSTACLE_FOR_ROW = 24;
     private static final int OBSTACLE_FOR_COL = 14;
     private static final int FREE_ROWS = 4;
@@ -22,7 +22,7 @@ public class ObstaclesFactory {
     private final double height;
     private static final int WALL_DEPTH = 100;
 
-    public ObstaclesFactory() {
+    public ObstaclesFactoryImpl() {
         this.width = Rooms.BR_CORNER.getX() - Rooms.UL_CORNER.getX();
         this.height = Rooms.BR_CORNER.getY() - Rooms.UL_CORNER.getY();
         this.obstacleWidth = this.width / OBSTACLE_FOR_ROW;
@@ -32,20 +32,22 @@ public class ObstaclesFactory {
     /**
      * @return a list contains walls
      */
-    public List<SimpleObject> getEmptyRoom() {
+    @Override
+    public List<SimpleObject> createEmptyRoom() {
         return this.getWalls();
     }
 
     /**
      * 
-     * @param squaresNumber : the number of squares to create
+     * @param squares : the number of squares to create
      * @return a list of obstacles
      */
-    public List<SimpleObject> createSquare(final int squaresNumber) {
+    @Override
+    public List<SimpleObject> createSquare(final int squares) {
         final List<SimpleObject> obstacles = new LinkedList<>();
         final Random rnd = new Random();
 
-        for (int n = 0; n < squaresNumber; n++) {
+        for (int n = 0; n < squares; n++) {
             final int size = rnd.nextInt(OBSTACLE_FOR_COL / 2); //7 max
             final int ulX = rnd.nextInt(OBSTACLE_FOR_COL - 2 * (FREE_ROWS - 1) - size);
             final int ulY = rnd.nextInt(OBSTACLE_FOR_ROW - 2 * (FREE_COLS - 1) - size);

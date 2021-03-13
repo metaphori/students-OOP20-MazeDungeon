@@ -86,9 +86,9 @@ public class RoomManagerImpl implements RoomManager {
                 continue;
             }
             final Room room = new RoomBuilderImpl().initialize(this)
-                                               .addRandomObstacle()
+                                               .addObstacle()
                                                .addDoors(entry.getValue())
-                                               .addRandomEnemy()
+                                               .addEnemy()
                                                .build();
             rooms.put(entry.getKey(), room);
         }
@@ -143,18 +143,18 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     /**
-     * @param direction : the direction of the new room in relation at the actual room
+     * @param cp : the cardinalPoint of the new room in relation at the actual room
      */
     @Override
-    public void changeRoom(final CardinalPoint direction) {
-        final Room newRoom = rooms.get(this.getNearbyPoint(this.getRoomPosition(actualRoom), direction));
+    public void changeRoom(final CardinalPoint cp) {
+        final Room newRoom = rooms.get(this.getNearbyPoint(this.getRoomPosition(actualRoom), cp));
         if (newRoom == null) {
             return;
         }
         if (!newRoom.isVisited()) {
             exploredRooms++;
         }
-        this.getCharacter().setPosition(characterSpawnPosition.get(direction));
+        this.getCharacter().setPosition(characterSpawnPosition.get(cp));
         newRoom.addDynamicObject(this.getCharacter());
         actualRoom.clean();
         actualRoom = newRoom;
