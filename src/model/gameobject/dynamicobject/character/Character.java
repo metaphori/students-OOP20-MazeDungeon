@@ -1,6 +1,5 @@
 package model.gameobject.dynamicobject.character;
 
-import model.common.Vector2D;
 import model.common.VectorDirection;
 import model.gameobject.dynamicobject.DynamicObject;
 

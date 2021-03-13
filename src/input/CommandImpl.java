@@ -20,29 +20,26 @@ public class CommandImpl implements Command {
     private final Character character;
     private final CharacterMovement chMovement; 
     private Trio<Integer, Boolean, Optional<VectorDirection>> command;
-
-
-    private final List<Trio<Integer, Boolean, Optional<VectorDirection>>> keysList = new ArrayList<>() {{
-       add(new Trio<>(KeyEvent.VK_UP, false, Optional.of(VectorDirection.UP)));
-       add(new Trio<>(KeyEvent.VK_DOWN, false, Optional.of(VectorDirection.DOWN))); 
-       add(new Trio<>(KeyEvent.VK_LEFT, false, Optional.of(VectorDirection.LEFT))); 
-       add(new Trio<>(KeyEvent.VK_RIGHT, false, Optional.of(VectorDirection.RIGHT)));
-
-       add(new Trio<>(KeyEvent.VK_W, false, Optional.of(VectorDirection.UP)));
-       add(new Trio<>(KeyEvent.VK_S, false, Optional.of(VectorDirection.DOWN)));
-       add(new Trio<>(KeyEvent.VK_D, false, Optional.of(VectorDirection.RIGHT)));
-       add(new Trio<>(KeyEvent.VK_A, false, Optional.of(VectorDirection.LEFT)));
-
-      // add(new Trio<>(KeyEvent.VK_ESCAPE, false, Optional.empty()));
-
-    }};
-
+    private final List<Trio<Integer, Boolean, Optional<VectorDirection>>> keysList = new ArrayList<>();
 
 
     public CommandImpl(final Model model, final GameController controller) {
         this.inGameMenuController = new InGameMenuControllerImpl(controller, model);
         this.character = model.getRoomManager().getCharacter();
         this.chMovement = new CharacterMovementImpl(character);
+        this.initializeKeysList();
+    }
+
+    private void initializeKeysList() {
+        this.keysList.add(new Trio<>(KeyEvent.VK_UP, false, Optional.of(VectorDirection.UP)));
+        this.keysList.add(new Trio<>(KeyEvent.VK_DOWN, false, Optional.of(VectorDirection.DOWN))); 
+        this.keysList.add(new Trio<>(KeyEvent.VK_LEFT, false, Optional.of(VectorDirection.LEFT))); 
+        this.keysList.add(new Trio<>(KeyEvent.VK_RIGHT, false, Optional.of(VectorDirection.RIGHT)));
+
+        this.keysList.add(new Trio<>(KeyEvent.VK_W, false, Optional.of(VectorDirection.UP)));
+        this.keysList.add(new Trio<>(KeyEvent.VK_S, false, Optional.of(VectorDirection.DOWN)));
+        this.keysList.add(new Trio<>(KeyEvent.VK_D, false, Optional.of(VectorDirection.RIGHT)));
+        this.keysList.add(new Trio<>(KeyEvent.VK_A, false, Optional.of(VectorDirection.LEFT)));
     }
 
     /**
@@ -56,13 +53,11 @@ public class CommandImpl implements Command {
                 keyCode = trio.getX();
                 this.command = findObjectFromStream(keyCode).get();
                 if (this.command != null) {
-                    if (this.command.getZ().isPresent()) {
                         if (isArrow(this.command)) {
                            this.character.setShoot(true, this.command.getZ().get());
                         } else {
                             this.chMovement.move(this.command.getZ().get());
                         }
-                    }
                 }
             }
         }

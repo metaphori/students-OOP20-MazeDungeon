@@ -44,6 +44,9 @@ public class RoomBuilderImpl implements RoomBuilder {
         if (isInitialize) {
            throw new IllegalStateException("cannot initialize twice"); 
         }
+        if (roomManager == null) {
+            throw new IllegalArgumentException("argument cannot be null");
+        }
         this.isInitialize = true;
         this.room = new RoomImpl(roomManager);
         this.room.addAllSimpleObject(obstaclesFactory.createEmptyRoom());
@@ -58,6 +61,9 @@ public class RoomBuilderImpl implements RoomBuilder {
     @Override
     public RoomBuilder addDoors(final Set<CardinalPoint> doors) {
         this.checkInitialize();
+        if (doors == null) {
+            throw new IllegalArgumentException("argument cannot be null");
+        }
         for (final CardinalPoint direction : doors) {
             this.room.addDoor(direction);
             this.room.addSimpleObject(doorFactory.createDoor(direction));

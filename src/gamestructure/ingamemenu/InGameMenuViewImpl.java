@@ -156,6 +156,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         }
         this.show();
     }
+    
     /**
      * 
      */
@@ -166,6 +167,19 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.frame.setVisible(true);
         this.frame.setSize(new Dimension((int) (WindowUtilities.NATIVE_WIDTH * WindowUtilities.WIDTH_RATIO * windowUtilities.getScreenRatio()) + this.frame.getInsets().left  + this.frame.getInsets().right,
                 (int) (WindowUtilities.NATIVE_HEIGHT * WindowUtilities.HEIGHT_RATIO * windowUtilities.getScreenRatio()) + this.frame.getInsets().top + this.frame.getInsets().bottom));
+        nobodyBtnSelect();
+    }
+    private void nobodyBtnSelect() {
+        this.componentMapMenu.entrySet().stream().forEach(e -> {
+            if (e.getValue().getX() instanceof JButton) {
+                e.getValue().getX().setBackground(COLOR_BACKGROUND);
+            }
+        });
+        this.componentMapShop.entrySet().stream().forEach(e -> {
+            if (e.getValue().getX() instanceof JButton) {
+                e.getValue().getX().setBackground(COLOR_BACKGROUND);
+            }
+        });
     }
     /**
      * 

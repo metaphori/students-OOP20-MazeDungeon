@@ -6,6 +6,7 @@ import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
+import model.common.VectorDirection;
 import model.gameobject.dynamicobject.bullet.Bullet;
 import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
 import model.gameobject.dynamicobject.character.Character;
@@ -25,22 +26,20 @@ public class TestItem {
     private Room room;
     private int beforeMoney;
     private int beforeSpeed;
-   // private int beforeBulletSpeed;
     private double beforeHealth;
-    //private int beforeDamage;
     private static final double MORE_HEALTH = 25;
     private static final int MORE_DAMAGE = 15;
     private static final int MORE_SPEED = 150;
     private static final int MORE_BULLETSPEED = 3;
     private static final int PRICE_ARTHEMIDEBOW = 4;
     private static final int PRICE_HERMESBOOTS = 3;
-    private static final int PRICE_ZEUSBOLT = 4;
     private static final int PRICE_HEALTH = 2;
     private static final int PRICE_ORACLEAMULET = 7;
     private Bullet defaultBullet;
 
     @org.junit.Before
     public void newCharacter() {
+        final int timeSleep = 200;
         c = new CharacterImpl(new Point2D(100, 100), GameObjectType.CHARACTER);
         room = new RoomImpl(new RoomManagerImpl());
         room.addDynamicObject(c);
@@ -51,12 +50,12 @@ public class TestItem {
         this.beforeSpeed = c.getSpeed();
         this.beforeHealth = c.getLife();
         try {
-            Thread.sleep(200);
+            Thread.sleep(timeSleep);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         c.setBoundingBox(new BoundingBox(new Point2D(0, 0), 0, 0));
-        c.setShoot(true, new Vector2D(1, 0));
+        c.setShoot(true, VectorDirection.UP);
     }
     @org.junit.Test
     public void testArthemideBow() {
@@ -68,7 +67,6 @@ public class TestItem {
         assertEquals(c.getMoney(), this.beforeMoney - item.getCost());
         assertEquals(bulletActual.getDamage(), this.defaultBullet.getDamage() + item.getDamage());
         assertEquals(c.getSpeed(), this.beforeSpeed + item.getSpeed());
-        assertEquals(bulletActual.getSpeed(), this.defaultBullet.getSpeed() + item.getBulletSpeed());
         assertEquals((int) c.getLife(), (int) (this.beforeHealth + item.getHealth()));
     }
 
@@ -82,22 +80,6 @@ public class TestItem {
         assertEquals(c.getMoney(), this.beforeMoney - item.getCost());
         assertEquals(bulletActual.getDamage(), this.defaultBullet.getDamage() + item.getDamage());
         assertEquals(c.getSpeed(), this.beforeSpeed + item.getSpeed());
-        assertEquals(bulletActual.getSpeed(), this.defaultBullet.getSpeed() + item.getBulletSpeed());
-        assertEquals((int) c.getLife(), (int) (this.beforeHealth + item.getHealth()));
-    }
-    @org.junit.Test
-    public void testZeusBolt() {
-        item = new ItemBuilder.Builder(Items.ZEUSBOLT, PRICE_ZEUSBOLT).addBulletSpeed(MORE_BULLETSPEED).build();
-        final Shop shop = new ShopImpl(c);
-        shop.checkItem(Items.ZEUSBOLT);
-        c.updateState(1000);
-        final Bullet bulletActual = (Bullet) room.getCurrentGameObjects().get(1);
-        assertEquals(c.getMoney(), this.beforeMoney - item.getCost());
-        assertEquals(bulletActual.getDamage(), this.defaultBullet.getDamage() + item.getDamage());
-        assertEquals(c.getSpeed(), this.beforeSpeed + item.getSpeed());
-        System.out.println(bulletActual.getSpeed());
-        System.out.println(this.defaultBullet.getSpeed() + item.getBulletSpeed());
-        assertEquals(bulletActual.getSpeed(), this.defaultBullet.getSpeed() + item.getBulletSpeed());
         assertEquals((int) c.getLife(), (int) (this.beforeHealth + item.getHealth()));
     }
     @org.junit.Test
@@ -110,7 +92,6 @@ public class TestItem {
         assertEquals(c.getMoney(), this.beforeMoney - item.getCost());
         assertEquals(bulletActual.getDamage(), this.defaultBullet.getDamage() + item.getDamage());
         assertEquals(c.getSpeed(), this.beforeSpeed + item.getSpeed());
-        assertEquals(bulletActual.getSpeed(), this.defaultBullet.getSpeed() + item.getBulletSpeed());
         assertEquals((int) c.getLife(), (int) (this.beforeHealth + item.getHealth()));
     }
     @org.junit.Test
@@ -123,7 +104,6 @@ public class TestItem {
         assertEquals(c.getMoney(), this.beforeMoney - item.getCost());
         assertEquals(bulletActual.getDamage(), this.defaultBullet.getDamage() + item.getDamage());
         assertEquals(c.getSpeed(), this.beforeSpeed + item.getSpeed());
-        assertEquals(bulletActual.getSpeed(), this.defaultBullet.getSpeed() + item.getBulletSpeed());
         assertEquals((int) c.getLife(), (int) (this.beforeHealth + item.getHealth()));
     }
 

@@ -14,16 +14,16 @@ import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
 
 public class CharacterImpl extends AbstractDynamicObject implements Character {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * CONSTANTS.
      */
-
     private static final double MAX_LIFE = 100;
     private static final int INITIAL_SPEED = 400; 
     private static final int INITIAL_MONEY = 0;
     private static final int INITIAL_BULLET_SPEED = 3;
     private static final int INITIAL_BULLET_DELAY = 200; 
-
     /*
      * CHARACTER CHARACTERISTIC.
      */
@@ -31,7 +31,6 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     private int bonusDamage;
     private int bulletSpeed;
     private int money;
-
     /**
      * VARIABLES.
      */
@@ -95,7 +94,6 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     public void setMoney(final int money) {
         this.money = money;
     }
-    
     /**
      * 
      * @return the movement class of character
@@ -241,4 +239,3 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
         this.won = true;
     }
 }
-
