@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import gamestructure.ingamemenu.InGameMenuController;
+import gamestructure.ingamemenu.InGameMenuControllerImpl;
 import gamestructure.mainmenu.MainMenuController;
 import gamestructure.mainmenu.MainMenuControllerImpl;
 import input.Command;
@@ -25,7 +27,6 @@ public class GameControllerImpl implements GameController {
     private final Model model;
     private final List<Integer> lastGameObjectsID = new LinkedList<>();
     private final Command command;
-    private KeyEvent actualCommand;
 
     /**
      * @param model : an instance of the model
@@ -162,7 +163,6 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void notifyClosedInGameMenu() {
-        this.command.setMenuClosed();
         this.view.renderItems(this.model.getShop().getCart());
         this.model.getShop().clearCart();
     }

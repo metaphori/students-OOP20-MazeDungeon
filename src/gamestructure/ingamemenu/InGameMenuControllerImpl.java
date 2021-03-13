@@ -8,12 +8,14 @@ import mvc.Model;
 public class InGameMenuControllerImpl implements InGameMenuController {
     private final GameController gameController;
     private final Shop shopModel;
+    private final Model model;
     private final InGameMenuView view = new InGameMenuViewImpl(this);
+    private boolean menuIsOpen;
 
     public InGameMenuControllerImpl(final GameController gameController, final Model model) {
         this.gameController = gameController;
         this.shopModel = model.getShop();
-        this.view.showInGameMenu();
+        this.model = model;
     }
 
     /**
@@ -44,8 +46,12 @@ public class InGameMenuControllerImpl implements InGameMenuController {
      * open the in game menu view.
      */
     public void openInGameMenu() {
-        this.view.removeMessage();
-        this.view.showInGameMenu();
+        if (!this.menuIsOpen && this.model.getRoomManager().getCurrentRoom().isDoorOpen() 
+                && !this.model.getRoomManager().getCharacter().isDead()) {
+            this.view.removeMessage();
+            this.view.showInGameMenu();
+            this.menuIsOpen = true;
+        }
     }
     /**
      * close the game.
@@ -58,6 +64,7 @@ public class InGameMenuControllerImpl implements InGameMenuController {
      */
     public void resume() {
         this.view.hide();
+        this.menuIsOpen = false;
         this.gameController.notifyClosedInGameMenu();
     }
 }

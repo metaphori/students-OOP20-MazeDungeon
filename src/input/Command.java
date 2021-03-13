@@ -7,14 +7,10 @@ public interface Command {
 
     void setKey(KeyEvent key, boolean b);
 
-    //void execute();
-
-    void setMenuClosed();
-
     void execute();
 
-    boolean checkStopVertical();
+    boolean checkUpDownKeys();
 
-    boolean checkStopHorizontal();
+    boolean checkRightLeftKeys();
 
 }
