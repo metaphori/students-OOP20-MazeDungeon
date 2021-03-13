@@ -32,6 +32,7 @@ public class MainMenuViewImpl implements MainMenuView {
         this.frame.setTitle("MazeDungeon");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
+        this.frame.setBackground(BACKGROUND_COLOR);
 
         final MenuPanel mainPanel = new MenuPanel();
         mainPanel.setBackground(BACKGROUND_COLOR);

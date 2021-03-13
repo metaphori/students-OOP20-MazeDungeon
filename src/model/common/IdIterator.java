@@ -17,7 +17,6 @@ public class IdIterator implements Iterator<Integer> {
     }
 
     /**
-     * @Override
      * @return the next value
      */
     @Override
