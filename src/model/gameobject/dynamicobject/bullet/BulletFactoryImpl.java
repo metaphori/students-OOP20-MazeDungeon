@@ -10,7 +10,7 @@ public class BulletFactoryImpl implements BulletFactory {
     /**
      * constant for speed of each bullet.
      */
-    private static final int CHARACTER_BULLET_SPEED = 100;
+    private static final int CHARACTER_BULLET_SPEED = 350;
     private static final int SKELETON_BULLET_SPEED = 200;
     private static final int SOUL_BULLET_SPEED = 200;
     private static final int SPROUT_BULLET_SPEED = 300;
