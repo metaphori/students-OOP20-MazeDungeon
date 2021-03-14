@@ -181,9 +181,6 @@ public class InGameMenuViewImpl implements InGameMenuView  {
             }
         });
     }
-    /**
-     * 
-     */
     @Override
     public void hide() {
         this.frame.setVisible(false);

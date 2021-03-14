@@ -9,7 +9,6 @@ public final class ItemBuilder implements Item {
     private final double health;
 
     private ItemBuilder(final Items name, final int cost, final int damage, final int speed, final int bulletSpeed, final double health) {
-        //super();
         this.name = name;
         this.setCost(cost);
         this.damage = damage;

@@ -61,6 +61,7 @@ public class ShopImpl implements Shop {
         mapPrice.put(Items.ORACLEAMULET, PRICE_ORACLEAMULET);
         return mapPrice;
     }
+
     /**
      * @param i : item selected, to check if the item is affordable
      */
@@ -154,13 +155,14 @@ public class ShopImpl implements Shop {
     public Item getHealth() {
         return new ItemBuilder.Builder(Items.HEALTH, PRICE_HEALTH).addHelath(MORE_HEALTH).build();
     }
+
     /**
-     * 
      * @return Oracle Amulet Item
      */
     public Item getOracleAmulet() {
         return new ItemBuilder.Builder(Items.ORACLEAMULET, PRICE_ORACLEAMULET).addDamage(MORE_DAMAGE).addSpeed(MORE_SPEED).addBulletSpeed(MORE_BULLETSPEED).build();
     }
+
     /**
      * empty the current cart.
      */
@@ -169,7 +171,6 @@ public class ShopImpl implements Shop {
     }
 
     /**
-     * 
      * @return a copy of current cart
      */
     public Set<Items> getCart() {
