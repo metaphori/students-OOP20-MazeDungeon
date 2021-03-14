@@ -11,7 +11,7 @@ public class ShopImpl implements Shop {
     private static final double MORE_HEALTH = 25;
     private static final int MORE_DAMAGE = 15;
     private static final int MORE_SPEED = 150;
-    private static final int MORE_BULLETSPEED = 3;
+    private static final int MORE_BULLETSPEED = 30;
     private static final int PRICE_ARTHEMIDEBOW = 4;
     private static final int PRICE_HERMESBOOTS = 3;
     private static final int PRICE_ZEUSBOLT = 4;

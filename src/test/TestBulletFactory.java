@@ -47,7 +47,7 @@ public class TestBulletFactory {
         final Vector2D direction = new Vector2D(0, 1);
         final Point2D position = new Point2D(0, 0);
         final int bonusDamage = 10;
-        Bullet bullet = this.bulletFactory.createCharacterBullet(position, direction, 0);
+        Bullet bullet = this.bulletFactory.createCharacterBullet(position, direction, bonusDamage); /**TODO:AGGIUNGI BULLETSPEED*/
         bullet.setSpeed(CHARACTER_BULLET_SPEED);
         assertEquals(bullet.getDamage(), CHARACTER_BULLET_DAMAGE);
         assertEquals(bullet.getSpeed(), CHARACTER_BULLET_SPEED);
@@ -63,7 +63,6 @@ public class TestBulletFactory {
         assertEquals(bullet.getBoundingBox(), bb);
         final Room room = new RoomImpl(new RoomManagerImpl());
         room.addDynamicObject(bullet);
-       
         System.out.println(bullet.getPosition());
         bullet.setRoom(room); //inserisco il bullet nella stanza 
         assertFalse(room.getCurrentGameObjects().isEmpty());

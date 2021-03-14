@@ -16,7 +16,7 @@ public class FinalArtifact extends SimpleObjectImpl {
     @Override
     public void collideWith(final GameObject obj2) {
         if (obj2.getGameObjectType().equals(GameObjectType.CHARACTER)) {
-            this.getRoom().getRoomManager().getCharacter().pickedUpFinalArtefact();
+            this.getRoom().getRoomManager().getCharacter().pickedUpFinalArtifact();
             this.getRoom().deleteGameObject(this);
         }
     }

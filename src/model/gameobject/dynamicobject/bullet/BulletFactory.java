@@ -5,7 +5,7 @@ import model.common.Vector2D;
 
 public interface BulletFactory {
 
-    Bullet createCharacterBullet(Point2D initialPosition, Vector2D direction, int bonusDamage);
+    Bullet createCharacterBullet(Point2D initialPosition, Vector2D direction, int bonusDamage, int bonusBulletSpeed);
 
     Bullet createSkeletonBullet(Point2D initialPosition, Vector2D direction);
 
