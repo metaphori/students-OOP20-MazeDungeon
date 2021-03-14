@@ -26,4 +26,6 @@ public interface GameController extends Controller {
     int getTotalRooms();
 
     Optional<Double> getBossLife();
+
+    void openInGameMenu();
 }

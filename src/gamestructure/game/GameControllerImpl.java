@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import gamestructure.ingamemenu.InGameMenuController;
+import gamestructure.ingamemenu.InGameMenuControllerImpl;
 import gamestructure.mainmenu.MainMenuController;
 import gamestructure.mainmenu.MainMenuControllerImpl;
 import input.Command;
@@ -25,7 +27,8 @@ public class GameControllerImpl implements GameController {
     private final Model model;
     private final List<Integer> lastGameObjectsID = new LinkedList<>();
     private final Command command;
-    private boolean inGameMenuOpen = false;
+    private boolean inGameMenuOpen;
+    private final InGameMenuController inGameMenuController;
 
     /**
      * @param model : an instance of the model
@@ -34,6 +37,7 @@ public class GameControllerImpl implements GameController {
         this.view = new GameViewImpl();
         this.model = model;
         this.command = new CommandImpl(this.model, this);
+        this.inGameMenuController = new InGameMenuControllerImpl(this, model);
     }
 
     /**
@@ -54,8 +58,9 @@ public class GameControllerImpl implements GameController {
         while (!this.model.isGameOver() && !this.model.isWon()) {
             final long current = System.currentTimeMillis();
             final int elapsed = (int) (current - lastTime);
-            if(inGameMenuOpen) {
-                
+            if (inGameMenuOpen) {
+                waitForNextFrame(current);
+                continue;
             }
             processInput();
             updateGame(elapsed * MILLISECOND_TO_SECOND);
@@ -167,6 +172,13 @@ public class GameControllerImpl implements GameController {
     public void notifyClosedInGameMenu() {
         this.view.renderItems(this.model.getShop().getCart());
         this.model.getShop().clearCart();
+        this.inGameMenuOpen = false;
+    }
+
+    @Override
+    public void openInGameMenu() {
+        this.inGameMenuController.openInGameMenu();
+        this.inGameMenuOpen = true;
     }
 
     private void openMainMenu() {

@@ -16,7 +16,7 @@ import mvc.Model;
 
 public class CommandImpl implements Command {
 
-    private final InGameMenuController inGameMenuController;
+    private final GameController gameController;
     private final Character character;
     private final CharacterMovement chMovement; 
     private Trio<Integer, Boolean, Optional<VectorDirection>> command;
@@ -24,7 +24,7 @@ public class CommandImpl implements Command {
 
 
     public CommandImpl(final Model model, final GameController controller) {
-        this.inGameMenuController = new InGameMenuControllerImpl(controller, model);
+        this.gameController = controller;
         this.character = model.getRoomManager().getCharacter();
         this.chMovement = new CharacterMovementImpl(character);
         this.initializeKeysList();
@@ -90,7 +90,7 @@ public class CommandImpl implements Command {
     @Override
     public void setKey(final KeyEvent key, final boolean b) {
         if (key.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            this.inGameMenuController.openInGameMenu();
+            this.gameController.openInGameMenu();
             return;
         }
         final Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> trio = this.keysList.stream().filter(t -> t.getX() == key.getKeyCode()).findFirst();
