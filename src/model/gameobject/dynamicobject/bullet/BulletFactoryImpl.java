@@ -29,34 +29,34 @@ public class BulletFactoryImpl implements BulletFactory {
      */
     @Override
     public Bullet createCharacterBullet(final Point2D initialPosition, final  Vector2D direction, final int bonusDamage, final int bonusBulletSpeed) {
-        return new BulletImpl(CHARACTER_BULLET_SPEED + bonusBulletSpeed, initialPosition, direction, GameObjectType.CHARACTER_BULLET, bonusDamage + CHARACTER_BULLET_DAMAGE);
+        return new BulletImpl(initialPosition, direction, GameObjectType.CHARACTER_BULLET, bonusDamage + CHARACTER_BULLET_DAMAGE, CHARACTER_BULLET_SPEED + bonusBulletSpeed);
     }
     /**
      * @return skeletonBullet.
      */
     @Override
     public Bullet createSkeletonBullet(final Point2D initialPosition, final Vector2D direction) {
-        return new BulletImpl(SKELETON_BULLET_SPEED, initialPosition, direction, GameObjectType.SKELETON_BULLET, SKELETON_BULLET_DAMAGE);
+        return new BulletImpl(initialPosition, direction, GameObjectType.SKELETON_BULLET, SKELETON_BULLET_DAMAGE, SKELETON_BULLET_SPEED);
     }
     /**
      * @return soulBullet.
      */
     @Override
     public Bullet createSoulBullet(final Point2D initialPosition, final Vector2D direction) {
-        return new BulletImpl(SOUL_BULLET_SPEED, initialPosition, direction, GameObjectType.SOUL_BULLET, SOUL_BULLET_DAMAGE);
+        return new BulletImpl(initialPosition, direction, GameObjectType.SOUL_BULLET, SOUL_BULLET_DAMAGE, SKELETON_BULLET_SPEED);
     }
     /**
      * @return sproutBullet.
      */
     @Override
     public Bullet createSproutBullet(final Point2D initialPosition, final Vector2D direction) {
-        return new BulletImpl(SPROUT_BULLET_SPEED, initialPosition, direction, GameObjectType.SPROUT_BULLET, SPROUT_BULLET_DAMAGE);
+        return new BulletImpl(initialPosition, direction, GameObjectType.SPROUT_BULLET, SPROUT_BULLET_DAMAGE, SPROUT_BULLET_SPEED);
     }
     /**
      * @return bossBullet.
      */
     @Override
     public Bullet createBossBullet(final Point2D initialPosition, final Vector2D direction) {
-        return new BulletImpl(BOSS_BULLET_SPEED, initialPosition, direction, GameObjectType.BOSS_BULLET, BOSS_BULLET_DAMAGE);
+        return new BulletImpl(initialPosition, direction, GameObjectType.BOSS_BULLET, BOSS_BULLET_DAMAGE, BOSS_BULLET_SPEED);
     }
 }

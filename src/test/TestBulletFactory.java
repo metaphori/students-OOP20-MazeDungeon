@@ -23,7 +23,7 @@ public class TestBulletFactory {
     /**
      * constant for speed of each bullet.
      */
-    private static final int CHARACTER_BULLET_SPEED = 100;
+    private static final int CHARACTER_BULLET_SPEED = 350;
     private static final int SKELETON_BULLET_SPEED = 200;
     private static final int SOUL_BULLET_SPEED = 200;
     private static final int SPROUT_BULLET_SPEED = 300;
@@ -46,26 +46,32 @@ public class TestBulletFactory {
     public void testCharacterBullet() {
         final Vector2D direction = new Vector2D(0, 1);
         final Point2D position = new Point2D(0, 0);
-        final int bonusDamage = 10;
-        Bullet bullet = this.bulletFactory.createCharacterBullet(position, direction, bonusDamage); /**TODO:AGGIUNGI BULLETSPEED*/
-        bullet.setSpeed(CHARACTER_BULLET_SPEED);
+        int bonusDamage = 0;
+        int bonusBulletSpeed = 0;
+
+        Bullet bullet = this.bulletFactory.createCharacterBullet(position, direction, bonusDamage, bonusBulletSpeed);
         assertEquals(bullet.getDamage(), CHARACTER_BULLET_DAMAGE);
         assertEquals(bullet.getSpeed(), CHARACTER_BULLET_SPEED);
         assertEquals(bullet.getDirection(), direction);
         assertEquals(bullet.getPosition(), position);
         assertEquals(bullet.getGameObjectType(), GameObjectType.CHARACTER_BULLET);
-        bullet.setSpeed(CHARACTER_BULLET_SPEED + 5);
-        assertEquals(bullet.getSpeed(), CHARACTER_BULLET_SPEED + 5);
-        bullet = this.bulletFactory.createCharacterBullet(position, direction, bonusDamage);
+        bonusDamage = 10;
+        bonusBulletSpeed = 10;
+        bullet.setSpeed(CHARACTER_BULLET_SPEED + bonusBulletSpeed);
+        bullet.setDamage(CHARACTER_BULLET_DAMAGE + bonusBulletSpeed);
+        assertEquals(bullet.getSpeed(), CHARACTER_BULLET_SPEED + bonusBulletSpeed);
+        assertEquals(bullet.getDamage(), CHARACTER_BULLET_DAMAGE + bonusDamage);
+
+        bullet = this.bulletFactory.createCharacterBullet(position, direction, bonusDamage, bonusBulletSpeed);
         assertEquals(bullet.getDamage(), CHARACTER_BULLET_DAMAGE + bonusDamage);
         final BoundingBox bb = new BoundingBox(new Point2D(0, 0), 0, 0);
         bullet.setBoundingBox(bb);
         assertEquals(bullet.getBoundingBox(), bb);
         final Room room = new RoomImpl(new RoomManagerImpl());
         room.addDynamicObject(bullet);
-        System.out.println(bullet.getPosition());
         bullet.setRoom(room); //inserisco il bullet nella stanza 
         assertFalse(room.getCurrentGameObjects().isEmpty());
+        assertTrue(room.getCurrentGameObjects().contains(bullet));
     }
 
     @org.junit.Test
