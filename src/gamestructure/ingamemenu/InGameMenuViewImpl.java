@@ -103,7 +103,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     }};
     public InGameMenuViewImpl(final InGameMenuController controller) {
         this.controller = controller;
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setTitle("MazeDungeon");
 
@@ -156,17 +156,17 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         }
         this.show();
     }
-    
+
     /**
      * 
      */
     @Override
     public void show() {
-        this.frame.setLocation(windowUtilities.getScreen().width / 2 - this.frame.getSize().width / 2,
-                windowUtilities.getScreen().height / 2 - this.frame.getSize().height / 2);
         this.frame.setVisible(true);
         this.frame.setSize(new Dimension((int) (WindowUtilities.NATIVE_WIDTH * WindowUtilities.WIDTH_RATIO * windowUtilities.getScreenRatio()) + this.frame.getInsets().left  + this.frame.getInsets().right,
                 (int) (WindowUtilities.NATIVE_HEIGHT * WindowUtilities.HEIGHT_RATIO * windowUtilities.getScreenRatio()) + this.frame.getInsets().top + this.frame.getInsets().bottom));
+        this.frame.setLocation(windowUtilities.getScreen().width / 2 - this.frame.getSize().width / 2,
+                windowUtilities.getScreen().height / 2 - this.frame.getSize().height / 2);
         nobodyBtnSelect();
     }
     private void nobodyBtnSelect() {
@@ -253,7 +253,6 @@ public class InGameMenuViewImpl implements InGameMenuView  {
             final JLabel lblBackGround = (JLabel) entry.getValue().getX();
             lblBackGround.setIcon(windowUtilities.resizeImage(imageIconSources.getImage(Images.BACKGROUNDMENU), entry.getValue().getY()));
             break;
-
         default:
             break;
         }

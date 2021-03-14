@@ -11,6 +11,7 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     private final Model model;
     private final InGameMenuView view = new InGameMenuViewImpl(this);
     private boolean menuIsOpen;
+    private boolean shopIsOpen;
 
     public InGameMenuControllerImpl(final GameController gameController, final Model model) {
         this.gameController = gameController;
@@ -39,6 +40,7 @@ public class InGameMenuControllerImpl implements InGameMenuController {
      * open the shop view.
      */
     public void openShop() {
+        shopIsOpen = true;
         this.view.setPriceItem(shopModel.addPrice());
         this.view.showShop();
     }
@@ -47,7 +49,8 @@ public class InGameMenuControllerImpl implements InGameMenuController {
      */
     public void openInGameMenu() {
         if (!this.menuIsOpen && this.model.getRoomManager().getCurrentRoom().isDoorOpen() 
-                && !this.model.getRoomManager().getCharacter().isDead()) {
+                && !this.model.getRoomManager().getCharacter().isDead() || shopIsOpen) {
+            shopIsOpen = false;
             this.view.removeMessage();
             this.view.showInGameMenu();
             this.menuIsOpen = true;
