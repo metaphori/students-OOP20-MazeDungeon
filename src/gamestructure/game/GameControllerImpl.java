@@ -25,6 +25,7 @@ public class GameControllerImpl implements GameController {
     private final Model model;
     private final List<Integer> lastGameObjectsID = new LinkedList<>();
     private final Command command;
+    private boolean inGameMenuOpen = false;
 
     /**
      * @param model : an instance of the model
@@ -53,6 +54,9 @@ public class GameControllerImpl implements GameController {
         while (!this.model.isGameOver() && !this.model.isWon()) {
             final long current = System.currentTimeMillis();
             final int elapsed = (int) (current - lastTime);
+            if(inGameMenuOpen) {
+                
+            }
             processInput();
             updateGame(elapsed * MILLISECOND_TO_SECOND);
             render();
