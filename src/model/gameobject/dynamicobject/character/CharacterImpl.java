@@ -154,8 +154,9 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
      */
     private void shoot() {
         final Bullet bullet = bulletFactory.createCharacterBullet(
-                new Point2D(getPosition().getX() + this.getBoundingBox().getWidth() / 2, getPosition().getY() + this.getBoundingBox().getHeight() / 2),
-                this.shootDirection.mul(this.bulletSpeed), this.bonusDamage);
+                new Point2D(getPosition().getX() + this.getBoundingBox().getWidth() / 2, getPosition().getY() + this.getBoundingBox().getHeight() / 2), this.shootDirection,
+                this.bonusDamage, this.bulletSpeed);
+
         bullet.setSafeZone(this.getBoundingBox());
         this.getRoom().addDynamicObject(bullet);
         this.shoot = false;
@@ -232,10 +233,10 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * set the winning. 
+     * set the winning when the character pick up the final artifact.
      */
     @Override
-    public void pickedUpFinalArtefact() {
+    public void pickedUpFinalArtifact() {
         this.won = true;
     }
 }

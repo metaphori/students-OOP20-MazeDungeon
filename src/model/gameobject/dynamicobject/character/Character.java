@@ -25,7 +25,7 @@ public interface Character extends DynamicObject {
 
     void setShoot(boolean shoot, VectorDirection vectorDirection);
 
-    void pickedUpFinalArtefact();
+    void pickedUpFinalArtifact();
 
     boolean isWon();
 
