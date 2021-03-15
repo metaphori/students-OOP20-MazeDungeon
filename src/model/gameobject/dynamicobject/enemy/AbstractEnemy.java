@@ -2,7 +2,6 @@ package model.gameobject.dynamicobject.enemy;
 
 import java.util.Random;
 
-import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
@@ -12,7 +11,7 @@ import model.gameobject.simpleobject.Coin;
 
 public abstract class AbstractEnemy extends AbstractDynamicObject implements Enemy {
 
-    private long lastShootTime = System.currentTimeMillis();
+    private long lastShootTime;
     private double life;
     private final long shootDelay;
 
@@ -69,17 +68,26 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
     }
 
     /**
+     * @param shootFrequency the frequency of shoot
+     * @return true if the enemy can shoot.
+     */
+    protected boolean canShoot(final long shootFrequency) {
+        final long currentTime = System.currentTimeMillis();
+        if (currentTime - this.lastShootTime > shootFrequency) {
+            this.lastShootTime = currentTime;
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * @param obj2 : the object with the enemy is colliding with.
      */
     @Override
     public void collideWith(final GameObject obj2) {
         switch (obj2.getGameObjectType().getCollisionType()) {
         case OBSTACLE:
-            final int footHeight = 15;
-            final Point2D footColliderUL = new Point2D(this.getBoundingBox().getULCorner().getX(), 
-                                                       this.getBoundingBox().getBRCorner().getY() - footHeight);
-            final BoundingBox footCollider = new BoundingBox(footColliderUL, this.getBoundingBox().getWidth(), footHeight);
-            if (footCollider.intersectWith(obj2.getBoundingBox())) {
+            if (this.getBaseBoundingBox().intersectWith(obj2.getBoundingBox())) {
                 this.setPosition(this.getLastPosition());
                 this.changeRoutine();
             }
@@ -92,19 +100,6 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
         default:
             break;
         }
-    }
-
-    /**
-     * @param shootFrequency the frequency of shoot
-     * @return true if the enemy can shoot.
-     */
-    protected boolean canShoot(final long shootFrequency) {
-        final long currentTime = System.currentTimeMillis();
-        if (currentTime - this.lastShootTime > shootFrequency) {
-            this.lastShootTime = currentTime;
-            return true;
-        }
-        return false;
     }
 
     /**

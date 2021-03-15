@@ -106,7 +106,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     public Enemy createSkeletonSeeker(final Point2D position) {
         return new AbstractEnemy(SKELETON_LIFE, SKELETON_SPEED, position, GameObjectType.ENEMY_SKELETON, SKELETON_SHOOT_DELAY) {
 
-            private long lastChangeTime = System.currentTimeMillis();
+            private long lastChangeTime;
             private static final int ROUTINE_CHANGE_TIME = 5000;
             private boolean inMovement = true;
 

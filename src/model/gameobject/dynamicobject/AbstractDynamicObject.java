@@ -1,11 +1,14 @@
 package model.gameobject.dynamicobject;
 
+import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.simpleobject.SimpleObjectImpl;
 
 public abstract class AbstractDynamicObject extends SimpleObjectImpl implements DynamicObject {
+
+    private static final int BASE_HEIGHT = 15;
     private Vector2D direction;
     private int speed;
     private Point2D lastPosition;
@@ -83,6 +86,15 @@ public abstract class AbstractDynamicObject extends SimpleObjectImpl implements 
      */
     protected void move(final double elapsed) {
         this.setPosition(this.getPosition().sum(this.getDirection().mul(speed).mul(elapsed)));
+    }
+
+    /**
+     * @return a BoundingBox only for the base of the DynamicObject
+     */
+    protected BoundingBox getBaseBoundingBox() {
+        final Point2D footColliderUL = new Point2D(this.getBoundingBox().getULCorner().getX(), 
+                                                   this.getBoundingBox().getBRCorner().getY() - BASE_HEIGHT);
+        return new BoundingBox(footColliderUL, this.getBoundingBox().getWidth(), BASE_HEIGHT);
     }
 
     @Override
