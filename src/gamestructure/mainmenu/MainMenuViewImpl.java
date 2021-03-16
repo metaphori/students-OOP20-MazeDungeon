@@ -43,7 +43,7 @@ public class MainMenuViewImpl implements MainMenuView {
      */
     public void show() {
         this.frame.setVisible(true);
-        this.frame.setSize(new Dimension((int) (MENU_WIDTH * windowUtilities.getScreenRatio() + this.frame.getInsets().right + this.frame.getInsets().left), 
+        this.frame.setSize(new Dimension((int) (MENU_WIDTH * windowUtilities.getScreenRatio()), 
                             (int) (MENU_HEIGHT * windowUtilities.getScreenRatio() + this.frame.getInsets().top + this.frame.getInsets().bottom)));
         this.frame.setLocation((int) (windowUtilities.getScreen().getWidth()) / 2 - this.frame.getSize().width / 2, 
                 (int) (windowUtilities.getScreen().getHeight()) / 2 - this.frame.getSize().height / 2);

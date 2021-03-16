@@ -163,8 +163,8 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     @Override
     public void show() {
         this.frame.setVisible(true);
-        this.frame.setSize(new Dimension((int) (WindowUtilities.NATIVE_WIDTH * WindowUtilities.WIDTH_RATIO * windowUtilities.getScreenRatio()) + this.frame.getInsets().left  + this.frame.getInsets().right,
-                (int) (WindowUtilities.NATIVE_HEIGHT * WindowUtilities.HEIGHT_RATIO * windowUtilities.getScreenRatio()) + this.frame.getInsets().top + this.frame.getInsets().bottom));
+        this.frame.setSize(new Dimension((int) (WindowUtilities.NATIVE_WIDTH * WindowUtilities.WIDTH_RATIO * windowUtilities.getScreenRatio()),
+                (int) (WindowUtilities.NATIVE_HEIGHT * WindowUtilities.HEIGHT_RATIO * windowUtilities.getScreenRatio())));
         this.frame.setLocation(windowUtilities.getScreen().width / 2 - this.frame.getSize().width / 2,
                 windowUtilities.getScreen().height / 2 - this.frame.getSize().height / 2);
         nobodyBtnSelect();

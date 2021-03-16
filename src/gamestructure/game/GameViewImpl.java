@@ -27,7 +27,7 @@ import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.ResourceLoader;
-import model.common.Sprite;
+import model.common.animations.Sprite;
 import model.shop.Items;
 
 public class GameViewImpl implements GameView, KeyListener {
@@ -79,7 +79,7 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.setVisible(true);
         final double frameWidth = WindowUtilities.NATIVE_WIDTH * WindowUtilities.WIDTH_RATIO * windowUtilities.getScreenRatio();
         final double frameHeigth = WindowUtilities.NATIVE_HEIGHT * WindowUtilities.HEIGHT_RATIO * windowUtilities.getScreenRatio();
-        this.frame.setSize(new Dimension((int) (frameWidth) + this.frame.getInsets().left + this.frame.getInsets().right,
+        this.frame.setSize(new Dimension((int) (frameWidth),
                 (int) (frameHeigth) + this.frame.getInsets().top + this.frame.getInsets().bottom));
         this.frame.setLocation(windowUtilities.getScreen().width / 2 - this.frame.getSize().width / 2,
                                windowUtilities.getScreen().height / 2 - this.frame.getSize().height / 2);

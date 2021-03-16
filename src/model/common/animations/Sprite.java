@@ -1,6 +1,8 @@
-package model.common;
+package model.common.animations;
 
 import java.awt.Image;
+
+import model.common.Point2D;
 
 public class Sprite {
     private final Image img;
