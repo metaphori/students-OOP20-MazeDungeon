@@ -16,6 +16,7 @@ import model.common.IdIterator;
 import model.common.Point2D;
 import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.dynamicobject.character.CharacterImpl;
+import model.gameobject.simpleobject.Coin;
 import model.gameobject.simpleobject.FinalArtifact;
 
 public class RoomManagerImpl implements RoomManager {
@@ -94,6 +95,7 @@ public class RoomManagerImpl implements RoomManager {
         }
 
         actualRoom = rooms.get(new Point2D(0, 0));
+        actualRoom.addSimpleObject(new Coin(new Point2D(600, 600)));
         actualRoom.addDynamicObject(character);
         actualRoom.visit();
     }

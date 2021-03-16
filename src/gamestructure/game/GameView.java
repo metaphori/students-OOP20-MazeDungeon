@@ -16,7 +16,7 @@ public interface GameView extends View {
 
     void setSpritePosition(int id, Point2D position);
 
-    void removeSprite(int id);
+    void removeAnimation(int id);
 
     void initialize();
 

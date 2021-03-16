@@ -170,13 +170,17 @@ public class GameViewImpl implements GameView, KeyListener {
      */
     @Override
     public void addSprite(final Integer id, final GameObjectType gameObjectType, final Point2D position) {
-        final ImageIcon image = new ImageIcon(resourceLoader.getPath(gameObjectType));
-        final Sprite sprite = new Sprite(adaptImage(image), image.getIconWidth(), image.getIconHeight());
+        final Map<State, List<ImageIcon>> stateMap = resourceLoader.getStateImages(gameObjectType);
+        stateMap.keySet().forEach(s -> {
+            final Animation an = new Animation();
+            an.setPosition(position);
+            an.addState(s, new SpriteIterator(stateMap.get(s).stream()
+                                                             .map(i -> new Sprite(adaptImage(i), i.getIconWidth(), i.getIconHeight()))
+                                                             .collect(Collectors.toList())));
+            animations.put(id, an);
+        });
 
-        final Animation an = new Animation();
-        an.setPosition(position);
-        an.addState(State.IDLE, new SpriteIterator(List.of(sprite)));
-        animations.put(id, an);
+        final ImageIcon image = stateMap.get(State.IDLE).get(0);
         this.controller.setBoundingBox(id, new BoundingBox(position, image.getIconWidth(), image.getIconHeight()));
     }
 
@@ -193,7 +197,7 @@ public class GameViewImpl implements GameView, KeyListener {
      * @param id : the id of the sprite that has to been removed.
      */
     @Override
-    public void removeSprite(final int id) {
+    public void removeAnimation(final int id) {
         this.animations.remove(id);
     }
 

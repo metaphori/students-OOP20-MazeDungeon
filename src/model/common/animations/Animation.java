@@ -9,6 +9,9 @@ public class Animation {
 
     private final Map<State, SpriteIterator> animations = new HashMap<>();
     private Point2D position;
+    private Sprite actualImage;
+    private long lastUpdate;
+    private static final int UPDATE_DELAY = 60;
 
     /**
      * 
@@ -24,7 +27,12 @@ public class Animation {
      * @return the next image
      */
     public Sprite getNext(final State state) {
-        return this.animations.get(state).next();
+        final long currentUpdate = System.currentTimeMillis();
+        if (currentUpdate - this.lastUpdate >= UPDATE_DELAY) {
+            this.actualImage = this.animations.get(state).next();
+            this.lastUpdate = currentUpdate;
+        }
+        return this.actualImage;
     }
 
     /**
@@ -42,6 +50,5 @@ public class Animation {
     public Point2D getPosition() {
         return position;
     }
-
 
 }
