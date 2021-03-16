@@ -9,11 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.stream.Collectors;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -27,7 +27,10 @@ import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.ResourceLoader;
+import model.common.animations.Animation;
 import model.common.animations.Sprite;
+import model.common.animations.SpriteIterator;
+import model.common.animations.State;
 import model.shop.Items;
 
 public class GameViewImpl implements GameView, KeyListener {
@@ -39,7 +42,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private static final Color BACKGROUND = new Color(11, 19, 30);
     private static final int PERIOD = 15;
     private final GamePanel gamePanel;
-    private final Map<Integer, Sprite> sprites = new ConcurrentSkipListMap<>();
+    private final Map<Integer, Animation> animations = new ConcurrentSkipListMap<>();
     private final ResourceLoader resourceLoader = new ResourceLoader();
     private final Timer timer;
     private final HUDPanel hudPanel = new HUDPanel(windowUtilities.getScreenRatio());
@@ -113,10 +116,11 @@ public class GameViewImpl implements GameView, KeyListener {
 
         @Override
         protected void paintComponent(final Graphics g) {
-            final List<Sprite> temp = new ArrayList<>(sprites.values());
+            final List<Animation> temp = animations.values().stream().collect(Collectors.toList());
             g.drawImage(this.roomImage, 0, 0, null);
-            temp.forEach(sprite -> {
-                g.drawImage(sprite.getImg(), (int) Math.round(sprite.getPosition().getX()), (int) Math.round(sprite.getPosition().getY()), null);
+            temp.forEach(animation -> {
+                final Sprite sprite = animation.getNext(State.IDLE);
+                g.drawImage(sprite.getImg(), (int) Math.round(animation.getPosition().getX()), (int) Math.round(animation.getPosition().getY()), null);
             }); 
             if (gameOver) {
                 g.drawImage(this.youLoseImage, 0, 0, null);
@@ -168,8 +172,11 @@ public class GameViewImpl implements GameView, KeyListener {
     public void addSprite(final Integer id, final GameObjectType gameObjectType, final Point2D position) {
         final ImageIcon image = new ImageIcon(resourceLoader.getPath(gameObjectType));
         final Sprite sprite = new Sprite(adaptImage(image), image.getIconWidth(), image.getIconHeight());
-        sprite.setPosition(position);
-        sprites.put(id, sprite);
+
+        final Animation an = new Animation();
+        an.setPosition(position);
+        an.addState(State.IDLE, new SpriteIterator(List.of(sprite)));
+        animations.put(id, an);
         this.controller.setBoundingBox(id, new BoundingBox(position, image.getIconWidth(), image.getIconHeight()));
     }
 
@@ -179,7 +186,7 @@ public class GameViewImpl implements GameView, KeyListener {
      */
     @Override
     public void setSpritePosition(final int id, final Point2D position) {
-        this.sprites.get(id).setPosition(position.mul(windowUtilities.getScreenRatio()));
+        this.animations.get(id).setPosition(position.mul(windowUtilities.getScreenRatio()));
     }
 
     /**
@@ -187,7 +194,7 @@ public class GameViewImpl implements GameView, KeyListener {
      */
     @Override
     public void removeSprite(final int id) {
-        this.sprites.remove(id);
+        this.animations.remove(id);
     }
 
     /**

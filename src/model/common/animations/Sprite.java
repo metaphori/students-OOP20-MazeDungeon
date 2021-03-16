@@ -8,7 +8,6 @@ public class Sprite {
     private final Image img;
     private final int width;
     private final int height;
-    private Point2D position;
 
     public Sprite(final Image img, final int width, final int height) {
         this.img = img;
@@ -38,22 +37,6 @@ public class Sprite {
      */
     public int getHeight() {
         return height;
-    }
-
-    /**
-     * 
-     * @param position
-     */
-    public void setPosition(final Point2D position) {
-        this.position = position;
-    }
-
-    /**
-     * 
-     * @return position of the sprite
-     */
-    public Point2D getPosition() {
-        return position;
     }
 
 }
