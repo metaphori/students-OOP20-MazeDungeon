@@ -46,7 +46,7 @@ public class TestItem {
         c.setMoney(10);
         c.setLife(c.getLife() - c.getLife() / 2);
         this.beforeMoney = c.getMoney();
-        this.defaultBullet = new BulletFactoryImpl().createCharacterBullet(new Point2D(0, 0), new Vector2D(0, 0), 0);
+        this.defaultBullet = new BulletFactoryImpl().createCharacterBullet(new Point2D(0, 0), new Vector2D(0, 0), 0, 0);
         this.beforeSpeed = c.getSpeed();
         this.beforeHealth = c.getLife();
         try {
