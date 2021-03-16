@@ -10,7 +10,7 @@ public class Animation {
     private final Map<State, SpriteIterator> animations = new HashMap<>();
     private Point2D position;
     private Sprite actualImage;
-    private long lastUpdate = System.currentTimeMillis();
+    private long lastUpdate;
     private static final int UPDATE_DELAY = 60;
 
     /**

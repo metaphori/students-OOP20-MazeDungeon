@@ -24,19 +24,45 @@ public class ResourceLoader {
         final Map<State, List<ImageIcon>> characterMap = new HashMap<>();
         characterMap.put(State.IDLE, this.loadImagesFromPath("Character/Stopped/", "CharacterStopped", 1, ".png"));
         resources.put(GameObjectType.CHARACTER, characterMap);
-        /*resources.put(GameObjectType.ENEMY_SOUL, pathGetter.getPortablePath("resources/images/Enemies/Soul/AttackLeft/Soul1.png"));
-        resources.put(GameObjectType.ENEMY_SKELETON, pathGetter.getPortablePath("resources/images/Enemies/Skeleton_Seeker/AttackLeft/Skeleton1.png"));
-        resources.put(GameObjectType.ENEMY_SPROUT, pathGetter.getPortablePath("resources/images/Enemies/Sprout/AttackLeft/Sprout1.png"));
-        resources.put(GameObjectType.ENEMY_BOSS, pathGetter.getPortablePath("resources/images/Boss/Boss.png"));
+
+        final Map<State, List<ImageIcon>> soulMap = new HashMap<>();
+        soulMap.put(State.IDLE, this.loadImagesFromPath("Enemies/Soul/MoveLeft/", "Soul", 8, ".png"));
+        resources.put(GameObjectType.ENEMY_SOUL, soulMap);
+
+        final Map<State, List<ImageIcon>> skeletonMap = new HashMap<>();
+        skeletonMap.put(State.IDLE, this.loadImagesFromPath("Enemies/Skeleton_Seeker/MoveLeft/", "Skeleton", 6, ".png"));
+        resources.put(GameObjectType.ENEMY_SKELETON, skeletonMap);
+
+        final Map<State, List<ImageIcon>> sproutMap = new HashMap<>();
+        sproutMap.put(State.IDLE, this.loadImagesFromPath("Enemies/Sprout/MoveLeft/", "Sprout", 5, ".png"));
+        resources.put(GameObjectType.ENEMY_SPROUT, sproutMap);
+
+        final Map<State, List<ImageIcon>> bossMap = new HashMap<>();
+        bossMap.put(State.IDLE, this.loadImagesFromPath("Boss/", "Boss", 1, ".png"));
+        resources.put(GameObjectType.ENEMY_BOSS, bossMap);
 
 
         /*LOAD BULLET IMAGE*/
-        /*resources.put(GameObjectType.SOUL_BULLET, pathGetter.getPortablePath("resources/images/Bullets/soulBullet.png"));
-        resources.put(GameObjectType.CHARACTER_BULLET, pathGetter.getPortablePath("resources/images/Bullets/characterBullet.png"));
-        resources.put(GameObjectType.SKELETON_BULLET, pathGetter.getPortablePath("resources/images/Bullets/skeletonBullet.png"));
-        resources.put(GameObjectType.BOSS_BULLET, pathGetter.getPortablePath("resources/images/Bullets/bossBullet.png"));
-        resources.put(GameObjectType.SPROUT_BULLET, pathGetter.getPortablePath("resources/images/Bullets/sproutBullet.png"));*/
+        final Map<State, List<ImageIcon>> soulBulletMap = new HashMap<>();
+        soulBulletMap.put(State.IDLE, this.loadImagesFromPath("Bullets/", "soulBullet", 1, ".png"));
+        resources.put(GameObjectType.SOUL_BULLET, soulBulletMap);
 
+        final Map<State, List<ImageIcon>> characterBulletMap = new HashMap<>();
+        characterBulletMap.put(State.IDLE, this.loadImagesFromPath("Bullets/", "characterBullet", 1, ".png"));
+        resources.put(GameObjectType.CHARACTER_BULLET, characterBulletMap);
+
+        final Map<State, List<ImageIcon>> skeletonBulletMap = new HashMap<>();
+        skeletonBulletMap.put(State.IDLE, this.loadImagesFromPath("Bullets/", "skeletonBullet", 1, ".png"));
+        resources.put(GameObjectType.SKELETON_BULLET, skeletonBulletMap);
+
+        final Map<State, List<ImageIcon>> bossBulletMap = new HashMap<>();
+        bossBulletMap.put(State.IDLE, this.loadImagesFromPath("Bullets/", "bossBullet", 1, ".png"));
+        resources.put(GameObjectType.BOSS_BULLET, bossBulletMap);
+
+        final Map<State, List<ImageIcon>> sproutBulletMap = new HashMap<>();
+        sproutBulletMap.put(State.IDLE, this.loadImagesFromPath("Bullets/", "sproutBullet", 1, ".png"));
+
+        resources.put(GameObjectType.SPROUT_BULLET, sproutBulletMap);
         /*DOOR*/
         final Map<State, List<ImageIcon>> doorUpMap = new HashMap<>();
         doorUpMap.put(State.IDLE, this.loadImagesFromPath("Room/Door/", "topDoor", 1, ".png"));
@@ -55,10 +81,13 @@ public class ResourceLoader {
         resources.put(GameObjectType.DOOR_EAST, doorRight);
 
 
-        /*OBSTACLE*/
-        /*resources.put(GameObjectType.ROCK, pathGetter.getPortablePath("resources/images/Room/Obstacle/Rock.png"));
+        final Map<State, List<ImageIcon>> rockMap = new HashMap<>();
+        rockMap.put(State.IDLE, this.loadImagesFromPath("Room/Obstacle/", "Rock", 1, ".png"));
+        resources.put(GameObjectType.ROCK, rockMap);
 
-        resources.put(GameObjectType.FINAL_ARTIFACT, pathGetter.getPortablePath("resources/images/Objects/FinalArtifact/WinnerSkull.png"));*/
+        final Map<State, List<ImageIcon>> finalArtifactMap = new HashMap<>();
+        finalArtifactMap.put(State.IDLE, this.loadImagesFromPath("Objects/FinalArtifact/", "WinnerSkull", 1, ".png"));
+        resources.put(GameObjectType.FINAL_ARTIFACT, finalArtifactMap);
     }
 
     /**
@@ -68,7 +97,7 @@ public class ResourceLoader {
      */
     public Map<State, List<ImageIcon>> getStateImages(final GameObjectType gameObjectType) {
         if (!resources.containsKey(gameObjectType)) {
-            System.out.println("IMMAGINE NON TROVATA");
+            System.out.println("IMMAGINE NON TROVATA" + gameObjectType);
         }
         return this.resources.get(gameObjectType);
     }
