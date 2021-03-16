@@ -20,7 +20,7 @@ public class ImageLoader {
         images.put(Images.BACKGROUNDSHOP, new ImageIcon(pathGetter.getPortablePath(IMAGES_PATH_INGAMEMENU + "shop.png")).getImage());
         images.put(Images.BTNRESUME, new ImageIcon(pathGetter.getPortablePath(IMAGES_PATH_INGAMEMENU + NAME_BTN_FOLDER + "resume.png")).getImage().getScaledInstance(WIDTH_BTN, HEIGHT_BTN, Image.SCALE_SMOOTH));
         images.put(Images.BTNEXIT, new ImageIcon(pathGetter.getPortablePath(IMAGES_PATH_INGAMEMENU + NAME_BTN_FOLDER + "exit.png")).getImage().getScaledInstance(WIDTH_BTN, HEIGHT_BTN, Image.SCALE_SMOOTH));
-        images.put(Images.BTNSHOP, new ImageIcon(pathGetter.getPortablePath(IMAGES_PATH_INGAMEMENU  + NAME_BTN_FOLDER + "shopBTN.png")).getImage().getScaledInstance(WIDTH_BTN, HEIGHT_BTN, Image.SCALE_SMOOTH));
+        images.put(Images.BTNSHOP, new ImageIcon(pathGetter.getPortablePath(IMAGES_PATH_INGAMEMENU  + NAME_BTN_FOLDER + "shopbtn.png")).getImage().getScaledInstance(WIDTH_BTN, HEIGHT_BTN, Image.SCALE_SMOOTH));
         images.put(Images.BTNRETURNMENU, new ImageIcon(pathGetter.getPortablePath(IMAGES_PATH_INGAMEMENU + NAME_BTN_FOLDER + "backToMenu.png")).getImage().getScaledInstance(WIDTH_BTN, HEIGHT_BTN, Image.SCALE_SMOOTH));
         images.put(Images.BTNARTHEMIDEBOW, new ImageIcon(pathGetter.getPortablePath(IMAGES_PATH_ITEM + "arthemideBow.png")).getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, Image.SCALE_SMOOTH));
         images.put(Images.BTNHEALTH, new ImageIcon(pathGetter.getPortablePath(IMAGES_PATH_ITEM + "health.png")).getImage().getScaledInstance(SIZE_IMAGE_ITEM, SIZE_IMAGE_ITEM, Image.SCALE_SMOOTH));

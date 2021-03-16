@@ -39,14 +39,14 @@ public class TestItem {
 
     @org.junit.Before
     public void newCharacter() {
-        final int timeSleep = 200;
+        final int timeSleep = 650;
         c = new CharacterImpl(new Point2D(100, 100), GameObjectType.CHARACTER);
         room = new RoomImpl(new RoomManagerImpl());
         room.addDynamicObject(c);
         c.setMoney(10);
         c.setLife(c.getLife() - c.getLife() / 2);
         this.beforeMoney = c.getMoney();
-        this.defaultBullet = new BulletFactoryImpl().createCharacterBullet(new Point2D(0, 0), new Vector2D(0, 0), 0);
+        this.defaultBullet = new BulletFactoryImpl().createCharacterBullet(new Point2D(0, 0), new Vector2D(0, 0), 0, 0);
         this.beforeSpeed = c.getSpeed();
         this.beforeHealth = c.getLife();
         try {
