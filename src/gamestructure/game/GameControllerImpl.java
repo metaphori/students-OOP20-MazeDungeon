@@ -123,7 +123,7 @@ public class GameControllerImpl implements GameController {
         final List<Integer> gameObjectsID = this.getActualObjectsID();
         for (final Integer id : this.lastGameObjectsID) {
             if (!gameObjectsID.contains(id)) {
-                this.view.removeSprite(id);
+                this.view.removeAnimation(id);
             }
         }
     }
@@ -175,6 +175,9 @@ public class GameControllerImpl implements GameController {
         this.inGameMenuOpen = false;
     }
 
+    /**
+     * The method for open the InGame menu.
+     */
     @Override
     public void openInGameMenu() {
         this.inGameMenuController.openInGameMenu();
