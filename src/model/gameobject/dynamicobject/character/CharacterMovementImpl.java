@@ -48,7 +48,6 @@ public class CharacterMovementImpl implements CharacterMovement {
      */
     @Override
     public void move(final VectorDirection vectorDirection) {
-        System.out.println(vectorDirection);
         switch (vectorDirection) {
             case UP:
                 this.moveUp();

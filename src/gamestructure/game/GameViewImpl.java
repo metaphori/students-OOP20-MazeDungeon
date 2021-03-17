@@ -120,7 +120,14 @@ public class GameViewImpl implements GameView, KeyListener {
             g.drawImage(this.roomImage, 0, 0, null);
             temp.forEach(animation -> {
                 final Sprite sprite = animation.getNext(State.IDLE);
-                g.drawImage(sprite.getImg(), (int) Math.round(animation.getPosition().getX()), (int) Math.round(animation.getPosition().getY()), null);
+                while (!g.drawImage(sprite.getImg(), (int) Math.round(animation.getPosition().getX()), (int) Math.round(animation.getPosition().getY()), this)) {
+                    try {
+                        Thread.sleep(1);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    };
+                }
             }); 
             if (gameOver) {
                 g.drawImage(this.youLoseImage, 0, 0, null);

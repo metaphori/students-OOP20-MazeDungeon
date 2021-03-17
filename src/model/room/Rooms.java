@@ -22,7 +22,7 @@ public final class Rooms {
     /**
      * number of rooms per floor.
      */
-    public static final int NUMBER_OF_ROOMS = 3;
+    public static final int NUMBER_OF_ROOMS = 10;
 
     private Rooms() {
     }
