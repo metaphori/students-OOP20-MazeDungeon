@@ -5,12 +5,8 @@ import java.awt.event.KeyEvent;
 
 public interface Command {
 
-    void setKey(KeyEvent key, boolean b);
+    void setKey(KeyEvent key, boolean clicked);
 
     void execute();
-
-    boolean checkUpDownKeys();
-
-    boolean checkRightLeftKeys();
 
 }
