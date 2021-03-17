@@ -63,10 +63,10 @@ public class HUDPanel extends JLayeredPane {
         this.coinImage = new ImageIcon(pathGetter.getPortablePath("resources/images/HUD/Coins/coin.png")).getImage().getScaledInstance((int) coinPosition.getWidth(),
                                                                                                            (int) coinPosition.getHeight(), 
                                                                                                            Image.SCALE_SMOOTH);
-        this.finalArtefactImage = new ImageIcon(pathGetter.getPortablePath("resources/images/Objects/FinalArtifact/spawned.png")).getImage().getScaledInstance((int) finalArtefactPosition.getWidth(), 
+        this.finalArtefactImage = new ImageIcon(pathGetter.getPortablePath("resources/images/objects/final_artifact/spawned.png")).getImage().getScaledInstance((int) finalArtefactPosition.getWidth(), 
                                                                                                                                (int) finalArtefactPosition.getHeight(), 
                                                                                                                                Image.SCALE_SMOOTH);
-        this.bossIconImage = new ImageIcon(pathGetter.getPortablePath("resources/images/Boss/BossIcon.png")).getImage().getScaledInstance((int) bossIconPosition.getWidth(), 
+        this.bossIconImage = new ImageIcon(pathGetter.getPortablePath("resources/images/enemies/enemy_boss/idle/enemy_boss.png")).getImage().getScaledInstance((int) bossIconPosition.getWidth(), 
                                                                                                                (int) bossIconPosition.getHeight(), 
                                                                                                                Image.SCALE_SMOOTH);
         this.lblRoomVisited = new JLabel();

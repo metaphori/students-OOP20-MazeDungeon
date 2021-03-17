@@ -21,7 +21,7 @@ public class DoorFactoryImpl implements DoorFactory {
     }
 
     private Door createNorthDoor() {
-        return new Door(NORTH_DOOR_POSITION, GameObjectType.DOOR_TOP);
+        return new Door(NORTH_DOOR_POSITION, GameObjectType.DOOR_NORTH);
     }
 
     private Door createSouthDoor() {

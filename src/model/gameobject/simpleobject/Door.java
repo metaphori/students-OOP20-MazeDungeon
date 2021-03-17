@@ -26,7 +26,7 @@ public class Door extends SimpleObjectImpl {
             case DOOR_SOUTH:
                 direction = CardinalPoint.SOUTH;
                 break;
-            case DOOR_TOP:
+            case DOOR_NORTH:
                 direction = CardinalPoint.NORTH;
                 break;
             case DOOR_WEST:

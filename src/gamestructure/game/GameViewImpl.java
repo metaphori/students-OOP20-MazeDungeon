@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -49,7 +50,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private boolean gameOver;
     private boolean won;
     private final JLabel lblStartInstruction = new JLabel(new ImageIcon(adaptImage(new ImageIcon(pathGetter.getPortablePath("resources/images/HUD/StartIstruction.png")))));
-    private static final int ISTRUCTION_TIME = 3000;
+    private static final int ISTRUCTION_TIME = 2000;
 
     public GameViewImpl() {
         this.frame = new JFrame();
@@ -124,9 +125,8 @@ public class GameViewImpl implements GameView, KeyListener {
                     try {
                         Thread.sleep(1);
                     } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
-                    };
+                    }
                 }
             }); 
             if (gameOver) {
@@ -177,15 +177,16 @@ public class GameViewImpl implements GameView, KeyListener {
      */
     @Override
     public void addSprite(final Integer id, final GameObjectType gameObjectType, final Point2D position) {
-        final Map<State, List<ImageIcon>> stateMap = resourceLoader.getStateImages(gameObjectType);
+        final Map<State, List<ImageIcon>> stateMap = new HashMap<>(resourceLoader.getStateImages(gameObjectType));
+        final Animation an = new Animation();
+        final Image img = stateMap.get(State.IDLE).get(0).getImage();
+        an.setPosition(position);
         stateMap.keySet().forEach(s -> {
-            final Animation an = new Animation();
-            an.setPosition(position);
             an.addState(s, new SpriteIterator(stateMap.get(s).stream()
                                                              .map(i -> new Sprite(adaptImage(i), i.getIconWidth(), i.getIconHeight()))
                                                              .collect(Collectors.toList())));
-            animations.put(id, an);
         });
+        animations.put(id, an);
 
         final ImageIcon image = stateMap.get(State.IDLE).get(0);
         this.controller.setBoundingBox(id, new BoundingBox(position, image.getIconWidth(), image.getIconHeight()));
