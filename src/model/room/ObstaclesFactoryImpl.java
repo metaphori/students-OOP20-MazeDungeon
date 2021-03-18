@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import model.common.BoundingBox;
+import model.common.CardinalPoint;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.simpleobject.Obstacle;
@@ -20,7 +21,8 @@ public class ObstaclesFactoryImpl implements ObstacleFactory {
     private final double obstacleHeight;
     private final double width;
     private final double height;
-    private static final int WALL_DEPTH = 100;
+    private static final int PERSPECTIVE_WALL_OFFSET = 50;
+    private static final int WALL_DEPTH = 1;
 
     public ObstaclesFactoryImpl() {
         this.width = Rooms.BR_CORNER.getX() - Rooms.UL_CORNER.getX();
@@ -67,20 +69,24 @@ public class ObstaclesFactoryImpl implements ObstacleFactory {
         final List<SimpleObject> walls = new LinkedList<>();
         SimpleObject tmp;
         //TOP
-        tmp = new Wall(Rooms.UL_CORNER);
+        tmp = new Wall(Rooms.UL_CORNER.sum(new Vector2D(0, -WALL_DEPTH)), CardinalPoint.NORTH);
         tmp.setBoundingBox(new BoundingBox(Rooms.UL_CORNER.sum(new Vector2D(0, -WALL_DEPTH)), this.width, WALL_DEPTH));
         walls.add(tmp);
         //RIGHT
-        tmp = new Wall(new Point2D(Rooms.BR_CORNER.getX(), Rooms.UL_CORNER.getY()));
-        tmp.setBoundingBox(new BoundingBox(new Point2D(Rooms.BR_CORNER.getX(), Rooms.UL_CORNER.getY()), WALL_DEPTH, this.height));
+        tmp = new Wall(new Point2D(Rooms.BR_CORNER.getX(), Rooms.UL_CORNER.getY() - PERSPECTIVE_WALL_OFFSET), CardinalPoint.EAST);
+        tmp.setBoundingBox(new BoundingBox(new Point2D(Rooms.BR_CORNER.getX(), Rooms.UL_CORNER.getY() - PERSPECTIVE_WALL_OFFSET), WALL_DEPTH, this.height + PERSPECTIVE_WALL_OFFSET));
         walls.add(tmp);
         //BOTTOM
-        tmp = new Wall(new Point2D(Rooms.UL_CORNER.getX(), Rooms.BR_CORNER.getY()));
+        tmp = new Wall(new Point2D(Rooms.UL_CORNER.getX(), Rooms.BR_CORNER.getY()), CardinalPoint.SOUTH);
         tmp.setBoundingBox(new BoundingBox(new Point2D(Rooms.UL_CORNER.getX(), Rooms.BR_CORNER.getY()), this.width, WALL_DEPTH));
         walls.add(tmp);
         //LEFT
-        tmp = new Wall(Rooms.UL_CORNER);
-        tmp.setBoundingBox(new BoundingBox(Rooms.UL_CORNER.sum(new Vector2D(-WALL_DEPTH, 0)), WALL_DEPTH, this.height));
+        tmp = new Wall(Rooms.UL_CORNER.sum(new Vector2D(-WALL_DEPTH, -PERSPECTIVE_WALL_OFFSET)), CardinalPoint.WEST);
+        tmp.setBoundingBox(new BoundingBox(Rooms.UL_CORNER.sum(new Vector2D(-WALL_DEPTH, -PERSPECTIVE_WALL_OFFSET)), WALL_DEPTH, this.height + PERSPECTIVE_WALL_OFFSET));
+        walls.add(tmp);
+        //PERSPECTIVE
+        tmp = new Wall(Rooms.UL_CORNER.sum(new Vector2D(0, -WALL_DEPTH)), CardinalPoint.NORTH);
+        tmp.setBoundingBox(new BoundingBox(Rooms.UL_CORNER.sum(new Vector2D(0, -WALL_DEPTH - PERSPECTIVE_WALL_OFFSET)), this.width, WALL_DEPTH));
         walls.add(tmp);
         return walls;
     }

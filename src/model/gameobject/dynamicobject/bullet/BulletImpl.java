@@ -1,6 +1,7 @@
 package model.gameobject.dynamicobject.bullet;
 
 import model.common.BoundingBox;
+import model.common.CardinalPoint;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
@@ -8,6 +9,7 @@ import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.AbstractDynamicObject;
 import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.dynamicobject.enemy.Enemy;
+import model.gameobject.simpleobject.Wall;
 
 public class BulletImpl extends AbstractDynamicObject implements Bullet {
 
@@ -56,11 +58,16 @@ public class BulletImpl extends AbstractDynamicObject implements Bullet {
      */
     @Override
     public void collideWith(final GameObject obj2) {
-        if (this.getBoundingBox().intersectWith(this.safeZone) && this.getDirection().getY() > 0) { 
+        /*if (this.getBoundingBox().intersectWith(this.safeZone) && this.getDirection().getY() > 0) { 
             return;
-        }
+        }*/
         switch (obj2.getGameObjectType().getCollisionType()) {
         case OBSTACLE:
+            if (obj2 instanceof Wall) {
+                if (((Wall) obj2).getCardinalPoint() == CardinalPoint.NORTH && this.getDirection().getY() > 0) {
+                    return;
+                }
+            }
             this.getRoom().deleteGameObject(this);
             break;
         case ENTITY:
