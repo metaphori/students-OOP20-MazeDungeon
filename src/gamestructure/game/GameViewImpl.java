@@ -22,7 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.Timer;
 
-import a.a.a.e;
 import gamestructure.PathGetter;
 import gamestructure.WindowUtilities;
 import model.common.BoundingBox;

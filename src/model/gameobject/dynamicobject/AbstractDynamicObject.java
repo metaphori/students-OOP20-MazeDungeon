@@ -65,6 +65,12 @@ public abstract class AbstractDynamicObject extends SimpleObjectImpl implements 
         } else if (newDirection.getX() < 0 && this.getGameObjectType().getStates().contains(State.MOVE_LEFT)) {
             this.setState(State.MOVE_LEFT);
             return;
+        } else if (newDirection.getY() < 0 && this.getGameObjectType().getStates().contains(State.MOVE_UP)) {
+            this.setState(State.MOVE_UP);
+            return;
+        } else if (newDirection.getY() > 0 && this.getGameObjectType().getStates().contains(State.MOVE_UP)) {
+            this.setState(State.MOVE_DOWN);
+            return;
         }
         this.setState(State.IDLE);
     }

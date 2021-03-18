@@ -96,7 +96,7 @@ public class CommandImpl implements Command {
         }
         final Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> trio = this.keysList.stream()
                                                                                               .filter(t -> t.getX() == key.getKeyCode())
-                                                                                              .findFirst();
+                                                                                               .findFirst();
         if (trio.isPresent()) {
             trio.get().setY(clicked);
         }

@@ -10,7 +10,7 @@ public enum GameObjectType {
     /**
      * The main character. Collision type : ENTITY.
      */
-    CHARACTER(CollisionType.ENTITY, List.of(State.IDLE)),
+    CHARACTER(CollisionType.ENTITY, List.of(State.IDLE, State.MOVE_LEFT, State.MOVE_RIGHT, State.MOVE_UP, State.MOVE_DOWN)),
 
     /**
      * An enemy of type : Sprout. Collision type : ENTITY.
