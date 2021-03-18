@@ -179,7 +179,6 @@ public class GameViewImpl implements GameView, KeyListener {
     public void addSprite(final Integer id, final GameObjectType gameObjectType, final Point2D position) {
         final Map<State, List<ImageIcon>> stateMap = new HashMap<>(resourceLoader.getStateImages(gameObjectType));
         final Animation an = new Animation();
-        final Image img = stateMap.get(State.IDLE).get(0).getImage();
         an.setPosition(position);
         stateMap.keySet().forEach(s -> {
             an.addState(s, new SpriteIterator(stateMap.get(s).stream()
