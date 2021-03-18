@@ -181,8 +181,9 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void openInGameMenu() {
-        this.inGameMenuController.openInGameMenu();
-        this.inGameMenuOpen = true;
+        if (this.inGameMenuController.openInGameMenu()) {
+            this.inGameMenuOpen = true;
+        }
     }
 
     private void openMainMenu() {

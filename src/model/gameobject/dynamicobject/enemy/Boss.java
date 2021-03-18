@@ -18,7 +18,7 @@ public class Boss extends AbstractEnemy {
     private static final int ALIGN_SHOOT_Y = 140;
     private static final int ALIGN_MONEY = 40;
     private static final int MODIFY_ALIGN_MONEY = 10;
-    private static final int BOSS_LIFE = 300;
+    private static final int BOSS_LIFE = 400;
 
     private long lastHitTime;
 

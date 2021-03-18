@@ -8,7 +8,7 @@ public interface InGameMenuController extends Controller {
 
     void openShop();
 
-    void openInGameMenu();
+    boolean openInGameMenu();
 
     void exit();
 
