@@ -106,6 +106,7 @@ public class GameControllerImpl implements GameController {
     }
 
     private void render() {
+        this.checkDeletedObject();
         this.updateSpritePositions();
         this.view.updateHUD();
     } 
