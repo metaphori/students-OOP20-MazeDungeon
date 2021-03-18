@@ -17,10 +17,10 @@ public class RoomBuilderImpl implements RoomBuilder {
     private final DoorFactory doorFactory = new DoorFactoryImpl();
     private final ObstacleFactory obstaclesFactory = new ObstaclesFactoryImpl(); 
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
-    private final List<Point2D> avaiableEnemyPosition = new LinkedList<>(List.of(new Point2D(254, 200), 
-                                                                                new Point2D(940, 200), 
-                                                                                new Point2D(254, 550), 
-                                                                                new Point2D(940, 550)));
+    private final List<Point2D> avaiableEnemyPosition = new LinkedList<>(List.of(new Point2D(260, 200), 
+                                                                                new Point2D(930, 200), 
+                                                                                new Point2D(260, 540), 
+                                                                                new Point2D(930, 540)));
     private Room room;
     private boolean isInitialize = false;
     private boolean build = false;
