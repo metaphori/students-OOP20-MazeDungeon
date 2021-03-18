@@ -9,7 +9,7 @@ import model.gameobject.simpleobject.SimpleObjectImpl;
 
 public abstract class AbstractDynamicObject extends SimpleObjectImpl implements DynamicObject {
 
-    private static final int BASE_HEIGHT = 15;
+    private static final int BASE_HEIGHT = 40;
     private Vector2D direction;
     private int speed;
     private Point2D lastPosition;

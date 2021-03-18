@@ -119,7 +119,8 @@ public class GameViewImpl implements GameView, KeyListener {
         @Override
         protected void paintComponent(final Graphics g) {
             g.drawImage(this.roomImage, 0, 0, null);
-            animations.entrySet().forEach(e -> {
+            final Map<Integer, Animation> tmpAnimations = new ConcurrentSkipListMap<>(animations);
+            tmpAnimations.entrySet().forEach(e -> {
                 final Sprite sprite = e.getValue().getNext(controller.getStateFromId(e.getKey()));
                 while (!g.drawImage(sprite.getImg(), (int) Math.round(e.getValue().getPosition().getX()), (int) Math.round(e.getValue().getPosition().getY()), this)) {
                     try {
