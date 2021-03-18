@@ -59,7 +59,7 @@ public abstract class AbstractDynamicObject extends SimpleObjectImpl implements 
     }
 
     private void changeState(final Vector2D newDirection) {
-        if (newDirection.getX() >= 0 && this.getGameObjectType().getStates().contains(State.MOVE_RIGHT)) {
+        if (newDirection.getX() > 0 && this.getGameObjectType().getStates().contains(State.MOVE_RIGHT)) {
             this.setState(State.MOVE_RIGHT);
             return;
         } else if (newDirection.getX() < 0 && this.getGameObjectType().getStates().contains(State.MOVE_LEFT)) {
