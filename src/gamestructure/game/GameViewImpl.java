@@ -120,10 +120,6 @@ public class GameViewImpl implements GameView, KeyListener {
         protected void paintComponent(final Graphics g) {
             g.drawImage(this.roomImage, 0, 0, null);
             animations.entrySet().forEach(e -> {
-                final State state = controller.getStateFromId(e.getKey());
-                if (state != State.IDLE) {
-                    System.out.println(state);
-                }
                 final Sprite sprite = e.getValue().getNext(controller.getStateFromId(e.getKey()));
                 while (!g.drawImage(sprite.getImg(), (int) Math.round(e.getValue().getPosition().getX()), (int) Math.round(e.getValue().getPosition().getY()), this)) {
                     try {
@@ -190,9 +186,6 @@ public class GameViewImpl implements GameView, KeyListener {
                                                              .map(i -> new Sprite(adaptImage(i), i.getIconWidth(), i.getIconHeight()))
                                                              .collect(Collectors.toList())));
         });
-        if(stateMap.containsKey(State.MOVE_LEFT)) {
-            System.out.println();
-        }
         animations.put(id, an);
 
         final ImageIcon image = stateMap.get(State.IDLE).get(0);

@@ -39,4 +39,12 @@ public class Sprite {
         return height;
     }
 
+    /**
+     * 
+     */
+    @Override
+    public String toString() {
+        return this.getHeight() + " ";
+    }
+
 }

@@ -10,12 +10,15 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
+import model.common.BoundingBox;
 import model.common.CardinalPoint;
 import model.common.GameObjectType;
 import model.common.IdIterator;
 import model.common.Point2D;
 import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.dynamicobject.character.CharacterImpl;
+import model.gameobject.dynamicobject.enemy.Enemy;
+import model.gameobject.dynamicobject.enemy.EnemyFactoryImpl;
 import model.gameobject.simpleobject.Coin;
 import model.gameobject.simpleobject.FinalArtifact;
 
@@ -96,6 +99,9 @@ public class RoomManagerImpl implements RoomManager {
 
         actualRoom = rooms.get(new Point2D(0, 0));
         actualRoom.addSimpleObject(new Coin(new Point2D(600, 600)));
+        /*final Enemy sprout = new EnemyFactoryImpl().createSkeletonSeeker(new Point2D(500,500));
+        sprout.setBoundingBox(new BoundingBox(new Point2D(500, 500), 100, 100));
+        actualRoom.addDynamicObject(sprout);*/
         actualRoom.addDynamicObject(character);
         actualRoom.visit();
     }
