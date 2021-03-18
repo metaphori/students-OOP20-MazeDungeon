@@ -63,11 +63,11 @@ public class BulletImpl extends AbstractDynamicObject implements Bullet {
         }*/
         switch (obj2.getGameObjectType().getCollisionType()) {
         case OBSTACLE:
-            if (obj2 instanceof Wall) {
+            /*if (obj2 instanceof Wall) {
                 if (((Wall) obj2).getCardinalPoint() == CardinalPoint.NORTH && this.getDirection().getY() > 0) {
                     return;
                 }
-            }
+            }*/
             this.getRoom().deleteGameObject(this);
             break;
         case ENTITY:
