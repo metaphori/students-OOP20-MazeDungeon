@@ -3,6 +3,7 @@ package model.gameobject.simpleobject;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
+import model.common.animations.State;
 import model.gameobject.GameObject;
 import model.room.Room;
 
@@ -12,6 +13,7 @@ public abstract class SimpleObjectImpl implements SimpleObject {
     private final GameObjectType gameObjectType;
     private BoundingBox boundingBox;
     private Room room;
+    private State state = State.IDLE;
 
     public SimpleObjectImpl(final Point2D position, final GameObjectType gameObjectType) {
         this.position = position;
@@ -55,6 +57,21 @@ public abstract class SimpleObjectImpl implements SimpleObject {
     @Override
     public GameObjectType getGameObjectType() {
         return this.gameObjectType;
+    }
+
+    /**
+     * @return the state of the object.
+     */
+    @Override
+    public State getState() {
+        return this.state;
+    }
+
+    /**
+     * @param state : the new state to set.
+     */
+    protected void setState(final State state) {
+        this.state = state;
     }
 
     /**

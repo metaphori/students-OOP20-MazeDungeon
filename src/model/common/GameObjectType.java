@@ -15,22 +15,22 @@ public enum GameObjectType {
     /**
      * An enemy of type : Sprout. Collision type : ENTITY.
      */
-    ENEMY_SPROUT(CollisionType.ENTITY, List.of(State.IDLE)),
+    ENEMY_SPROUT(CollisionType.ENTITY, List.of(State.IDLE, State.MOVE_LEFT, State.MOVE_RIGHT)),
 
     /**
      * An enemy of type : Soul. Collision type : ENTITY.
      */
-    ENEMY_SOUL(CollisionType.ENTITY, List.of(State.IDLE)),
+    ENEMY_SOUL(CollisionType.ENTITY, List.of(State.IDLE, State.MOVE_LEFT, State.MOVE_RIGHT)),
 
     /**
      * An enemy of type : Skeleton. Collision type : ENTITY.
      */
-    ENEMY_SKELETON(CollisionType.ENTITY, List.of(State.IDLE)),
+    ENEMY_SKELETON(CollisionType.ENTITY, List.of(State.IDLE, State.MOVE_LEFT, State.MOVE_RIGHT)),
 
     /**
      * An enemy of type : Boss. Collision type : ENTITY.
      */
-    ENEMY_BOSS(CollisionType.ENTITY, List.of(State.IDLE)),
+    ENEMY_BOSS(CollisionType.ENTITY, List.of(State.IDLE, State.MOVE_LEFT, State.MOVE_RIGHT)),
 
     /**
      * Coin. Collision type : INTERACTIVE_ELEMENT.

@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.Timer;
 
+import a.a.a.e;
 import gamestructure.PathGetter;
 import gamestructure.WindowUtilities;
 import model.common.BoundingBox;
@@ -117,15 +118,18 @@ public class GameViewImpl implements GameView, KeyListener {
 
         @Override
         protected void paintComponent(final Graphics g) {
-            final List<Animation> temp = animations.values().stream().collect(Collectors.toList());
             g.drawImage(this.roomImage, 0, 0, null);
-            temp.forEach(animation -> {
-                final Sprite sprite = animation.getNext(State.IDLE);
-                while (!g.drawImage(sprite.getImg(), (int) Math.round(animation.getPosition().getX()), (int) Math.round(animation.getPosition().getY()), this)) {
+            animations.entrySet().forEach(e -> {
+                final State state = controller.getStateFromId(e.getKey());
+                if (state != State.IDLE) {
+                    System.out.println(state);
+                }
+                final Sprite sprite = e.getValue().getNext(controller.getStateFromId(e.getKey()));
+                while (!g.drawImage(sprite.getImg(), (int) Math.round(e.getValue().getPosition().getX()), (int) Math.round(e.getValue().getPosition().getY()), this)) {
                     try {
                         Thread.sleep(1);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
                     }
                 }
             }); 
@@ -186,6 +190,9 @@ public class GameViewImpl implements GameView, KeyListener {
                                                              .map(i -> new Sprite(adaptImage(i), i.getIconWidth(), i.getIconHeight()))
                                                              .collect(Collectors.toList())));
         });
+        if(stateMap.containsKey(State.MOVE_LEFT)) {
+            System.out.println();
+        }
         animations.put(id, an);
 
         final ImageIcon image = stateMap.get(State.IDLE).get(0);

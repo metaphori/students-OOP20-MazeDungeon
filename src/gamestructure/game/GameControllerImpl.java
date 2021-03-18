@@ -14,6 +14,7 @@ import input.Command;
 import input.CommandImpl;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
+import model.common.animations.State;
 import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.enemy.AbstractEnemy;
 import model.room.Rooms;
@@ -231,5 +232,17 @@ public class GameControllerImpl implements GameController {
             return Optional.empty();
         }
         return Optional.of(((AbstractEnemy) this.model.getGameObject(bossID.get())).getLife());
+    }
+
+    /**
+     * @param id : the id of the GameObject
+     * @return the state of the GameObject
+     */
+    @Override
+    public State getStateFromId(final int id) {
+        if (!this.getActualObjectsID().contains(id)) {
+            return State.IDLE;
+        }
+        return this.model.getGameObject(id).getState();
     }
 }

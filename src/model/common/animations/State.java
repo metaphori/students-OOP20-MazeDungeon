@@ -4,5 +4,9 @@ public enum State {
     /**
      * 
      */
-    IDLE;
+    IDLE,
+    
+    MOVE_LEFT,
+    
+    MOVE_RIGHT;
 }

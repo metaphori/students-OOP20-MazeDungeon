@@ -4,6 +4,7 @@ import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
+import model.common.animations.State;
 import model.gameobject.simpleobject.SimpleObjectImpl;
 
 public abstract class AbstractDynamicObject extends SimpleObjectImpl implements DynamicObject {
@@ -53,7 +54,19 @@ public abstract class AbstractDynamicObject extends SimpleObjectImpl implements 
      */
     @Override
     public void setDirection(final Vector2D newDirection) {
+        this.changeState(newDirection);
         this.direction = newDirection;
+    }
+
+    private void changeState(final Vector2D newDirection) {
+        if (newDirection.getX() >= 0 && this.getGameObjectType().getStates().contains(State.MOVE_RIGHT)) {
+            this.setState(State.MOVE_RIGHT);
+            return;
+        } else if (newDirection.getX() < 0 && this.getGameObjectType().getStates().contains(State.MOVE_LEFT)) {
+            this.setState(State.MOVE_LEFT);
+            return;
+        }
+        this.setState(State.IDLE);
     }
 
     /**

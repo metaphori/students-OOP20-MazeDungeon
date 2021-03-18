@@ -43,6 +43,7 @@ public class ResourceLoader {
             }
             resources.put(gameObjectType, stateMap);
         }
+        System.out.println();
     }
 
     /**

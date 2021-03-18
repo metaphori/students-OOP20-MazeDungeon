@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.util.Optional;
 
 import model.common.BoundingBox;
+import model.common.animations.State;
 import mvc.Controller;
 
 public interface GameController extends Controller {
@@ -28,4 +29,6 @@ public interface GameController extends Controller {
     Optional<Double> getBossLife();
 
     void openInGameMenu();
+
+    State getStateFromId(int id);
 }
