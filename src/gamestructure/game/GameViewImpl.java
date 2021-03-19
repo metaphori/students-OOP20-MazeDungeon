@@ -63,7 +63,6 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.addKeyListener(this);
         this.frame.remove(this.lblStartInstruction);
         timer = new Timer(PERIOD, gamePanel);
-        timer.start();
     }
 
     /**
@@ -72,7 +71,6 @@ public class GameViewImpl implements GameView, KeyListener {
     @Override
     public void initialize() {
         this.gamePanel.initialize();
-        this.timer.start();
     }
 
     /**
@@ -94,6 +92,7 @@ public class GameViewImpl implements GameView, KeyListener {
             e.printStackTrace();
         }
         gamePanel.setSize(this.frame.getSize());
+        this.timer.start();
     }
 
     /**
