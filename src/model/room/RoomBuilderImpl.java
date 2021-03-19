@@ -13,7 +13,7 @@ import model.gameobject.dynamicobject.enemy.EnemyFactoryImpl;
 
 public class RoomBuilderImpl implements RoomBuilder {
     private static final int MAX_ENEMY_NUMBER = 4;
-    private static final Point2D BOSS_SPAWN_POSITION = new Point2D(256, 54);
+    private static final Point2D BOSS_SPAWN_POSITION = new Point2D(256, 70);
     private final DoorFactory doorFactory = new DoorFactoryImpl();
     private final ObstacleFactory obstaclesFactory = new ObstaclesFactoryImpl(); 
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
