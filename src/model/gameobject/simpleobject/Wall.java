@@ -8,17 +8,26 @@ import model.gameobject.GameObject;
 public class Wall extends SimpleObjectImpl {
 
     private final CardinalPoint cardinalPoint;
+    private final WallType wallType;
 
-    public Wall(final Point2D position, final CardinalPoint cardinalPoint) {
+    public Wall(final Point2D position, final CardinalPoint cardinalPoint, final WallType wallType) {
         super(position, GameObjectType.INVISIBLE_OBJECT);
         this.cardinalPoint = cardinalPoint;
+        this.wallType = wallType;
     }
 
     /**
-     * @return
+     * @return the cardinal point of the wall
      */
     public CardinalPoint getCardinalPoint() {
         return cardinalPoint;
+    }
+
+    /**
+     * @return true if the wall is perspective
+     */
+    public boolean isPerspective() {
+        return wallType == WallType.PERSPECTIVE;
     }
 
     /**
@@ -27,5 +36,10 @@ public class Wall extends SimpleObjectImpl {
     @Override
     public void collideWith(final GameObject obj2) {
     }
+
+    /**
+     * 
+     */
+    public enum WallType { SOLID, PERSPECTIVE };
 
 }
