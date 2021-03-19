@@ -11,6 +11,7 @@ public class Animation {
     private Point2D position;
     private Sprite actualImage;
     private long lastUpdate;
+    private State lastState = State.IDLE;
     private static final int UPDATE_DELAY = 60;
 
     /**
@@ -21,15 +22,19 @@ public class Animation {
     public void addState(final State state, final SpriteIterator spriteIterator) {
         this.animations.put(state, spriteIterator);
     }
+    
+    public void setState(final State state) {
+        this.lastState = state;
+    }
     /**
      * 
      * @param state
      * @return the next image
      */
-    public Sprite getNext(final State state) {
+    public Sprite getNext() {
         final long currentUpdate = System.currentTimeMillis();
         if (currentUpdate - this.lastUpdate >= UPDATE_DELAY) {
-            this.actualImage = this.animations.get(state).next();
+            this.actualImage = this.animations.get(this.lastState).next();
             this.lastUpdate = currentUpdate;
         }
         return this.actualImage;

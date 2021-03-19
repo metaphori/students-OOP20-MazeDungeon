@@ -120,7 +120,7 @@ public class GameViewImpl implements GameView, KeyListener {
             g.drawImage(this.roomImage, 0, 0, null);
             final Map<Integer, Animation> tmpAnimations = new ConcurrentSkipListMap<>(animations);
             tmpAnimations.entrySet().forEach(e -> {
-                final Sprite sprite = e.getValue().getNext(controller.getStateFromId(e.getKey()));
+                final Sprite sprite = e.getValue().getNext();
                 while (!g.drawImage(sprite.getImg(), (int) Math.round(e.getValue().getPosition().getX()), (int) Math.round(e.getValue().getPosition().getY()), this)) {
                     try {
                         Thread.sleep(1);
@@ -198,6 +198,7 @@ public class GameViewImpl implements GameView, KeyListener {
     @Override
     public void setSpritePosition(final int id, final Point2D position) {
         this.animations.get(id).setPosition(position.mul(windowUtilities.getScreenRatio()));
+        this.animations.get(id).setState(this.controller.getStateFromId(id));
     }
 
     /**
