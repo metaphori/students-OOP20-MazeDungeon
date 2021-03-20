@@ -10,6 +10,10 @@ import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.dynamicobject.enemy.EnemyFactory;
 import model.gameobject.dynamicobject.enemy.EnemyFactoryImpl;
+import model.gameobject.simpleobject.door.DoorFactory;
+import model.gameobject.simpleobject.door.DoorFactoryImpl;
+import model.gameobject.simpleobject.obstacle.ObstacleFactory;
+import model.gameobject.simpleobject.obstacle.ObstaclesFactoryImpl;
 
 public class RoomBuilderImpl implements RoomBuilder {
     private static final int MAX_ENEMY_NUMBER = 4;
@@ -22,35 +26,17 @@ public class RoomBuilderImpl implements RoomBuilder {
                                                                                 new Point2D(260, 540), 
                                                                                 new Point2D(930, 540)));
     private Room room;
-    private boolean isInitialize = false;
     private boolean build = false;
     private boolean canAddEnemy = true;
     private boolean canAddObstacle = true;
     private boolean canAddBoss = true;
 
-    private void checkInitialize() {
-        if (!isInitialize) {
-            throw new IllegalStateException("need to initialize first"); 
-        }
-    }
-
-    /**
-     * 
-     * @param roomManager : the roomManager of the room
-     * @return the builder object
-     */
-    @Override
-    public RoomBuilder initialize(final RoomManager roomManager) {
-        if (isInitialize) {
-           throw new IllegalStateException("cannot initialize twice"); 
-        }
+    public RoomBuilderImpl(final RoomManager roomManager) {
         if (roomManager == null) {
-            throw new IllegalArgumentException("argument cannot be null");
+            throw new IllegalArgumentException("roomManager cannot be null");
         }
-        this.isInitialize = true;
         this.room = new RoomImpl(roomManager);
         this.room.addAllSimpleObject(obstaclesFactory.createEmptyRoom());
-        return this;
     }
 
     /**
@@ -60,7 +46,6 @@ public class RoomBuilderImpl implements RoomBuilder {
      */
     @Override
     public RoomBuilder addDoors(final Set<CardinalPoint> doors) {
-        this.checkInitialize();
         if (doors == null) {
             throw new IllegalArgumentException("argument cannot be null");
         }
@@ -77,7 +62,6 @@ public class RoomBuilderImpl implements RoomBuilder {
      */
     @Override
     public RoomBuilder addObstacle() {
-        this.checkInitialize();
         if (!canAddObstacle) {
             throw new IllegalStateException("cannot add obstacle");
         }
@@ -92,7 +76,6 @@ public class RoomBuilderImpl implements RoomBuilder {
      */
     @Override
     public RoomBuilder addEnemy() {
-        this.checkInitialize();
         if (!canAddEnemy) {
             throw new IllegalStateException("cannot add enemy");
         }
@@ -127,7 +110,6 @@ public class RoomBuilderImpl implements RoomBuilder {
      */
     @Override
     public RoomBuilder addBoss() {
-        this.checkInitialize();
         if (!canAddBoss) {
             throw new IllegalStateException("cannot add boss");
         }
@@ -143,7 +125,6 @@ public class RoomBuilderImpl implements RoomBuilder {
      */
     @Override
     public Room build() {
-        this.checkInitialize();
         if (build) {
             throw new IllegalStateException("already build"); 
         }

@@ -77,31 +77,24 @@ public class RoomManagerImpl implements RoomManager {
 
         for (final Entry<Point2D, Set<CardinalPoint>> entry : map.entrySet()) {
             if (entry.getKey().equals(spawnRoom)) {
-                rooms.put(entry.getKey(), new RoomBuilderImpl().initialize(this)
-                                                           .addDoors(entry.getValue())
-                                                           .build());
+                rooms.put(entry.getKey(), new RoomBuilderImpl(this).addDoors(entry.getValue())
+                                                                   .build());
                 continue;
             }
             if (!bossRoom.isEmpty() && entry.getKey().equals(bossRoom.get())) {
-                rooms.put(entry.getKey(), new RoomBuilderImpl().initialize(this)
-                                                           .addDoors(entry.getValue())
-                                                           .addBoss()
-                                                           .build());
+                rooms.put(entry.getKey(), new RoomBuilderImpl(this).addDoors(entry.getValue())
+                                                                   .addBoss()
+                                                                   .build());
                 continue;
             }
-            final Room room = new RoomBuilderImpl().initialize(this)
-                                               .addObstacle()
-                                               .addDoors(entry.getValue())
-                                               .addEnemy()
-                                               .build();
+            final Room room = new RoomBuilderImpl(this).addObstacle()
+                                                       .addDoors(entry.getValue())
+                                                       .addEnemy()
+                                                       .build();
             rooms.put(entry.getKey(), room);
         }
 
         actualRoom = rooms.get(new Point2D(0, 0));
-        actualRoom.addSimpleObject(new Coin(new Point2D(600, 600)));
-        /*final Enemy sprout = new EnemyFactoryImpl().createSkeletonSeeker(new Point2D(500,500));
-        sprout.setBoundingBox(new BoundingBox(new Point2D(500, 500), 100, 100));
-        actualRoom.addDynamicObject(sprout);*/
         actualRoom.addDynamicObject(character);
         actualRoom.visit();
     }

@@ -1,4 +1,4 @@
-package model.room;
+package model.gameobject.simpleobject.obstacle;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,10 +8,9 @@ import model.common.BoundingBox;
 import model.common.CardinalPoint;
 import model.common.Point2D;
 import model.common.Vector2D;
-import model.gameobject.simpleobject.Obstacle;
 import model.gameobject.simpleobject.SimpleObject;
-import model.gameobject.simpleobject.Wall;
-import model.gameobject.simpleobject.Wall.WallType;
+import model.gameobject.simpleobject.obstacle.Wall.WallType;
+import model.room.Rooms;
 
 public class ObstaclesFactoryImpl implements ObstacleFactory {
     private static final int OBSTACLE_FOR_ROW = 24;
@@ -97,8 +96,8 @@ public class ObstaclesFactoryImpl implements ObstacleFactory {
                            obstacleHeight * (x - 1 + FREE_ROWS) + Rooms.UL_CORNER.getY());
     }
 
-    private Obstacle getObstacle(final Point2D position) {
-        return new Obstacle(position);
+    private Rock getObstacle(final Point2D position) {
+        return new Rock(position);
     }
 
 }

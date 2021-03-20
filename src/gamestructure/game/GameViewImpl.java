@@ -175,7 +175,7 @@ public class GameViewImpl implements GameView, KeyListener {
      * @param position : the position where to print the image.
      */
     @Override
-    public void addSprite(final Integer id, final GameObjectType gameObjectType, final Point2D position) {
+    public void addAnimation(final Integer id, final GameObjectType gameObjectType, final Point2D position) {
         final Map<State, List<ImageIcon>> stateMap = new HashMap<>(resourceLoader.getStateImages(gameObjectType));
         final Animation an = new Animation();
         an.setPosition(position);
@@ -195,9 +195,9 @@ public class GameViewImpl implements GameView, KeyListener {
      * @param position : the new position of the sprite.
      */
     @Override
-    public void setSpritePosition(final int id, final Point2D position) {
+    public void updateAnimation(final int id, final Point2D position, final State state) {
         this.animations.get(id).setPosition(position.mul(windowUtilities.getScreenRatio()));
-        this.animations.get(id).setState(this.controller.getStateFromId(id));
+        this.animations.get(id).setState(state);
     }
 
     /**
