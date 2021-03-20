@@ -2,8 +2,8 @@ package gamestructure.ingamemenu;
 
 import java.util.Map;
 
+import gamestructure.View;
 import model.shop.Items;
-import mvc.View;
 
 public interface InGameMenuView extends View {
 

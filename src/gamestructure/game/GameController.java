@@ -4,8 +4,8 @@ import java.awt.event.KeyEvent;
 import java.util.Optional;
 
 import animations.State;
+import gamestructure.Controller;
 import model.common.BoundingBox;
-import mvc.Controller;
 
 public interface GameController extends Controller {
     void mainLoop();

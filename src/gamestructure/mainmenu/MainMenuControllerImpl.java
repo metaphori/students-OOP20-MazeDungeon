@@ -2,8 +2,8 @@ package gamestructure.mainmenu;
 
 import gamestructure.game.GameController;
 import gamestructure.game.GameControllerImpl;
+import model.Model;
 import model.ModelImpl;
-import mvc.Model;
 
 public class MainMenuControllerImpl implements MainMenuController {
 

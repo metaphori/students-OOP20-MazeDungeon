@@ -1,6 +1,5 @@
 package model.gameobject.dynamicobject.bullet;
 
-import model.common.BoundingBox;
 import model.gameobject.dynamicobject.DynamicObject;
 
 public interface Bullet extends DynamicObject {
@@ -9,5 +8,4 @@ public interface Bullet extends DynamicObject {
 
     void setDamage(int damage);
 
-    void setSafeZone(BoundingBox safeZone);
 }

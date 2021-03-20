@@ -2,8 +2,8 @@ package test;
 
 import gamestructure.game.GameController;
 import gamestructure.game.GameControllerImpl;
+import model.Model;
 import model.ModelImpl;
-import mvc.Model;
 
 public class TestGame {
     public static void main(final String[] args) {

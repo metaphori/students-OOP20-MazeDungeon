@@ -1,9 +1,9 @@
 package gamestructure.ingamemenu;
 
 import gamestructure.game.GameController;
+import model.Model;
 import model.shop.Items;
 import model.shop.Shop;
-import mvc.Model;
 
 public class InGameMenuControllerImpl implements InGameMenuController {
     private final GameController gameController;

@@ -7,11 +7,11 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import gamestructure.game.GameController;
+import model.Model;
 import model.common.VectorDirection;
 import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.dynamicobject.character.CharacterMovement;
 import model.gameobject.dynamicobject.character.CharacterMovementImpl;
-import mvc.Model;
 
 public class CommandImpl implements Command {
 

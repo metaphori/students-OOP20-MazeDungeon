@@ -13,12 +13,12 @@ import gamestructure.mainmenu.MainMenuController;
 import gamestructure.mainmenu.MainMenuControllerImpl;
 import input.Command;
 import input.CommandImpl;
+import model.Model;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.enemy.AbstractEnemy;
 import model.room.Rooms;
-import mvc.Model;
 
 public class GameControllerImpl implements GameController {
     private static final long PERIOD = 1;

@@ -1,4 +1,4 @@
-package mvc;
+package gamestructure;
 
 public interface Controller {
 

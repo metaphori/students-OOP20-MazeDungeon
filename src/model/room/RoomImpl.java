@@ -8,7 +8,6 @@ import java.util.Set;
 
 import model.common.CardinalPoint;
 import model.common.GameObjectType;
-import model.common.Point2D;
 import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.DynamicObject;
 import model.gameobject.dynamicobject.enemy.AbstractEnemy;
@@ -20,7 +19,7 @@ public class RoomImpl implements Room {
     private final List<DynamicObject> dynamicObjects = new LinkedList<>();
     private final Set<CardinalPoint> nearRooms = new HashSet<>();
     private final RoomManager roomManager;
-    private boolean isVisited = false;
+    private boolean isVisited;
  
     public RoomImpl(final RoomManager roomManager) {
         this.roomManager = roomManager;

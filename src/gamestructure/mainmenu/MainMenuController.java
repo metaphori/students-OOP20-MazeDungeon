@@ -1,6 +1,6 @@
 package gamestructure.mainmenu;
 
-import mvc.Controller;
+import gamestructure.Controller;
 
 public interface MainMenuController extends Controller {
     void newGame();

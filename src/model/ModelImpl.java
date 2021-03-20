@@ -9,7 +9,6 @@ import model.room.RoomManager;
 import model.room.RoomManagerImpl;
 import model.shop.Shop;
 import model.shop.ShopImpl;
-import mvc.Model;
 
 
 public class ModelImpl implements Model {

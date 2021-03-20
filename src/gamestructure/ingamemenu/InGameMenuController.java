@@ -1,7 +1,7 @@
 package gamestructure.ingamemenu;
 
+import gamestructure.Controller;
 import model.shop.Items;
-import mvc.Controller;
 public interface InGameMenuController extends Controller {
 
     void buyItem(Items itemSelected);

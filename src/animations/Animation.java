@@ -16,20 +16,24 @@ public class Animation {
 
     /**
      * 
-     * @param state
-     * @param spriteIterator
+     * @param state : state to add at the animation
+     * @param spriteIterator : iterator paired to the state
      */
     public void addState(final State state, final SpriteIterator spriteIterator) {
         this.animations.put(state, spriteIterator);
     }
-    
+
+    /**
+     * 
+     * @param state : state to set as active
+     */
     public void setState(final State state) {
         this.lastState = state;
     }
+
     /**
      * 
-     * @param state
-     * @return the next image
+     * @return the next image of the animation
      */
     public Sprite getNext() {
         final long currentUpdate = System.currentTimeMillis();
@@ -42,7 +46,7 @@ public class Animation {
 
     /**
      * 
-     * @param position
+     * @param position : the position of animation
      */
     public void setPosition(final Point2D position) {
         this.position = position;
@@ -50,7 +54,7 @@ public class Animation {
 
     /**
      * 
-     * @return position of the sprite
+     * @return position of the animation
      */
     public Point2D getPosition() {
         return position;

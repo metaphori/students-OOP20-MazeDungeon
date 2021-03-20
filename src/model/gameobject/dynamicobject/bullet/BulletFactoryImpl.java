@@ -43,7 +43,7 @@ public class BulletFactoryImpl implements BulletFactory {
      */
     @Override
     public Bullet createSoulBullet(final Point2D initialPosition, final Vector2D direction) {
-        return new BulletImpl(initialPosition, direction, GameObjectType.SOUL_BULLET, SOUL_BULLET_DAMAGE, SKELETON_BULLET_SPEED);
+        return new BulletImpl(initialPosition, direction, GameObjectType.SOUL_BULLET, SOUL_BULLET_DAMAGE, SOUL_BULLET_SPEED);
     }
     /**
      * @return sproutBullet.

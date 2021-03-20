@@ -52,7 +52,6 @@ public class EnemyFactoryImpl implements EnemyFactory {
             protected void shoot() {
                 final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
                 final Bullet bullet = bulletFactory.createSproutBullet(newPosition, this.getDirection().getNormalized());
-                bullet.setSafeZone(this.getBoundingBox());
                 this.getRoom().addDynamicObject(bullet);
             }
 
@@ -88,7 +87,6 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 final Vector2D bulletDIrection = new Vector2D(characterPosition.getX() - this.getPosition().getX(), 
                                                               characterPosition.getY() - this.getPosition().getY()).getNormalized();
                 final Bullet bullet = bulletFactory.createSoulBullet(this.getPosition(), bulletDIrection);
-                bullet.setSafeZone(this.getBoundingBox());
                 this.getRoom().addDynamicObject(bullet);
             }
 
@@ -137,7 +135,6 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 bullets.add(bulletFactory.createSkeletonBullet(newPosition, new Vector2D(1, 0)));
                 bullets.add(bulletFactory.createSkeletonBullet(newPosition, new Vector2D(-1, 0)));
                 bullets.forEach(b -> {
-                    b.setSafeZone(this.getBoundingBox());
                     this.getRoom().addDynamicObject(b);
                 });
             }

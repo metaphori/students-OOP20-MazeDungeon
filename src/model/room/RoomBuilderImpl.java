@@ -25,8 +25,8 @@ public class RoomBuilderImpl implements RoomBuilder {
                                                                                 new Point2D(930, 200), 
                                                                                 new Point2D(260, 540), 
                                                                                 new Point2D(930, 540)));
-    private Room room;
-    private boolean build = false;
+    private final Room room;
+    private boolean build;
     private boolean canAddEnemy = true;
     private boolean canAddObstacle = true;
     private boolean canAddBoss = true;

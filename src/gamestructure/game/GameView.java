@@ -2,11 +2,11 @@ package gamestructure.game;
 
 import java.util.Set;
 
+import animations.State;
+import gamestructure.View;
 import model.common.GameObjectType;
 import model.common.Point2D;
-import model.common.animations.State;
 import model.shop.Items;
-import mvc.View;
 
 public interface GameView extends View {
     void updateHUD();
