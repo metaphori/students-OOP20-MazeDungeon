@@ -1,4 +1,4 @@
-package model.common.animations;
+package animations;
 
 public enum State {
     /**

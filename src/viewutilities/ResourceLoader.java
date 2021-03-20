@@ -1,4 +1,4 @@
-package model.common;
+package viewutilities;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import java.util.Optional;
 
 import javax.swing.ImageIcon;
 
-import gamestructure.PathGetter;
-import model.common.animations.State;
+import animations.State;
+import model.common.GameObjectType;
 
 public class ResourceLoader {
     private final Map<GameObjectType, Map<State, List<ImageIcon>>> resources = new HashMap<>();

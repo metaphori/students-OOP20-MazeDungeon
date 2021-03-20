@@ -14,13 +14,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.border.LineBorder;
-import gamestructure.WindowUtilities;
+
 import gamestructure.ingamemenu.utilities.ImageLoader;
 import gamestructure.ingamemenu.utilities.Images;
 import gamestructure.ingamemenu.utilities.MenuShopComponents;
-import gamestructure.Pair;
-import model.common.ResizableRectangle;
 import model.shop.Items;
+import viewutilities.Pair;
+import viewutilities.ResizableRectangle;
+import viewutilities.WindowUtilities;
 
 public class InGameMenuViewImpl implements InGameMenuView  {
     private static final int SIZE_IMAGE_ITEM = 100;

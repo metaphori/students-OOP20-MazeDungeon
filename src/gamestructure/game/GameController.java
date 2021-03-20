@@ -3,8 +3,8 @@ package gamestructure.game;
 import java.awt.event.KeyEvent;
 import java.util.Optional;
 
+import animations.State;
 import model.common.BoundingBox;
-import model.common.animations.State;
 import mvc.Controller;
 
 public interface GameController extends Controller {

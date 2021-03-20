@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import animations.State;
 import gamestructure.ingamemenu.InGameMenuController;
 import gamestructure.ingamemenu.InGameMenuControllerImpl;
 import gamestructure.mainmenu.MainMenuController;
@@ -14,7 +15,6 @@ import input.Command;
 import input.CommandImpl;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
-import model.common.animations.State;
 import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.enemy.AbstractEnemy;
 import model.room.Rooms;

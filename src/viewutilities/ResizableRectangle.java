@@ -1,4 +1,4 @@
-package model.common;
+package viewutilities;
 
 import java.awt.Rectangle;
 

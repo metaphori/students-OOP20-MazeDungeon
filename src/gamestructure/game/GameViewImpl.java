@@ -22,17 +22,17 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.Timer;
 
-import gamestructure.PathGetter;
-import gamestructure.WindowUtilities;
+import animations.Animation;
+import animations.Sprite;
+import animations.SpriteIterator;
+import animations.State;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
-import model.common.ResourceLoader;
-import model.common.animations.Animation;
-import model.common.animations.Sprite;
-import model.common.animations.SpriteIterator;
-import model.common.animations.State;
 import model.shop.Items;
+import viewutilities.PathGetter;
+import viewutilities.ResourceLoader;
+import viewutilities.WindowUtilities;
 
 public class GameViewImpl implements GameView, KeyListener {
 

@@ -1,9 +1,9 @@
 package model.gameobject;
 
+import animations.State;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
-import model.common.animations.State;
 import model.room.Room;
 
 public interface GameObject {

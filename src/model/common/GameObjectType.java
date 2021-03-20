@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import model.common.animations.State;
+import animations.State;
 
 public enum GameObjectType {
     /**

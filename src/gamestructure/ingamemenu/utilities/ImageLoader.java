@@ -4,7 +4,8 @@ import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
-import gamestructure.PathGetter;
+
+import viewutilities.PathGetter;
 
 public class ImageLoader {
     private final Map<Images, Image> images = new HashMap<>();

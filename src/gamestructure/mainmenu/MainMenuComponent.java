@@ -2,7 +2,7 @@ package gamestructure.mainmenu;
 
 import javax.swing.ImageIcon;
 
-import gamestructure.PathGetter;
+import viewutilities.PathGetter;
 
 public enum MainMenuComponent {
     /**

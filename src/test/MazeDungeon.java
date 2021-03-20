@@ -1,12 +1,13 @@
 package test;
 
+import gamestructure.mainmenu.MainMenuController;
+import gamestructure.mainmenu.MainMenuControllerImpl;
+
 public class MazeDungeon {
 
     public static void main(final String[] args) {
-        // TODO Auto-generated method stub
-        System.out.println();
-        System.out.println("Commit Di Girolamo");
-        System.out.println("Commit Di Di Marco");
+        final MainMenuController controller = new MainMenuControllerImpl();
+        controller.setup();
     }
 
 }

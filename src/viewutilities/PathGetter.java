@@ -1,4 +1,4 @@
-package gamestructure;
+package viewutilities;
 
 import java.io.File;
 

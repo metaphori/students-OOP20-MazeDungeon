@@ -1,4 +1,4 @@
-package model.common.animations;
+package animations;
 
 import java.util.HashMap;
 import java.util.Map;

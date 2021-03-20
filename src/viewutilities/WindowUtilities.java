@@ -1,12 +1,10 @@
-package gamestructure;
+package viewutilities;
 
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
-
-import model.common.ResizableRectangle;
 
 public class WindowUtilities {
 

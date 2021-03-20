@@ -13,9 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.border.LineBorder;
 
-import gamestructure.Pair;
-import gamestructure.WindowUtilities;
-import model.common.ResizableRectangle;
+import viewutilities.Pair;
+import viewutilities.ResizableRectangle;
+import viewutilities.WindowUtilities;
 
 public class MainMenuViewImpl implements MainMenuView {
 
