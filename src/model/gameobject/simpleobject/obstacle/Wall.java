@@ -1,9 +1,10 @@
-package model.gameobject.simpleobject;
+package model.gameobject.simpleobject.obstacle;
 
 import model.common.CardinalPoint;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.GameObject;
+import model.gameobject.simpleobject.SimpleObjectImpl;
 
 public class Wall extends SimpleObjectImpl {
 

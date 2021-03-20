@@ -1,4 +1,4 @@
-package model.room;
+package model.gameobject.simpleobject.obstacle;
 
 import java.util.List;
 

@@ -1,9 +1,8 @@
-package model.room;
+package model.gameobject.simpleobject.door;
 
 import model.common.CardinalPoint;
 import model.common.GameObjectType;
 import model.common.Point2D;
-import model.gameobject.simpleobject.Door;
 
 public class DoorFactoryImpl implements DoorFactory {
 

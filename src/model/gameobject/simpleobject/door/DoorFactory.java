@@ -1,7 +1,6 @@
-package model.room;
+package model.gameobject.simpleobject.door;
 
 import model.common.CardinalPoint;
-import model.gameobject.simpleobject.Door;
 
 public interface DoorFactory {
 

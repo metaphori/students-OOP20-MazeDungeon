@@ -107,13 +107,13 @@ public class GameControllerImpl implements GameController {
 
     private void render() {
         this.checkDeletedObject();
-        this.updateSpritePositions();
+        this.updateAnimations();
         this.view.updateHUD();
     } 
 
-    private void updateSpritePositions() {
+    private void updateAnimations() {
         for (final Integer id : this.lastGameObjectsID) {
-            this.view.setSpritePosition(id, model.getGameObjectPosition(id));
+            this.view.updateAnimation(id, model.getGameObjectPosition(id), this.getStateFromId(id));
         }
     }
 
@@ -135,7 +135,7 @@ public class GameControllerImpl implements GameController {
         for (final Integer id : gameObjectsID) {
             if (!lastGameObjectsID.contains(id)) {
                 final GameObject newObject = model.getGameObject(id);
-                view.addSprite(newObject.getID(), newObject.getGameObjectType(), newObject.getPosition());
+                view.addAnimation(newObject.getID(), newObject.getGameObjectType(), newObject.getPosition());
             }
         }
         lastGameObjectsID.clear();

@@ -1,12 +1,13 @@
-package model.gameobject.simpleobject;
+package model.gameobject.simpleobject.obstacle;
 
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.GameObject;
+import model.gameobject.simpleobject.SimpleObjectImpl;
 
-public class Obstacle extends SimpleObjectImpl {
+public class Rock extends SimpleObjectImpl {
 
-    public Obstacle(final Point2D position) {
+    public Rock(final Point2D position) {
         super(position, GameObjectType.ROCK);
     }
 

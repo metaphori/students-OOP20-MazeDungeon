@@ -9,7 +9,7 @@ import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.AbstractDynamicObject;
 import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.dynamicobject.enemy.Enemy;
-import model.gameobject.simpleobject.Wall;
+import model.gameobject.simpleobject.obstacle.Wall;
 
 public class BulletImpl extends AbstractDynamicObject implements Bullet {
 

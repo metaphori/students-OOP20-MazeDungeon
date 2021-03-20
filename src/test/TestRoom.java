@@ -22,35 +22,31 @@ public class TestRoom {
     @org.junit.Before
     public void init() {
         roomManager = new RoomManagerImpl();
-        roomBuilder = new RoomBuilderImpl();
+        roomBuilder = new RoomBuilderImpl(roomManager);
     }
 
     @org.junit.Test
     public void testDoors() {
-        room = roomBuilder.initialize(roomManager)
-                          .addEnemy()
+        room = roomBuilder.addEnemy()
                           .build();
         assertFalse(room.isDoorOpen());
 
         room.clean();
         assertTrue(room.isDoorOpen());
 
-        roomBuilder = new RoomBuilderImpl();
-        room = roomBuilder.initialize(roomManager)
-                          .addBoss()
+        roomBuilder = new RoomBuilderImpl(roomManager);
+        room = roomBuilder.addBoss()
                           .build();
         assertFalse(room.isDoorOpen());
 
-        roomBuilder = new RoomBuilderImpl();
-        room = roomBuilder.initialize(roomManager)
-                          .build();
+        roomBuilder = new RoomBuilderImpl(roomManager);
+        room = roomBuilder.build();
         assertTrue(room.isDoorOpen());
     }
 
     @org.junit.Test
     public void testAddGameObject() {
-        room = roomBuilder.initialize(roomManager)
-                          .build();
+        room = roomBuilder.build();
         final SimpleObject gameObject = new Coin(new Point2D(500, 500));
         assertFalse(room.getCurrentGameObjects().contains(gameObject));
         room.addSimpleObject(gameObject);
@@ -59,8 +55,7 @@ public class TestRoom {
 
     @org.junit.Test
     public void testBoss() {
-        room = roomBuilder.initialize(roomManager)
-                          .build();
+        room = roomBuilder.build();
         final DynamicObject boss = new EnemyFactoryImpl().createBoss(new Point2D(500, 500));
         assertTrue(room.getBossID().isEmpty());
         room.addDynamicObject(boss);
