@@ -62,11 +62,11 @@ public class CommandImpl implements Command {
         }
 
         if (this.checkUpDownKeys()) {
-            characterMovement.stopVertical();
+            this.characterMovement.stopVertical();
         }
 
         if (this.checkRightLeftKeys()) {
-            characterMovement.stopHorizontal();
+            this.characterMovement.stopHorizontal();
         }
      }
 
@@ -96,7 +96,7 @@ public class CommandImpl implements Command {
         }
         final Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> trio = this.keysList.stream()
                                                                                               .filter(t -> t.getX() == key.getKeyCode())
-                                                                                               .findFirst();
+                                                                                              .findFirst();
         if (trio.isPresent()) {
             trio.get().setY(clicked);
         }

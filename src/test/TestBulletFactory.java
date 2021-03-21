@@ -85,8 +85,8 @@ public class TestBulletFactory {
         assertEquals(bullet.getDirection(), direction);
         assertEquals(bullet.getPosition(), position);
         assertEquals(bullet.getGameObjectType(), GameObjectType.SKELETON_BULLET);
-        bullet.setSpeed(SKELETON_BULLET_SPEED + 5);
-        assertEquals(bullet.getSpeed(), SKELETON_BULLET_SPEED + 5);
+        bullet.setSpeed(SKELETON_BULLET_SPEED + 10);
+        assertEquals(bullet.getSpeed(), SKELETON_BULLET_SPEED + 10);
         bullet = this.bulletFactory.createSkeletonBullet(position, direction);
         assertEquals(bullet.getDamage(), SKELETON_BULLET_DAMAGE);
         final BoundingBox bb = new BoundingBox(new Point2D(0, 0), 0, 0);
@@ -109,8 +109,8 @@ public class TestBulletFactory {
         assertEquals(bullet.getDirection(), direction);
         assertEquals(bullet.getPosition(), position);
         assertEquals(bullet.getGameObjectType(), GameObjectType.SOUL_BULLET);
-        bullet.setSpeed(SOUL_BULLET_SPEED + 5);
-        assertEquals(bullet.getSpeed(), SOUL_BULLET_SPEED + 5);
+        bullet.setSpeed(SOUL_BULLET_SPEED + 10);
+        assertEquals(bullet.getSpeed(), SOUL_BULLET_SPEED + 10);
         bullet = this.bulletFactory.createSoulBullet(position, direction);
         assertEquals(bullet.getDamage(), SOUL_BULLET_DAMAGE);
         final BoundingBox bb = new BoundingBox(new Point2D(0, 0), 0, 0);
@@ -133,8 +133,8 @@ public class TestBulletFactory {
         assertEquals(bullet.getDirection(), direction);
         assertEquals(bullet.getPosition(), position);
         assertEquals(bullet.getGameObjectType(), GameObjectType.SPROUT_BULLET);
-        bullet.setSpeed(SPROUT_BULLET_SPEED + 5);
-        assertEquals(bullet.getSpeed(), SPROUT_BULLET_SPEED + 5);
+        bullet.setSpeed(SPROUT_BULLET_SPEED + 10);
+        assertEquals(bullet.getSpeed(), SPROUT_BULLET_SPEED + 10);
         bullet = this.bulletFactory.createSproutBullet(position, direction);
         assertEquals(bullet.getDamage(), SPROUT_BULLET_DAMAGE);
         final BoundingBox bb = new BoundingBox(new Point2D(0, 0), 0, 0);
@@ -157,8 +157,8 @@ public class TestBulletFactory {
         assertEquals(bullet.getDirection(), direction);
         assertEquals(bullet.getPosition(), position);
         assertEquals(bullet.getGameObjectType(), GameObjectType.BOSS_BULLET);
-        bullet.setSpeed(BOSS_BULLET_SPEED + 5);
-        assertEquals(bullet.getSpeed(), BOSS_BULLET_SPEED + 5);
+        bullet.setSpeed(BOSS_BULLET_SPEED + 10);
+        assertEquals(bullet.getSpeed(), BOSS_BULLET_SPEED + 10);
         bullet = this.bulletFactory.createBossBullet(position, direction);
         assertEquals(bullet.getDamage(), BOSS_BULLET_DAMAGE);
         final BoundingBox bb = new BoundingBox(new Point2D(0, 0), 0, 0);
