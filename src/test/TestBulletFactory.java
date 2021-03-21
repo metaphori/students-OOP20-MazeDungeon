@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import model.gameobject.dynamicobject.bullet.Bullet;
 import model.gameobject.dynamicobject.bullet.BulletFactory;
 import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
-import model.gameobject.dynamicobject.bullet.BulletImpl;
 import model.room.Room;
 import model.room.RoomImpl;
 import model.room.RoomManagerImpl;
