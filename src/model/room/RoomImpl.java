@@ -163,12 +163,10 @@ public class RoomImpl implements Room {
      */
     @Override
     public Optional<Integer> getBossID() {
-        for (final GameObject gameObject : getCurrentGameObjects()) {
-            if (gameObject.getGameObjectType() == GameObjectType.ENEMY_BOSS) {
-                return Optional.of(gameObject.getID());
-            }
-        }
-        return Optional.empty();
+        return this.getCurrentGameObjects().stream()
+                                           .filter(o -> o.getGameObjectType() == GameObjectType.ENEMY_BOSS)
+                                           .map(o -> o.getID())
+                                           .findAny();
     }
 
 }

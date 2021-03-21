@@ -131,12 +131,11 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     private Point2D getRoomPosition(final Room room) {
-        for (final Entry<Point2D, Room> entry : rooms.entrySet()) {
-            if (entry.getValue().equals(room)) {
-                return entry.getKey();
-            }
-        }
-        throw new IllegalStateException("the parameter is not part of the floor");
+        final Optional<Point2D> pos = rooms.entrySet().stream()
+                                                      .filter(e -> e.getValue().equals(room))
+                                                      .map(e -> e.getKey())
+                                                      .findFirst();
+        return pos.get();
     }
 
     /**
@@ -156,9 +155,8 @@ public class RoomManagerImpl implements RoomManager {
         actualRoom.clean();
         actualRoom = newRoom;
         actualRoom.visit();
-        //.out.println(actualRoom.getDoors());
 
-        if (this.allVisited()) {
+        if (exploredRooms == Rooms.NUMBER_OF_ROOMS) {
             final Room startRoom = this.rooms.get(new Point2D(0, 0));
             final double x = (Rooms.UL_CORNER.getX() + Rooms.BR_CORNER.getX()) / 2;
             final double y = (Rooms.UL_CORNER.getX() + Rooms.BR_CORNER.getY()) / 2;
@@ -172,18 +170,6 @@ public class RoomManagerImpl implements RoomManager {
     @Override
     public Character getCharacter() {
         return this.character;
-    }
-
-    /**
-     * @return true if all the room has been visited
-     */
-    private boolean allVisited() {
-        for (final Room room : rooms.values()) {
-            if (!room.isVisited()) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
