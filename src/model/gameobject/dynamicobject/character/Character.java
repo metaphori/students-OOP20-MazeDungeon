@@ -27,8 +27,8 @@ public interface Character extends DynamicObject {
 
     void pickedUpFinalArtifact();
 
-    boolean isWon();
-
     boolean isDead();
+
+    boolean isWin();
 
 }

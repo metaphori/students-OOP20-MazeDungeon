@@ -81,6 +81,6 @@ public class ModelImpl implements Model {
      */
     @Override
     public boolean isWon() {
-        return this.roomManager.getCharacter().isWon();
+        return this.roomManager.getCharacter().isWin();
     }
 }

@@ -18,7 +18,7 @@ public class CommandImpl implements Command {
     private final GameController gameController;
     private final Character character;
     private final CharacterMovement characterMovement; 
-    private Trio<Integer, Boolean, Optional<VectorDirection>> command;
+    private Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> command;
     private final List<Trio<Integer, Boolean, Optional<VectorDirection>>> keysList = new ArrayList<>();
 
 
@@ -50,12 +50,12 @@ public class CommandImpl implements Command {
             int keyCode;
             if (key.getY()) {
                 keyCode = key.getX();
-                this.command = findObjectFromStream(keyCode).get();
-                if (this.command != null) {
+                this.command = findObjectFromStream(keyCode);
+                if (!this.command.isEmpty()) {
                     if (isArrow(this.command)) {
-                       this.character.setShoot(true, this.command.getZ().get());
+                       this.character.setShoot(true, this.command.get().getZ().get());
                     } else {
-                        this.characterMovement.move(this.command.getZ().get());
+                        this.characterMovement.move(this.command.get().getZ().get());
                     }
                 }
             }
@@ -68,11 +68,13 @@ public class CommandImpl implements Command {
         if (this.checkRightLeftKeys()) {
             this.characterMovement.stopHorizontal();
         }
-     }
+    }
 
-    private boolean isArrow(final Trio<Integer, Boolean, Optional<VectorDirection>> trio) {
-        return trio.getX() == KeyEvent.VK_UP || trio.getX() == KeyEvent.VK_DOWN || trio.getX() == KeyEvent.VK_LEFT 
-                || trio.getX() == KeyEvent.VK_RIGHT;
+
+
+    private boolean isArrow(final Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> trio) {
+        return trio.get().getX() == KeyEvent.VK_UP || trio.get().getX() == KeyEvent.VK_DOWN || trio.get().getX() == KeyEvent.VK_LEFT 
+                || trio.get().getX() == KeyEvent.VK_RIGHT;
     }
 
     private Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> findObjectFromStream(final int key) {

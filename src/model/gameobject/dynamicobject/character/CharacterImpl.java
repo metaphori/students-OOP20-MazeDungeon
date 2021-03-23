@@ -21,14 +21,14 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     private static final double MAX_LIFE = 100;
     private static final int INITIAL_SPEED = 300; 
     private static final int INITIAL_MONEY = 0;
-    private static final int INITIAL_BULLET_SPEED = 1;
+    private static final int INITIAL_BONUS_SPEED = 0;
     private static final int INITIAL_BULLET_DELAY = 400; 
     /*
      * CHARACTER CHARACTERISTIC.
      */
     private double life;
     private int bonusDamage;
-    private int bulletSpeed;
+    private int bonusSpeed;
     private int money;
     /**
      * VARIABLES.
@@ -37,18 +37,18 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     private long lastShootTime; 
     private Vector2D shootDirection;
     private boolean shoot;
-    private boolean won;
+    private boolean win;
 
     public CharacterImpl(final Point2D position, final GameObjectType gameObjectType) {
         super(INITIAL_SPEED, position, gameObjectType);
         this.life = MAX_LIFE;
         this.bonusDamage = 0;
-        this.bulletSpeed = INITIAL_BULLET_SPEED;
+        this.bonusSpeed = INITIAL_BONUS_SPEED;
         this.money = INITIAL_MONEY;
         this.lastShootTime = System.currentTimeMillis();
         this.bulletFactory = new BulletFactoryImpl();
         this.shoot = false;
-        this.won = false;
+        this.win = false;
     }
 
     /**
@@ -116,7 +116,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
      */
     @Override
     public void increaseBulletSpeed(final int bulletSpeed) {
-        this.bulletSpeed += bulletSpeed;
+        this.bonusSpeed += bulletSpeed;
     }
 
     /**
@@ -145,7 +145,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     private void shoot() {
         final Bullet bullet = bulletFactory.createCharacterBullet(
                 new Point2D(getPosition().getX() + this.getBoundingBox().getWidth() / 2, getPosition().getY() + this.getBoundingBox().getHeight() / 2), this.shootDirection,
-                this.bonusDamage, this.bulletSpeed);
+                this.bonusDamage, this.bonusSpeed);
 
         this.getRoom().addDynamicObject(bullet);
         this.shoot = false;
@@ -165,25 +165,25 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * @param obj2 
+     * @param oj2 
      * the object the character is collide with.
      */
     @Override
-    public void collideWith(final GameObject obj2) {
-       switch (obj2.getGameObjectType().getCollisionType()) {
+    public void collideWith(final GameObject oj2) {
+       switch (oj2.getGameObjectType().getCollisionType()) {
             case OBSTACLE:
-                if (this.getBaseBoundingBox().intersectWith(obj2.getBoundingBox())) {
+                if (this.getBaseBoundingBox().intersectWith(oj2.getBoundingBox())) {
                     this.setPosition(this.getLastPosition());
                 }
                 break;
             case ENTITY:
-                final AbstractDynamicObject dinamicObject = (AbstractDynamicObject) obj2;
+                final AbstractDynamicObject dinamicObject = (AbstractDynamicObject) oj2;
                 dinamicObject.setPosition(dinamicObject.getLastPosition());
                 break;
             case INTERACTIVE_ELEMENT:
-                if (obj2.getGameObjectType().equals(GameObjectType.COIN)) {
+                if (oj2.getGameObjectType().equals(GameObjectType.COIN)) {
                     this.money++;
-                    this.getRoom().deleteGameObject(obj2);
+                    this.getRoom().deleteGameObject(oj2);
                 }
                 break;
             default:
@@ -214,8 +214,8 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
      * @return true if the character is won.
      */
     @Override
-    public boolean isWon() {
-        return this.won;
+    public boolean isWin() {
+        return this.win;
     }
 
     /**
@@ -223,6 +223,6 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
      */
     @Override
     public void pickedUpFinalArtifact() {
-        this.won = true;
+        this.win = true;
     }
 }
