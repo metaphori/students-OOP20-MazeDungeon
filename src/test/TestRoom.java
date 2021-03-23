@@ -15,6 +15,7 @@ import model.room.RoomManager;
 import model.room.RoomManagerImpl;
 
 public class TestRoom {
+    private static final Point2D SPAWN_POSITION = new Point2D(500, 500);
     private RoomManager roomManager;
     private RoomBuilder roomBuilder;
     private Room room;
@@ -47,7 +48,7 @@ public class TestRoom {
     @org.junit.Test
     public void testAddGameObject() {
         room = roomBuilder.build();
-        final SimpleObject gameObject = new Coin(new Point2D(500, 500));
+        final SimpleObject gameObject = new Coin(SPAWN_POSITION);
         assertFalse(room.getCurrentGameObjects().contains(gameObject));
         room.addSimpleObject(gameObject);
         assertTrue(room.getCurrentGameObjects().contains(gameObject));
@@ -56,7 +57,7 @@ public class TestRoom {
     @org.junit.Test
     public void testBoss() {
         room = roomBuilder.build();
-        final DynamicObject boss = new EnemyFactoryImpl().createBoss(new Point2D(500, 500));
+        final DynamicObject boss = new EnemyFactoryImpl().createBoss(SPAWN_POSITION);
         assertTrue(room.getBossID().isEmpty());
         room.addDynamicObject(boss);
         assertTrue(room.getBossID().isPresent());
