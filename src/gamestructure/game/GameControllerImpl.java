@@ -118,7 +118,10 @@ public class GameControllerImpl implements GameController {
     }
 
     private List<Integer> getActualObjectsID() {
-        return this.model.getActualGameObjects().stream().filter(o -> o.getGameObjectType() != GameObjectType.INVISIBLE_OBJECT).map(obj -> obj.getID()).collect(Collectors.toList());
+        return this.model.getActualGameObjects().stream()
+                                                .filter(o -> o.getGameObjectType() != GameObjectType.INVISIBLE_OBJECT)
+                                                .map(obj -> obj.getID())
+                                                .collect(Collectors.toList());
     }
 
     private void checkDeletedObject() {

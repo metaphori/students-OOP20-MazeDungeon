@@ -38,7 +38,6 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     private Vector2D shootDirection;
     private boolean shoot;
     private boolean won;
-    private final CharacterMovement movement;
 
     public CharacterImpl(final Point2D position, final GameObjectType gameObjectType) {
         super(INITIAL_SPEED, position, gameObjectType);
@@ -50,7 +49,6 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
         this.bulletFactory = new BulletFactoryImpl();
         this.shoot = false;
         this.won = false;
-        this.movement = new CharacterMovementImpl(this);
     }
 
     /**
@@ -92,13 +90,6 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     @Override
     public void setMoney(final int money) {
         this.money = money;
-    }
-    /**
-     * 
-     * @return the movement class of character
-     */
-    public CharacterMovement getCh() {
-        return movement;
     }
 
     /**

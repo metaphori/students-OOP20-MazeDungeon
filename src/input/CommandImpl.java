@@ -46,10 +46,10 @@ public class CommandImpl implements Command {
      */
     @Override
     public void execute() {
-        int keyCode;
-        for (final Trio<Integer, Boolean, Optional<VectorDirection>> trio : this.keysList) {
-            if (trio.getY()) {
-                keyCode = trio.getX();
+        this.keysList.forEach(key -> {
+            int keyCode;
+            if (key.getY()) {
+                keyCode = key.getX();
                 this.command = findObjectFromStream(keyCode).get();
                 if (this.command != null) {
                     if (isArrow(this.command)) {
@@ -59,14 +59,14 @@ public class CommandImpl implements Command {
                     }
                 }
             }
-        }
+        });
 
         if (this.checkUpDownKeys()) {
-            characterMovement.stopVertical();
+            this.characterMovement.stopVertical();
         }
 
         if (this.checkRightLeftKeys()) {
-            characterMovement.stopHorizontal();
+            this.characterMovement.stopHorizontal();
         }
      }
 
@@ -96,7 +96,7 @@ public class CommandImpl implements Command {
         }
         final Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> trio = this.keysList.stream()
                                                                                               .filter(t -> t.getX() == key.getKeyCode())
-                                                                                               .findFirst();
+                                                                                              .findFirst();
         if (trio.isPresent()) {
             trio.get().setY(clicked);
         }

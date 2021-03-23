@@ -13,7 +13,7 @@ import model.room.RoomImpl;
 import model.room.RoomManagerImpl;
 
 public class TestBoss {
-    private static final int BOSS_LIFE = 300;
+    private static final int BOSS_LIFE = 400;
     private static final int BOSS_SPEED = 160;
     private EnemyFactory enemy;
 
