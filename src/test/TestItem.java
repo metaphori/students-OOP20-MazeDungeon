@@ -27,10 +27,10 @@ public class TestItem {
     private int beforeMoney;
     private int beforeSpeed;
     private double beforeHealth;
-    private static final double MORE_HEALTH = 25;
-    private static final int MORE_DAMAGE = 15;
-    private static final int MORE_SPEED = 150;
-    private static final int MORE_BULLETSPEED = 3;
+    private static final double MORE_HEALTH = 20;
+    private static final int MORE_DAMAGE = 5;
+    private static final int MORE_SPEED = 40;
+    private static final int MORE_BULLETSPEED = 40;
     private static final int PRICE_ARTHEMIDEBOW = 4;
     private static final int PRICE_HERMESBOOTS = 3;
     private static final int PRICE_HEALTH = 2;

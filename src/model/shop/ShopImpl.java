@@ -8,15 +8,15 @@ import java.util.Set;
 import model.gameobject.dynamicobject.character.Character;
 
 public class ShopImpl implements Shop {
-    private static final double MORE_HEALTH = 25;
+    private static final double MORE_HEALTH = 20;
     private static final int MORE_DAMAGE = 5;
-    private static final int MORE_SPEED = 100;
-    private static final int MORE_BULLETSPEED = 30;
-    private static final int PRICE_ARTHEMIDEBOW = 0;
-    private static final int PRICE_HERMESBOOTS = 0;
-    private static final int PRICE_ZEUSBOLT = 0;
-    private static final int PRICE_HEALTH = 0;
-    private static final int PRICE_ORACLEAMULET = 0;
+    private static final int MORE_SPEED = 40;
+    private static final int MORE_BULLETSPEED = 40;
+    private static final int PRICE_ARTHEMIDEBOW = 4;
+    private static final int PRICE_HERMESBOOTS = 3;
+    private static final int PRICE_ZEUSBOLT = 4;
+    private static final int PRICE_HEALTH = 2;
+    private static final int PRICE_ORACLEAMULET = 7;
 
     private final Set<Items> purchasedItems = new HashSet<>();
     private final Set<Items> cart = new HashSet<>();
