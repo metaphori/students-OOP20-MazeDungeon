@@ -146,7 +146,6 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
         final Bullet bullet = bulletFactory.createCharacterBullet(
                 new Point2D(getPosition().getX() + this.getBoundingBox().getWidth() / 2, getPosition().getY() + this.getBoundingBox().getHeight() / 2), this.shootDirection,
                 this.bonusDamage, this.bonusSpeed);
-
         this.getRoom().addDynamicObject(bullet);
         this.shoot = false;
     }

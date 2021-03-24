@@ -40,6 +40,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private final JFrame frame;
     private final WindowUtilities windowUtilities = new WindowUtilities();
     private final PathGetter pathGetter = new PathGetter();
+    private final ImageIcon iconImage = new ImageIcon(pathGetter.getPortablePath("resources/images/character/idle/character.png"));
     private static final Color BACKGROUND = new Color(11, 19, 30);
     private static final int PERIOD = 15;
     private final GamePanel gamePanel;
@@ -56,6 +57,7 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame = new JFrame();
         this.frame.setResizable(false);
         this.frame.setTitle("MazeDungeon");
+        this.frame.setIconImage(this.iconImage.getImage());
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gamePanel = new GamePanel();
         this.frame.setBackground(BACKGROUND);

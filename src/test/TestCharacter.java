@@ -7,11 +7,7 @@ import static org.junit.Assert.assertTrue;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
-import model.common.Vector2D;
 import model.common.VectorDirection;
-import model.gameobject.GameObject;
-import model.gameobject.dynamicobject.bullet.Bullet;
-import model.gameobject.dynamicobject.bullet.BulletImpl;
 import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.dynamicobject.character.CharacterImpl;
 import model.gameobject.simpleobject.Coin;
@@ -30,6 +26,7 @@ public class TestCharacter {
     private static final double MAX_LIFE = 100;
     private static final int INITIAL_SPEED = 300; 
     private static final int INITIAL_MONEY = 0;
+    private static final int INITIAL_BULLET_DELAY = 400;
 
     @org.junit.Before
     public void initCharacter() {
@@ -57,10 +54,17 @@ public class TestCharacter {
 
     @org.junit.Test
     public void testCharacterShoot() {
-        final int object = this.room.getCurrentGameObjects().size();
+        final int objects = this.room.getCurrentGameObjects().size();
+        try {
+            Thread.sleep(INITIAL_BULLET_DELAY);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        final BoundingBox bb = new BoundingBox(new Point2D(301, 301), 301, 301);
+        this.character.setBoundingBox(bb);
         this.character.setShoot(true, VectorDirection.UP);
-        this.character.updateState(10);
-        assertEquals(object + 1, this.room.getCurrentGameObjects().size());
+        this.character.updateState(1000);
+        assertEquals(objects + 1, this.room.getCurrentGameObjects().size());
 
     }
 

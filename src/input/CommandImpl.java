@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import gamestructure.game.GameController;
 import model.Model;
@@ -122,14 +121,5 @@ public class CommandImpl implements Command {
             return  !this.findObjectFromStream(KeyEvent.VK_D).get().getY() && !this.findObjectFromStream(KeyEvent.VK_A).get().getY();
         }
         return false;
-    }
-
-    /**
-     * 
-     * @param predicate
-     * @return the filtered stream by the predicate
-     */
-    private Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> filtering(final Predicate predicate) {
-        return this.keysList.stream().filter(predicate).findFirst();
     }
 }
