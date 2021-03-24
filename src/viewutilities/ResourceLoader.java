@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class ResourceLoader {
             if (gameObjectType.equals(GameObjectType.INVISIBLE_OBJECT)) {
                 continue;
             }
-            final Optional<File> directory = this.searchDirectory(new File(IMG_PATH), gameObjectType.toString().toLowerCase());
+            final Optional<File> directory = this.searchDirectory(new File(IMG_PATH), gameObjectType.toString().toLowerCase(Locale.ENGLISH));
             if (directory.isEmpty()) {
                 System.out.println(gameObjectType);
                 System.out.println("folder not found");
@@ -34,9 +35,9 @@ public class ResourceLoader {
             final Map<State, List<ImageIcon>> stateMap = new HashMap<>();
             for (final State state : gameObjectType.getStates()) {
                 final List<ImageIcon> images = new LinkedList<>();
-                final String statePath = this.pathGetter.getPortablePath(directory.get().getPath() + File.separator + state.toString().toLowerCase());
+                final String statePath = this.pathGetter.getPortablePath(directory.get().getPath() + File.separator + state.toString().toLowerCase(Locale.ENGLISH));
                 images.addAll(this.loadImagesFromPath(statePath + File.separator, 
-                                                      gameObjectType.toString().toLowerCase(), 
+                                                      gameObjectType.toString().toLowerCase(Locale.ENGLISH), 
                                                       new File(statePath).list().length,
                                                       ".png"));
                 stateMap.put(state, images);

@@ -30,12 +30,7 @@ public class RoomManagerImpl implements RoomManager {
     private final Character character = new CharacterImpl(new Point2D(300, 200), GameObjectType.CHARACTER);
     private int exploredRooms = 1;
 
-    private final Map<CardinalPoint, Point2D> characterSpawnPosition = new HashMap<>() {{
-        put(CardinalPoint.NORTH, CHARACTER_NORTH_SPAWN_POSITION);
-        put(CardinalPoint.SOUTH, CHARACTER_SOUTH_SPAWN_POSITION);
-        put(CardinalPoint.WEST, CHARACTER_WEST_SPAWN_POSITION);
-        put(CardinalPoint.EAST, CHARACTER_EAST_SPAWN_POSITION);
-    }};
+    private final Map<CardinalPoint, Point2D> characterSpawnPosition = new HashMap<>();
 
     public RoomManagerImpl() {
         this.initializeRooms(this.createGameMap());
@@ -46,6 +41,14 @@ public class RoomManagerImpl implements RoomManager {
      */
     public void update(final double elapsed) {
         this.actualRoom.update(elapsed);
+        this.initializeSpawnPosition();
+    }
+
+    private void initializeSpawnPosition() {
+        characterSpawnPosition.put(CardinalPoint.NORTH, CHARACTER_NORTH_SPAWN_POSITION);
+        characterSpawnPosition.put(CardinalPoint.SOUTH, CHARACTER_SOUTH_SPAWN_POSITION);
+        characterSpawnPosition.put(CardinalPoint.WEST, CHARACTER_WEST_SPAWN_POSITION);
+        characterSpawnPosition.put(CardinalPoint.EAST, CHARACTER_EAST_SPAWN_POSITION);
     }
 
     private Point2D getNearbyPoint(final Point2D point, final CardinalPoint cardinalPoint) {
