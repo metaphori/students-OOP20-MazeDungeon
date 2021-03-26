@@ -41,7 +41,8 @@ public class GameViewImpl implements GameView, KeyListener {
     private final JFrame frame;
     private final WindowUtilities windowUtilities = new WindowUtilities();
     private final PathGetter pathGetter = new PathGetter();
-    private final ImageIcon iconImage = new ImageIcon(pathGetter.getPortablePath("resources/images/character/idle/character.png"));
+    private final ImageIcon iconImage = new ImageIcon(this.getClass().getResource(pathGetter.getPortablePath("/images/character/idle/character1.png")));
+    private final ImageIcon loadImage = new ImageIcon(this.getClass().getResource(pathGetter.getPortablePath("/images/HUD/StartIstruction.png")));
     private static final Color BACKGROUND = new Color(11, 19, 30);
     private static final int PERIOD = 15;
     private final GamePanel gamePanel;
@@ -51,7 +52,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private final HUDPanel hudPanel = new HUDPanel(windowUtilities.getScreenRatio());
     private boolean gameOver;
     private boolean won;
-    private final JLabel lblStartInstruction = new JLabel(new ImageIcon(adaptImage(new ImageIcon(this.getClass().getResource(pathGetter.getPortablePath("/images/HUD/StartIstruction.png"))))));
+    private final JLabel lblStartInstruction = new JLabel(new ImageIcon(adaptImage(loadImage)));
     private static final int ISTRUCTION_TIME = 2000;
 
     public GameViewImpl() {
@@ -108,9 +109,9 @@ public class GameViewImpl implements GameView, KeyListener {
 
     private class GamePanel extends JLayeredPane implements ActionListener {
         private static final long serialVersionUID = 1L;
-        private final Image youLoseImage = adaptImage(new ImageIcon(pathGetter.getPortablePath("resources/images/HUD/GameOver/gameOverFinal.png")));
-        private final Image winnerImage = adaptImage(new ImageIcon(pathGetter.getPortablePath("resources/images/HUD/Victory/winner.png")));
-        private final Image roomImage = adaptImage(new ImageIcon(pathGetter.getPortablePath("resources/images/Room/room.png")));
+        private final Image youLoseImage = adaptImage(new ImageIcon(this.getClass().getResource(pathGetter.getPortablePath("/images/HUD/GameOver/gameOverFinal.png"))));
+        private final Image winnerImage = adaptImage(new ImageIcon(this.getClass().getResource(pathGetter.getPortablePath("/images/HUD/Victory/winner.png"))));
+        private final Image roomImage = adaptImage(new ImageIcon(this.getClass().getResource(pathGetter.getPortablePath("/images/Room/room.png"))));
 
         @Override
         public void actionPerformed(final ActionEvent e) {
