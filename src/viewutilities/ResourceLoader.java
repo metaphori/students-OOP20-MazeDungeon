@@ -28,7 +28,7 @@ public class ResourceLoader {
                 final String statePath = gameObjectPath + state.toString().toLowerCase() + "/" + gameObjectType.toString().toLowerCase();
                 final List<ImageIcon> images = new LinkedList<>();
                 URL tmp;
-                for (int i = 1; (tmp = this.getClass().getResource(statePath + i + ".png")) != null; i++) {
+                for (int i = 1; (tmp = this.getClass().getResource(pathGetter.getPortablePath(statePath + i + ".png"))) != null; i++) {
                     images.add(new ImageIcon(tmp));
                 }
                 stateMap.put(state, images);
