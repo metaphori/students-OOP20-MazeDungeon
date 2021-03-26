@@ -1,47 +1,45 @@
 package gamestructure.mainmenu;
 
-import javax.swing.ImageIcon;
-
 import viewutilities.PathGetter;
 
 public enum MainMenuComponent {
     /**
-     * The button that start a new game.
+     * The button that start a new game. 
      */
-    BTN_NEW_GAME(new ImageIcon(PathResources.IMAGE_PATH + "NewGame.png")),
+    BTN_NEW_GAME(PathResources.IMAGE_PATH + "NewGame.png"),
 
     /**
      * The button that show the credits.
      */
-    BTN_CREDITS(new ImageIcon(PathResources.IMAGE_PATH + "CreditsButton.png")),
+    BTN_CREDITS(PathResources.IMAGE_PATH + "CreditsButton.png"),
 
     /**
      * The button for exit the game.
      */
-    BTN_EXIT(new ImageIcon(PathResources.IMAGE_PATH + "Exit.png")),
+    BTN_EXIT(PathResources.IMAGE_PATH + "Exit.png"),
 
     /**
      * The label where the credits are showed.
      */
-    LBL_CREDITS(new ImageIcon(PathResources.IMAGE_PATH + "lblCredits.png")),
+    LBL_CREDITS(PathResources.IMAGE_PATH + "lblCredits.png"),
 
     /**
      * The label that contains the background image.
      */
-    LBL_BACKGROUND(new ImageIcon(PathResources.IMAGE_PATH + "MainMenuBackground.png"));
+    LBL_BACKGROUND(PathResources.IMAGE_PATH + "MainMenuBackground.png");
 
-    private final ImageIcon img;
+    private final String path;
 
-    MainMenuComponent(final ImageIcon img) {
-        this.img = img;
+    MainMenuComponent(final String path) {
+        this.path = path;
     }
 
     private static class PathResources {
         private static final PathGetter PATH_GETTER = new PathGetter();
-        private static final String IMAGE_PATH = PATH_GETTER.getPortablePath("resources/images/MainMenu/");
+        private static final String IMAGE_PATH = PATH_GETTER.getPortablePath("/images/MainMenu/");
     }
 
-    public ImageIcon getImage() {
-        return this.img;
+    public String getPath() {
+        return this.path;
     }
 }

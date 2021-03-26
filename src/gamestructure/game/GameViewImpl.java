@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private final HUDPanel hudPanel = new HUDPanel(windowUtilities.getScreenRatio());
     private boolean gameOver;
     private boolean won;
-    private final JLabel lblStartInstruction = new JLabel(new ImageIcon(adaptImage(new ImageIcon(pathGetter.getPortablePath("resources/images/HUD/StartIstruction.png")))));
+    private final JLabel lblStartInstruction = new JLabel(new ImageIcon(adaptImage(new ImageIcon(this.getClass().getResource(pathGetter.getPortablePath("/images/HUD/StartIstruction.png"))))));
     private static final int ISTRUCTION_TIME = 2000;
 
     public GameViewImpl() {

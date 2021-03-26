@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -74,7 +75,8 @@ public class MainMenuViewImpl implements MainMenuView {
                 e.getValue().getY().mul(windowUtilities.getScreenRatio());
                 if (e.getValue().getX() instanceof JLabel) {
                     final JLabel lbl = (JLabel) e.getValue().getX();
-                    lbl.setIcon(windowUtilities.resizeImage(e.getKey().getImage(), e.getValue().getY()));
+                    //lbl.setIcon(windowUtilities.resizeImage(e.getKey().getImage(), e.getValue().getY()));
+                    lbl.setIcon(windowUtilities.resizeImage(new ImageIcon(this.getClass().getResource(e.getKey().getPath())), e.getValue().getY()));
                 }
                 this.configureComponents(e);
                 e.getValue().getX().setBounds(e.getValue().getY());
@@ -83,7 +85,8 @@ public class MainMenuViewImpl implements MainMenuView {
 
             this.componentsMap.entrySet().stream().filter(e -> e.getValue().getX() instanceof JButton).forEach(e -> {
                 final JButton btn = (JButton) e.getValue().getX();
-                btn.setIcon(windowUtilities.resizeImage(e.getKey().getImage(), e.getValue().getY()));
+               // btn.setIcon(windowUtilities.resizeImage(e.getKey().getPath(), e.getValue().getY()));
+                btn.setIcon(windowUtilities.resizeImage(new ImageIcon(this.getClass().getResource(e.getKey().getPath())), e.getValue().getY()));
                 this.configureButtonGraphics((JButton) e.getValue().getX());
             });
         }
