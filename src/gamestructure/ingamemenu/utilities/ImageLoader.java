@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
 
-import viewutilities.PathGetter;
-
 public class ImageLoader {
     private final Map<Images, Image> images = new HashMap<>();
     private static final int SIZE_IMAGE_ITEM = 100;

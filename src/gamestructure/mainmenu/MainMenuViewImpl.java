@@ -21,8 +21,8 @@ import viewutilities.WindowUtilities;
 
 public class MainMenuViewImpl implements MainMenuView {
 
-    private static final int MENU_WIDTH = 613;
-    private static final int MENU_HEIGHT = 727;
+    private static final int MENU_WIDTH = 625;
+    private static final int MENU_HEIGHT = 765;
     private static final Color BACKGROUND_COLOR = new Color(11, 19, 30);
     private final WindowUtilities windowUtilities = new WindowUtilities();
     private final JFrame frame = new JFrame();
@@ -45,7 +45,7 @@ public class MainMenuViewImpl implements MainMenuView {
      */
     public void show() {
         this.frame.setSize(new Dimension((int) (MENU_WIDTH * windowUtilities.getScreenRatio()), 
-                            (int) (MENU_HEIGHT * windowUtilities.getScreenRatio() + this.frame.getInsets().top + this.frame.getInsets().bottom)));
+                            (int) (MENU_HEIGHT * windowUtilities.getScreenRatio())));
         this.frame.setLocation((int) (windowUtilities.getScreen().getWidth()) / 2 - this.frame.getSize().width / 2, 
                 (int) (windowUtilities.getScreen().getHeight()) / 2 - this.frame.getSize().height / 2);
         this.frame.setVisible(true);

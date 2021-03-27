@@ -1,9 +1,5 @@
 package gamestructure.mainmenu;
 
-import java.io.File;
-
-import viewutilities.PathGetter;
-
 public enum MainMenuComponent {
     /**
      * The button that start a new game. 

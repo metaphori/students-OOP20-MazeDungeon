@@ -21,12 +21,12 @@ public class WindowUtilities {
     /**
      * width percentage used from the game window.
      */
-    public static final double WIDTH_RATIO = 0.666_667; 
+    public static final double WIDTH_RATIO = 0.670; 
 
     /**
      * height percentage used from the game window.
      */
-    public static final double HEIGHT_RATIO = 0.740_740;
+    public static final double HEIGHT_RATIO = 0.775;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final double screenRatio = screen.getWidth() / NATIVE_WIDTH;
 
