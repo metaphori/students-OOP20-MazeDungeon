@@ -21,7 +21,7 @@ import viewutilities.WindowUtilities;
 
 public class MainMenuViewImpl implements MainMenuView {
 
-    private static final int MENU_WIDTH = 625;
+    private static final int MENU_WIDTH = 630;
     private static final int MENU_HEIGHT = 765;
     private static final Color BACKGROUND_COLOR = new Color(11, 19, 30);
     private final WindowUtilities windowUtilities = new WindowUtilities();
@@ -34,7 +34,7 @@ public class MainMenuViewImpl implements MainMenuView {
         this.frame.setTitle("MazeDungeon");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
-        this.frame.setBackground(BACKGROUND_COLOR);
+        this.frame.getContentPane().setBackground(BACKGROUND_COLOR);
 
         final MenuPanel mainPanel = new MenuPanel();
         this.frame.add(mainPanel);

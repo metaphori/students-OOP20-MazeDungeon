@@ -59,7 +59,7 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.setIconImage(this.iconImage.getImage());
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gamePanel = new GamePanel();
-        this.frame.setBackground(BACKGROUND);
+        this.frame.getContentPane().setBackground(BACKGROUND);
         this.frame.add(gamePanel);
         this.frame.addKeyListener(this);
         this.frame.remove(this.lblStartInstruction);
