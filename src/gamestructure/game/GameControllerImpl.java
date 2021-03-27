@@ -30,6 +30,7 @@ public class GameControllerImpl implements GameController {
     private final Command command;
     private boolean inGameMenuOpen;
     private final InGameMenuController inGameMenuController;
+    private boolean active = true;
 
     /**
      * @param model : an instance of the model
@@ -59,8 +60,9 @@ public class GameControllerImpl implements GameController {
         while (!this.model.isGameOver() && !this.model.isWon()) {
             final long current = System.currentTimeMillis();
             final int elapsed = (int) (current - lastTime);
-            if (inGameMenuOpen) {
+            if (inGameMenuOpen || !active) {
                 waitForNextFrame(current);
+                lastTime = current;
                 continue;
             }
             processInput();
@@ -250,4 +252,13 @@ public class GameControllerImpl implements GameController {
         }
         return this.model.getGameObject(id).getState();
     }
+
+    /**
+     * set if the controller is active.
+     */
+    @Override
+    public void setActive(final boolean active) {
+        this.active = active;
+    }
+
 }

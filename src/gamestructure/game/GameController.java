@@ -31,4 +31,6 @@ public interface GameController extends Controller {
     void openInGameMenu();
 
     State getStateFromId(int id);
+
+    void setActive(boolean active);
 }
