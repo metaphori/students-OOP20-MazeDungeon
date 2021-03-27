@@ -7,7 +7,7 @@ import model.ModelImpl;
 
 public class MainMenuControllerImpl implements MainMenuController {
 
-    private MainMenuView view;
+    private final MainMenuView view;
 
     public MainMenuControllerImpl() {
         this.view = new MainMenuViewImpl(this);

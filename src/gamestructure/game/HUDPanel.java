@@ -15,7 +15,6 @@ import javax.swing.JLayeredPane;
 import javax.swing.JProgressBar;
 
 import model.shop.Items;
-import viewutilities.PathGetter;
 import viewutilities.ResizableRectangle;
 
 public class HUDPanel extends JLayeredPane {

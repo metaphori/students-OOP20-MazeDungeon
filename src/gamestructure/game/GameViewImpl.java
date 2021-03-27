@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +30,6 @@ import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.shop.Items;
-import viewutilities.PathGetter;
 import viewutilities.ResourceLoader;
 import viewutilities.WindowUtilities;
 
@@ -61,7 +59,7 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.setIconImage(this.iconImage.getImage());
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gamePanel = new GamePanel();
-        this.frame.setBackground(BACKGROUND);
+        this.frame.getContentPane().setBackground(BACKGROUND);
         this.frame.add(gamePanel);
         this.frame.addKeyListener(this);
         this.frame.remove(this.lblStartInstruction);

@@ -2,7 +2,6 @@ package gamestructure.mainmenu;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +34,7 @@ public class MainMenuViewImpl implements MainMenuView {
         this.frame.setTitle("MazeDungeon");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
-        this.frame.setBackground(BACKGROUND_COLOR);
+        this.frame.getContentPane().setBackground(BACKGROUND_COLOR);
 
         final MenuPanel mainPanel = new MenuPanel();
         this.frame.add(mainPanel);

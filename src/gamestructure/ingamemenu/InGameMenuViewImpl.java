@@ -163,7 +163,6 @@ public class InGameMenuViewImpl implements InGameMenuView  {
      */
     @Override
     public void show() {
-        this.frame.setBackground(COLOR_BACKGROUND);
         this.frame.getContentPane().setPreferredSize(new Dimension((int) (WindowUtilities.NATIVE_WIDTH * WindowUtilities.WIDTH_RATIO * windowUtilities.getScreenRatio()) + this.frame.getInsets().left +  this.frame.getInsets().right,
                 (int) (WindowUtilities.NATIVE_HEIGHT * WindowUtilities.HEIGHT_RATIO * windowUtilities.getScreenRatio()) + this.frame.getInsets().top + this.frame.getInsets().bottom));
         this.frame.pack();
