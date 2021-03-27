@@ -14,7 +14,7 @@ import model.common.GameObjectType;
 
 public class ResourceLoader {
     private final Map<GameObjectType, Map<State, List<ImageIcon>>> resources = new HashMap<>();
-    private static final String IMG_PATH = "/images/";
+    private static final String IMG_PATH = "/images/gameObject/";
 
     public ResourceLoader() {
         for (final GameObjectType gameObjectType : GameObjectType.values()) {

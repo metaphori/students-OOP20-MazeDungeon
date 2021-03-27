@@ -24,7 +24,7 @@ public class HUDPanel extends JLayeredPane {
     private final ResizableRectangle coinPosition = new ResizableRectangle(MARGIN, 50, 50, 50);
     private final ResizableRectangle coinCounterPosition = new ResizableRectangle((int) coinPosition.getX() + (int) coinPosition.getWidth(), 
                                                                                   (int) coinPosition.getY(), 50, 50);
-    private final ResizableRectangle roomVisitedPosition = new ResizableRectangle(1000, 10, 200, 20);
+    private final ResizableRectangle roomVisitedPosition = new ResizableRectangle(980, 10, 220, 20);
     private final ResizableRectangle finalArtefactPosition = new ResizableRectangle((int) roomVisitedPosition.getX(),
                                                                                     (int) roomVisitedPosition.getY() + (int) roomVisitedPosition.getHeight() + MARGIN,
                                                                                     170, 60);
@@ -61,10 +61,10 @@ public class HUDPanel extends JLayeredPane {
         this.coinImage = new ImageIcon(this.getClass().getResource("/images/HUD/Coins/coin.png")).getImage().getScaledInstance((int) coinPosition.getWidth(),
                                                                                                            (int) coinPosition.getHeight(), 
                                                                                                            Image.SCALE_SMOOTH);
-        this.finalArtefactImage = new ImageIcon(this.getClass().getResource("/images/objects/final_artifact/spawned.png")).getImage().getScaledInstance((int) finalArtefactPosition.getWidth(), 
+        this.finalArtefactImage = new ImageIcon(this.getClass().getResource("/images/gameObject/final_artifact/spawned.png")).getImage().getScaledInstance((int) finalArtefactPosition.getWidth(), 
                                                                                                                                (int) finalArtefactPosition.getHeight(), 
                                                                                                                                Image.SCALE_SMOOTH);
-        this.bossIconImage = new ImageIcon(this.getClass().getResource("/images/enemy_boss/idle/enemy_boss1.png")).getImage().getScaledInstance((int) bossIconPosition.getWidth(), 
+        this.bossIconImage = new ImageIcon(this.getClass().getResource("/images/gameObject/enemy_boss/idle/enemy_boss1.png")).getImage().getScaledInstance((int) bossIconPosition.getWidth(), 
                                                                                                                (int) bossIconPosition.getHeight(), 
                                                                                                                Image.SCALE_SMOOTH);
         this.lblRoomVisited = new JLabel();

@@ -38,7 +38,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private GameController controller;
     private final JFrame frame;
     private final WindowUtilities windowUtilities = new WindowUtilities();
-    private final ImageIcon iconImage = new ImageIcon(this.getClass().getResource("/images/character/idle/character1.png"));
+    private final ImageIcon iconImage = new ImageIcon(this.getClass().getResource("/images/gameObject/character/idle/character1.png"));
     private final ImageIcon loadImage = new ImageIcon(this.getClass().getResource("/images/HUD/StartIstruction.png"));
     private static final Color BACKGROUND = new Color(11, 19, 30);
     private static final int PERIOD = 15;
