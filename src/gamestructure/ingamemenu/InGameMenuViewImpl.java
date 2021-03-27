@@ -36,10 +36,8 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     private final JFrame frame = new JFrame();
 
     private final ImageLoader  imageIconSources = new ImageLoader();
-
     private final JLayeredPane inGameMenuPanel = new JLayeredPane();
     private final JLayeredPane shopPanel = new JLayeredPane();
-
     private static final Color COLOR_BACKGROUND = new Color(11, 23, 30, 255);
     private boolean startMenu = true;
     private boolean startShop = true;
@@ -107,7 +105,6 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setTitle("MazeDungeon");
-
     }
     /**
      * show shop panel and set button and label.
@@ -159,7 +156,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     }
 
     /**
-     * 
+     * show in game menu frame and set property.
      */
     @Override
     public void show() {
@@ -170,6 +167,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
                 windowUtilities.getScreen().height / 2 - this.frame.getSize().height / 2);
         this.frame.setVisible(true);
         nobodyBtnSelect();
+        this.frame.setBackground(COLOR_BACKGROUND);
     }
     private void nobodyBtnSelect() {
         this.componentMapMenu.entrySet().stream().forEach(e -> {
@@ -184,7 +182,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         });
     }
     /**
-     * 
+     * hide the in game menu frame.
      */
     @Override
     public void hide() {

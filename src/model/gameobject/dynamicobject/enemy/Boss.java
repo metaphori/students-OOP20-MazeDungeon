@@ -51,7 +51,7 @@ public class Boss extends AbstractEnemy {
         }
     }
     /**
-     * 
+     * change Boss Routine.
      */
     @Override
     protected void changeRoutine() {
@@ -67,7 +67,7 @@ public class Boss extends AbstractEnemy {
 
     }
     /**
-     * 
+     * when Boss collide.
      */
     @Override
     public void collideWith(final GameObject obj2) {
@@ -83,7 +83,7 @@ public class Boss extends AbstractEnemy {
         }
     }
     /**
-     * 
+     * set property Boss Shoot.
      */
     @Override
     protected void shoot() {
@@ -112,8 +112,9 @@ public class Boss extends AbstractEnemy {
         this.tryToShoot();
     }
     /**
-     * @Override
+     * spawn coin when the boss dies.
      */
+    @Override
     protected void spawnCoin() {
         this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(new Vector2D(this.getBoundingBox().getWidth() / 2 - ALIGN_MONEY,
                 this.getBoundingBox().getHeight() / 2 + ALIGN_MONEY))));

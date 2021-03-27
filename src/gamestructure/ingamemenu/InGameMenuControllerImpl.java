@@ -20,7 +20,7 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     }
 
     /**
-     * 
+     * setup in game menu view.
      */
     @Override
     public void setup() {
