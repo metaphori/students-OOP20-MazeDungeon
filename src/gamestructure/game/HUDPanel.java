@@ -148,16 +148,16 @@ public class HUDPanel extends JLayeredPane {
         final ImageIcon tmpImage;
         switch (item) {
         case ARTHEMIDEBOW:
-            tmpImage = new ImageIcon(this.getClass().getResource("resources/images/Item/arthemideBow.png"));
+            tmpImage = new ImageIcon(this.getClass().getResource("/images/Item/arthemideBow.png"));
             break;
         case HERMESBOOTS:
-            tmpImage = new ImageIcon(this.getClass().getResource("resources/images/Item/hermesBoots.png"));
+            tmpImage = new ImageIcon(this.getClass().getResource("/images/Item/hermesBoots.png"));
             break;
         case ZEUSBOLT:
-            tmpImage = new ImageIcon(this.getClass().getResource("resources/images/Item/zeusBolt.png"));
+            tmpImage = new ImageIcon(this.getClass().getResource("/images/Item/zeusBolt.png"));
             break;
         case ORACLEAMULET:
-            tmpImage = new ImageIcon(this.getClass().getResource("resources/images/Item/oracleAmulet.png"));
+            tmpImage = new ImageIcon(this.getClass().getResource("/images/Item/oracleAmulet.png"));
             break;
         default:
             return;
