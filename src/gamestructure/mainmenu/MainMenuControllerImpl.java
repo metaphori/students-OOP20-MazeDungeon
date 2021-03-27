@@ -9,12 +9,14 @@ public class MainMenuControllerImpl implements MainMenuController {
 
     private MainMenuView view;
 
+    public MainMenuControllerImpl() {
+        this.view = new MainMenuViewImpl(this);
+    }
     /**
      * Set up the MainMenu Controller.
      *  @Override
      */
     public void setup() {
-        this.view = new MainMenuViewImpl(this);
         this.view.show();
     }
 

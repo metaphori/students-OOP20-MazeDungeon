@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
@@ -15,20 +16,18 @@ public class ResourceLoader {
     private final Map<GameObjectType, Map<State, List<ImageIcon>>> resources = new HashMap<>();
     private static final String IMG_PATH = "/images/";
 
-    private final PathGetter pathGetter = new PathGetter();
-
     public ResourceLoader() {
         for (final GameObjectType gameObjectType : GameObjectType.values()) {
-            final String gameObjectPath = IMG_PATH + gameObjectType.toString().toLowerCase() + "/";
+            final String gameObjectPath = IMG_PATH + gameObjectType.toString().toLowerCase(Locale.ENGLISH) + "/";
             if (gameObjectType.equals(GameObjectType.INVISIBLE_OBJECT)) {
                 continue;
             }
             final Map<State, List<ImageIcon>> stateMap = new HashMap<>();
             for (final State state : gameObjectType.getStates()) {
-                final String statePath = gameObjectPath + state.toString().toLowerCase() + "/" + gameObjectType.toString().toLowerCase();
+                final String statePath = gameObjectPath + state.toString().toLowerCase(Locale.ENGLISH) + "/" + gameObjectType.toString().toLowerCase(Locale.ENGLISH);
                 final List<ImageIcon> images = new LinkedList<>();
                 URL tmp;
-                for (int i = 1; (tmp = this.getClass().getResource(pathGetter.getPortablePath(statePath + i + ".png"))) != null; i++) {
+                for (int i = 1; (tmp = this.getClass().getResource(statePath + i + ".png")) != null; i++) {
                     images.add(new ImageIcon(tmp));
                 }
                 stateMap.put(state, images);

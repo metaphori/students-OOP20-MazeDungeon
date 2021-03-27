@@ -1,5 +1,7 @@
 package gamestructure.mainmenu;
 
+import java.io.File;
+
 import viewutilities.PathGetter;
 
 public enum MainMenuComponent {
@@ -35,8 +37,7 @@ public enum MainMenuComponent {
     }
 
     private static class PathResources {
-        private static final PathGetter PATH_GETTER = new PathGetter();
-        private static final String IMAGE_PATH = PATH_GETTER.getPortablePath("/images/MainMenu/");
+        private static final String IMAGE_PATH = "/images/MainMenu/";
     }
 
     public String getPath() {

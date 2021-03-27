@@ -40,9 +40,8 @@ public class GameViewImpl implements GameView, KeyListener {
     private GameController controller;
     private final JFrame frame;
     private final WindowUtilities windowUtilities = new WindowUtilities();
-    private final PathGetter pathGetter = new PathGetter();
-    private final ImageIcon iconImage = new ImageIcon(this.getClass().getResource(pathGetter.getPortablePath("/images/character/idle/character1.png")));
-    private final ImageIcon loadImage = new ImageIcon(this.getClass().getResource(pathGetter.getPortablePath("/images/HUD/StartIstruction.png")));
+    private final ImageIcon iconImage = new ImageIcon(this.getClass().getResource("/images/character/idle/character1.png"));
+    private final ImageIcon loadImage = new ImageIcon(this.getClass().getResource("/images/HUD/StartIstruction.png"));
     private static final Color BACKGROUND = new Color(11, 19, 30);
     private static final int PERIOD = 15;
     private final GamePanel gamePanel;
@@ -82,7 +81,6 @@ public class GameViewImpl implements GameView, KeyListener {
      */
     @Override
     public void show() {
-        this.frame.setVisible(true);
         final double frameWidth = WindowUtilities.NATIVE_WIDTH * WindowUtilities.WIDTH_RATIO * windowUtilities.getScreenRatio();
         final double frameHeigth = WindowUtilities.NATIVE_HEIGHT * WindowUtilities.HEIGHT_RATIO * windowUtilities.getScreenRatio();
         this.frame.setSize(new Dimension((int) (frameWidth),
@@ -90,6 +88,7 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.setLocation(windowUtilities.getScreen().width / 2 - this.frame.getSize().width / 2,
                                windowUtilities.getScreen().height / 2 - this.frame.getSize().height / 2);
         this.frame.add(this.lblStartInstruction);
+        this.frame.setVisible(true);
         try {
             Thread.sleep(ISTRUCTION_TIME);
         } catch (InterruptedException e) {
@@ -109,9 +108,9 @@ public class GameViewImpl implements GameView, KeyListener {
 
     private class GamePanel extends JLayeredPane implements ActionListener {
         private static final long serialVersionUID = 1L;
-        private final Image youLoseImage = adaptImage(new ImageIcon(this.getClass().getResource(pathGetter.getPortablePath("/images/HUD/GameOver/gameOverFinal.png"))));
-        private final Image winnerImage = adaptImage(new ImageIcon(this.getClass().getResource(pathGetter.getPortablePath("/images/HUD/Victory/winner.png"))));
-        private final Image roomImage = adaptImage(new ImageIcon(this.getClass().getResource(pathGetter.getPortablePath("/images/Room/room.png"))));
+        private final Image youLoseImage = adaptImage(new ImageIcon(this.getClass().getResource("/images/HUD/GameOver/gameOverFinal.png")));
+        private final Image winnerImage = adaptImage(new ImageIcon(this.getClass().getResource("/images/HUD/Victory/winner.png")));
+        private final Image roomImage = adaptImage(new ImageIcon(this.getClass().getResource("/images/Room/room.png")));
 
         @Override
         public void actionPerformed(final ActionEvent e) {

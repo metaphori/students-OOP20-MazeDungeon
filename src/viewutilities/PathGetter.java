@@ -10,6 +10,6 @@ public class PathGetter {
      * @return return the input path with the portable path separator instead "/"
      */
     public String getPortablePath(final String path) {
-        return path.replaceAll("//", sep);
+        return path.replaceAll("//", "//");
     }
 }

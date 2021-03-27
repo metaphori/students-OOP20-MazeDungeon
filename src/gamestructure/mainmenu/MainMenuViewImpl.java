@@ -2,6 +2,7 @@ package gamestructure.mainmenu;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -43,11 +44,11 @@ public class MainMenuViewImpl implements MainMenuView {
      * @Override
      */
     public void show() {
-        this.frame.setVisible(true);
         this.frame.setSize(new Dimension((int) (MENU_WIDTH * windowUtilities.getScreenRatio()), 
                             (int) (MENU_HEIGHT * windowUtilities.getScreenRatio() + this.frame.getInsets().top + this.frame.getInsets().bottom)));
         this.frame.setLocation((int) (windowUtilities.getScreen().getWidth()) / 2 - this.frame.getSize().width / 2, 
                 (int) (windowUtilities.getScreen().getHeight()) / 2 - this.frame.getSize().height / 2);
+        this.frame.setVisible(true);
     }
 
     /**
@@ -75,8 +76,8 @@ public class MainMenuViewImpl implements MainMenuView {
                 e.getValue().getY().mul(windowUtilities.getScreenRatio());
                 if (e.getValue().getX() instanceof JLabel) {
                     final JLabel lbl = (JLabel) e.getValue().getX();
-                    //lbl.setIcon(windowUtilities.resizeImage(e.getKey().getImage(), e.getValue().getY()));
-                    lbl.setIcon(windowUtilities.resizeImage(new ImageIcon(this.getClass().getResource(e.getKey().getPath())), e.getValue().getY()));
+                    final URL url = this.getClass().getResource(e.getKey().getPath());
+                    lbl.setIcon(windowUtilities.resizeImage(new ImageIcon(url), e.getValue().getY()));
                 }
                 this.configureComponents(e);
                 e.getValue().getX().setBounds(e.getValue().getY());
@@ -85,8 +86,8 @@ public class MainMenuViewImpl implements MainMenuView {
 
             this.componentsMap.entrySet().stream().filter(e -> e.getValue().getX() instanceof JButton).forEach(e -> {
                 final JButton btn = (JButton) e.getValue().getX();
-               // btn.setIcon(windowUtilities.resizeImage(e.getKey().getPath(), e.getValue().getY()));
-                btn.setIcon(windowUtilities.resizeImage(new ImageIcon(this.getClass().getResource(e.getKey().getPath())), e.getValue().getY()));
+                final URL url = this.getClass().getResource(e.getKey().getPath());
+                btn.setIcon(windowUtilities.resizeImage(new ImageIcon(url), e.getValue().getY()));
                 this.configureButtonGraphics((JButton) e.getValue().getX());
             });
         }
