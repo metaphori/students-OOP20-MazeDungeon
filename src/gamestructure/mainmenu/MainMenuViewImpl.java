@@ -2,6 +2,7 @@ package gamestructure.mainmenu;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,8 +45,9 @@ public class MainMenuViewImpl implements MainMenuView {
      * @Override
      */
     public void show() {
-        this.frame.setSize(new Dimension((int) (MENU_WIDTH * windowUtilities.getScreenRatio()), 
-                            (int) (MENU_HEIGHT * windowUtilities.getScreenRatio() + this.frame.getInsets().top + this.frame.getInsets().bottom)));
+        this.frame.getContentPane().setPreferredSize(new Dimension((int) (MENU_WIDTH * windowUtilities.getScreenRatio()),
+                            (int) (MENU_HEIGHT * windowUtilities.getScreenRatio())));
+        this.frame.pack();
         this.frame.setLocation((int) (windowUtilities.getScreen().getWidth()) / 2 - this.frame.getSize().width / 2, 
                 (int) (windowUtilities.getScreen().getHeight()) / 2 - this.frame.getSize().height / 2);
         this.frame.setVisible(true);
