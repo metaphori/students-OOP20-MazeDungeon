@@ -51,6 +51,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private boolean won;
     private final JLabel lblStartInstruction = new JLabel(new ImageIcon(adaptImage(loadImage)));
     private static final int ISTRUCTION_TIME = 2000;
+    private boolean loading = true;
 
     public GameViewImpl() {
         this.frame = new JFrame();
@@ -88,11 +89,6 @@ public class GameViewImpl implements GameView, KeyListener {
                                windowUtilities.getScreen().height / 2 - this.frame.getSize().height / 2);
         this.frame.add(this.lblStartInstruction);
         this.frame.setVisible(true);
-        try {
-            Thread.sleep(ISTRUCTION_TIME);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         gamePanel.setSize(this.frame.getSize());
         this.timer.start();
     }
@@ -110,6 +106,12 @@ public class GameViewImpl implements GameView, KeyListener {
         private final Image youLoseImage = adaptImage(new ImageIcon(this.getClass().getResource("/images/HUD/GameOver/gameOverFinal.png")));
         private final Image winnerImage = adaptImage(new ImageIcon(this.getClass().getResource("/images/HUD/Victory/winner.png")));
         private final Image roomImage = adaptImage(new ImageIcon(this.getClass().getResource("/images/Room/room.png")));
+        private final Image loadImage =  adaptImage(new ImageIcon(this.getClass().getResource("/images/HUD/StartIstruction.png")));
+        private final long openTime;
+
+        GamePanel() {
+            openTime = System.currentTimeMillis();
+        }
 
         @Override
         public void actionPerformed(final ActionEvent e) {
@@ -118,6 +120,13 @@ public class GameViewImpl implements GameView, KeyListener {
 
         @Override
         protected void paintComponent(final Graphics g) {
+            if (loading && System.currentTimeMillis() - openTime < ISTRUCTION_TIME) {
+                g.drawImage(this.loadImage, 0, 0, null);
+                return;
+            } else if (loading) {
+                loading = false;
+                this.add(hudPanel);
+            }
             g.drawImage(this.roomImage, 0, 0, null);
             final Map<Integer, Animation> tmpAnimations = new ConcurrentSkipListMap<>(animations);
             tmpAnimations.entrySet().forEach(e -> {
@@ -141,7 +150,6 @@ public class GameViewImpl implements GameView, KeyListener {
         public void initialize() {
             hudPanel.initialize(controller.getCharacterLife());
             hudPanel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
-            this.add(hudPanel);
         }
     }
 
@@ -159,6 +167,9 @@ public class GameViewImpl implements GameView, KeyListener {
      */
     @Override
     public void updateHUD() {
+        if (loading) {
+            return;
+        }
         hudPanel.updateLife(this.controller.getCharacterLife());
         hudPanel.updateCoinCounter(this.controller.getCharacterMoney());
         hudPanel.updateVisitedRooms(this.controller.getVisitedRoom(), this.controller.getTotalRooms());
@@ -216,6 +227,9 @@ public class GameViewImpl implements GameView, KeyListener {
      */
     @Override
     public void keyPressed(final KeyEvent key) {
+        if (loading) {
+            return;
+        }
         if (this.controller != null) {
             this.controller.pressKey(key);
         }
@@ -227,6 +241,9 @@ public class GameViewImpl implements GameView, KeyListener {
      */
     @Override
     public void keyReleased(final KeyEvent key) {
+        if (loading) {
+            return;
+        }
         if (this.controller != null) {
             this.controller.releaseKey(key);
         }
