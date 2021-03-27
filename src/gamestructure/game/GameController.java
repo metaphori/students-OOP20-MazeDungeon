@@ -33,4 +33,6 @@ public interface GameController extends Controller {
     State getStateFromId(int id);
 
     void setActive(boolean active);
+
+    void setInactive();
 }

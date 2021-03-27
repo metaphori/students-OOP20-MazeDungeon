@@ -119,7 +119,7 @@ public class GameViewImpl implements GameView, KeyListener {
             System.out.println(frame.isActive());
             controller.setActive(frame.isActive());
             if (!frame.isActive()) {
-                //TODO svuotare la lista di comandi di dima
+                controller.setInactive();
             }
         }
 
@@ -239,7 +239,6 @@ public class GameViewImpl implements GameView, KeyListener {
             this.controller.pressKey(key);
         }
     }
-
     /**
      * @param key : the KeyEvent of the key released
      * it's notify the event at the controller

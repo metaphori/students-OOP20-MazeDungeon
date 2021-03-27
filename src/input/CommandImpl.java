@@ -104,6 +104,14 @@ public class CommandImpl implements Command {
     }
 
     /**
+     * setta tutti i pulsanti a false.
+     */
+    @Override
+    public void setAllInactive() {
+        this.keysList.stream().forEach(k -> k.setY(false));
+    }
+
+    /**
      * @return true if keys up(W) and down(S) are not pressed.
      */
     private boolean checkUpDownKeys() {

@@ -261,4 +261,12 @@ public class GameControllerImpl implements GameController {
         this.active = active;
     }
 
+    /**
+     * set the input inactive.
+     */
+    @Override
+    public void setInactive() {
+        this.command.setAllInactive();
+    }
+
 }
