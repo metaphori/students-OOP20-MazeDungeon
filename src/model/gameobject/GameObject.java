@@ -7,6 +7,7 @@ import model.common.Point2D;
 import model.room.Room;
 
 public interface GameObject {
+
     int getID();
 
     void setID(int id);

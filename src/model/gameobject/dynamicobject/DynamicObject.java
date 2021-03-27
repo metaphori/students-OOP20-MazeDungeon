@@ -5,6 +5,7 @@ import model.common.Vector2D;
 import model.gameobject.GameObject;
 
 public interface DynamicObject extends GameObject {
+
     int getSpeed();
 
     void setSpeed(int speed);

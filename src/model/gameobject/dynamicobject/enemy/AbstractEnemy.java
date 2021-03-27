@@ -82,6 +82,8 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
 
     /**
      * @param obj2 : the object with the enemy is colliding with.
+     * if it's colliding with a obstacle or an entity, the enemy's position is set to the last position.
+     * And the routine of the enemy will change.
      */
     @Override
     public void collideWith(final GameObject obj2) {

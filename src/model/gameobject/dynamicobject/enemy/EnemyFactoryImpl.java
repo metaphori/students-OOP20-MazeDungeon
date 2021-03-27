@@ -37,6 +37,9 @@ public class EnemyFactoryImpl implements EnemyFactory {
             private static final int ROUTINE_CHANGE_TIME = 1000;
             private long lastHitTime;
 
+            /**
+             * When the time goes by, the sprout try to shoot and if it can, follow the character.
+             */
             @Override
             public void updateState(final double elapsed) {
                 this.tryToShoot();
@@ -75,6 +78,10 @@ public class EnemyFactoryImpl implements EnemyFactory {
     @Override
     public Enemy createSoul(final Point2D position) {
         return new AbstractEnemy(SOUL_LIFE, SOUL_SPEED, position, GameObjectType.ENEMY_SOUL, SOUL_SHOOT_DELAY) {
+
+            /**
+             * When the time goes by, the soul try to shoot and move.
+             */
             @Override
             public void updateState(final double elapsed) {
                 this.tryToShoot();
@@ -108,6 +115,10 @@ public class EnemyFactoryImpl implements EnemyFactory {
             private static final int ROUTINE_CHANGE_TIME = 5000;
             private boolean inMovement = true;
 
+            /**
+             * When the time goes by, the skeleton update his routine (stopped or in movement).
+             * If it's stopped he try to shoot.
+             */
             @Override
             public void updateState(final double elapsed) {
                 final long currentTime = System.currentTimeMillis();

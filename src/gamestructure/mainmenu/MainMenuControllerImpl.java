@@ -14,16 +14,16 @@ public class MainMenuControllerImpl implements MainMenuController {
     }
     /**
      * Set up the MainMenu Controller.
-     *  @Override
      */
+    @Override
     public void setup() {
         this.view.show();
     }
 
     /**
      * It start a new game using a new Thread.
-     * @Override
      */
+    @Override
     public void newGame() {
         final Thread thread = new Thread(new Runnable() {
             @Override

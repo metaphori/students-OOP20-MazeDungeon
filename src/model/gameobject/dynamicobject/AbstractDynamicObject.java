@@ -116,6 +116,9 @@ public abstract class AbstractDynamicObject extends SimpleObjectImpl implements 
         return new BoundingBox(footColliderUL, this.getBoundingBox().getWidth(), BASE_HEIGHT);
     }
 
+    /**
+     * The method for change the state of the enemy, when the time goes by.
+     */
     @Override
     public abstract void updateState(double elapsed);
 }

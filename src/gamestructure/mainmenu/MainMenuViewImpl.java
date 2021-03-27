@@ -41,8 +41,9 @@ public class MainMenuViewImpl implements MainMenuView {
     }
 
     /**
-     * @Override
+     * Show the frame of the Main Menu, setting it's size and location.
      */
+    @Override
     public void show() {
         this.frame.getContentPane().setPreferredSize(new Dimension((int) (MENU_WIDTH * windowUtilities.getScreenRatio()),
                             (int) (MENU_HEIGHT * windowUtilities.getScreenRatio())));
@@ -53,8 +54,9 @@ public class MainMenuViewImpl implements MainMenuView {
     }
 
     /**
-     * @Override
+     * Destroy the frame of the Main Menu.
      */
+    @Override
     public void hide() {
         this.frame.dispose();
     }
