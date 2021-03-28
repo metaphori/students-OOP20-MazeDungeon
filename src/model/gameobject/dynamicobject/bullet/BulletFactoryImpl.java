@@ -5,6 +5,10 @@ import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
 
+/**
+ * The implementation of Bullet Factory.
+ *
+ */
 public class BulletFactoryImpl implements BulletFactory {
 
     /**
@@ -25,35 +29,35 @@ public class BulletFactoryImpl implements BulletFactory {
     private static final int BOSS_BULLET_DAMAGE = 30;
 
     /**
-     * @return characterBullet.
+     * @return {@inheritDoc}
      */
     @Override
     public Bullet createCharacterBullet(final Point2D initialPosition, final  Vector2D direction, final int bonusDamage, final int bonusBulletSpeed) {
         return new BulletImpl(initialPosition, direction, GameObjectType.CHARACTER_BULLET, bonusDamage + CHARACTER_BULLET_DAMAGE, CHARACTER_BULLET_SPEED + bonusBulletSpeed);
     }
     /**
-     * @return skeletonBullet.
+     * {@inheritDoc}
      */
     @Override
     public Bullet createSkeletonBullet(final Point2D initialPosition, final Vector2D direction) {
         return new BulletImpl(initialPosition, direction, GameObjectType.SKELETON_BULLET, SKELETON_BULLET_DAMAGE, SKELETON_BULLET_SPEED);
     }
     /**
-     * @return soulBullet.
+     * {@inheritDoc}
      */
     @Override
     public Bullet createSoulBullet(final Point2D initialPosition, final Vector2D direction) {
         return new BulletImpl(initialPosition, direction, GameObjectType.SOUL_BULLET, SOUL_BULLET_DAMAGE, SOUL_BULLET_SPEED);
     }
     /**
-     * @return sproutBullet.
+     * @return {@inheritDoc}
      */
     @Override
     public Bullet createSproutBullet(final Point2D initialPosition, final Vector2D direction) {
         return new BulletImpl(initialPosition, direction, GameObjectType.SPROUT_BULLET, SPROUT_BULLET_DAMAGE, SPROUT_BULLET_SPEED);
     }
     /**
-     * @return bossBullet.
+     * @return {@inheritDoc}
      */
     @Override
     public Bullet createBossBullet(final Point2D initialPosition, final Vector2D direction) {
