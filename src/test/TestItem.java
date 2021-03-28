@@ -39,7 +39,7 @@ public class TestItem {
 
     @org.junit.Before
     public void newCharacter() {
-        final int timeSleep = 650;
+        final int timeSleep = 400;
         c = new CharacterImpl(new Point2D(100, 100), GameObjectType.CHARACTER);
         room = new RoomImpl(new RoomManagerImpl());
         room.addDynamicObject(c);
