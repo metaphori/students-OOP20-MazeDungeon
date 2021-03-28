@@ -5,15 +5,24 @@ import gamestructure.game.GameControllerImpl;
 import model.Model;
 import model.ModelImpl;
 
+/**
+ * It contains the implementation of the methods of a generic Controller,
+ * and the methods defined by MainMenuController's interface.
+ *
+ */
 public class MainMenuControllerImpl implements MainMenuController {
 
     private final MainMenuView view;
 
+    /**
+     * Instantiate a new MainMenuController initializing also the corresponding MainMenuView.
+     */
     public MainMenuControllerImpl() {
         this.view = new MainMenuViewImpl(this);
     }
+
     /**
-     * Set up the MainMenu Controller.
+     * @{inheritDoc}
      */
     @Override
     public void setup() {
@@ -21,7 +30,7 @@ public class MainMenuControllerImpl implements MainMenuController {
     }
 
     /**
-     * It start a new game using a new Thread.
+     * @{inheritDoc}
      */
     @Override
     public void newGame() {

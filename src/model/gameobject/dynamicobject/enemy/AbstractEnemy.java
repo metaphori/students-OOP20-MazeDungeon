@@ -9,6 +9,15 @@ import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.AbstractDynamicObject;
 import model.gameobject.simpleobject.Coin;
 
+/**
+ * An abstract class for represent the common features to all type of enemies.
+ * 
+ * An AbstractEnemy can manage it's life and it's shoot is timed with delay, 
+ * it can also collide correctly with others GameObjects.
+ * 
+ * It provides two abstract methods to be implemented, one for implements the shoot,
+ * and the other for implements the changing of it's routine.
+ */
 public abstract class AbstractEnemy extends AbstractDynamicObject implements Enemy {
 
     private long lastShootTime;
@@ -16,6 +25,8 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
     private final long shootDelay;
 
     /**
+     * Build a new AbstractEnemy by setting it's life, speed, type and position in the room. 
+     * 
      * @param life : the default life of the enemy
      * @param speed : the default speed of the enemy
      * @param position : the starting position of the enemy
@@ -30,7 +41,7 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
     }
 
     /**
-     * @return the current life of the enemy.
+     * @{inheritDoc}
      */
     @Override
     public double getLife() {
@@ -38,7 +49,7 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
     }
 
     /**
-     * The enemy shoot if he can.
+     * @{inheritDoc}
      */
     @Override
     public void tryToShoot() {
@@ -48,7 +59,7 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
     }
 
     /**
-     * @param damage : the damage to be taken by the enemy.
+     * @{inheritDoc}
      */
     @Override
     public void takesDamage(final double damage) {
@@ -81,9 +92,11 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
     }
 
     /**
+     * Provide to implement the collision of a generic enemy.
+     * If it's colliding with a obstacle or an entity, the enemy's position is set to the last position,
+     * and the routine of the enemy will change.
+     * 
      * @param obj2 : the object with the enemy is colliding with.
-     * if it's colliding with a obstacle or an entity, the enemy's position is set to the last position.
-     * And the routine of the enemy will change.
      */
     @Override
     public void collideWith(final GameObject obj2) {

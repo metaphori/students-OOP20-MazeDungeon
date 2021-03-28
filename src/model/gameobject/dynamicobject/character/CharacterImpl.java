@@ -194,7 +194,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
      * Update state.
      */
     @Override
-    public void updateState(final double elapsed) { 
+    public void update(final double elapsed) { 
         this.move(elapsed);
         if (this.shoot) {
             this.shoot();

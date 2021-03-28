@@ -7,6 +7,14 @@ import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.simpleobject.SimpleObjectImpl;
 
+/**
+ * An abstract class that implements the DynamicObject as a SimpleObject,
+ * with more features defined in the DynamicObject's interface.
+ * 
+ * It also implements the changing of the state of the DynamicObject,
+ * making explicit if it's moving and in what direction.
+ *
+ */
 public abstract class AbstractDynamicObject extends SimpleObjectImpl implements DynamicObject {
 
     private static final int BASE_HEIGHT = 40;
@@ -15,9 +23,11 @@ public abstract class AbstractDynamicObject extends SimpleObjectImpl implements 
     private Point2D lastPosition;
 
     /**
-     * @param speed : the initial speed of the DinamicObject
-     * @param position : the initial position of the DinamicObject
-     * @param gameObjectType : the type of the DinamicObject
+     * Build a new DynamicObject using it's speed, position in the room and it'0s type.
+     * 
+     * @param speed : the initial speed of the DinamicObject.
+     * @param position : the initial position of the DinamicObject.
+     * @param gameObjectType : the type of the DinamicObject.
      */
     public AbstractDynamicObject(final int speed, final Point2D position, final GameObjectType gameObjectType) {
         super(position, gameObjectType);
@@ -35,7 +45,7 @@ public abstract class AbstractDynamicObject extends SimpleObjectImpl implements 
     }
 
     /**
-     * @param speed : set speed value as the speed of the DinamicObject
+     * @{inheritDoc}
      */
     @Override
     public void setSpeed(final int speed) {
@@ -43,14 +53,15 @@ public abstract class AbstractDynamicObject extends SimpleObjectImpl implements 
     }
 
     /**
-     * @return the direction of the DinamicObject
+     * @{inheritDoc}
      */
+    @Override
     public Vector2D getDirection() {
         return this.direction;
     }
 
     /**
-     * @param newDirection : set direction value as the direction of the DinamicObject
+     * @{inheritDoc}
      */
     @Override
     public void setDirection(final Vector2D newDirection) {
@@ -76,8 +87,9 @@ public abstract class AbstractDynamicObject extends SimpleObjectImpl implements 
     }
 
     /**
-     * @param newPosition : set the current position of the DInamicObject to the new position
+     * @{inheritDoc}
      */
+    @Override
     public void setPosition(final Point2D newPosition) {
         this.lastPosition = this.getPosition();
         super.setPosition(newPosition);
@@ -94,21 +106,22 @@ public abstract class AbstractDynamicObject extends SimpleObjectImpl implements 
     }
 
     /**
-     * @return last position of the object
+     * @{inheritDoc}
      */
+    @Override
     public Point2D getLastPosition() {
         return this.lastPosition;
     }
 
     /**
-     * @param elapsed : the time passed from the last movement
+     * @param elapsed : the time passed from the last movement.
      */
     protected void move(final double elapsed) {
         this.setPosition(this.getPosition().sum(this.getDirection().mul(speed).mul(elapsed)));
     }
 
     /**
-     * @return a BoundingBox only for the base of the DynamicObject
+     * @return a BoundingBox only for the base of the DynamicObject.
      */
     protected BoundingBox getBaseBoundingBox() {
         final Point2D footColliderUL = new Point2D(this.getBoundingBox().getULCorner().getX(), 
@@ -117,8 +130,8 @@ public abstract class AbstractDynamicObject extends SimpleObjectImpl implements 
     }
 
     /**
-     * The method for change the state of the enemy, when the time goes by.
+     * @{inheritDoc}
      */
     @Override
-    public abstract void updateState(double elapsed);
+    public abstract void update(double elapsed);
 }

@@ -32,7 +32,7 @@ public class BulletImpl extends AbstractDynamicObject implements Bullet {
      * 
      */
     @Override
-    public void updateState(final double elapsed) {
+    public void update(final double elapsed) {
         this.move(elapsed);
     }
 

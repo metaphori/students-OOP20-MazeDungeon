@@ -19,6 +19,13 @@ import viewutilities.Pair;
 import viewutilities.ResizableRectangle;
 import viewutilities.WindowUtilities;
 
+/**
+ * This class implement all the needed features for realize the GUI of the MainMenu.
+ * 
+ * It provide to place all the component in the right way,
+ * and make it resizable for the portability of the application, using different monitor.
+ *
+ */
 public class MainMenuViewImpl implements MainMenuView {
 
     private static final int MENU_WIDTH = 613;
@@ -41,7 +48,7 @@ public class MainMenuViewImpl implements MainMenuView {
     }
 
     /**
-     * Show the frame of the Main Menu, setting it's size and location.
+     * @{inheritDoc}
      */
     @Override
     public void show() {
@@ -54,7 +61,7 @@ public class MainMenuViewImpl implements MainMenuView {
     }
 
     /**
-     * Destroy the frame of the Main Menu.
+     * @{inheritDoc}
      */
     @Override
     public void hide() {

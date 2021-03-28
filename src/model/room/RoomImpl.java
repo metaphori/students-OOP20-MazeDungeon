@@ -32,7 +32,7 @@ public class RoomImpl implements Room {
     public void update(final double elapsed) {
         final List<DynamicObject> temp = new LinkedList<>(List.copyOf(this.dynamicObjects));
         temp.iterator().forEachRemaining(obj -> {
-            obj.updateState(elapsed);
+            obj.update(elapsed);
         });
         this.checkCollisions();
     }

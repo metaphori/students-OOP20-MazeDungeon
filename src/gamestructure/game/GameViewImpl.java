@@ -116,7 +116,6 @@ public class GameViewImpl implements GameView, KeyListener {
         @Override
         public void actionPerformed(final ActionEvent e) {
             repaint();
-            System.out.println(frame.isActive());
             controller.setActive(frame.isActive());
             if (!frame.isActive()) {
                 controller.setInactive();
