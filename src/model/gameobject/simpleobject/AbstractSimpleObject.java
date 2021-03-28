@@ -16,7 +16,7 @@ import model.room.Room;
  * The method for manage collisions is to be implemented in base of the type of the SimpleObject that need it.
  *
  */
-public abstract class SimpleObjectImpl implements SimpleObject {
+public abstract class AbstractSimpleObject implements SimpleObject {
     private int id;
     private Point2D position;
     private final GameObjectType gameObjectType;
@@ -30,7 +30,7 @@ public abstract class SimpleObjectImpl implements SimpleObject {
      * @param position : the position where the SimpleObject will be placed.
      * @param gameObjectType : the type of the SimpleObject will be built.
      */
-    public SimpleObjectImpl(final Point2D position, final GameObjectType gameObjectType) {
+    public AbstractSimpleObject(final Point2D position, final GameObjectType gameObjectType) {
         this.position = position;
         this.gameObjectType = gameObjectType;
     }

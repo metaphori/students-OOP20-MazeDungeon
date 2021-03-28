@@ -5,7 +5,7 @@ import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
-import model.gameobject.simpleobject.SimpleObjectImpl;
+import model.gameobject.simpleobject.AbstractSimpleObject;
 
 /**
  * An abstract class that implements the DynamicObject as a SimpleObject,
@@ -15,7 +15,7 @@ import model.gameobject.simpleobject.SimpleObjectImpl;
  * making explicit if it's moving and in what direction.
  *
  */
-public abstract class AbstractDynamicObject extends SimpleObjectImpl implements DynamicObject {
+public abstract class AbstractDynamicObject extends AbstractSimpleObject implements DynamicObject {
 
     private static final int BASE_HEIGHT = 40;
     private Vector2D direction;
