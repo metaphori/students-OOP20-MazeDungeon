@@ -2,6 +2,9 @@ package model.room;
 
 import model.common.Point2D;
 
+/**
+ * this class contains some utility fields for the Room, the RoomManager and the RoomBuilder.
+ */
 public final class Rooms {
 
     /**

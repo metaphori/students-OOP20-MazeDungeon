@@ -13,6 +13,14 @@ import model.gameobject.dynamicobject.DynamicObject;
 import model.gameobject.dynamicobject.enemy.AbstractEnemy;
 import model.gameobject.simpleobject.SimpleObject;
 
+/**
+ * The implementation of the Interface Room.
+ * 
+ * A Room is a GameObject container.
+ * 
+ * On each GameObject, the Room checks collisions.
+ * On each DyamicObject, the Room updates the state.
+ */
 public class RoomImpl implements Room {
 
     private final List<SimpleObject> simpleObjects = new LinkedList<>();
@@ -21,12 +29,16 @@ public class RoomImpl implements Room {
     private final RoomManager roomManager;
     private boolean isVisited;
  
+    /**
+     * create a new Room giving a RoomManager.
+     * @param roomManager : RoomManager of the new Room
+     */
     public RoomImpl(final RoomManager roomManager) {
         this.roomManager = roomManager;
     }
 
     /**
-     * @param elapsed : the time passed
+     * @{inheritDoc}
      */
     @Override
     public void update(final double elapsed) {
@@ -38,8 +50,9 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @param obj : the dynamic object to add in the room
+     * @{inheritDoc}
      */
+    @Override
     public void addDynamicObject(final DynamicObject obj) {
         obj.setRoom(this);
         obj.setID(this.roomManager.getIdIterator().next());
@@ -47,8 +60,9 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @param obj : the simple object to add in the room
+     * @{inheritDoc}
      */
+    @Override
     public void addSimpleObject(final SimpleObject obj) {
         obj.setRoom(this);
         obj.setID(this.roomManager.getIdIterator().next());
@@ -56,7 +70,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * delete all dynamic objects.
+     * @{inheritDoc}
      */
     @Override
     public void clean() {
@@ -64,8 +78,9 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @return the list of the objects in the rooms
+     * @{inheritDoc}
      */
+    @Override
     public List<GameObject> getCurrentGameObjects() {
         final List<GameObject> gameObjects = new LinkedList<>(simpleObjects);
         gameObjects.addAll(dynamicObjects);
@@ -73,7 +88,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @param gameObject : the GameObject to remove from the room
+     * @{inheritDoc}
      */
     @Override
     public void deleteGameObject(final GameObject gameObject) {
@@ -95,7 +110,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @return the RoomManager
+     * @{inheritDoc}
      */
     @Override
     public RoomManager getRoomManager() {
@@ -103,7 +118,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @param cardinalPoint : cardinalPoint of the door.
+     * @{inheritDoc}
      */
     @Override
     public void addDoor(final CardinalPoint cardinalPoint) {
@@ -111,7 +126,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @return all the directions in the room that have a door
+     * @{inheritDoc}
      */
     @Override
     public Set<CardinalPoint> getDoors() {
@@ -119,7 +134,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @return true if character can cross the door
+     * @{inheritDoc}
      */
     @Override
     public boolean isDoorOpen() {
@@ -132,7 +147,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @param objs : simple objects to add in the room
+     * @{inheritDoc}
      */
     @Override
     public void addAllSimpleObject(final List<SimpleObject> objs) {
@@ -142,7 +157,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @return true if the room has been visited
+     * @{inheritDoc}
      */
     @Override
     public boolean isVisited() {
@@ -150,7 +165,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * set the visited attribute true.
+     * @{inheritDoc}
      */
     @Override
     public void visit() {
@@ -158,8 +173,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @return an empty optional if the room doesn't contain the boss.
-     *         the boss ID otherwise
+     * @{inheritDoc}
      */
     @Override
     public Optional<Integer> getBossID() {
