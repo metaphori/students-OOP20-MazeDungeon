@@ -1,5 +1,10 @@
 package model.shop;
-
+/**
+ * 
+ * Create the Item and set the parameters that are passed. 
+ * Uses the Pattern Builder.
+ *
+ */
 public final class ItemBuilder implements Item {
     private final Items name;
     private int cost;
@@ -53,7 +58,12 @@ public final class ItemBuilder implements Item {
         private int damage;
         private int bulletSpeed;
         private double health;
-
+        /**
+         * set the required parameters of the Items.
+         * While the remaining values with a default value.
+         * @param name
+         * @param cost
+         */
         public Builder(final Items name, final int cost) {
             this.name = name;
             this.cost = cost;

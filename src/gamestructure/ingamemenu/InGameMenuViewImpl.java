@@ -22,7 +22,13 @@ import model.shop.Items;
 import viewutilities.Pair;
 import viewutilities.ResizableRectangle;
 import viewutilities.WindowUtilities;
-
+/**
+ * This class implement all the needed features for realize the GUI of the InGameMenu.
+ * 
+ * It provide to place all components of the shop and InGameMenu in the right way,
+ * and make it resizable for the portability of the application, using different monitor.
+ *
+ */
 public class InGameMenuViewImpl implements InGameMenuView  {
     private static final int SIZE_IMAGE_ITEM = 100;
     private final WindowUtilities windowUtilities = new WindowUtilities();
@@ -100,6 +106,11 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         put(MenuShopComponents.LBL_PRICE_ZB, new Pair<>(new JLabel(), rrLblPriceZB));
         put(MenuShopComponents.LBL_MSG, new Pair<>(new JLabel(), rrLblMsg));
     }};
+
+    /**
+     * Instantiate a new InGameMenuView initializing it.
+     * @param controller
+     */
     public InGameMenuViewImpl(final InGameMenuController controller) {
         this.controller = controller;
         this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -107,7 +118,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.frame.setTitle("MazeDungeon");
     }
     /**
-     * show shop panel and set button and label.
+     * @{inheritDoc}
      */
     public void showShop() {
         this.frame.remove(inGameMenuPanel);
@@ -132,7 +143,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.show();
     }
     /**
-     * open in game menu panel and set button and label.
+     * @{inheritDoc}
      */
     public void showInGameMenu() {
         this.frame.remove(shopPanel);
@@ -156,7 +167,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     }
 
     /**
-     * show in game menu frame and set property.
+     * @{inheritDoc}
      */
     @Override
     public void show() {
@@ -182,7 +193,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         });
     }
     /**
-     * hide the in game menu frame.
+     * @{inheritDoc}
      */
     @Override
     public void hide() {
@@ -205,7 +216,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         });
     }
     /**
-     * create and set message label, for output information.
+     * @{inheritDoc}
      * @param messageOutput : set message in JLabel
      */
     public void returnMessage(final String messageOutput) {
@@ -213,13 +224,13 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         ((JLabel) componentMapShop.get(MenuShopComponents.LBL_MSG).getX()).setVisible(true);
     }
     /**
-     * clear message label.
+     * @{inheritDoc}
      */
     public void removeMessage() {
         ((JLabel) componentMapShop.get(MenuShopComponents.LBL_MSG).getX()).setText("");
     }
     /**
-     * set output price item.
+     * @{inheritDoc}
      * @param map : for set Item price in view
      */
     public void setPriceItem(final Map<Items, Integer> map) {

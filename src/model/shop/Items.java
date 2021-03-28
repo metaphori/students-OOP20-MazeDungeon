@@ -1,5 +1,9 @@
 package model.shop;
-
+/**
+ * 
+ * Enumeration that lists the various items present in the shop.
+ *
+ */
 public enum Items {
     /**
      * Item Arthemide Bow.

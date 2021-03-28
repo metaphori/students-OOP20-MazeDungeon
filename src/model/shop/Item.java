@@ -1,5 +1,9 @@
 package model.shop;
-
+/**
+ * 
+ * Interface that declares methods for setting parameters to Item.
+ *
+ */
 public interface Item {
 
     int getCost();

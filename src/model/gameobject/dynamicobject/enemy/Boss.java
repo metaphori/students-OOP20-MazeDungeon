@@ -9,7 +9,11 @@ import model.gameobject.dynamicobject.bullet.BulletFactory;
 import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
 import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.simpleobject.Coin;
-
+/**
+ * 
+ * Implement the game boss and his movement and shooting logic, also set the boss parameters.
+ *
+ */
 public class Boss extends AbstractEnemy {
     private final BulletFactory bulletFactory = new BulletFactoryImpl();
     private static final long BOSS_SHOOT_DELAY = 500;
@@ -21,7 +25,12 @@ public class Boss extends AbstractEnemy {
     private static final int BOSS_LIFE = 400;
 
     private long lastHitTime;
-
+    /**
+     * create the game boss by invoking the constructor with super.
+     * @param speed
+     * @param position
+     * @param gameObjectType
+     */
     public Boss(final int speed, final Point2D position, final GameObjectType gameObjectType) {
         super(BOSS_LIFE, speed, position, gameObjectType, BOSS_SHOOT_DELAY);
     }
@@ -51,7 +60,7 @@ public class Boss extends AbstractEnemy {
         }
     }
     /**
-     * change Boss Routine.
+     * @{inheritDoc}
      */
     @Override
     protected void changeRoutine() {
@@ -67,7 +76,7 @@ public class Boss extends AbstractEnemy {
 
     }
     /**
-     * when Boss collide.
+     * @{inheritDoc}
      */
     @Override
     public void collideWith(final GameObject obj2) {
@@ -83,7 +92,7 @@ public class Boss extends AbstractEnemy {
         }
     }
     /**
-     * set property Boss Shoot.
+     * @{inheritDoc}
      */
     @Override
     protected void shoot() {
@@ -102,17 +111,16 @@ public class Boss extends AbstractEnemy {
         }
         this.getRoom().addDynamicObject(bullet);
     }
-
     /**
-     * @param elapsed
-     * @Override
+     * @{inheritDoc}
      */
+    @Override
     public void update(final double elapsed) {
         this.move(elapsed);
         this.tryToShoot();
     }
     /**
-     * spawn coin when the boss dies.
+     * @{inheritDoc}
      */
     @Override
     protected void spawnCoin() {

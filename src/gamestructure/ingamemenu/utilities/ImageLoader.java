@@ -4,7 +4,11 @@ import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
-
+/**
+ * 
+ * it is intended to upload InGameMenu and Shop images.
+ *
+ */
 public class ImageLoader {
     private final Map<Images, Image> images = new HashMap<>();
     private static final int SIZE_IMAGE_ITEM = 100;
@@ -13,6 +17,9 @@ public class ImageLoader {
     private static final String IMAGES_PATH_INGAMEMENU = "/images/InGameMenu/";
     private static final String IMAGES_PATH_ITEM = "/images/Item/";
     private static final String NAME_BTN_FOLDER = "button/";
+    /**
+     * to create an object to load images.
+     */
     public ImageLoader() {
         images.put(Images.BACKGROUNDMENU, new ImageIcon(this.getClass().getResource(IMAGES_PATH_INGAMEMENU + "ingamemenu.png")).getImage());
         images.put(Images.BACKGROUNDSHOP, new ImageIcon(this.getClass().getResource(IMAGES_PATH_INGAMEMENU + "shop.png")).getImage());
@@ -33,7 +40,7 @@ public class ImageLoader {
      */
     public ImageIcon getImage(final Images im) {
         if (!images.containsKey(im)) {
-            System.out.println("IMMAGINE NON TROVATA");
+            System.out.println("image not found");
         }
         return new ImageIcon(this.images.get(im));
     }

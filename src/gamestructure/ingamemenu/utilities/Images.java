@@ -1,5 +1,9 @@
 package gamestructure.ingamemenu.utilities;
-
+/**
+ * 
+ * An enumeration used for classify all the InGameMenu's image.
+ *
+ */
 public enum Images {
     /**
      * the background menu image.
