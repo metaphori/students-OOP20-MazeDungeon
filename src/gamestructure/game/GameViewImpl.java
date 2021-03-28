@@ -29,10 +29,16 @@ import animations.State;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.common.Point2D;
+import model.room.Rooms;
 import model.shop.Items;
 import viewutilities.ResourceLoader;
 import viewutilities.WindowUtilities;
 
+/**
+ * This class contains the implementation of all the methods defined in the GameView interface.
+ *
+ * It also contains the events for the key pressed by user, and it has a connection with GameController.
+ */
 public class GameViewImpl implements GameView, KeyListener {
 
     private GameController controller;
@@ -53,6 +59,10 @@ public class GameViewImpl implements GameView, KeyListener {
     private static final int ISTRUCTION_TIME = 2000;
     private boolean loading = true;
 
+    /**
+     * Build a new GameView, setting all the default parameters, as the title, the background etc.
+     * It also make the timer used for rendering start.
+     */
     public GameViewImpl() {
         this.frame = new JFrame();
         this.frame.setResizable(false);
@@ -68,7 +78,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * Initialize the GameView by initializing the gamePanel and starting the timer.
+     * Initialize the GameView by initializing the gamePanel.
      */
     @Override
     public void initialize() {
@@ -76,7 +86,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * It show the GameView.
+     * @{inheritDoc}
      */
     @Override
     public void show() {
@@ -94,7 +104,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * Destroy the GameView.
+     * @{inheritDoc}
      */
     @Override
     public void hide() {
@@ -117,9 +127,6 @@ public class GameViewImpl implements GameView, KeyListener {
         public void actionPerformed(final ActionEvent e) {
             repaint();
             controller.setActive(frame.isActive());
-            if (!frame.isActive()) {
-                controller.setInactive();
-            }
         }
 
         @Override
@@ -158,7 +165,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @param controller : set controller ad the controller of the GameView
+     * @{inheritDoc}
      */
     @Override
     public void setController(final GameController controller) {
@@ -167,7 +174,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * Update the Heads Up Display.
+     * @{inheritDoc}
      */
     @Override
     public void updateHUD() {
@@ -176,7 +183,7 @@ public class GameViewImpl implements GameView, KeyListener {
         }
         hudPanel.updateLife(this.controller.getCharacterLife());
         hudPanel.updateCoinCounter(this.controller.getCharacterMoney());
-        hudPanel.updateVisitedRooms(this.controller.getVisitedRoom(), this.controller.getTotalRooms());
+        hudPanel.updateVisitedRooms(this.controller.getVisitedRoom(), Rooms.NUMBER_OF_ROOMS);
         hudPanel.updateBossLife(this.controller.getBossLife());
     }
 
@@ -187,9 +194,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @param id : the id of the GameObject to load the sprite of.
-     * @param gameObjectType : the type of the GameObject for the correct loading of it's image.
-     * @param position : the position where to print the image.
+     * @{inheritDoc}
      */
     @Override
     public void addAnimation(final Integer id, final GameObjectType gameObjectType, final Point2D position) {
@@ -208,8 +213,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @param id : the id of the sprite to update.
-     * @param position : the new position of the sprite.
+     * @{inheritDoc}
      */
     @Override
     public void updateAnimation(final int id, final Point2D position, final State state) {
@@ -218,7 +222,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @param id : the id of the sprite that has to been removed.
+     * @{inheritDoc}
      */
     @Override
     public void removeAnimation(final int id) {
@@ -226,8 +230,9 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
+     * It's notify the event at the controller.
+     * 
      * @param key : the KeyEvent of the key pressed
-     * it's notify the event at the controller
      */
     @Override
     public void keyPressed(final KeyEvent key) {
@@ -238,9 +243,11 @@ public class GameViewImpl implements GameView, KeyListener {
             this.controller.pressKey(key);
         }
     }
+
     /**
+     * It's notify the event at the controller.
+     * 
      * @param key : the KeyEvent of the key released
-     * it's notify the event at the controller
      */
     @Override
     public void keyReleased(final KeyEvent key) {
@@ -254,20 +261,10 @@ public class GameViewImpl implements GameView, KeyListener {
 
     @Override
     public void keyTyped(final KeyEvent arg0) {
-        // TODO Auto-generated method stub
     }
 
     /**
-     * When called set the gameOvervariable at true.
-     */
-    @Override
-    public void gameOver() {
-        this.gameOver = true;
-    }
-
-    /**
-     * @param purchasedItems : the Set of the item purchased by the player.
-     * It add all the item purchased to the HUD panel
+     * @{inheritDoc}
      */
     @Override
     public void renderItems(final Set<Items> purchasedItems) {
@@ -277,7 +274,15 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * When called set the won at true.
+     * @{inheritDoc}
+     */
+    @Override
+    public void gameOver() {
+        this.gameOver = true;
+    }
+
+    /**
+     * @{inheritDoc}
      */
     @Override
     public void isWon() {

@@ -1,5 +1,9 @@
 package model.common;
 
+/**
+ * A basic class that implements the concept of Vector in two dimensions.
+ * 
+ */
 public class Vector2D implements java.io.Serializable {
 
         private static final long serialVersionUID = 4909854761347770884L;

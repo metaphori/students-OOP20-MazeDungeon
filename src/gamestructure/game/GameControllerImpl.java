@@ -18,8 +18,12 @@ import model.common.BoundingBox;
 import model.common.GameObjectType;
 import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.enemy.AbstractEnemy;
-import model.room.Rooms;
 
+/**
+ * A class that implements all the method that define a controller as the GameController.
+ * It contains the main part of the application, the game loop.
+ *
+ */
 public class GameControllerImpl implements GameController {
     private static final long PERIOD = 1;
     private static final double MILLISECOND_TO_SECOND = 0.001;
@@ -33,6 +37,7 @@ public class GameControllerImpl implements GameController {
     private boolean active = true;
 
     /**
+     * Build a new GameController.
      * @param model : an instance of the model
      */
     public GameControllerImpl(final Model model) {
@@ -43,7 +48,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * set up the controller, viewing the GameView.
+     * @{inheritDoc}
      */
     @Override
     public void setup() {
@@ -52,7 +57,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * The main loop of the game.
+     * @{inheritDoc}
      */
     @Override
     public void mainLoop() {
@@ -60,7 +65,7 @@ public class GameControllerImpl implements GameController {
         while (!this.model.isGameOver() && !this.model.isWon()) {
             final long current = System.currentTimeMillis();
             final int elapsed = (int) (current - lastTime);
-            if (inGameMenuOpen || !active) {
+            if (inGameMenuOpen || !this.active) {
                 waitForNextFrame(current);
                 lastTime = current;
                 continue;
@@ -148,8 +153,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @param id : the id of the GameObject 
-     * @param boundingBox : the BoundingBox to set at the GameObject
+     * @{inheritDoc}
      */
     @Override
     public void setBoundingBox(final int id, final BoundingBox boundingBox) {
@@ -157,7 +161,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @return the character current life.
+     * @{inheritDoc}
      */
     @Override 
     public double getCharacterLife() {
@@ -165,7 +169,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @return the character current money.
+     * @{inheritDoc}
      */
     @Override 
     public int getCharacterMoney() {
@@ -173,7 +177,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * notify that the InGameMenu is closed.
+     * @{inheritDoc}
      */
     @Override
     public void notifyClosedInGameMenu() {
@@ -183,7 +187,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * The method for open the InGame menu.
+     * @{inheritDoc}
      */
     @Override
     public void openInGameMenu() {
@@ -198,7 +202,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @param key : the key pressed
+     * @{inheritDoc}
      */
     @Override
     public void pressKey(final KeyEvent key) {
@@ -206,7 +210,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @param key : the key released
+     * @{inheritDoc}
      */
     @Override
     public void releaseKey(final KeyEvent key) {
@@ -214,7 +218,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @return the number of visited rooms.
+     * @{inheritDoc}
      */
     @Override
     public int getVisitedRoom() {
@@ -222,15 +226,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @return the total number of visited rooms.
-     */
-    @Override
-    public int getTotalRooms() {
-        return Rooms.NUMBER_OF_ROOMS;
-    }
-
-    /**
-     * return the Optional of the boss life.
+     * @{inheritDoc}
      */
     @Override
     public Optional<Double> getBossLife() {
@@ -242,8 +238,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @param id : the id of the GameObject
-     * @return the state of the GameObject
+     * @{inheritDoc}
      */
     @Override
     public State getStateFromId(final int id) {
@@ -254,19 +249,13 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * set if the controller is active.
+     * @{inheritDoc}
      */
     @Override
     public void setActive(final boolean active) {
         this.active = active;
+        if (!active) {
+            this.command.setAllInactive();
+        }
     }
-
-    /**
-     * set the input inactive.
-     */
-    @Override
-    public void setInactive() {
-        this.command.setAllInactive();
-    }
-
 }
