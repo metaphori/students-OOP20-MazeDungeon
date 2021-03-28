@@ -107,7 +107,7 @@ public class Boss extends AbstractEnemy {
      * @param elapsed
      * @Override
      */
-    public void updateState(final double elapsed) {
+    public void update(final double elapsed) {
         this.move(elapsed);
         this.tryToShoot();
     }

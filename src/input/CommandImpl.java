@@ -2,8 +2,10 @@ package input;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import gamestructure.game.GameController;
 import model.Model;
@@ -12,12 +14,20 @@ import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.dynamicobject.character.CharacterMovement;
 import model.gameobject.dynamicobject.character.CharacterMovementImpl;
 
+/**
+ * The implementation of command interface.
+ * 
+ * It contains methods to check what type of key is pressed and some methods to handle the trio list.
+ * A trio in this class represents a key. Key, clicked, an optional for the direction of the movement.
+ */
 public class CommandImpl implements Command {
 
     private final GameController gameController;
     private final Character character;
     private final CharacterMovement characterMovement; 
     private Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> command;
+    private final Set<Integer> letterKeys = new HashSet<>(Set.of(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D));
+    private final Set<Integer> arrowKeys = new HashSet<>(Set.of(KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT));
     private final List<Trio<Integer, Boolean, Optional<VectorDirection>>> keysList = new ArrayList<>();
 
 
@@ -33,15 +43,15 @@ public class CommandImpl implements Command {
         this.keysList.add(new Trio<>(KeyEvent.VK_DOWN, false, Optional.of(VectorDirection.DOWN))); 
         this.keysList.add(new Trio<>(KeyEvent.VK_LEFT, false, Optional.of(VectorDirection.LEFT))); 
         this.keysList.add(new Trio<>(KeyEvent.VK_RIGHT, false, Optional.of(VectorDirection.RIGHT)));
-
         this.keysList.add(new Trio<>(KeyEvent.VK_W, false, Optional.of(VectorDirection.UP)));
         this.keysList.add(new Trio<>(KeyEvent.VK_S, false, Optional.of(VectorDirection.DOWN)));
         this.keysList.add(new Trio<>(KeyEvent.VK_A, false, Optional.of(VectorDirection.LEFT)));
         this.keysList.add(new Trio<>(KeyEvent.VK_D, false, Optional.of(VectorDirection.RIGHT)));
+        this.keysList.add(new Trio<>(KeyEvent.VK_ESCAPE, false, Optional.empty()));
     }
 
     /**
-     * execute the pressed keys.
+     * {@inheritDoc}
      */
     @Override
     public void execute() {
@@ -51,10 +61,12 @@ public class CommandImpl implements Command {
                 keyCode = key.getX();
                 this.command = findObjectFromStream(keyCode);
                 if (!this.command.isEmpty()) {
-                    if (isArrow(this.command)) {
+                    if (this.isArrow(this.command)) {
                        this.character.setShoot(true, this.command.get().getZ().get());
-                    } else {
+                    } else if (this.isLetter(this.command)) {
                         this.characterMovement.move(this.command.get().getZ().get());
+                    } else {
+                        this.gameController.openInGameMenu();
                     }
                 }
             }
@@ -69,11 +81,33 @@ public class CommandImpl implements Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setKey(final KeyEvent key, final boolean clicked) {
+        final Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> trio = this.keysList.stream()
+                                                                                              .filter(t -> t.getX() == key.getKeyCode())
+                                                                                              .findFirst();
+        if (trio.isPresent()) {
+            trio.get().setY(clicked);
+        }
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAllInactive() {
+        this.keysList.stream().forEach(k -> k.setY(false));
+    }
 
-    private boolean isArrow(final Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> trio) {
-        return trio.get().getX() == KeyEvent.VK_UP || trio.get().getX() == KeyEvent.VK_DOWN || trio.get().getX() == KeyEvent.VK_LEFT 
-                || trio.get().getX() == KeyEvent.VK_RIGHT;
+    private boolean isLetter(final Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> command) {
+        return letterKeys.contains(command.get().getX());
+    }
+
+    private boolean isArrow(final Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> command) {
+        return arrowKeys.contains(command.get().getX());
     }
 
     private Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> findObjectFromStream(final int key) {
@@ -84,23 +118,6 @@ public class CommandImpl implements Command {
             return object;
         }
        return Optional.empty();
-    }
-
-    /**
-     * set a key when is clicked.
-     */
-    @Override
-    public void setKey(final KeyEvent key, final boolean clicked) {
-        if (key.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            this.gameController.openInGameMenu();
-            return;
-        }
-        final Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> trio = this.keysList.stream()
-                                                                                              .filter(t -> t.getX() == key.getKeyCode())
-                                                                                              .findFirst();
-        if (trio.isPresent()) {
-            trio.get().setY(clicked);
-        }
     }
 
     /**

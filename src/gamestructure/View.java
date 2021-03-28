@@ -1,15 +1,18 @@
 package gamestructure;
 
+/**
+ * An interface modeling a generic View.
+ *
+ */
 public interface View {
 
     /**
-     * Show the view on the screen.
+     * Show the view.
      */
     void show();
 
     /**
-     * Destroy the view.
+     * Delete the view.
      */
     void hide();
-
 }

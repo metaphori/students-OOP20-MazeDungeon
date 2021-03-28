@@ -1,5 +1,10 @@
 package gamestructure.mainmenu;
 
+/**
+ * An enumeration used for classify all the Main Menu's components, 
+ * with a name and the corresponding path of their images in the resource directory.
+ *
+ */
 public enum MainMenuComponent {
     /**
      * The button that start a new game. 
@@ -36,6 +41,9 @@ public enum MainMenuComponent {
         private static final String IMAGE_PATH = "/images/MainMenu/";
     }
 
+    /**
+     * @return the path matched to the name of the component.
+     */
     public String getPath() {
         return this.path;
     }

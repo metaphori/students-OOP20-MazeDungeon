@@ -19,6 +19,13 @@ import viewutilities.Pair;
 import viewutilities.ResizableRectangle;
 import viewutilities.WindowUtilities;
 
+/**
+ * This class implement all the needed features for realize the GUI of the MainMenu.
+ * 
+ * It provide to place all the component in the right way,
+ * and make it resizable for the portability of the application, using different monitor.
+ *
+ */
 public class MainMenuViewImpl implements MainMenuView {
 
     private static final int MENU_WIDTH = 613;
@@ -41,8 +48,9 @@ public class MainMenuViewImpl implements MainMenuView {
     }
 
     /**
-     * @Override
+     * @{inheritDoc}
      */
+    @Override
     public void show() {
         this.frame.getContentPane().setPreferredSize(new Dimension((int) (MENU_WIDTH * windowUtilities.getScreenRatio()),
                             (int) (MENU_HEIGHT * windowUtilities.getScreenRatio())));
@@ -53,8 +61,9 @@ public class MainMenuViewImpl implements MainMenuView {
     }
 
     /**
-     * @Override
+     * @{inheritDoc}
      */
+    @Override
     public void hide() {
         this.frame.dispose();
     }

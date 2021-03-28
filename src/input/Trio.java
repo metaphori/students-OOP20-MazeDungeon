@@ -1,5 +1,12 @@
 package input;
-
+/**
+ * 
+ * A custom class to create an object consisting of three elements.
+ *
+ * @param <X>
+ * @param <Y>
+ * @param <Z>
+ */
 public class Trio<X, Y, Z> {
 
     private final X x;

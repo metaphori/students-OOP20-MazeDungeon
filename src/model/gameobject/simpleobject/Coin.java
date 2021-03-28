@@ -4,7 +4,7 @@ import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.GameObject;
 
-public class Coin extends SimpleObjectImpl {
+public class Coin extends AbstractSimpleObject {
 
     public Coin(final Point2D position) {
         super(position, GameObjectType.COIN);

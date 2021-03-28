@@ -4,9 +4,9 @@ import model.common.CardinalPoint;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.GameObject;
-import model.gameobject.simpleobject.SimpleObjectImpl;
+import model.gameobject.simpleobject.AbstractSimpleObject;
 
-public class Door extends SimpleObjectImpl {
+public class Door extends AbstractSimpleObject {
 
     public Door(final Point2D position, final GameObjectType gameObjectType) {
         super(position, gameObjectType);

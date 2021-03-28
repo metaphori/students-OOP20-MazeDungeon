@@ -1,5 +1,9 @@
 package model.common;
 
+/**
+ * A basic class that implements the concept of Point in two dimensions.
+ * 
+ */
 public class Point2D implements java.io.Serializable {
     private static final long serialVersionUID = 4674087395785183468L;
     private final double x;

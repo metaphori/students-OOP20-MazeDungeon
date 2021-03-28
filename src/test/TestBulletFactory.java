@@ -22,7 +22,7 @@ public class TestBulletFactory {
     /**
      * constant for speed of each bullet.
      */
-    private static final int CHARACTER_BULLET_SPEED = 350;
+    private static final int CHARACTER_BULLET_SPEED = 400;
     private static final int SKELETON_BULLET_SPEED = 200;
     private static final int SOUL_BULLET_SPEED = 200;
     private static final int SPROUT_BULLET_SPEED = 300;
@@ -47,7 +47,6 @@ public class TestBulletFactory {
         final Point2D position = new Point2D(0, 0);
         int bonusDamage = 0;
         int bonusBulletSpeed = 0;
-
         Bullet bullet = this.bulletFactory.createCharacterBullet(position, direction, bonusDamage, bonusBulletSpeed);
         assertEquals(CHARACTER_BULLET_DAMAGE, bullet.getDamage());
         assertEquals(CHARACTER_BULLET_SPEED, bullet.getSpeed());
