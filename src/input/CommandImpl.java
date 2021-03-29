@@ -42,7 +42,6 @@ public class CommandImpl implements Command {
         this.keysList.add(new Trio<>(KeyEvent.VK_A, false, Optional.of(VectorDirection.LEFT)));
         this.keysList.add(new Trio<>(KeyEvent.VK_D, false, Optional.of(VectorDirection.RIGHT)));
         this.keysList.add(new Trio<>(KeyEvent.VK_ESCAPE, false, Optional.empty()));
-
     }
 
     /**
