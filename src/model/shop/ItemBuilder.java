@@ -21,31 +21,52 @@ public final class ItemBuilder implements Item {
         this.bulletSpeed = bulletSpeed;
         this.health = health;
     }
-
+    /**
+     * @{inheritDoc}
+     * @return returns the value that represents the price
+     */
     public int getCost() {
         return cost;
     }
-
+    /**
+     * @{inheritDoc}
+     * @param cost : price value
+     */
     public void setCost(final int cost) {
         this.cost = cost;
     }
-
+    /**
+     * @{inheritDoc}
+     * @return returns an enumeration representing the item name
+     */
     public Items getName() {
         return this.name;
     }
-
+    /**
+     * @{inheritDoc}
+     * @return returns the value that represents the life that the item adds
+     */
     public double getHealth() {
         return health;
     }
-
+    /**
+     * @{inheritDoc}
+     * @return returns the value that represents the movement speed that the item adds
+     */
     public int getSpeed() {
         return this.speed;
     }
-
+    /**
+     * @{inheritDoc}
+     * @return returns the value that represents the bullet speed that the item adds
+     */
     public int getBulletSpeed() {
         return this.bulletSpeed;
     }
-
+    /**
+     * @{inheritDoc}
+     * @return returns the value that represents the damage that the item adds
+     */
     public int getDamage() {
         return this.damage;
     }
@@ -108,7 +129,7 @@ public final class ItemBuilder implements Item {
             return this;
         }
         /**
-         * Complete Item.
+         * Complete and create Item.
          * @return Item
          */
         public Item build() {
