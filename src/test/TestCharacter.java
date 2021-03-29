@@ -63,7 +63,7 @@ public class TestCharacter {
         final BoundingBox bb = new BoundingBox(new Point2D(301, 301), 301, 301);
         this.character.setBoundingBox(bb);
         this.character.setShoot(true, VectorDirection.UP);
-        this.character.updateState(1000);
+        this.character.update(1000);
         assertEquals(objects + 1, this.room.getCurrentGameObjects().size());
 
     }

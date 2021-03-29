@@ -10,29 +10,28 @@ import model.gameobject.dynamicobject.bullet.Bullet;
 import model.gameobject.dynamicobject.bullet.BulletFactory;
 import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
 
-
+/**
+ * The implementation of Character
+ * 
+ * It contains different methods to handle all the character's characteristics as life, bulletDamage etc...
+ * It contains the costants to inizialize the character at the beginning.
+ * It contains methods to handle character state.
+ *
+ */
 public class CharacterImpl extends AbstractDynamicObject implements Character {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * CONSTANTS.
-     */
     private static final double MAX_LIFE = 100;
     private static final int INITIAL_SPEED = 300; 
     private static final int INITIAL_MONEY = 0;
     private static final int INITIAL_BONUS_SPEED = 0;
-    private static final int INITIAL_BULLET_DELAY = 400; 
-    /*
-     * CHARACTER CHARACTERISTIC.
-     */
+    private static final int INITIAL_BULLET_DELAY = 400;
+
     private double life;
     private int bonusDamage;
     private int bonusSpeed;
     private int money;
-    /**
-     * VARIABLES.
-     */
     private final BulletFactory bulletFactory;
     private long lastShootTime; 
     private Vector2D shootDirection;
@@ -52,7 +51,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * @return the max life
+     * {@inheritDoc}
      */
     @Override
     public double getMaxLife() {
@@ -60,7 +59,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * @return return the current life.
+     * {@inheritDoc}
      */
     @Override
     public double getLife() {
@@ -68,7 +67,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * @return the amount of money.
+     * {@inheritDoc}
      */
     @Override
     public int getMoney() {
@@ -76,7 +75,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * @param life to set
+     * {@inheritDoc}
      */
     @Override
     public void setLife(final double life) {
@@ -84,8 +83,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * @param money
-     * set the current money amount
+     * {@inheritDoc}
      */
     @Override
     public void setMoney(final int money) {
@@ -93,8 +91,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * @param damage
-     * increase the current damage.
+     * {@inheritDoc}
      */
     @Override
     public void increaseDamage(final int damage) {
@@ -102,8 +99,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * @param speed 
-     * increase the current character speed.
+     * {@inheritDoc}
      */
     @Override
     public void increaseSpeed(final int speed) {
@@ -111,8 +107,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * @param bulletSpeed
-     * increase bullet speed.
+     * {@inheritDoc}
      */
     @Override
     public void increaseBulletSpeed(final int bulletSpeed) {
@@ -120,7 +115,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * Takes damage to the character.
+     * {@inheritDoc}
      */
     @Override
     public void takesDamage(final int damage) {
@@ -128,8 +123,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * @param shootDirection     * 
-     * set a shoot and his direction.
+     * {@inheritDoc}
      */
     @Override
     public void setShoot(final boolean shoot, final VectorDirection shootDirection) {
@@ -152,7 +146,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
 
     /**
      * 
-     * @return if the character can shoot
+     * @return true if the character can shoot
      */
     private boolean canShoot() {
         final long currentTime = System.currentTimeMillis();
@@ -164,8 +158,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * @param oj2 
-     * the object the character is collide with.
+     * {@inheritDoc}
      */
     @Override
     public void collideWith(final GameObject oj2) {
@@ -191,10 +184,10 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * Update state.
+     * {@inheritDoc}
      */
     @Override
-    public void updateState(final double elapsed) { 
+    public void update(final double elapsed) { 
         this.move(elapsed);
         if (this.shoot) {
             this.shoot();
@@ -202,7 +195,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * @return true if the character is death.
+     * {@inheritDoc}
      */
     @Override
     public boolean isDead() {
@@ -210,7 +203,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * @return true if the character is won.
+     * {@inheritDoc}
      */
     @Override
     public boolean isWin() {
@@ -218,7 +211,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     }
 
     /**
-     * set the winning when the character pick up the final artifact.
+     * {@inheritDoc}
      */
     @Override
     public void pickedUpFinalArtifact() {

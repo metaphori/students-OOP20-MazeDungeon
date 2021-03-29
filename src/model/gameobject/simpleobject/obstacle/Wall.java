@@ -4,9 +4,9 @@ import model.common.CardinalPoint;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.GameObject;
-import model.gameobject.simpleobject.SimpleObjectImpl;
+import model.gameobject.simpleobject.AbstractSimpleObject;
 
-public class Wall extends SimpleObjectImpl {
+public class Wall extends AbstractSimpleObject {
 
     private final CardinalPoint cardinalPoint;
     private final WallType wallType;

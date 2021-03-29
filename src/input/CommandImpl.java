@@ -14,6 +14,12 @@ import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.dynamicobject.character.CharacterMovement;
 import model.gameobject.dynamicobject.character.CharacterMovementImpl;
 
+/**
+ * The implementation of command interface.
+ * 
+ * It contains methods to check what type of key is pressed and some methods to handle the trio list.
+ * A trio in this class represents a key. Key, clicked, an optional for the direction of the movement.
+ */
 public class CommandImpl implements Command {
 
     private final GameController gameController;
@@ -45,7 +51,7 @@ public class CommandImpl implements Command {
     }
 
     /**
-     * execute the pressed keys.
+     * {@inheritDoc}
      */
     @Override
     public void execute() {
@@ -76,7 +82,7 @@ public class CommandImpl implements Command {
     }
 
     /**
-     * set a key when is clicked.
+     * {@inheritDoc}
      */
     @Override
     public void setKey(final KeyEvent key, final boolean clicked) {
@@ -89,7 +95,7 @@ public class CommandImpl implements Command {
     }
 
     /**
-     * setta tutti i pulsanti a false.
+     * {@inheritDoc}
      */
     @Override
     public void setAllInactive() {

@@ -15,6 +15,16 @@ import model.gameobject.simpleobject.door.DoorFactoryImpl;
 import model.gameobject.simpleobject.obstacle.ObstacleFactory;
 import model.gameobject.simpleobject.obstacle.ObstaclesFactoryImpl;
 
+/**
+ * this class implements RoomBuilder.
+ * 
+ * this type of RoomBuilder has specifics restrictions.
+ * A boss can't be added if there are already obstacles or enemies.
+ * Enemies can't be added if there is already a boss.
+ * Obstacles can't be added if there is already a boss.
+ * 
+ * Can't call the method Build twice.
+ */
 public class RoomBuilderImpl implements RoomBuilder {
     private static final int MAX_ENEMY_NUMBER = 4;
     private static final Point2D BOSS_SPAWN_POSITION = new Point2D(256, 70);
@@ -31,6 +41,10 @@ public class RoomBuilderImpl implements RoomBuilder {
     private boolean canAddObstacle = true;
     private boolean canAddBoss = true;
 
+    /**
+     * create a RoomBuilder using the indispensable parameter RoomManager.
+     * @param roomManager : the RoomManager of the Room that the builder will create
+     */
     public RoomBuilderImpl(final RoomManager roomManager) {
         if (roomManager == null) {
             throw new IllegalArgumentException("roomManager cannot be null");
@@ -40,9 +54,7 @@ public class RoomBuilderImpl implements RoomBuilder {
     }
 
     /**
-     * 
-     * @param doors : the direction of each door
-     * @return the builder object
+     * @{inheritDoc}
      */
     @Override
     public RoomBuilder addDoors(final Set<CardinalPoint> doors) {
@@ -57,8 +69,7 @@ public class RoomBuilderImpl implements RoomBuilder {
     }
 
     /**
-     * add some obstacles to the room. cannot add with boss.
-     * @return the builder object
+     * @{inheritDoc}
      */
     @Override
     public RoomBuilder addObstacle() {
@@ -71,8 +82,7 @@ public class RoomBuilderImpl implements RoomBuilder {
     }
 
     /**
-     * add some enemy to the room. cannot add with boss.
-     * @return the builder object
+     * @{inheritDoc}
      */
     @Override
     public RoomBuilder addEnemy() {
@@ -105,8 +115,7 @@ public class RoomBuilderImpl implements RoomBuilder {
     }
 
     /**
-     * add the boss in the room. cannot add with obstacles or enemies.
-     * @return the builder object 
+     * @{inheritDoc}
      */
     @Override
     public RoomBuilder addBoss() {
@@ -121,6 +130,7 @@ public class RoomBuilderImpl implements RoomBuilder {
     }
 
     /**
+     * This method can't be called twice.
      * @return the room initialized with the builder 
      */
     @Override

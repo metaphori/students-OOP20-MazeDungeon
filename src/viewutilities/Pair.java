@@ -1,5 +1,11 @@
 package viewutilities;
 
+/**
+ * A basic class that realize Pair with generics.
+ *
+ * @param <X> The first coordinate of the Pair.
+ * @param <Y> The second coordinate of the Pair.
+ */
 public class Pair<X, Y> {
     private final X x;
     private final Y y;

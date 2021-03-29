@@ -10,6 +10,14 @@ import model.gameobject.dynamicobject.bullet.Bullet;
 import model.gameobject.dynamicobject.bullet.BulletFactory;
 import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
 
+/**
+ * The implementation of the EnemyFactory.
+ * 
+ * It contains the implementation of all the enemies, using anonymous class.
+ * It also contains all the specifics values of speed, damage and shoot delay for each enemy type.
+ *
+ */
+
 public class EnemyFactoryImpl implements EnemyFactory {
 
     private static final int SOUL_LIFE = 50;
@@ -28,7 +36,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     private final BulletFactory bulletFactory = new BulletFactoryImpl();
 
     /**
-     * @return an enemy of type: Sprout
+     * @{inheritDoc}
      */
     @Override
     public Enemy createSprout(final Point2D position) {
@@ -41,7 +49,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
              * When the time goes by, the sprout try to shoot and if it can, follow the character.
              */
             @Override
-            public void updateState(final double elapsed) {
+            public void update(final double elapsed) {
                 this.tryToShoot();
                 final long currentTime = System.currentTimeMillis();
                 if (currentTime - this.lastHitTime > ROUTINE_CHANGE_TIME) {
@@ -73,7 +81,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     }
 
     /**
-     * @return an enemy of type: Soul
+     * @{inheritDoc}
      */
     @Override
     public Enemy createSoul(final Point2D position) {
@@ -83,7 +91,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
              * When the time goes by, the soul try to shoot and move.
              */
             @Override
-            public void updateState(final double elapsed) {
+            public void update(final double elapsed) {
                 this.tryToShoot();
                 this.move(elapsed);
             }
@@ -105,7 +113,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     }
 
     /**
-     * @return an enemy of type: SkeletonSeeker
+     * @{inheritDoc}
      */
     @Override
     public Enemy createSkeletonSeeker(final Point2D position) {
@@ -120,7 +128,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
              * If it's stopped he try to shoot.
              */
             @Override
-            public void updateState(final double elapsed) {
+            public void update(final double elapsed) {
                 final long currentTime = System.currentTimeMillis();
                 if (currentTime - this.lastChangeTime > ROUTINE_CHANGE_TIME) {
                     this.lastChangeTime = currentTime;
@@ -163,7 +171,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     }
 
     /**
-     * @return an enemy of type: Boss
+     * @{inheritDoc}
      */
     @Override
     public Enemy createBoss(final Point2D position) {

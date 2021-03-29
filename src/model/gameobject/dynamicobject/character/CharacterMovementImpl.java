@@ -3,6 +3,13 @@ package model.gameobject.dynamicobject.character;
 import model.common.Vector2D;
 import model.common.VectorDirection;
 
+/**
+ * 
+ * The implementation of CharacterMovement. 
+ * 
+ * There are methods to move the character in different direction. 
+ *
+ */
 public class CharacterMovementImpl implements CharacterMovement {
 
     private final Character character;
@@ -29,14 +36,14 @@ public class CharacterMovementImpl implements CharacterMovement {
     }
 
     /**
-     * stops the character when moving vertically.
+     * {@inheritDoc}
      */
     @Override
     public void stopVertical() {
         this.character.setDirection(new Vector2D(this.character.getDirection().getX(), 0));
     }
     /**
-     * stops the character when moving horizontally.
+     * {@inheritDoc}
      */
     @Override
     public void stopHorizontal() {
@@ -44,7 +51,7 @@ public class CharacterMovementImpl implements CharacterMovement {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public void move(final VectorDirection vectorDirection) {

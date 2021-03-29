@@ -39,7 +39,7 @@ public class TestItem {
 
     @org.junit.Before
     public void newCharacter() {
-        final int timeSleep = 650;
+        final int timeSleep = 400;
         c = new CharacterImpl(new Point2D(100, 100), GameObjectType.CHARACTER);
         room = new RoomImpl(new RoomManagerImpl());
         room.addDynamicObject(c);
@@ -62,7 +62,7 @@ public class TestItem {
         item = new ItemBuilder.Builder(Items.ARTHEMIDEBOW, PRICE_ARTHEMIDEBOW).addDamage(MORE_DAMAGE).build();
         final Shop shop = new ShopImpl(c);
         shop.checkItem(Items.ARTHEMIDEBOW);
-        c.updateState(1000);
+        c.update(1000);
         final Bullet bulletActual = (Bullet) room.getCurrentGameObjects().get(1);
         assertEquals(c.getMoney(), this.beforeMoney - item.getCost());
         assertEquals(bulletActual.getDamage(), this.defaultBullet.getDamage() + item.getDamage());
@@ -75,7 +75,7 @@ public class TestItem {
         item = new ItemBuilder.Builder(Items.HERMESBOOTS, PRICE_HERMESBOOTS).addSpeed(MORE_SPEED).build();
         final Shop shop = new ShopImpl(c);
         shop.checkItem(Items.HERMESBOOTS);
-        c.updateState(1000);
+        c.update(1000);
         final Bullet bulletActual = (Bullet) room.getCurrentGameObjects().get(1);
         assertEquals(c.getMoney(), this.beforeMoney - item.getCost());
         assertEquals(bulletActual.getDamage(), this.defaultBullet.getDamage() + item.getDamage());
@@ -87,7 +87,7 @@ public class TestItem {
         item = new ItemBuilder.Builder(Items.HEALTH, PRICE_HEALTH).addHelath(MORE_HEALTH).build();
         final Shop shop = new ShopImpl(c);
         shop.checkItem(Items.HEALTH);
-        c.updateState(1000);
+        c.update(1000);
         final Bullet bulletActual = (Bullet) room.getCurrentGameObjects().get(1);
         assertEquals(c.getMoney(), this.beforeMoney - item.getCost());
         assertEquals(bulletActual.getDamage(), this.defaultBullet.getDamage() + item.getDamage());
@@ -99,7 +99,7 @@ public class TestItem {
         item = new ItemBuilder.Builder(Items.ORACLEAMULET, PRICE_ORACLEAMULET).addDamage(MORE_DAMAGE).addSpeed(MORE_SPEED).addBulletSpeed(MORE_BULLETSPEED).build();
         final Shop shop = new ShopImpl(c);
         shop.checkItem(Items.ORACLEAMULET);
-        c.updateState(1000);
+        c.update(1000);
         final Bullet bulletActual = (Bullet) room.getCurrentGameObjects().get(1);
         assertEquals(c.getMoney(), this.beforeMoney - item.getCost());
         assertEquals(bulletActual.getDamage(), this.defaultBullet.getDamage() + item.getDamage());

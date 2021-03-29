@@ -6,7 +6,12 @@ import java.util.Map;
 import java.util.Set;
 
 import model.gameobject.dynamicobject.character.Character;
-
+/**
+ * 
+ * Create a Shop items.
+ * Manages the purchases made and takes care of adding skills to the character.
+ *
+ */
 public class ShopImpl implements Shop {
     private static final double MORE_HEALTH = 20;
     private static final int MORE_DAMAGE = 5;
@@ -25,6 +30,11 @@ public class ShopImpl implements Shop {
     private final String msgNoMoney;
     private final Character character;
 
+    /**
+     * this will save the character object to then add abilities.
+     * Set messages for output.
+     * @param character
+     */
     public ShopImpl(final Character character) {
         this.character = character;
         msgBought = "You bought this item! You have coins: ";
@@ -51,6 +61,7 @@ public class ShopImpl implements Shop {
 
     /** 
      * @return a map: every Item with its price 
+     * @{inheritDoc}
      */
     public Map<Items, Integer> addPrice() {
         final Map<Items, Integer> mapPrice = new HashMap<>();
@@ -64,6 +75,7 @@ public class ShopImpl implements Shop {
 
     /**
      * @param i : item selected, to check if the item is affordable
+     * @{inheritDoc}
      */
     public void checkItem(final Items i) {
         if (this.purchasedItems.contains(i)) {
@@ -123,6 +135,7 @@ public class ShopImpl implements Shop {
 
     /**
      * @return string for output message
+     * @{inheritDoc}
      */
     public String getMessageOuput() {
         return messageOuput;
@@ -130,6 +143,7 @@ public class ShopImpl implements Shop {
 
     /**
      * @return ArthemideBow Item
+     * @{inheritDoc}
      */
     public Item getArthemideBow() {
         return new ItemBuilder.Builder(Items.ARTHEMIDEBOW, PRICE_ARTHEMIDEBOW).addDamage(MORE_DAMAGE).build();
@@ -137,6 +151,7 @@ public class ShopImpl implements Shop {
 
     /**
      * @return HermesBoots Item
+     * @{inheritDoc}
      */
     public Item getHermesBoots() {
         return new ItemBuilder.Builder(Items.HERMESBOOTS, PRICE_HERMESBOOTS).addSpeed(MORE_SPEED).build();
@@ -144,6 +159,7 @@ public class ShopImpl implements Shop {
 
     /**
      * @return ZeusBolt Item
+     * @{inheritDoc}
      */
     public Item getZeusBolt() {
         return new ItemBuilder.Builder(Items.ZEUSBOLT, PRICE_ZEUSBOLT).addBulletSpeed(MORE_BULLETSPEED).build();
@@ -151,6 +167,7 @@ public class ShopImpl implements Shop {
 
     /**
      * @return Health Item
+     * @{inheritDoc}
      */
     public Item getHealth() {
         return new ItemBuilder.Builder(Items.HEALTH, PRICE_HEALTH).addHelath(MORE_HEALTH).build();
@@ -158,13 +175,14 @@ public class ShopImpl implements Shop {
 
     /**
      * @return Oracle Amulet Item
+     * @{inheritDoc}
      */
     public Item getOracleAmulet() {
         return new ItemBuilder.Builder(Items.ORACLEAMULET, PRICE_ORACLEAMULET).addDamage(MORE_DAMAGE).addSpeed(MORE_SPEED).addBulletSpeed(MORE_BULLETSPEED).build();
     }
 
     /**
-     * empty the current cart.
+     * @{inheritDoc}
      */
     public void clearCart() {
         this.cart.clear();
@@ -172,6 +190,7 @@ public class ShopImpl implements Shop {
 
     /**
      * @return a copy of current cart
+     * @{inheritDoc}
      */
     public Set<Items> getCart() {
         return Set.copyOf(this.cart);

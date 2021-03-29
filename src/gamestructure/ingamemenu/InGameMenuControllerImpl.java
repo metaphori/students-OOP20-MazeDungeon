@@ -5,7 +5,12 @@ import model.Model;
 import model.shop.Items;
 import model.shop.Shop;
 
+/**
+ * It contains the implementation of the methods of a generic Controller,
+ * and the methods defined by InGameMenuController's interface.
+ */
 public class InGameMenuControllerImpl implements InGameMenuController {
+
     private final GameController gameController;
     private final Shop shopModel;
     private final Model model;
@@ -13,31 +18,34 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     private boolean menuIsOpen;
     private boolean shopIsOpen;
 
+    /**
+     * Instantiate a new InGameMenuController initializing also the corresponding InGameMenuView.
+     * @param gameController
+     * @param model
+     */
     public InGameMenuControllerImpl(final GameController gameController, final Model model) {
         this.gameController = gameController;
         this.shopModel = model.getShop();
         this.model = model;
     }
-
     /**
-     * setup in game menu view.
+     * @{inheritDoc}
      */
     @Override
     public void setup() {
         this.view.show();
     }
-
     /**
-     * Set new message and check the item.
-    * @param itemSelected 
-    */
+     * @{inheritDoc}
+     * @param itemSelected 
+     */
     public void buyItem(final Items itemSelected) {
         this.view.removeMessage();
         shopModel.checkItem(itemSelected);
         this.view.returnMessage(shopModel.getMessageOuput());
     }
     /**
-     * open the shop view.
+     * @{inheritDoc}
      */
     public void openShop() {
         shopIsOpen = true;
@@ -45,7 +53,7 @@ public class InGameMenuControllerImpl implements InGameMenuController {
         this.view.showShop();
     }
     /**
-     * open the in game menu view.
+     * @{inheritDoc}
      * @return boolean : true if the in game menu opened
      */
     public boolean openInGameMenu() {
@@ -60,13 +68,13 @@ public class InGameMenuControllerImpl implements InGameMenuController {
         return false;
     }
     /**
-     * close the game.
+     * @{inheritDoc}
      */
     public void exit() {
        System.exit(0);
     }
     /**
-     * resume the game and closes the menu in game.
+     * @{inheritDoc}
      */
     public void resume() {
         this.view.hide();

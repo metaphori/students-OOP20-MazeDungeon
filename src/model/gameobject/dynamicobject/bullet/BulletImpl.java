@@ -21,7 +21,7 @@ public class BulletImpl extends AbstractDynamicObject implements Bullet {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public int getDamage() {
@@ -29,15 +29,15 @@ public class BulletImpl extends AbstractDynamicObject implements Bullet {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
-    public void updateState(final double elapsed) {
+    public void update(final double elapsed) {
         this.move(elapsed);
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public void setDamage(final int damage) {
@@ -45,7 +45,7 @@ public class BulletImpl extends AbstractDynamicObject implements Bullet {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public void collideWith(final GameObject obj2) {

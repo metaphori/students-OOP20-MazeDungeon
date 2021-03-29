@@ -18,6 +18,15 @@ import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.dynamicobject.character.CharacterImpl;
 import model.gameobject.simpleobject.FinalArtifact;
 
+/**
+ * this class implements RoomManager.
+ * 
+ * a RoomManagerImpl contain a collection of Rooms.
+ * The Room disposition is random and all the Rooms have at least a door that connect
+ * to another Room.
+ * 
+ * Character can move only between adjacent Rooms.
+ */
 public class RoomManagerImpl implements RoomManager {
 
     private static final Point2D CHARACTER_NORTH_SPAWN_POSITION = new Point2D(620, 550);
@@ -32,13 +41,17 @@ public class RoomManagerImpl implements RoomManager {
 
     private final Map<CardinalPoint, Point2D> characterSpawnPosition = new HashMap<>();
 
+    /**
+     * create a new RoomManagerImpl without specify any parameter.
+     */
     public RoomManagerImpl() {
         this.initializeRooms(this.createGameMap());
     }
 
     /**
-     * @param elapsed : the time elapsed from the last call
+     * @{inheritDoc}
      */
+    @Override
     public void update(final double elapsed) {
         this.actualRoom.update(elapsed);
         this.initializeSpawnPosition();
@@ -51,7 +64,7 @@ public class RoomManagerImpl implements RoomManager {
         characterSpawnPosition.put(CardinalPoint.EAST, CHARACTER_EAST_SPAWN_POSITION);
     }
 
-    private Point2D getNearbyPoint(final Point2D point, final CardinalPoint cardinalPoint) {
+    private Point2D getNearRoomPosition(final Point2D point, final CardinalPoint cardinalPoint) {
         switch (cardinalPoint) {
         case NORTH:
             return new Point2D(point.getX(), point.getY() + 1);
@@ -106,7 +119,7 @@ public class RoomManagerImpl implements RoomManager {
         while (map.size() < Rooms.NUMBER_OF_ROOMS) {
             final CardinalPoint extractedCP = CardinalPoint.getAny();
             final Point2D extractedPosition = new LinkedList<>(map.keySet()).get(new Random().nextInt(map.size()));
-            final Point2D newRoomPosition = this.getNearbyPoint(extractedPosition, extractedCP);
+            final Point2D newRoomPosition = this.getNearRoomPosition(extractedPosition, extractedCP);
             if (!map.containsKey(newRoomPosition)) {
                 map.put(newRoomPosition, new HashSet<CardinalPoint>());
             }
@@ -118,15 +131,15 @@ public class RoomManagerImpl implements RoomManager {
 
 
     /**
-     * 
-     * @return the actual room
+     * @{inheritDoc}
      */
+    @Override
     public Room getCurrentRoom() {
         return actualRoom;
     }
 
     /**
-     * @return the id iterator
+     * @{inheritDoc}
      */
     @Override
     public IdIterator getIdIterator() {
@@ -142,11 +155,11 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     /**
-     * @param cp : the cardinalPoint of the new room in relation at the actual room
+     * @{inheritDoc}
      */
     @Override
     public void changeRoom(final CardinalPoint cp) {
-        final Room newRoom = rooms.get(this.getNearbyPoint(this.getRoomPosition(actualRoom), cp));
+        final Room newRoom = rooms.get(this.getNearRoomPosition(this.getRoomPosition(actualRoom), cp));
         if (newRoom == null) {
             return;
         }
@@ -168,7 +181,7 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     /**
-     * @return the character
+     * @{inheritDoc}
      */
     @Override
     public Character getCharacter() {
@@ -176,7 +189,7 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     /**
-     * @return the number of visited rooms
+     * @{inheritDoc}
      */
     @Override
     public int getVisitedRooms() {

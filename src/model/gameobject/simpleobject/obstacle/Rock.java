@@ -3,9 +3,9 @@ package model.gameobject.simpleobject.obstacle;
 import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.GameObject;
-import model.gameobject.simpleobject.SimpleObjectImpl;
+import model.gameobject.simpleobject.AbstractSimpleObject;
 
-public class Rock extends SimpleObjectImpl {
+public class Rock extends AbstractSimpleObject {
 
     public Rock(final Point2D position) {
         super(position, GameObjectType.ROCK);

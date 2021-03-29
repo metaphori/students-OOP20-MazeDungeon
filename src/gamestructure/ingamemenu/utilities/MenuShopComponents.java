@@ -1,5 +1,9 @@
 package gamestructure.ingamemenu.utilities;
-
+/**
+ * 
+ * An enumeration used for classify all the InGameMenu's components.
+ *
+ */
 public enum MenuShopComponents {
     /**
      * Component Button Resume.
