@@ -55,7 +55,6 @@ public class GameViewImpl implements GameView, KeyListener {
     private final HUDPanel hudPanel = new HUDPanel(windowUtilities.getScreenRatio());
     private boolean gameOver;
     private boolean won;
-    private final JLabel lblStartInstruction = new JLabel(new ImageIcon(adaptImage(loadImage)));
     private static final int ISTRUCTION_TIME = 2000;
     private boolean loading = true;
 
@@ -73,7 +72,6 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.getContentPane().setBackground(BACKGROUND);
         this.frame.add(gamePanel);
         this.frame.addKeyListener(this);
-        this.frame.remove(this.lblStartInstruction);
         timer = new Timer(PERIOD, gamePanel);
     }
 
@@ -97,7 +95,6 @@ public class GameViewImpl implements GameView, KeyListener {
         this.frame.pack();
         this.frame.setLocation(windowUtilities.getScreen().width / 2 - this.frame.getSize().width / 2,
                                windowUtilities.getScreen().height / 2 - this.frame.getSize().height / 2);
-        this.frame.add(this.lblStartInstruction);
         this.frame.setVisible(true);
         gamePanel.setSize(this.frame.getSize());
         this.timer.start();
