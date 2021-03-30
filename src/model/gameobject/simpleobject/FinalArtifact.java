@@ -4,14 +4,23 @@ import model.common.GameObjectType;
 import model.common.Point2D;
 import model.gameobject.GameObject;
 
+/**
+ * This class model the FinalArtifact, 
+ * a SimpleObject that make the game finish when is picked up by Character. 
+ *
+ */
 public class FinalArtifact extends AbstractSimpleObject {
 
+    /**
+     * Build a new FinalArtifact.
+     * @param position : the position where the FinalArtifact will be spawned.
+     */
     public FinalArtifact(final Point2D position) {
         super(position, GameObjectType.FINAL_ARTIFACT);
     }
 
     /**
-     * @param obj2 object with is in collision
+     * {@inheritDoc}
      */
     @Override
     public void collideWith(final GameObject obj2) {

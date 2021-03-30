@@ -48,7 +48,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setup() {
@@ -57,7 +57,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void mainLoop() {
@@ -153,7 +153,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setBoundingBox(final int id, final BoundingBox boundingBox) {
@@ -161,7 +161,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override 
     public double getCharacterLife() {
@@ -169,7 +169,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override 
     public int getCharacterMoney() {
@@ -177,7 +177,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void notifyClosedInGameMenu() {
@@ -187,7 +187,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void openInGameMenu() {
@@ -202,7 +202,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void pressKey(final KeyEvent key) {
@@ -210,7 +210,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void releaseKey(final KeyEvent key) {
@@ -218,7 +218,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public int getVisitedRoom() {
@@ -226,7 +226,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Optional<Double> getBossLife() {
@@ -238,7 +238,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public State getStateFromId(final int id) {
@@ -249,7 +249,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setActive(final boolean active) {

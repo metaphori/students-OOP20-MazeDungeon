@@ -41,7 +41,7 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public double getLife() {
@@ -49,7 +49,7 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void tryToShoot() {
@@ -59,7 +59,7 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void takesDamage(final double damage) {

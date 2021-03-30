@@ -22,7 +22,7 @@ public class MainMenuControllerImpl implements MainMenuController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setup() {
@@ -30,7 +30,7 @@ public class MainMenuControllerImpl implements MainMenuController {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void newGame() {
