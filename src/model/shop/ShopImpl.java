@@ -60,7 +60,7 @@ public class ShopImpl implements Shop {
     }
 
     /** 
-     * @return a map: every Item with its price 
+     *
      * {@inheritDoc}
      */
     public Map<Items, Integer> addPrice() {
@@ -74,7 +74,7 @@ public class ShopImpl implements Shop {
     }
 
     /**
-     * @param i : item selected, to check if the item is affordable
+     *
      * {@inheritDoc}
      */
     public void checkItem(final Items i) {
@@ -134,7 +134,7 @@ public class ShopImpl implements Shop {
     }
 
     /**
-     * @return string for output message
+     *
      * {@inheritDoc}
      */
     public String getMessageOuput() {
@@ -142,7 +142,7 @@ public class ShopImpl implements Shop {
     }
 
     /**
-     * @return ArthemideBow Item
+     *
      * {@inheritDoc}
      */
     public Item getArthemideBow() {
@@ -150,7 +150,7 @@ public class ShopImpl implements Shop {
     }
 
     /**
-     * @return HermesBoots Item
+     *
      * {@inheritDoc}
      */
     public Item getHermesBoots() {
@@ -158,7 +158,7 @@ public class ShopImpl implements Shop {
     }
 
     /**
-     * @return ZeusBolt Item
+     *
      * {@inheritDoc}
      */
     public Item getZeusBolt() {
@@ -166,7 +166,7 @@ public class ShopImpl implements Shop {
     }
 
     /**
-     * @return Health Item
+     *
      * {@inheritDoc}
      */
     public Item getHealth() {
@@ -174,7 +174,7 @@ public class ShopImpl implements Shop {
     }
 
     /**
-     * @return Oracle Amulet Item
+     *
      * {@inheritDoc}
      */
     public Item getOracleAmulet() {
@@ -189,7 +189,7 @@ public class ShopImpl implements Shop {
     }
 
     /**
-     * @return a copy of current cart
+     *
      * {@inheritDoc}
      */
     public Set<Items> getCart() {

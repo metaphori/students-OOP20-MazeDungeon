@@ -217,7 +217,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     }
     /**
      * {@inheritDoc}
-     * @param messageOutput : set message in JLabel
+     *
      */
     public void returnMessage(final String messageOutput) {
         ((JLabel) componentMapShop.get(MenuShopComponents.LBL_MSG).getX()).setText(messageOutput);
@@ -231,7 +231,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     }
     /**
      * {@inheritDoc}
-     * @param map : for set Item price in view
+     *
      */
     public void setPriceItem(final Map<Items, Integer> map) {
         priceArthemideBow = map.get(Items.ARTHEMIDEBOW).toString();
