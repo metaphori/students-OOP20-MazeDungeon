@@ -60,7 +60,7 @@ public class Boss extends AbstractEnemy {
         }
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     protected void changeRoutine() {
@@ -76,7 +76,7 @@ public class Boss extends AbstractEnemy {
 
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void collideWith(final GameObject obj2) {
@@ -92,7 +92,7 @@ public class Boss extends AbstractEnemy {
         }
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     protected void shoot() {
@@ -112,7 +112,7 @@ public class Boss extends AbstractEnemy {
         this.getRoom().addDynamicObject(bullet);
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void update(final double elapsed) {
@@ -120,7 +120,7 @@ public class Boss extends AbstractEnemy {
         this.tryToShoot();
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     protected void spawnCoin() {

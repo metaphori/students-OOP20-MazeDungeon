@@ -118,7 +118,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.frame.setTitle("MazeDungeon");
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public void showShop() {
         this.frame.remove(inGameMenuPanel);
@@ -143,7 +143,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         this.show();
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public void showInGameMenu() {
         this.frame.remove(shopPanel);
@@ -167,7 +167,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void show() {
@@ -193,7 +193,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         });
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void hide() {
@@ -216,7 +216,7 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         });
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      * @param messageOutput : set message in JLabel
      */
     public void returnMessage(final String messageOutput) {
@@ -224,13 +224,13 @@ public class InGameMenuViewImpl implements InGameMenuView  {
         ((JLabel) componentMapShop.get(MenuShopComponents.LBL_MSG).getX()).setVisible(true);
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public void removeMessage() {
         ((JLabel) componentMapShop.get(MenuShopComponents.LBL_MSG).getX()).setText("");
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      * @param map : for set Item price in view
      */
     public void setPriceItem(final Map<Items, Integer> map) {

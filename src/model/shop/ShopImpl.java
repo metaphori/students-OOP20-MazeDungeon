@@ -61,7 +61,7 @@ public class ShopImpl implements Shop {
 
     /** 
      * @return a map: every Item with its price 
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public Map<Items, Integer> addPrice() {
         final Map<Items, Integer> mapPrice = new HashMap<>();
@@ -75,7 +75,7 @@ public class ShopImpl implements Shop {
 
     /**
      * @param i : item selected, to check if the item is affordable
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public void checkItem(final Items i) {
         if (this.purchasedItems.contains(i)) {
@@ -135,7 +135,7 @@ public class ShopImpl implements Shop {
 
     /**
      * @return string for output message
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public String getMessageOuput() {
         return messageOuput;
@@ -143,7 +143,7 @@ public class ShopImpl implements Shop {
 
     /**
      * @return ArthemideBow Item
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public Item getArthemideBow() {
         return new ItemBuilder.Builder(Items.ARTHEMIDEBOW, PRICE_ARTHEMIDEBOW).addDamage(MORE_DAMAGE).build();
@@ -151,7 +151,7 @@ public class ShopImpl implements Shop {
 
     /**
      * @return HermesBoots Item
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public Item getHermesBoots() {
         return new ItemBuilder.Builder(Items.HERMESBOOTS, PRICE_HERMESBOOTS).addSpeed(MORE_SPEED).build();
@@ -159,7 +159,7 @@ public class ShopImpl implements Shop {
 
     /**
      * @return ZeusBolt Item
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public Item getZeusBolt() {
         return new ItemBuilder.Builder(Items.ZEUSBOLT, PRICE_ZEUSBOLT).addBulletSpeed(MORE_BULLETSPEED).build();
@@ -167,7 +167,7 @@ public class ShopImpl implements Shop {
 
     /**
      * @return Health Item
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public Item getHealth() {
         return new ItemBuilder.Builder(Items.HEALTH, PRICE_HEALTH).addHelath(MORE_HEALTH).build();
@@ -175,14 +175,14 @@ public class ShopImpl implements Shop {
 
     /**
      * @return Oracle Amulet Item
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public Item getOracleAmulet() {
         return new ItemBuilder.Builder(Items.ORACLEAMULET, PRICE_ORACLEAMULET).addDamage(MORE_DAMAGE).addSpeed(MORE_SPEED).addBulletSpeed(MORE_BULLETSPEED).build();
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public void clearCart() {
         this.cart.clear();
@@ -190,7 +190,7 @@ public class ShopImpl implements Shop {
 
     /**
      * @return a copy of current cart
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public Set<Items> getCart() {
         return Set.copyOf(this.cart);

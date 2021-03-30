@@ -29,14 +29,14 @@ public class InGameMenuControllerImpl implements InGameMenuController {
         this.model = model;
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setup() {
         this.view.show();
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      * @param itemSelected 
      */
     public void buyItem(final Items itemSelected) {
@@ -45,7 +45,7 @@ public class InGameMenuControllerImpl implements InGameMenuController {
         this.view.returnMessage(shopModel.getMessageOuput());
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public void openShop() {
         shopIsOpen = true;
@@ -53,7 +53,7 @@ public class InGameMenuControllerImpl implements InGameMenuController {
         this.view.showShop();
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      * @return boolean : true if the in game menu opened
      */
     public boolean openInGameMenu() {
@@ -68,13 +68,13 @@ public class InGameMenuControllerImpl implements InGameMenuController {
         return false;
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public void exit() {
        System.exit(0);
     }
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public void resume() {
         this.view.hide();
