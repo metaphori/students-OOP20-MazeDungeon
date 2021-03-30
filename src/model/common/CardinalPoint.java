@@ -2,28 +2,31 @@ package model.common;
 
 import java.util.Random;
 
+/**
+ * A basic class that implements the concept of cardinal point.
+ */
 public enum CardinalPoint {
     /**
-     * 
+     * cardinal point north.
      */
     NORTH,
     /**
-     *
+     * cardinal point west.
      */
     WEST,
     /**
-     *
+     * cardinal point south.
      */
     SOUTH,
     /**
-     *
+     * cardinal point east.
      */
     EAST;
 
     private static final int SIZE = 4;
 
     /**
-     * @return a random direction
+     * @return a random cardinal point
      */
     public static CardinalPoint getAny() {
         return values()[new Random().nextInt(SIZE)];

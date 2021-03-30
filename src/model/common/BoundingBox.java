@@ -1,5 +1,9 @@
 package model.common;
 
+/**
+ * The BoundingBox is a class that permit to check a collision with an 
+ * other BondingBox.
+ */
 public class BoundingBox {
     private Point2D upperLeft;
     private Point2D bottomRight;
@@ -55,6 +59,7 @@ public class BoundingBox {
     }
 
     /**
+     * check collisions between two bounding box.
      * @param box : the BoundingBox to check collision with
      * @return true if the two BoundingBox collide, false otherwise
      */

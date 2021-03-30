@@ -62,7 +62,7 @@ public class RoomBuilderImpl implements RoomBuilder {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public RoomBuilder addDoors(final Set<CardinalPoint> doors) {
@@ -74,7 +74,7 @@ public class RoomBuilderImpl implements RoomBuilder {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public RoomBuilder addObstacle() {
@@ -87,7 +87,7 @@ public class RoomBuilderImpl implements RoomBuilder {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public RoomBuilder addEnemy() {
@@ -120,7 +120,7 @@ public class RoomBuilderImpl implements RoomBuilder {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public RoomBuilder addBoss() {

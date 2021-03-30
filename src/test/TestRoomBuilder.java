@@ -6,6 +6,9 @@ import model.room.RoomBuilderImpl;
 import model.room.RoomManager;
 import model.room.RoomManagerImpl;
 
+/**
+ * 
+ */
 public class TestRoomBuilder {
 
     private RoomBuilder roomBuilder;

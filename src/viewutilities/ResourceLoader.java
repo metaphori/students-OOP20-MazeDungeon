@@ -12,10 +12,16 @@ import javax.swing.ImageIcon;
 import animations.State;
 import model.common.GameObjectType;
 
+/**
+ * This class permit to load all the images of each gameObject for each state.
+ */
 public class ResourceLoader {
     private final Map<GameObjectType, Map<State, List<ImageIcon>>> resources = new HashMap<>();
     private static final String IMG_PATH = "/images/gameObject/";
 
+    /**
+     * create a resource loader.
+     */
     public ResourceLoader() {
         for (final GameObjectType gameObjectType : GameObjectType.values()) {
             final String gameObjectPath = IMG_PATH + gameObjectType.toString().toLowerCase(Locale.ENGLISH) + "/";
@@ -26,9 +32,10 @@ public class ResourceLoader {
             for (final State state : gameObjectType.getStates()) {
                 final String statePath = gameObjectPath + state.toString().toLowerCase(Locale.ENGLISH) + "/" + gameObjectType.toString().toLowerCase(Locale.ENGLISH);
                 final List<ImageIcon> images = new LinkedList<>();
-                URL tmp;
-                for (int i = 1; (tmp = this.getClass().getResource(statePath + i + ".png")) != null; i++) {
+                URL tmp = this.getClass().getResource(statePath + "1.png");
+                for (int i = 2; tmp != null; i++) {
                     images.add(new ImageIcon(tmp));
+                    tmp = this.getClass().getResource(statePath + i + ".png");
                 }
                 stateMap.put(state, images);
             }

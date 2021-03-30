@@ -49,7 +49,7 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void update(final double elapsed) {
@@ -131,7 +131,7 @@ public class RoomManagerImpl implements RoomManager {
 
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Room getCurrentRoom() {
@@ -139,7 +139,7 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public IdIterator getIdIterator() {
@@ -155,7 +155,7 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void changeRoom(final CardinalPoint cp) {
@@ -181,7 +181,7 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Character getCharacter() {
@@ -189,7 +189,7 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public int getVisitedRooms() {
