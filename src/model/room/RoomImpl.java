@@ -150,16 +150,6 @@ public class RoomImpl implements Room {
      * @{inheritDoc}
      */
     @Override
-    public void addAllSimpleObject(final List<SimpleObject> objs) {
-        for (final SimpleObject simpleObject : objs) {
-            this.addSimpleObject(simpleObject);
-        }
-    }
-
-    /**
-     * @{inheritDoc}
-     */
-    @Override
     public boolean isVisited() {
         return isVisited;
     }

@@ -6,12 +6,20 @@ import java.util.Random;
 
 import model.common.BoundingBox;
 import model.common.CardinalPoint;
+import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
+import model.gameobject.GameObject;
+import model.gameobject.simpleobject.AbstractSimpleObject;
 import model.gameobject.simpleobject.SimpleObject;
 import model.gameobject.simpleobject.obstacle.Wall.WallType;
 import model.room.Rooms;
 
+/**
+ * The ObstacleFactoryImpl permit to create:
+ *  - walls
+ *  - square of Rocks.
+ */
 public class ObstaclesFactoryImpl implements ObstacleFactory {
     private static final int OBSTACLE_FOR_ROW = 24;
     private static final int OBSTACLE_FOR_COL = 14;
@@ -35,7 +43,7 @@ public class ObstaclesFactoryImpl implements ObstacleFactory {
      * @return a list contains walls
      */
     @Override
-    public List<SimpleObject> createEmptyRoom() {
+    public List<SimpleObject> createWalls() {
         return this.getWalls();
     }
 
@@ -96,8 +104,13 @@ public class ObstaclesFactoryImpl implements ObstacleFactory {
                            obstacleHeight * (x - 1 + FREE_ROWS) + Rooms.UL_CORNER.getY());
     }
 
-    private Rock getObstacle(final Point2D position) {
-        return new Rock(position);
+    private SimpleObject getObstacle(final Point2D position) {
+        return new AbstractSimpleObject(position, GameObjectType.ROCK) {
+
+            @Override
+            public void collideWith(final GameObject obj2) {
+            }
+        };
     }
 
 }

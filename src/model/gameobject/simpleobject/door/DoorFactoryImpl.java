@@ -4,6 +4,9 @@ import model.common.CardinalPoint;
 import model.common.GameObjectType;
 import model.common.Point2D;
 
+/**
+ * the DoorFactoryImpl is a DoorFactory that return simple doors.
+ */
 public class DoorFactoryImpl implements DoorFactory {
 
     private static final Point2D WEST_DOOR_POSITION = new Point2D(110, 360);
@@ -28,8 +31,7 @@ public class DoorFactoryImpl implements DoorFactory {
     }
 
     /**
-     * @param cardinalPoint the cardinal point of the door
-     * @return the door in the cardinal point of the parameter
+     * @{inheritDoc}
      */
     @Override
     public Door createDoor(final CardinalPoint cardinalPoint) {
