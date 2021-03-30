@@ -4,10 +4,22 @@ import java.util.List;
 
 import model.gameobject.simpleobject.SimpleObject;
 
+/**
+ * an ObstacleFactory permit to create obstacle dispositions.
+ */
 public interface ObstacleFactory {
 
-    List<SimpleObject> createEmptyRoom();
+    /**
+     * Create an empty room containing only walls.
+     * @return a list containing walls
+     */
+    List<SimpleObject> createWalls();
 
-    List<SimpleObject> createSquare(int squares);
+    /**
+     * Create n squares each one of random size.
+     * @param n : number of squares
+     * @return a list containing obstacles
+     */
+    List<SimpleObject> createSquare(int n);
 
 }

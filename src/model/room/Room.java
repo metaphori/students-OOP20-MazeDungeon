@@ -36,12 +36,6 @@ public interface Room {
     void addSimpleObject(SimpleObject obj);
 
     /**
-     * Add multiple SimpleObject to the room.
-     * @param objs : list of SimpleObjects to add to the room
-     */
-    void addAllSimpleObject(List<SimpleObject> objs);
-
-    /**
      * Remove a GameObject from the room.
      * @param gameObject : GameObject to remove from the room
      */

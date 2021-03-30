@@ -1,15 +1,19 @@
 package model.room;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 
 import model.common.CardinalPoint;
 import model.common.GameObjectType;
 import model.common.Point2D;
+import model.gameobject.dynamicobject.enemy.Enemy;
 import model.gameobject.dynamicobject.enemy.EnemyFactory;
 import model.gameobject.dynamicobject.enemy.EnemyFactoryImpl;
+import model.gameobject.simpleobject.SimpleObject;
 import model.gameobject.simpleobject.door.DoorFactory;
 import model.gameobject.simpleobject.door.DoorFactoryImpl;
 import model.gameobject.simpleobject.obstacle.ObstacleFactory;
@@ -35,7 +39,12 @@ public class RoomBuilderImpl implements RoomBuilder {
                                                                                 new Point2D(930, 200), 
                                                                                 new Point2D(260, 540), 
                                                                                 new Point2D(930, 540)));
-    private final Room room;
+    private final List<Enemy> enemies = new LinkedList<>();
+    private Optional<Enemy> boss = Optional.empty();
+    private final List<SimpleObject> obstacles = new LinkedList<>();
+    private final Set<CardinalPoint> doors = new HashSet<>();
+    private final RoomManager roomManager;
+
     private boolean build;
     private boolean canAddEnemy = true;
     private boolean canAddObstacle = true;
@@ -49,8 +58,7 @@ public class RoomBuilderImpl implements RoomBuilder {
         if (roomManager == null) {
             throw new IllegalArgumentException("roomManager cannot be null");
         }
-        this.room = new RoomImpl(roomManager);
-        this.room.addAllSimpleObject(obstaclesFactory.createEmptyRoom());
+        this.roomManager = roomManager;
     }
 
     /**
@@ -61,10 +69,7 @@ public class RoomBuilderImpl implements RoomBuilder {
         if (doors == null) {
             throw new IllegalArgumentException("argument cannot be null");
         }
-        for (final CardinalPoint direction : doors) {
-            this.room.addDoor(direction);
-            this.room.addSimpleObject(doorFactory.createDoor(direction));
-        }
+        this.doors.addAll(doors);
         return this;
     }
 
@@ -77,7 +82,7 @@ public class RoomBuilderImpl implements RoomBuilder {
             throw new IllegalStateException("cannot add obstacle");
         }
         this.canAddBoss = false;
-        this.room.addAllSimpleObject(this.obstaclesFactory.createSquare(3));
+        this.obstacles.addAll(this.obstaclesFactory.createSquare(3));
         return this;
     }
 
@@ -99,13 +104,13 @@ public class RoomBuilderImpl implements RoomBuilder {
             this.avaiableEnemyPosition.remove(pos);
             switch (GameObjectType.getRandomEnemy()) {
             case ENEMY_SKELETON:
-                this.room.addDynamicObject(this.enemyFactory.createSkeletonSeeker(position));
+                this.enemies.add(this.enemyFactory.createSkeletonSeeker(position));
                 break;
             case ENEMY_SOUL:
-                this.room.addDynamicObject(this.enemyFactory.createSoul(position));
+                this.enemies.add(this.enemyFactory.createSoul(position));
                 break;
             case ENEMY_SPROUT:
-                this.room.addDynamicObject(this.enemyFactory.createSprout(position));
+                this.enemies.add(this.enemyFactory.createSprout(position));
                 break;
             default:
                 break;
@@ -125,7 +130,8 @@ public class RoomBuilderImpl implements RoomBuilder {
         this.canAddBoss = false;
         this.canAddEnemy = false;
         this.canAddObstacle = false;
-        this.room.addDynamicObject(this.enemyFactory.createBoss(BOSS_SPAWN_POSITION));
+
+        this.boss = Optional.of(this.enemyFactory.createBoss(BOSS_SPAWN_POSITION));
         return this;
     }
 
@@ -139,7 +145,32 @@ public class RoomBuilderImpl implements RoomBuilder {
             throw new IllegalStateException("already build"); 
         }
         this.build = true;
-        return this.room;
+
+        final Room room = new RoomImpl(this.roomManager);
+        obstacles.addAll(obstaclesFactory.createWalls());
+
+        //adding obstacles
+        for (final SimpleObject obstacle : obstacles) {
+            room.addSimpleObject(obstacle);
+        }
+
+        //adding doors
+        for (final CardinalPoint direction : doors) {
+            room.addDoor(direction);
+            room.addSimpleObject(doorFactory.createDoor(direction));
+        }
+
+        //adding enemies
+        for (final Enemy enemy : enemies) {
+            room.addDynamicObject(enemy);
+        }
+
+        //adding boss
+        if (boss.isPresent()) {
+            room.addDynamicObject(boss.get());
+        }
+
+        return room;
     }
 
 }
