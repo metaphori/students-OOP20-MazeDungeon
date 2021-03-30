@@ -37,7 +37,7 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     }
     /**
      * {@inheritDoc}
-     * @param itemSelected 
+     *
      */
     public void buyItem(final Items itemSelected) {
         this.view.removeMessage();
@@ -54,7 +54,7 @@ public class InGameMenuControllerImpl implements InGameMenuController {
     }
     /**
      * {@inheritDoc}
-     * @return boolean : true if the in game menu opened
+     * 
      */
     public boolean openInGameMenu() {
         if (!this.menuIsOpen && this.model.getRoomManager().getCurrentRoom().isDoorOpen() 

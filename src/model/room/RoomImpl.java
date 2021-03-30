@@ -38,7 +38,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void update(final double elapsed) {
@@ -50,7 +50,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void addDynamicObject(final DynamicObject obj) {
@@ -60,7 +60,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void addSimpleObject(final SimpleObject obj) {
@@ -70,7 +70,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void clean() {
@@ -78,7 +78,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public List<GameObject> getCurrentGameObjects() {
@@ -88,7 +88,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void deleteGameObject(final GameObject gameObject) {
@@ -110,7 +110,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public RoomManager getRoomManager() {
@@ -118,7 +118,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void addDoor(final CardinalPoint cardinalPoint) {
@@ -126,7 +126,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Set<CardinalPoint> getDoors() {
@@ -134,7 +134,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public boolean isDoorOpen() {
@@ -147,7 +147,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public boolean isVisited() {
@@ -155,7 +155,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void visit() {
@@ -163,7 +163,7 @@ public class RoomImpl implements Room {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Optional<Integer> getBossID() {

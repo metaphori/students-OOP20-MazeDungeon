@@ -3,6 +3,10 @@ package model.common;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * This is an infinite Iterator that provides id for all the GameObjects.
+ *
+ */
 public class IdIterator implements Iterator<Integer> {
 
     private int value;

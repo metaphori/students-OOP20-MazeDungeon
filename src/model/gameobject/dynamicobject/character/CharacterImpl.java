@@ -20,8 +20,6 @@ import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
  */
 public class CharacterImpl extends AbstractDynamicObject implements Character {
 
-    private static final long serialVersionUID = 1L;
-
     private static final double MAX_LIFE = 100;
     private static final int INITIAL_SPEED = 300; 
     private static final int INITIAL_MONEY = 0;

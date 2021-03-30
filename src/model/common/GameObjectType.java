@@ -6,6 +6,12 @@ import java.util.Random;
 
 import animations.State;
 
+/**
+ * This enumeration provide to identify a GameObject with a type, 
+ * matching to the type, the type of the collision and 
+ * a list of possible states of the object (idle, move_left, move_right).
+ *
+ */
 public enum GameObjectType {
     /**
      * The main character. Collision type : ENTITY.
@@ -101,19 +107,32 @@ public enum GameObjectType {
     private final CollisionType collisionType;
     private final List<State> states;
 
+    /**
+     * @param collisionType : the type of the collision.
+     * @param states : the possible states.
+     */
     GameObjectType(final CollisionType collisionType, final List<State> states) {
         this.collisionType = collisionType;
         this.states = states;
     }
 
+    /**
+     * @return the type of the collision of the enemy.
+     */
     public CollisionType getCollisionType() {
         return this.collisionType;
     }
 
+    /**
+     * @return the list of the possible states of the GameObject.
+     */
     public List<State> getStates() {
         return new LinkedList<>(states);
     }
 
+    /**
+     * @return a random enemy.
+     */
     public static GameObjectType getRandomEnemy() {
         switch (new Random().nextInt(SIMPLE_ENEMY_NUMBER)) {
         case 0:

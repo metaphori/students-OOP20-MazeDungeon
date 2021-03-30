@@ -14,6 +14,9 @@ import model.room.RoomBuilderImpl;
 import model.room.RoomManager;
 import model.room.RoomManagerImpl;
 
+/**
+ * Test the room.
+ */
 public class TestRoom {
     private static final Point2D SPAWN_POSITION = new Point2D(500, 500);
     private RoomManager roomManager;
@@ -26,6 +29,10 @@ public class TestRoom {
         roomBuilder = new RoomBuilderImpl(roomManager);
     }
 
+    /**
+     * Test if the doors are closed where there are enemies and if are open
+     * when there aren't enemies.
+     */
     @org.junit.Test
     public void testDoors() {
         room = roomBuilder.addEnemy()
@@ -45,6 +52,9 @@ public class TestRoom {
         assertTrue(room.isDoorOpen());
     }
 
+    /**
+     * Test if the adding of a generic GameObject work properly.
+     */
     @org.junit.Test
     public void testAddGameObject() {
         room = roomBuilder.build();
@@ -54,6 +64,10 @@ public class TestRoom {
         assertTrue(room.getCurrentGameObjects().contains(gameObject));
     }
 
+    /**
+     * test what getBossID return when there is not the boss in the room and 
+     * when there is.
+     */
     @org.junit.Test
     public void testBoss() {
         room = roomBuilder.build();

@@ -44,7 +44,6 @@ public class GameViewImpl implements GameView, KeyListener {
     private final JFrame frame;
     private final WindowUtilities windowUtilities = new WindowUtilities();
     private final ImageIcon iconImage = new ImageIcon(this.getClass().getResource("/images/gameObject/character/idle/character1.png"));
-    private final ImageIcon loadImage = new ImageIcon(this.getClass().getResource("/images/HUD/StartIstruction.png"));
     private static final Color BACKGROUND = new Color(11, 19, 30);
     private static final int PERIOD = 15;
     private final GamePanel gamePanel;
@@ -83,7 +82,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void show() {
@@ -100,7 +99,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void hide() {
@@ -161,7 +160,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setController(final GameController controller) {
@@ -170,7 +169,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void updateHUD() {
@@ -190,7 +189,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void addAnimation(final Integer id, final GameObjectType gameObjectType, final Point2D position) {
@@ -209,7 +208,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void updateAnimation(final int id, final Point2D position, final State state) {
@@ -218,7 +217,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void removeAnimation(final int id) {
@@ -260,7 +259,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void renderItems(final Set<Items> purchasedItems) {
@@ -270,7 +269,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void gameOver() {
@@ -278,7 +277,7 @@ public class GameViewImpl implements GameView, KeyListener {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void isWon() {

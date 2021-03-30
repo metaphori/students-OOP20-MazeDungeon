@@ -36,7 +36,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     private final BulletFactory bulletFactory = new BulletFactoryImpl();
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Enemy createSprout(final Point2D position) {
@@ -59,6 +59,9 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 this.move(elapsed);
             }
 
+            /**
+             * {@inheritDoc}
+             */
             @Override
             protected void shoot() {
                 final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
@@ -66,6 +69,9 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 this.getRoom().addDynamicObject(bullet);
             }
 
+            /**
+             * {@inheritDoc}
+             */
             @Override
             protected void changeRoutine() {
                 this.lastHitTime = System.currentTimeMillis();
@@ -81,7 +87,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Enemy createSoul(final Point2D position) {
@@ -96,6 +102,9 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 this.move(elapsed);
             }
 
+            /**
+             * {@inheritDoc}
+             */
             @Override
             protected void shoot() {
                 final Point2D characterPosition = this.getRoom().getRoomManager().getCharacter().getPosition();
@@ -105,6 +114,9 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 this.getRoom().addDynamicObject(bullet);
             }
 
+            /**
+             * {@inheritDoc}
+             */
             @Override
             protected void changeRoutine() {
                 this.setDirection(this.getRndDirection());
@@ -113,7 +125,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Enemy createSkeletonSeeker(final Point2D position) {
@@ -145,6 +157,9 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 this.move(elapsed);
             }
 
+            /**
+             * {@inheritDoc}
+             */
             @Override
             protected void shoot() {
                 final Point2D newPosition = new Point2D(this.getPosition().getX() + this.getBoundingBox().getWidth() / 2, this.getPosition().getY());
@@ -158,6 +173,9 @@ public class EnemyFactoryImpl implements EnemyFactory {
                 });
             }
 
+            /**
+             * {@inheritDoc}
+             */
             @Override
             protected void changeRoutine() {
                 this.inMovement = true;
@@ -171,7 +189,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Enemy createBoss(final Point2D position) {

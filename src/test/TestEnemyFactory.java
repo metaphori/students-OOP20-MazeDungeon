@@ -12,6 +12,10 @@ import model.room.Room;
 import model.room.RoomImpl;
 import model.room.RoomManagerImpl;
 
+/**
+ * This test provide to verify the correct working of the factory and of the all types of enemy.
+ *
+ */
 public class TestEnemyFactory {
     private static final int SOUL_LIFE = 50;
     private static final int SPROUT_LIFE = 50;
@@ -27,6 +31,9 @@ public class TestEnemyFactory {
         ef = new EnemyFactoryImpl();
     }
 
+    /**
+     * This test verify the correct creation and working of the Sprout.
+     */
     @org.junit.Test
     public void testSprout() {
         final Enemy sprout = ef.createSprout(new Point2D(100, 100));
@@ -44,6 +51,9 @@ public class TestEnemyFactory {
         assertFalse(room.getCurrentGameObjects().contains(sprout));
     }
 
+    /**
+     * This test verify the correct creation and working of the Soul.
+     */
     @org.junit.Test
     public void testSoul() {
         final Enemy soul = ef.createSoul(new Point2D(100, 100));
@@ -61,6 +71,9 @@ public class TestEnemyFactory {
         assertFalse(room.getCurrentGameObjects().contains(soul));
     }
 
+    /**
+     * This test verify the correct creation and working of the Skeleton.
+     */
     @org.junit.Test
     public void testSkeleton() {
         final Enemy skeleton = ef.createSkeletonSeeker(new Point2D(100, 100));

@@ -45,7 +45,7 @@ public abstract class AbstractDynamicObject extends AbstractSimpleObject impleme
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setSpeed(final int speed) {
@@ -53,7 +53,7 @@ public abstract class AbstractDynamicObject extends AbstractSimpleObject impleme
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Vector2D getDirection() {
@@ -61,7 +61,7 @@ public abstract class AbstractDynamicObject extends AbstractSimpleObject impleme
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setDirection(final Vector2D newDirection) {
@@ -87,7 +87,7 @@ public abstract class AbstractDynamicObject extends AbstractSimpleObject impleme
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setPosition(final Point2D newPosition) {
@@ -106,7 +106,7 @@ public abstract class AbstractDynamicObject extends AbstractSimpleObject impleme
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Point2D getLastPosition() {
@@ -130,7 +130,7 @@ public abstract class AbstractDynamicObject extends AbstractSimpleObject impleme
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public abstract void update(double elapsed);

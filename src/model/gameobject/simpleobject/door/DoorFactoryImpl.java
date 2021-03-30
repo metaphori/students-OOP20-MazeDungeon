@@ -31,7 +31,7 @@ public class DoorFactoryImpl implements DoorFactory {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Door createDoor(final CardinalPoint cardinalPoint) {

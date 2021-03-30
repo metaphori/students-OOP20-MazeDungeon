@@ -48,7 +48,7 @@ public class MainMenuViewImpl implements MainMenuView {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void show() {
@@ -61,7 +61,7 @@ public class MainMenuViewImpl implements MainMenuView {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void hide() {

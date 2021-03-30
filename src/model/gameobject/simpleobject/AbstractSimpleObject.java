@@ -36,7 +36,7 @@ public abstract class AbstractSimpleObject implements SimpleObject {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public int getID() {
@@ -44,7 +44,7 @@ public abstract class AbstractSimpleObject implements SimpleObject {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setID(final int id) {
@@ -52,7 +52,7 @@ public abstract class AbstractSimpleObject implements SimpleObject {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Point2D getPosition() {
@@ -67,7 +67,7 @@ public abstract class AbstractSimpleObject implements SimpleObject {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public GameObjectType getGameObjectType() {
@@ -75,7 +75,7 @@ public abstract class AbstractSimpleObject implements SimpleObject {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public State getState() {
@@ -90,7 +90,7 @@ public abstract class AbstractSimpleObject implements SimpleObject {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public BoundingBox getBoundingBox() {
@@ -98,7 +98,7 @@ public abstract class AbstractSimpleObject implements SimpleObject {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setBoundingBox(final BoundingBox boundingBox) {
@@ -113,7 +113,7 @@ public abstract class AbstractSimpleObject implements SimpleObject {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setRoom(final Room room) {
@@ -121,7 +121,7 @@ public abstract class AbstractSimpleObject implements SimpleObject {
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public abstract void collideWith(GameObject obj2);
