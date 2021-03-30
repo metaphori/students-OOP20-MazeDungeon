@@ -10,14 +10,18 @@ import model.room.RoomManagerImpl;
 import model.shop.Shop;
 import model.shop.ShopImpl;
 
+/**
+ * This class implements all the methods specified in the corresponding interface.
+ * It contains the main connection to the logics of the application.
+ *
+ */
 
 public class ModelImpl implements Model {
     private final RoomManager roomManager = new RoomManagerImpl();
     private final Shop shop = new ShopImpl(this.roomManager.getCharacter());
 
     /**
-     * @param id : the id of the GameObject.
-     * @return the position of the GameObject using it's ID.
+     * {@inheritDoc}
      */
     @Override
     public Point2D getGameObjectPosition(final int id) {
@@ -25,8 +29,7 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * @param id : the id of the GameObject.
-     * @return the GameObject using it's ID. 
+     * {@inheritDoc}
      */
     public GameObject getGameObject(final int id) {
         for (final GameObject gameObject : roomManager.getCurrentRoom().getCurrentGameObjects()) {
@@ -38,14 +41,14 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * @return the list of all the GameObject presents in the actual room.
+     * {@inheritDoc}
      */
     public List<GameObject> getActualGameObjects() {
         return new LinkedList<GameObject>(roomManager.getCurrentRoom().getCurrentGameObjects());
     }
 
     /**
-     * @param elapsed : the time passed from the last gameLoop cycle.
+     * {@inheritDoc}
      */
     @Override
     public void updateGameWorld(final double elapsed) {
@@ -53,7 +56,7 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * @return the roomManager.
+     * {@inheritDoc}
      */
     @Override
     public RoomManager getRoomManager() {
@@ -61,7 +64,7 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * @return the shop.
+     * {@inheritDoc}
      */
     @Override
     public Shop getShop() {
@@ -69,7 +72,7 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * @return true if the game is over.
+     * {@inheritDoc}
      */
     @Override
     public boolean isGameOver() {
@@ -77,7 +80,7 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * @return true if the game is won.
+     * {@inheritDoc}
      */
     @Override
     public boolean isWon() {
