@@ -1,5 +1,7 @@
 package test;
 
+import model.common.Point2D;
+import model.gameobject.simpleobject.Coin;
 import model.room.Room;
 import model.room.RoomBuilder;
 import model.room.RoomBuilderImpl;
@@ -45,7 +47,8 @@ public class TestRoomBuilder {
 
     @org.junit.Test (expected = IllegalArgumentException.class)
     public void testInitParameter() {
-        final RoomBuilder roomBuilder = new RoomBuilderImpl(null);
+        final RoomBuilder testRoomBuilder = new RoomBuilderImpl(null);
+        testRoomBuilder.build();
     }
 
     @org.junit.Test (expected = IllegalArgumentException.class)
@@ -57,7 +60,9 @@ public class TestRoomBuilder {
     public void testBuildTwice() {
         roomBuilder.addObstacle();
         final Room room1 = roomBuilder.build();
+        room1.addSimpleObject(new Coin(new Point2D(0, 0)));
         final Room room2 = roomBuilder.build();
+        room2.addSimpleObject(new Coin(new Point2D(0, 0)));
     }
 
 }
