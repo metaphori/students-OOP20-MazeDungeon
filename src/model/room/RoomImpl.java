@@ -139,7 +139,7 @@ public class RoomImpl implements Room {
     @Override
     public boolean isDoorOpen() {
         for (final DynamicObject dinamicObject : dynamicObjects) {
-            if (AbstractEnemy.class.isAssignableFrom(dinamicObject.getClass()) && dinamicObject.getGameObjectType() != GameObjectType.CHARACTER) {
+            if (AbstractEnemy.class.isAssignableFrom(dinamicObject.getClass()) && dinamicObject.getGameObjectType() != GameObjectType.MAINCHARACTER) {
                 return false;
             }
         }

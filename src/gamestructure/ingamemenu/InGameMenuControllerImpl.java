@@ -58,7 +58,7 @@ public class InGameMenuControllerImpl implements InGameMenuController {
      */
     public boolean openInGameMenu() {
         if (!this.menuIsOpen && this.model.getRoomManager().getCurrentRoom().isDoorOpen() 
-                && !this.model.getRoomManager().getCharacter().isDead() || shopIsOpen) {
+                && !this.model.getRoomManager().getMainCharacter().isDead() || shopIsOpen) {
             shopIsOpen = false;
             this.view.removeMessage();
             this.view.showInGameMenu();

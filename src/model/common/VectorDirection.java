@@ -1,5 +1,7 @@
 package model.common;
-
+/**
+ * This enumeration contains the vectorDirection specified by a Vector2D.
+ */
 public enum VectorDirection {
     /**
      * Direction up for movement.

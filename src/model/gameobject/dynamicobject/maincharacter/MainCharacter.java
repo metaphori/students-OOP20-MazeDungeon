@@ -1,15 +1,15 @@
-package model.gameobject.dynamicobject.character;
+package model.gameobject.dynamicobject.maincharacter;
 
 import model.common.VectorDirection;
 import model.gameobject.dynamicobject.DynamicObject;
 
 /**
- * An interface for modeling the Character as extension of DinamycObject.
+ * An interface for modeling the MainCharacter as extension of DinamycObject.
  */
-public interface Character extends DynamicObject {
+public interface MainCharacter extends DynamicObject {
 
     /**
-     * @return the max life of character
+     * @return the max life of main character
      */
     double getMaxLife();
 
@@ -43,7 +43,7 @@ public interface Character extends DynamicObject {
 
     /**
      * @param speed 
-     * increase the current character speed.
+     * increase the current main character speed.
      */
     void increaseSpeed(int speed);
 
@@ -55,7 +55,7 @@ public interface Character extends DynamicObject {
 
     /**
      * @param damage
-     * Takes damage to the character.
+     * Takes damage to the main character.
      */
     void takesDamage(int damage);
 
@@ -67,17 +67,17 @@ public interface Character extends DynamicObject {
     void setShoot(boolean shoot, VectorDirection vectorDirection);
 
     /**
-     * set the winning when the character pick up the final artifact.
+     * set the winning when the main character pick up the final artifact.
      */
     void pickedUpFinalArtifact();
 
     /**
-     * @return true if the character is death.
+     * @return true if the main character is death.
      */
     boolean isDead();
 
     /**
-     * @return true if the character is won.
+     * @return true if the main character is won.
      */
     boolean isWin();
 

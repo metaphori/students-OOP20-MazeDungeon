@@ -73,7 +73,7 @@ public interface Room {
     void clean();
 
     /**
-     * @return true if the Room has been visited from the Character
+     * @return true if the Room has been visited from the MainCharacter
      */
     boolean isVisited();
 

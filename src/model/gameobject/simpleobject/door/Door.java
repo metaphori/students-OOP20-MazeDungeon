@@ -21,7 +21,7 @@ public class Door extends AbstractSimpleObject {
             return;
         }
         switch (obj2.getGameObjectType()) {
-        case CHARACTER:
+        case MAINCHARACTER:
             final CardinalPoint direction;
             switch (this.getGameObjectType()) {
             case DOOR_SOUTH:

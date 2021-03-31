@@ -2,7 +2,7 @@ package model.room;
 
 import model.common.CardinalPoint;
 import model.common.IdIterator;
-import model.gameobject.dynamicobject.character.Character;
+import model.gameobject.dynamicobject.maincharacter.MainCharacter;
 
 /**
  * An interface that help the user to managing multiple Rooms.
@@ -20,7 +20,7 @@ public interface RoomManager {
     void update(double elapsed);
 
     /**
-     * @return the current Room that's the Room where the Character is.
+     * @return the current Room that's the Room where the MainCharacter is.
      */
     Room getCurrentRoom();
 
@@ -36,9 +36,9 @@ public interface RoomManager {
     void changeRoom(CardinalPoint cp);
 
     /**
-     * @return the Character.
+     * @return the MainCharacter.
      */
-    Character getCharacter();
+    MainCharacter getMainCharacter();
 
     /**
      * @return the number of visited Rooms

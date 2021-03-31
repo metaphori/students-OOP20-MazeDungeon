@@ -6,8 +6,8 @@ import model.common.Point2D;
 import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.AbstractDynamicObject;
-import model.gameobject.dynamicobject.character.Character;
 import model.gameobject.dynamicobject.enemy.Enemy;
+import model.gameobject.dynamicobject.maincharacter.MainCharacter;
 import model.gameobject.simpleobject.obstacle.Wall;
 
 public class BulletImpl extends AbstractDynamicObject implements Bullet {
@@ -58,11 +58,11 @@ public class BulletImpl extends AbstractDynamicObject implements Bullet {
             this.getRoom().deleteGameObject(this);
             break;
         case ENTITY:
-            if (obj2.getGameObjectType().equals(GameObjectType.CHARACTER) && !this.getGameObjectType().equals(GameObjectType.CHARACTER_BULLET)) {
-                final Character character = (Character) obj2;
-                character.takesDamage(this.getDamage());
+            if (obj2.getGameObjectType().equals(GameObjectType.MAINCHARACTER) && !this.getGameObjectType().equals(GameObjectType.MAINCHARACTER_BULLET)) {
+                final MainCharacter mainCharacter = (MainCharacter) obj2;
+                mainCharacter.takesDamage(this.getDamage());
                 this.getRoom().deleteGameObject(this);
-            } else if (!obj2.getGameObjectType().equals(GameObjectType.CHARACTER) && this.getGameObjectType().equals(GameObjectType.CHARACTER_BULLET)) {
+            } else if (!obj2.getGameObjectType().equals(GameObjectType.MAINCHARACTER) && this.getGameObjectType().equals(GameObjectType.MAINCHARACTER_BULLET)) {
                 final Enemy enemy = (Enemy) obj2;
                 enemy.takesDamage(this.getDamage());
                 this.getRoom().deleteGameObject(this);

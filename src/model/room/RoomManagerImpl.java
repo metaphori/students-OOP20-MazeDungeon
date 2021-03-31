@@ -14,8 +14,8 @@ import model.common.CardinalPoint;
 import model.common.GameObjectType;
 import model.common.IdIterator;
 import model.common.Point2D;
-import model.gameobject.dynamicobject.character.Character;
-import model.gameobject.dynamicobject.character.CharacterImpl;
+import model.gameobject.dynamicobject.maincharacter.MainCharacter;
+import model.gameobject.dynamicobject.maincharacter.MainCharacterImpl;
 import model.gameobject.simpleobject.FinalArtifact;
 
 /**
@@ -25,7 +25,7 @@ import model.gameobject.simpleobject.FinalArtifact;
  * The Room disposition is random and all the Rooms have at least a door that connect
  * to another Room.
  * 
- * Character can move only between adjacent Rooms.
+ * MainCharacter can move only between adjacent Rooms.
  */
 public class RoomManagerImpl implements RoomManager {
 
@@ -36,7 +36,7 @@ public class RoomManagerImpl implements RoomManager {
     private final IdIterator idIterator = new IdIterator();
     private final Map<Point2D, Room> rooms = new HashMap<>();
     private Room actualRoom;
-    private final Character character = new CharacterImpl(new Point2D(300, 200), GameObjectType.CHARACTER);
+    private final MainCharacter mainCharacter = new MainCharacterImpl(new Point2D(300, 200), GameObjectType.MAINCHARACTER);
     private int exploredRooms = 1;
 
     private final Map<CardinalPoint, Point2D> characterSpawnPosition = new HashMap<>();
@@ -107,7 +107,7 @@ public class RoomManagerImpl implements RoomManager {
         }
 
         actualRoom = rooms.get(new Point2D(0, 0));
-        actualRoom.addDynamicObject(character);
+        actualRoom.addDynamicObject(mainCharacter);
         actualRoom.visit();
     }
 
@@ -166,8 +166,8 @@ public class RoomManagerImpl implements RoomManager {
         if (!newRoom.isVisited()) {
             exploredRooms++;
         }
-        this.getCharacter().setPosition(characterSpawnPosition.get(cp));
-        newRoom.addDynamicObject(this.getCharacter());
+        this.getMainCharacter().setPosition(characterSpawnPosition.get(cp));
+        newRoom.addDynamicObject(this.getMainCharacter());
         actualRoom.clean();
         actualRoom = newRoom;
         actualRoom.visit();
@@ -184,8 +184,8 @@ public class RoomManagerImpl implements RoomManager {
      * {@inheritDoc}
      */
     @Override
-    public Character getCharacter() {
-        return this.character;
+    public MainCharacter getMainCharacter() {
+        return this.mainCharacter;
     }
 
     /**

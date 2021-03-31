@@ -4,7 +4,7 @@ import model.common.Point2D;
 import model.common.Vector2D;
 
 /**
- * An interface for modeling a factory of Enemy. 
+ * An interface for modeling a factory of bullet.
  */
 
 public interface BulletFactory {
@@ -14,9 +14,9 @@ public interface BulletFactory {
      * @param direction : the direction where the bullet will go.
      * @param bonusDamage : the bonus damage of the bullet.
      * @param bonusBulletSpeed : the bonus speed of the bullet.
-     * @return a character bullet
+     * @return a main character bullet
      */
-    Bullet createCharacterBullet(Point2D initialPosition, Vector2D direction, int bonusDamage, int bonusBulletSpeed);
+    Bullet createMainCharacterBullet(Point2D initialPosition, Vector2D direction, int bonusDamage, int bonusBulletSpeed);
 
     /**
      * @param initialPosition the position where the bullet will be spawned. 

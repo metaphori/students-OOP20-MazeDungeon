@@ -16,7 +16,7 @@ public enum GameObjectType {
     /**
      * The main character. Collision type : ENTITY.
      */
-    CHARACTER(CollisionType.ENTITY, List.of(State.IDLE, State.MOVE_LEFT, State.MOVE_RIGHT, State.MOVE_UP, State.MOVE_DOWN)),
+    MAINCHARACTER(CollisionType.ENTITY, List.of(State.IDLE, State.MOVE_LEFT, State.MOVE_RIGHT, State.MOVE_UP, State.MOVE_DOWN)),
 
     /**
      * An enemy of type : Sprout. Collision type : ENTITY.
@@ -69,27 +69,27 @@ public enum GameObjectType {
     DOOR_SOUTH(CollisionType.INTERACTIVE_ELEMENT, List.of(State.IDLE)),
 
     /**
-     * The Character Bullet. Collision type : INTERACTIVE_ELEMENT.
+     * The MainCharacter Bullet. Collision type : INTERACTIVE_ELEMENT.
      */
-    CHARACTER_BULLET(CollisionType.INTERACTIVE_ELEMENT, List.of(State.IDLE)),
+    MAINCHARACTER_BULLET(CollisionType.INTERACTIVE_ELEMENT, List.of(State.IDLE)),
 
     /**
-     * The Character Bullet. Collision type : INTERACTIVE_ELEMENT.
+     * The MainCharacter Bullet. Collision type : INTERACTIVE_ELEMENT.
      */
     SKELETON_BULLET(CollisionType.INTERACTIVE_ELEMENT, List.of(State.IDLE)),
 
     /**
-     * The Character Bullet. Collision type : INTERACTIVE_ELEMENT.
+     * The Soul Bullet. Collision type : INTERACTIVE_ELEMENT.
      */
     SOUL_BULLET(CollisionType.INTERACTIVE_ELEMENT, List.of(State.IDLE)),
 
     /**
-     * The Character Bullet. Collision type : INTERACTIVE_ELEMENT.
+     * The Sprout Bullet. Collision type : INTERACTIVE_ELEMENT.
      */
     SPROUT_BULLET(CollisionType.INTERACTIVE_ELEMENT, List.of(State.IDLE)),
 
     /**
-     * The Character Bullet. Collision type : INTERACTIVE_ELEMENT.
+     * The Boss Bullet. Collision type : INTERACTIVE_ELEMENT.
      */
     BOSS_BULLET(CollisionType.INTERACTIVE_ELEMENT, List.of(State.IDLE)),
 

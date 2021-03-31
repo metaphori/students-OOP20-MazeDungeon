@@ -18,7 +18,7 @@ import model.shop.ShopImpl;
 
 public class ModelImpl implements Model {
     private final RoomManager roomManager = new RoomManagerImpl();
-    private final Shop shop = new ShopImpl(this.roomManager.getCharacter());
+    private final Shop shop = new ShopImpl(this.roomManager.getMainCharacter());
 
     /**
      * {@inheritDoc}
@@ -76,7 +76,7 @@ public class ModelImpl implements Model {
      */
     @Override
     public boolean isGameOver() {
-        return this.roomManager.getCharacter().isDead();
+        return this.roomManager.getMainCharacter().isDead();
     }
 
     /**
@@ -84,6 +84,6 @@ public class ModelImpl implements Model {
      */
     @Override
     public boolean isWon() {
-        return this.roomManager.getCharacter().isWin();
+        return this.roomManager.getMainCharacter().isWin();
     }
 }

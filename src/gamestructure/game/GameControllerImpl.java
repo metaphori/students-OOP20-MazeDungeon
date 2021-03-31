@@ -165,7 +165,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override 
     public double getCharacterLife() {
-        return this.model.getRoomManager().getCharacter().getLife();
+        return this.model.getRoomManager().getMainCharacter().getLife();
     }
 
     /**
@@ -173,7 +173,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override 
     public int getCharacterMoney() {
-        return this.model.getRoomManager().getCharacter().getMoney();
+        return this.model.getRoomManager().getMainCharacter().getMoney();
     }
 
     /**

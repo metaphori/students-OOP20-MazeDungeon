@@ -7,7 +7,7 @@ import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.bullet.Bullet;
 import model.gameobject.dynamicobject.bullet.BulletFactory;
 import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
-import model.gameobject.dynamicobject.character.Character;
+import model.gameobject.dynamicobject.maincharacter.MainCharacter;
 import model.gameobject.simpleobject.Coin;
 /**
  * 
@@ -83,10 +83,10 @@ public class Boss extends AbstractEnemy {
         final int takeDamage = 10;
         final int hitDelay = 1000;
         super.collideWith(obj2);
-        if (obj2.getGameObjectType() == GameObjectType.CHARACTER) {
+        if (obj2.getGameObjectType() == GameObjectType.MAINCHARACTER) {
             final long currentTime = System.currentTimeMillis();
             if (currentTime - this.lastHitTime > hitDelay) {
-                ((Character) obj2).takesDamage(takeDamage);
+                ((MainCharacter) obj2).takesDamage(takeDamage);
                 this.lastHitTime = currentTime;
             }
         }
@@ -105,7 +105,7 @@ public class Boss extends AbstractEnemy {
             if (this.getDirection().getX() == -1 && this.getDirection().getY() == 0) {
                 modifyAlignShootY = MODIFY_ALIGN_MONEY;
             }
-            final Point2D characterPosition = this.getRoom().getRoomManager().getCharacter().getPosition();
+            final Point2D characterPosition = this.getRoom().getRoomManager().getMainCharacter().getPosition();
             bullet = bulletFactory.createBossBullet(this.getPosition().sum(new Vector2D(ALIGN_SHOOT_X, ALIGN_SHOOT_Y - modifyAlignShootY)),
                     new Vector2D(characterPosition.getX() - ALIGN_SHOOT_X - this.getPosition().getX(), characterPosition.getY() - ALIGN_SHOOT_Y - this.getPosition().getY()).getNormalized());
         }

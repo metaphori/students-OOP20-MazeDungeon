@@ -39,12 +39,12 @@ public interface GameController extends Controller {
     void notifyClosedInGameMenu();
 
     /**
-     * @return the character current life.
+     * @return the main character current life.
      */
     double getCharacterLife();
 
     /**
-     * @return the character current money.
+     * @return the main character current money.
      */
     int getCharacterMoney();
 

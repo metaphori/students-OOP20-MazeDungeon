@@ -1,11 +1,11 @@
-package model.gameobject.dynamicobject.character;
+package model.gameobject.dynamicobject.maincharacter;
 
 import model.common.VectorDirection;
 /**
  * An interface for modeling character Movements.
  *
  */
-public interface CharacterMovement {
+public interface MainCharacterMovement {
     /**
      * stops the character when goes vertically.
      */

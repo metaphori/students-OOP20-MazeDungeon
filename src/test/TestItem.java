@@ -9,8 +9,8 @@ import model.common.Vector2D;
 import model.common.VectorDirection;
 import model.gameobject.dynamicobject.bullet.Bullet;
 import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
-import model.gameobject.dynamicobject.character.Character;
-import model.gameobject.dynamicobject.character.CharacterImpl;
+import model.gameobject.dynamicobject.maincharacter.MainCharacter;
+import model.gameobject.dynamicobject.maincharacter.MainCharacterImpl;
 import model.room.Room;
 import model.room.RoomImpl;
 import model.room.RoomManagerImpl;
@@ -22,7 +22,7 @@ import model.shop.ShopImpl;
 
 public class TestItem {
     private Item item;
-    private Character c;
+    private MainCharacter c;
     private Room room;
     private int beforeMoney;
     private int beforeSpeed;
@@ -40,13 +40,13 @@ public class TestItem {
     @org.junit.Before
     public void newCharacter() {
         final int timeSleep = 400;
-        c = new CharacterImpl(new Point2D(100, 100), GameObjectType.CHARACTER);
+        c = new MainCharacterImpl(new Point2D(100, 100), GameObjectType.MAINCHARACTER);
         room = new RoomImpl(new RoomManagerImpl());
         room.addDynamicObject(c);
         c.setMoney(10);
         c.setLife(c.getLife() - c.getLife() / 2);
         this.beforeMoney = c.getMoney();
-        this.defaultBullet = new BulletFactoryImpl().createCharacterBullet(new Point2D(0, 0), new Vector2D(0, 0), 0, 0);
+        this.defaultBullet = new BulletFactoryImpl().createMainCharacterBullet(new Point2D(0, 0), new Vector2D(0, 0), 0, 0);
         this.beforeSpeed = c.getSpeed();
         this.beforeHealth = c.getLife();
         try {

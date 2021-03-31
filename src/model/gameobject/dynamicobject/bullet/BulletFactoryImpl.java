@@ -32,8 +32,8 @@ public class BulletFactoryImpl implements BulletFactory {
      * @return {@inheritDoc}
      */
     @Override
-    public Bullet createCharacterBullet(final Point2D initialPosition, final  Vector2D direction, final int bonusDamage, final int bonusBulletSpeed) {
-        return new BulletImpl(initialPosition, direction, GameObjectType.CHARACTER_BULLET, bonusDamage + CHARACTER_BULLET_DAMAGE, CHARACTER_BULLET_SPEED + bonusBulletSpeed);
+    public Bullet createMainCharacterBullet(final Point2D initialPosition, final  Vector2D direction, final int bonusDamage, final int bonusBulletSpeed) {
+        return new BulletImpl(initialPosition, direction, GameObjectType.MAINCHARACTER_BULLET, bonusDamage + CHARACTER_BULLET_DAMAGE, CHARACTER_BULLET_SPEED + bonusBulletSpeed);
     }
     /**
      * {@inheritDoc}

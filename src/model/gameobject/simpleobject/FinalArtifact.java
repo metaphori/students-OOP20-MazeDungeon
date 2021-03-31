@@ -6,7 +6,7 @@ import model.gameobject.GameObject;
 
 /**
  * This class model the FinalArtifact, 
- * a SimpleObject that make the game finish when is picked up by Character. 
+ * a SimpleObject that make the game finish when is picked up by MainCharacter. 
  *
  */
 public class FinalArtifact extends AbstractSimpleObject {
@@ -24,8 +24,8 @@ public class FinalArtifact extends AbstractSimpleObject {
      */
     @Override
     public void collideWith(final GameObject obj2) {
-        if (obj2.getGameObjectType().equals(GameObjectType.CHARACTER)) {
-            this.getRoom().getRoomManager().getCharacter().pickedUpFinalArtifact();
+        if (obj2.getGameObjectType().equals(GameObjectType.MAINCHARACTER)) {
+            this.getRoom().getRoomManager().getMainCharacter().pickedUpFinalArtifact();
             this.getRoom().deleteGameObject(this);
         }
     }

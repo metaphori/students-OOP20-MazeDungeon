@@ -10,9 +10,9 @@ import java.util.Set;
 import gamestructure.game.GameController;
 import model.Model;
 import model.common.VectorDirection;
-import model.gameobject.dynamicobject.character.Character;
-import model.gameobject.dynamicobject.character.CharacterMovement;
-import model.gameobject.dynamicobject.character.CharacterMovementImpl;
+import model.gameobject.dynamicobject.maincharacter.MainCharacter;
+import model.gameobject.dynamicobject.maincharacter.MainCharacterMovement;
+import model.gameobject.dynamicobject.maincharacter.MainCharacterMovementImpl;
 
 /**
  * The implementation of command interface.
@@ -23,8 +23,8 @@ import model.gameobject.dynamicobject.character.CharacterMovementImpl;
 public class CommandImpl implements Command {
 
     private final GameController gameController;
-    private final Character character;
-    private final CharacterMovement characterMovement; 
+    private final MainCharacter mainCharacter;
+    private final MainCharacterMovement mainCharacterMovement; 
     private Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> command;
     private final Set<Integer> letterKeys = new HashSet<>(Set.of(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D));
     private final Set<Integer> arrowKeys = new HashSet<>(Set.of(KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT));
@@ -33,8 +33,8 @@ public class CommandImpl implements Command {
 
     public CommandImpl(final Model model, final GameController controller) {
         this.gameController = controller;
-        this.character = model.getRoomManager().getCharacter();
-        this.characterMovement = new CharacterMovementImpl(character);
+        this.mainCharacter = model.getRoomManager().getMainCharacter();
+        this.mainCharacterMovement = new MainCharacterMovementImpl(this.mainCharacter);
         this.initializeKeysList();
     }
 
@@ -62,9 +62,9 @@ public class CommandImpl implements Command {
                 this.command = findObjectFromStream(keyCode);
                 if (!this.command.isEmpty()) {
                     if (this.isArrow(this.command)) {
-                       this.character.setShoot(true, this.command.get().getZ().get());
+                       this.mainCharacter.setShoot(true, this.command.get().getZ().get());
                     } else if (this.isLetter(this.command)) {
-                        this.characterMovement.move(this.command.get().getZ().get());
+                        this.mainCharacterMovement.move(this.command.get().getZ().get());
                     } else {
                         this.gameController.openInGameMenu();
                     }
@@ -73,11 +73,11 @@ public class CommandImpl implements Command {
         });
 
         if (this.checkUpDownKeys()) {
-            this.characterMovement.stopVertical();
+            this.mainCharacterMovement.stopVertical();
         }
 
         if (this.checkRightLeftKeys()) {
-            this.characterMovement.stopHorizontal();
+            this.mainCharacterMovement.stopHorizontal();
         }
     }
 

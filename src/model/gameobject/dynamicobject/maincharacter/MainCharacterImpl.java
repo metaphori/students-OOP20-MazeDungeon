@@ -1,4 +1,4 @@
-package model.gameobject.dynamicobject.character;
+package model.gameobject.dynamicobject.maincharacter;
 
 import model.common.GameObjectType;
 import model.common.Point2D;
@@ -11,14 +11,14 @@ import model.gameobject.dynamicobject.bullet.BulletFactory;
 import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
 
 /**
- * The implementation of Character
+ * The implementation of MainCharacter
  * 
- * It contains different methods to handle all the character's characteristics as life, bulletDamage etc...
- * It contains the costants to inizialize the character at the beginning.
+ * It contains different methods to handle all the main character's characteristics as life, bulletDamage etc...
+ * It contains the costants to inizialize the main character at the beginning.
  * It contains methods to handle character state.
  *
  */
-public class CharacterImpl extends AbstractDynamicObject implements Character {
+public class MainCharacterImpl extends AbstractDynamicObject implements MainCharacter {
 
     private static final double MAX_LIFE = 100;
     private static final int INITIAL_SPEED = 300; 
@@ -36,7 +36,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
     private boolean shoot;
     private boolean win;
 
-    public CharacterImpl(final Point2D position, final GameObjectType gameObjectType) {
+    public MainCharacterImpl(final Point2D position, final GameObjectType gameObjectType) {
         super(INITIAL_SPEED, position, gameObjectType);
         this.life = MAX_LIFE;
         this.bonusDamage = 0;
@@ -135,7 +135,7 @@ public class CharacterImpl extends AbstractDynamicObject implements Character {
      * shoot a bullet.
      */
     private void shoot() {
-        final Bullet bullet = bulletFactory.createCharacterBullet(
+        final Bullet bullet = bulletFactory.createMainCharacterBullet(
                 new Point2D(getPosition().getX() + this.getBoundingBox().getWidth() / 2, getPosition().getY() + this.getBoundingBox().getHeight() / 2), this.shootDirection,
                 this.bonusDamage, this.bonusSpeed);
         this.getRoom().addDynamicObject(bullet);

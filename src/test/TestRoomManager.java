@@ -19,7 +19,7 @@ public class TestRoomManager {
 
     @org.junit.Test
     public void testCharacter() {
-        assertNotNull(roomManager.getCharacter());
+        assertNotNull(roomManager.getMainCharacter());
     }
 
     @org.junit.Test

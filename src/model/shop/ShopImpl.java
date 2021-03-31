@@ -5,11 +5,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import model.gameobject.dynamicobject.character.Character;
+import model.gameobject.dynamicobject.maincharacter.MainCharacter;
 /**
  * 
  * Create a Shop items.
- * Manages the purchases made and takes care of adding skills to the character.
+ * Manages the purchases made and takes care of adding skills to the mainCharacter.
  *
  */
 public class ShopImpl implements Shop {
@@ -28,35 +28,35 @@ public class ShopImpl implements Shop {
     private String messageOuput = "";
     private final String msgBought;
     private final String msgNoMoney;
-    private final Character character;
+    private final MainCharacter mainCharacter;
 
     /**
-     * this will save the character object to then add abilities.
+     * this will save the mainCharacter object to then add abilities.
      * Set messages for output.
-     * @param character
+     * @param mainCharacter
      */
-    public ShopImpl(final Character character) {
-        this.character = character;
+    public ShopImpl(final MainCharacter mainCharacter) {
+        this.mainCharacter = mainCharacter;
         msgBought = "You bought this item! You have coins: ";
         msgNoMoney = "You don't have enough coins!";
     }
 
     private void addSkills(final Item item) {
-        this.character.increaseDamage(item.getDamage());
-        this.character.increaseSpeed(item.getSpeed());
-        this.character.increaseBulletSpeed(item.getBulletSpeed());
-        if (this.character.getLife() + item.getHealth() > this.character.getMaxLife()) {
-            this.character.setLife(this.character.getMaxLife());
+        this.mainCharacter.increaseDamage(item.getDamage());
+        this.mainCharacter.increaseSpeed(item.getSpeed());
+        this.mainCharacter.increaseBulletSpeed(item.getBulletSpeed());
+        if (this.mainCharacter.getLife() + item.getHealth() > this.mainCharacter.getMaxLife()) {
+            this.mainCharacter.setLife(this.mainCharacter.getMaxLife());
         } else {
-            this.character.setLife(this.character.getLife() + item.getHealth());
+            this.mainCharacter.setLife(this.mainCharacter.getLife() + item.getHealth());
         }
     }
 
     private void setItem(final Item item) {
-        this.character.setMoney(this.character.getMoney() - item.getCost());
+        this.mainCharacter.setMoney(this.mainCharacter.getMoney() - item.getCost());
         this.purchasedItems.add(item.getName());
         this.cart.add(item.getName());
-        this.messageOuput = this.msgBought  + this.character.getMoney();
+        this.messageOuput = this.msgBought  + this.mainCharacter.getMoney();
     }
 
     /** 
@@ -83,7 +83,7 @@ public class ShopImpl implements Shop {
         } else {
             switch (i) {
                 case ARTHEMIDEBOW:
-                    if (this.getArthemideBow().getCost() > this.character.getMoney()) {
+                    if (this.getArthemideBow().getCost() > this.mainCharacter.getMoney()) {
                         this.messageOuput = this.msgNoMoney;
                         break;
                     }
@@ -91,7 +91,7 @@ public class ShopImpl implements Shop {
                     this.addSkills(this.getArthemideBow());
                     break;
                 case HERMESBOOTS:
-                    if (this.getHermesBoots().getCost() > this.character.getMoney()) {
+                    if (this.getHermesBoots().getCost() > this.mainCharacter.getMoney()) {
                         this.messageOuput = this.msgNoMoney;
                         break;
                     }
@@ -99,7 +99,7 @@ public class ShopImpl implements Shop {
                     this.addSkills(this.getHermesBoots());
                     break;
                 case ZEUSBOLT:
-                    if (this.getZeusBolt().getCost() > this.character.getMoney()) {
+                    if (this.getZeusBolt().getCost() > this.mainCharacter.getMoney()) {
                         this.messageOuput = this.msgNoMoney;
                         break;
                     }
@@ -107,20 +107,20 @@ public class ShopImpl implements Shop {
                     this.addSkills(getZeusBolt());
                     break;
                 case HEALTH:
-                    if (this.getHealth().getCost() > this.character.getMoney()) {
+                    if (this.getHealth().getCost() > this.mainCharacter.getMoney()) {
                         messageOuput = msgNoMoney;
                         break;
                     }
-                    if (this.character.getLife() == this.character.getMaxLife()) {
+                    if (this.mainCharacter.getLife() == this.mainCharacter.getMaxLife()) {
                         this.messageOuput = "You have too much life!";
                         break;
                     }
-                    this.character.setMoney(this.character.getMoney() - this.getHealth().getCost());
+                    this.mainCharacter.setMoney(this.mainCharacter.getMoney() - this.getHealth().getCost());
                     this.addSkills(getHealth());
-                    this.messageOuput = this.msgBought + this.character.getMoney();
+                    this.messageOuput = this.msgBought + this.mainCharacter.getMoney();
                     break;
                 case ORACLEAMULET:
-                    if (this.getOracleAmulet().getCost() > this.character.getMoney()) {
+                    if (this.getOracleAmulet().getCost() > this.mainCharacter.getMoney()) {
                         this.messageOuput = this.msgNoMoney;
                         break;
                     }
