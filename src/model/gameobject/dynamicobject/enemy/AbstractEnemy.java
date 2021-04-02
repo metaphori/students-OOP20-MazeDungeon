@@ -10,7 +10,7 @@ import model.gameobject.dynamicobject.AbstractDynamicObject;
 import model.gameobject.simpleobject.Coin;
 
 /**
- * An abstract class for represent the common features to all type of enemies.
+ * An abstract class for represent the common features to all types of enemies.
  * 
  * An AbstractEnemy can manage it's life and it's shoot is timed with delay, 
  * it can also collide correctly with others GameObjects.
@@ -74,8 +74,9 @@ public abstract class AbstractEnemy extends AbstractDynamicObject implements Ene
      * Spawn a new coin in the room. 
      */
     protected void spawnCoin() {
-        this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(new Vector2D(this.getBoundingBox().getWidth() / 2,
-                this.getBoundingBox().getHeight() / 2))));
+        final Vector2D coinOffset = new Vector2D(this.getBoundingBox().getWidth() / 2,
+                                                 this.getBoundingBox().getHeight() / 2);
+        this.getRoom().addSimpleObject(new Coin(this.getPosition().sum(coinOffset)));
     }
 
     /**
