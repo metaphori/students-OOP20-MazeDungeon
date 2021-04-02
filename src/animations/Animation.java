@@ -5,6 +5,10 @@ import java.util.Map;
 
 import model.common.Point2D;
 
+/**
+ * An Animation permit to have more SpriteIterator, each one associated to a different State.
+ * Permit to return the next Sprite according to the last state set. 
+ */
 public class Animation {
 
     private final Map<State, SpriteIterator> animations = new HashMap<>();

@@ -2,11 +2,20 @@ package animations;
 
 import java.awt.Image;
 
+/**
+ * represent an image with an height and a width.
+ */
 public class Sprite {
     private final Image img;
     private final int width;
     private final int height;
 
+    /**
+     * 
+     * @param img : Image of the Sprite
+     * @param width : width of the Sprite
+     * @param height : height of the Sprite
+     */
     public Sprite(final Image img, final int width, final int height) {
         this.img = img;
         this.width = width;
@@ -14,8 +23,7 @@ public class Sprite {
     }
 
     /**
-     * 
-     * @return image
+     * @return the image linked at the sprite
      */
     public Image getImg() {
         return img;
@@ -31,7 +39,7 @@ public class Sprite {
 
     /**
      * 
-     * @return heigth of the image
+     * @return height of the image
      */
     public int getHeight() {
         return height;

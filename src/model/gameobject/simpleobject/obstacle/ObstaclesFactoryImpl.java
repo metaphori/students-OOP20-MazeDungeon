@@ -12,7 +12,6 @@ import model.common.Vector2D;
 import model.gameobject.GameObject;
 import model.gameobject.simpleobject.AbstractSimpleObject;
 import model.gameobject.simpleobject.SimpleObject;
-import model.gameobject.simpleobject.obstacle.Wall.WallType;
 import model.room.Rooms;
 
 /**

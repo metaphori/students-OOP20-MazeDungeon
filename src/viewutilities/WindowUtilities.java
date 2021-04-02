@@ -6,6 +6,9 @@ import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 
+/**
+ * WindowUtilities provides information about the Window.
+ */
 public class WindowUtilities {
 
     /**

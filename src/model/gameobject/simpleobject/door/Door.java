@@ -6,14 +6,22 @@ import model.common.Point2D;
 import model.gameobject.GameObject;
 import model.gameobject.simpleobject.AbstractSimpleObject;
 
+/**
+ * the door permit to the character to move between rooms.
+ */
 public class Door extends AbstractSimpleObject {
 
+    /**
+     * @param position : position of the new Door
+     * @param gameObjectType : type of gameObject
+     */
     public Door(final Point2D position, final GameObjectType gameObjectType) {
         super(position, gameObjectType);
     }
 
     /**
-     * it doesn't interact with anything at the moment.
+     * when a door collide with the character and the door is open, 
+     * the new room is loaded. In other cases nothing happens.
      */
     @Override
     public void collideWith(final GameObject obj2) {

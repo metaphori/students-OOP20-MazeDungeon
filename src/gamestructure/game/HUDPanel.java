@@ -17,10 +17,22 @@ import javax.swing.JProgressBar;
 import model.shop.Items;
 import viewutilities.ResizableRectangle;
 
+/**
+ * an HUD panel permit to show information about the game on the frame.
+ * In particular shows the life of the character, the amount of coins collected, 
+ * the owned items, the number of visited rooms and the life bar of the boss if there is
+ * the boss in the room.
+ */
 public class HUDPanel extends JLayeredPane {
 
     private static final long serialVersionUID = 1L;
     private static final int MARGIN = 10;
+    private static final int ROOM_VISITED_FONT_SIZE = 20;
+    private static final int COIN_COUNTER_FONT_SIZE = 25;
+    private static final Color CHAR_LIFEBAR_FOREGROUND = new Color(150, 0, 0);
+    private static final Color BOSS_LIFEBAR_FOREGROUND = new Color(167, 142, 13);
+
+    //creating rectangles, one for each HUD element
     private final ResizableRectangle coinPosition = new ResizableRectangle(MARGIN, 50, 50, 50);
     private final ResizableRectangle coinCounterPosition = new ResizableRectangle((int) coinPosition.getX() + (int) coinPosition.getWidth(), 
                                                                                   (int) coinPosition.getY(), 50, 50);
@@ -33,10 +45,8 @@ public class HUDPanel extends JLayeredPane {
                                                                             64, 64);
     private final ResizableRectangle bossLifeBarPosition = new ResizableRectangle(360, MARGIN, 500, 30);
     private final ResizableRectangle bossIconPosition = new ResizableRectangle(290, 0, 74, 49);
-    private static final int ROOM_VISITED_FONT_SIZE = 20;
-    private static final int COIN_COUNTER_FONT_SIZE = 25;
-    private static final Color CHAR_LIFEBAR_FOREGROUND = new Color(150, 0, 0);
-    private static final Color BOSS_LIFEBAR_FOREGROUND = new Color(167, 142, 13);
+
+    //HUD elements
     private final JLabel lblCoinCounter = new JLabel();
     private final JLabel lblRoomVisited;
     private final Image coinImage;
@@ -45,9 +55,12 @@ public class HUDPanel extends JLayeredPane {
     private JProgressBar characterLifeBar;
     private Optional<JProgressBar> bossLifeBar = Optional.empty();
     private boolean finalArtefactVisible;
-
     private final List<Image> items = new LinkedList<>();
 
+    /**
+     * 
+     * @param screenRatio : the ratio between the screen width and the native width
+     */
     HUDPanel(final double screenRatio) {
         coinPosition.mul(screenRatio);
         coinCounterPosition.mul(screenRatio);
@@ -83,7 +96,7 @@ public class HUDPanel extends JLayeredPane {
 
     /**
      * 
-     * @param maxLife
+     * @param maxLife : the max life of the character
      */
     public void initialize(final double maxLife) {
         characterLifeBar = new JProgressBar(0, (int) maxLife);
@@ -94,7 +107,7 @@ public class HUDPanel extends JLayeredPane {
 
     /**
      * 
-     * @param life
+     * @param life : the life of the boss if there is.
      */
     public void updateBossLife(final Optional<Double> life) {
         if (life.isEmpty() && bossLifeBar.isEmpty()) {
@@ -116,22 +129,23 @@ public class HUDPanel extends JLayeredPane {
 
     /**
      * 
-     * @param coins
+     * @param coins : the actual amount of coins
      */
     public void updateCoinCounter(final int coins) {
         this.lblCoinCounter.setText(coins + "$");
     }
 
     /**
-     * @param life
+     * @param life : the actual life of the character
      */
     public void updateLife(final double life) {
         this.characterLifeBar.setValue((int) (life));
     }
 
     /**
-     * @param nRooms
-     * @param totalRooms
+     * Update the number of visited rooms.
+     * @param nRooms : the number of visited rooms
+     * @param totalRooms : the total number of rooms
      */
     public void updateVisitedRooms(final int nRooms, final int totalRooms) {
         this.lblRoomVisited.setText("Visited Rooms: " + nRooms + "/" + totalRooms);
@@ -141,7 +155,8 @@ public class HUDPanel extends JLayeredPane {
     }
 
     /**
-     * @param item
+     * Add a bought item to the view.
+     * @param item : the new item to add
      */
     public void addItem(final Items item) {
         final ImageIcon tmpImage;
