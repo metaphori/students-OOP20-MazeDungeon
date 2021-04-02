@@ -53,7 +53,7 @@ public class GameViewImpl implements GameView, KeyListener {
     private final HUDPanel hudPanel = new HUDPanel(windowUtilities.getScreenRatio());
     private boolean gameOver;
     private boolean won;
-    private static final int ISTRUCTION_TIME = 2000;
+    private static final int ISTRUCTION_TIME = 5000;
     private boolean loading = true;
 
     /**
