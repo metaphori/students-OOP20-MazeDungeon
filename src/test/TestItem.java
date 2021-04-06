@@ -7,8 +7,10 @@ import model.common.GameObjectType;
 import model.common.Point2D;
 import model.common.Vector2D;
 import model.common.VectorDirection;
+import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.bullet.Bullet;
 import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
+import model.gameobject.dynamicobject.bullet.BulletImpl;
 import model.gameobject.dynamicobject.maincharacter.MainCharacter;
 import model.gameobject.dynamicobject.maincharacter.MainCharacterImpl;
 import model.room.Room;
@@ -63,7 +65,7 @@ public class TestItem {
         final Shop shop = new ShopImpl(c);
         shop.checkItem(Items.ARTHEMIDEBOW);
         c.update(1000);
-        final Bullet bulletActual = (Bullet) room.getCurrentGameObjects().get(1);
+        final Bullet bulletActual = searchBullet();
         assertEquals(c.getMoney(), this.beforeMoney - item.getCost());
         assertEquals(bulletActual.getDamage(), this.defaultBullet.getDamage() + item.getDamage());
         assertEquals(c.getSpeed(), this.beforeSpeed + item.getSpeed());
@@ -76,7 +78,7 @@ public class TestItem {
         final Shop shop = new ShopImpl(c);
         shop.checkItem(Items.HERMESBOOTS);
         c.update(1000);
-        final Bullet bulletActual = (Bullet) room.getCurrentGameObjects().get(1);
+        final Bullet bulletActual = searchBullet();
         assertEquals(c.getMoney(), this.beforeMoney - item.getCost());
         assertEquals(bulletActual.getDamage(), this.defaultBullet.getDamage() + item.getDamage());
         assertEquals(c.getSpeed(), this.beforeSpeed + item.getSpeed());
@@ -88,7 +90,7 @@ public class TestItem {
         final Shop shop = new ShopImpl(c);
         shop.checkItem(Items.HEALTH);
         c.update(1000);
-        final Bullet bulletActual = (Bullet) room.getCurrentGameObjects().get(1);
+        final Bullet bulletActual = searchBullet();
         assertEquals(c.getMoney(), this.beforeMoney - item.getCost());
         assertEquals(bulletActual.getDamage(), this.defaultBullet.getDamage() + item.getDamage());
         assertEquals(c.getSpeed(), this.beforeSpeed + item.getSpeed());
@@ -100,11 +102,20 @@ public class TestItem {
         final Shop shop = new ShopImpl(c);
         shop.checkItem(Items.ORACLEAMULET);
         c.update(1000);
-        final Bullet bulletActual = (Bullet) room.getCurrentGameObjects().get(1);
+        final Bullet bulletActual = searchBullet();
         assertEquals(c.getMoney(), this.beforeMoney - item.getCost());
         assertEquals(bulletActual.getDamage(), this.defaultBullet.getDamage() + item.getDamage());
         assertEquals(c.getSpeed(), this.beforeSpeed + item.getSpeed());
         assertEquals((int) c.getLife(), (int) (this.beforeHealth + item.getHealth()));
+    }
+
+    private Bullet searchBullet() {
+        for (final GameObject go : room.getCurrentGameObjects()) {
+            if (go.getClass().equals(BulletImpl.class)) {
+                return (Bullet) go;
+            }
+        }
+        return null;
     }
 
 }
