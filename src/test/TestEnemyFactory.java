@@ -43,8 +43,9 @@ public class TestEnemyFactory {
         final Room room = new RoomBuilderImpl(new RoomManagerImpl()).build();
         sprout.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
         room.addDynamicObject(sprout);
+        final int previousGameObjects = room.getCurrentGameObjects().size();
         sprout.tryToShoot();
-        assertFalse(room.getCurrentGameObjects().isEmpty());
+        assertEquals(previousGameObjects + 1, room.getCurrentGameObjects().size());
         sprout.takesDamage(10);
         assertEquals((int) SPROUT_LIFE - 10, (int) sprout.getLife());
         sprout.takesDamage(SPROUT_LIFE);
@@ -63,8 +64,9 @@ public class TestEnemyFactory {
         final Room room = new RoomBuilderImpl(new RoomManagerImpl()).build();
         soul.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
         room.addDynamicObject(soul);
+        final int previousGameObjects = room.getCurrentGameObjects().size();
         soul.tryToShoot();
-        assertFalse(room.getCurrentGameObjects().isEmpty());
+        assertEquals(previousGameObjects + 1, room.getCurrentGameObjects().size());
         soul.takesDamage(10);
         assertEquals((int) SOUL_LIFE - 10, (int) soul.getLife());
         soul.takesDamage(SOUL_LIFE);
@@ -83,8 +85,9 @@ public class TestEnemyFactory {
         final Room room = new RoomBuilderImpl(new RoomManagerImpl()).build();
         skeleton.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
         room.addDynamicObject(skeleton);
+        final int previousGameObjects = room.getCurrentGameObjects().size();
         skeleton.tryToShoot();
-        assertFalse(room.getCurrentGameObjects().isEmpty());
+        assertEquals(previousGameObjects + 4, room.getCurrentGameObjects().size());
         skeleton.takesDamage(10);
         assertEquals((int) SKELETON_LIFE - 10, (int) skeleton.getLife());
         skeleton.takesDamage(SKELETON_LIFE);
