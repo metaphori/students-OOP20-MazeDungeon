@@ -12,7 +12,7 @@ import model.gameobject.dynamicobject.maincharacter.MainCharacter;
 import model.gameobject.dynamicobject.maincharacter.MainCharacterImpl;
 import model.gameobject.simpleobject.Coin;
 import model.room.Room;
-import model.room.RoomImpl;
+import model.room.RoomBuilderImpl;
 import model.room.RoomManagerImpl;
 
 public class TestMainCharacter {
@@ -31,7 +31,7 @@ public class TestMainCharacter {
     @org.junit.Before
     public void initCharacter() {
         this.mainCharacter = new MainCharacterImpl(this.initialPoint, GameObjectType.MAINCHARACTER);
-        this.room = new RoomImpl(new RoomManagerImpl());
+        this.room = new RoomBuilderImpl(new RoomManagerImpl()).build();
         this.room.addDynamicObject(this.mainCharacter);
     }
 

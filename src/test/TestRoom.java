@@ -35,7 +35,7 @@ public class TestRoom {
      */
     @org.junit.Test
     public void testDoors() {
-        room = roomBuilder.addEnemy()
+        room = roomBuilder.addRandomEnemy()
                           .build();
         assertFalse(room.isDoorOpen());
 

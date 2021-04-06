@@ -11,12 +11,23 @@ import model.gameobject.simpleobject.AbstractSimpleObject;
  */
 public class Door extends AbstractSimpleObject {
 
+    private final CardinalPoint cardinalPoint;
+
     /**
      * @param position : position of the new Door
      * @param gameObjectType : type of gameObject
+     * @param cardinalPoint : the cardinal point of the door
      */
-    public Door(final Point2D position, final GameObjectType gameObjectType) {
+    public Door(final Point2D position, final GameObjectType gameObjectType, final CardinalPoint cardinalPoint) {
         super(position, gameObjectType);
+        this.cardinalPoint = cardinalPoint;
+    }
+
+    /**
+     * @return the cardinal point of the door
+     */
+    public CardinalPoint getCardinalPoint() {
+        return this.cardinalPoint;
     }
 
     /**

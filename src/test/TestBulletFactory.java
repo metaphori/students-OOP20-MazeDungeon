@@ -8,7 +8,7 @@ import model.gameobject.dynamicobject.bullet.Bullet;
 import model.gameobject.dynamicobject.bullet.BulletFactory;
 import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
 import model.room.Room;
-import model.room.RoomImpl;
+import model.room.RoomBuilderImpl;
 import model.room.RoomManagerImpl;
 import model.common.BoundingBox;
 import model.common.GameObjectType;
@@ -64,7 +64,7 @@ public class TestBulletFactory {
         final BoundingBox bb = new BoundingBox(new Point2D(0, 0), 0, 0);
         bullet.setBoundingBox(bb);
         assertEquals(bb, bullet.getBoundingBox());
-        final Room room = new RoomImpl(new RoomManagerImpl());
+        final Room room = new RoomBuilderImpl(new RoomManagerImpl()).build();
         room.addDynamicObject(bullet);
         bullet.setRoom(room);
         assertFalse(room.getCurrentGameObjects().isEmpty());
@@ -89,7 +89,7 @@ public class TestBulletFactory {
         final BoundingBox bb = new BoundingBox(new Point2D(0, 0), 0, 0);
         bullet.setBoundingBox(bb);
         assertEquals(bb, bullet.getBoundingBox());
-        final Room room = new RoomImpl(new RoomManagerImpl());
+        final Room room = new RoomBuilderImpl(new RoomManagerImpl()).build();
         room.addDynamicObject(bullet);
         bullet.setRoom(room); //inserisco il bullet nella stanza 
         assertFalse(room.getCurrentGameObjects().isEmpty());
@@ -113,7 +113,7 @@ public class TestBulletFactory {
         final BoundingBox bb = new BoundingBox(new Point2D(0, 0), 0, 0);
         bullet.setBoundingBox(bb);
         assertEquals(bb, bullet.getBoundingBox());
-        final Room room = new RoomImpl(new RoomManagerImpl());
+        final Room room = new RoomBuilderImpl(new RoomManagerImpl()).build();
         room.addDynamicObject(bullet);
         bullet.setRoom(room); //inserisco il bullet nella stanza 
         assertFalse(room.getCurrentGameObjects().isEmpty());
@@ -137,7 +137,7 @@ public class TestBulletFactory {
         final BoundingBox bb = new BoundingBox(new Point2D(0, 0), 0, 0);
         bullet.setBoundingBox(bb);
         assertEquals(bb, bullet.getBoundingBox());
-        final Room room = new RoomImpl(new RoomManagerImpl());
+        final Room room = new RoomBuilderImpl(new RoomManagerImpl()).build();
         room.addDynamicObject(bullet);
         bullet.setRoom(room); //inserisco il bullet nella stanza 
         assertFalse(room.getCurrentGameObjects().isEmpty());
@@ -161,7 +161,7 @@ public class TestBulletFactory {
         final BoundingBox bb = new BoundingBox(new Point2D(0, 0), 0, 0);
         bullet.setBoundingBox(bb);
         assertEquals(bb, bullet.getBoundingBox());
-        final Room room = new RoomImpl(new RoomManagerImpl());
+        final Room room = new RoomBuilderImpl(new RoomManagerImpl()).build();
         room.addDynamicObject(bullet);
         bullet.setRoom(room); //inserisco il bullet nella stanza 
         assertFalse(room.getCurrentGameObjects().isEmpty());

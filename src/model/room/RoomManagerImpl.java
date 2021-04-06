@@ -58,10 +58,10 @@ public class RoomManagerImpl implements RoomManager {
     }
 
     private void initializeSpawnPosition() {
-        characterSpawnPosition.put(CardinalPoint.NORTH, CHARACTER_NORTH_SPAWN_POSITION);
-        characterSpawnPosition.put(CardinalPoint.SOUTH, CHARACTER_SOUTH_SPAWN_POSITION);
-        characterSpawnPosition.put(CardinalPoint.WEST, CHARACTER_WEST_SPAWN_POSITION);
-        characterSpawnPosition.put(CardinalPoint.EAST, CHARACTER_EAST_SPAWN_POSITION);
+        this.characterSpawnPosition.put(CardinalPoint.NORTH, CHARACTER_NORTH_SPAWN_POSITION);
+        this.characterSpawnPosition.put(CardinalPoint.SOUTH, CHARACTER_SOUTH_SPAWN_POSITION);
+        this.characterSpawnPosition.put(CardinalPoint.WEST, CHARACTER_WEST_SPAWN_POSITION);
+        this.characterSpawnPosition.put(CardinalPoint.EAST, CHARACTER_EAST_SPAWN_POSITION);
     }
 
     private Point2D getNearRoomPosition(final Point2D point, final CardinalPoint cardinalPoint) {
@@ -89,26 +89,26 @@ public class RoomManagerImpl implements RoomManager {
 
         for (final Entry<Point2D, Set<CardinalPoint>> entry : map.entrySet()) {
             if (entry.getKey().equals(spawnRoom)) {
-                rooms.put(entry.getKey(), new RoomBuilderImpl(this).addDoors(entry.getValue())
+                this.rooms.put(entry.getKey(), new RoomBuilderImpl(this).addDoors(entry.getValue())
                                                                    .build());
                 continue;
             }
             if (!bossRoom.isEmpty() && entry.getKey().equals(bossRoom.get())) {
-                rooms.put(entry.getKey(), new RoomBuilderImpl(this).addDoors(entry.getValue())
+                this.rooms.put(entry.getKey(), new RoomBuilderImpl(this).addDoors(entry.getValue())
                                                                    .addBoss()
                                                                    .build());
                 continue;
             }
-            final Room room = new RoomBuilderImpl(this).addObstacle()
+            final Room room = new RoomBuilderImpl(this).addRandomObstacle()
                                                        .addDoors(entry.getValue())
-                                                       .addEnemy()
+                                                       .addRandomEnemy()
                                                        .build();
-            rooms.put(entry.getKey(), room);
+            this.rooms.put(entry.getKey(), room);
         }
 
-        actualRoom = rooms.get(new Point2D(0, 0));
-        actualRoom.addDynamicObject(mainCharacter);
-        actualRoom.visit();
+        this.actualRoom = rooms.get(new Point2D(0, 0));
+        this.actualRoom.addDynamicObject(mainCharacter);
+        this.actualRoom.visit();
     }
 
     private Map<Point2D, Set<CardinalPoint>> createGameMap() {
@@ -135,7 +135,7 @@ public class RoomManagerImpl implements RoomManager {
      */
     @Override
     public Room getCurrentRoom() {
-        return actualRoom;
+        return this.actualRoom;
     }
 
     /**
@@ -164,13 +164,13 @@ public class RoomManagerImpl implements RoomManager {
             return;
         }
         if (!newRoom.isVisited()) {
-            exploredRooms++;
+            this.exploredRooms++;
         }
         this.getMainCharacter().setPosition(characterSpawnPosition.get(cp));
         newRoom.addDynamicObject(this.getMainCharacter());
-        actualRoom.clean();
-        actualRoom = newRoom;
-        actualRoom.visit();
+        this.actualRoom.clean();
+        this.actualRoom = newRoom;
+        this.actualRoom.visit();
 
         if (exploredRooms == Rooms.NUMBER_OF_ROOMS) {
             final Room startRoom = this.rooms.get(new Point2D(0, 0));
@@ -193,7 +193,7 @@ public class RoomManagerImpl implements RoomManager {
      */
     @Override
     public int getVisitedRooms() {
-        return exploredRooms;
+        return this.exploredRooms;
     }
 
 }

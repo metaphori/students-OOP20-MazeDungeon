@@ -11,7 +11,9 @@ import model.common.GameObjectType;
 import model.gameobject.GameObject;
 import model.gameobject.dynamicobject.DynamicObject;
 import model.gameobject.dynamicobject.enemy.AbstractEnemy;
+import model.gameobject.dynamicobject.enemy.Enemy;
 import model.gameobject.simpleobject.SimpleObject;
+import model.gameobject.simpleobject.door.Door;
 
 /**
  * The implementation of the Interface Room.
@@ -32,9 +34,28 @@ public class RoomImpl implements Room {
     /**
      * create a new Room giving a RoomManager.
      * @param roomManager : RoomManager of the new Room
+     * @param enemies : 
+     * @param obstacles : 
+     * @param doors : 
      */
-    public RoomImpl(final RoomManager roomManager) {
+    public RoomImpl(final RoomManager roomManager, final List<Enemy> enemies, final List<SimpleObject> obstacles, final List<Door> doors) {
         this.roomManager = roomManager;
+
+        for (final SimpleObject obstacle : obstacles) {
+            this.initGameObject(obstacle);
+            simpleObjects.add(obstacle);
+        }
+
+        for (final Door door : doors) {
+            nearRooms.add(door.getCardinalPoint());
+            this.initGameObject(door);
+            simpleObjects.add(door);
+        }
+
+        for (final Enemy enemy : enemies) {
+            this.initGameObject(enemy);
+            dynamicObjects.add(enemy);
+        }
     }
 
     /**
@@ -54,8 +75,7 @@ public class RoomImpl implements Room {
      */
     @Override
     public void addDynamicObject(final DynamicObject obj) {
-        obj.setRoom(this);
-        obj.setID(this.roomManager.getIdIterator().next());
+        this.initGameObject(obj);
         dynamicObjects.add(obj);
     }
 
@@ -64,9 +84,13 @@ public class RoomImpl implements Room {
      */
     @Override
     public void addSimpleObject(final SimpleObject obj) {
+        this.initGameObject(obj);
+        simpleObjects.add(obj);
+    }
+
+    private void initGameObject(final GameObject obj) {
         obj.setRoom(this);
         obj.setID(this.roomManager.getIdIterator().next());
-        simpleObjects.add(obj);
     }
 
     /**
@@ -115,14 +139,6 @@ public class RoomImpl implements Room {
     @Override
     public RoomManager getRoomManager() {
         return roomManager;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addDoor(final CardinalPoint cardinalPoint) {
-        nearRooms.add(cardinalPoint);
     }
 
     /**

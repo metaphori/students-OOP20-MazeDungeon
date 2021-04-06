@@ -9,7 +9,7 @@ import model.gameobject.dynamicobject.enemy.Enemy;
 import model.gameobject.dynamicobject.enemy.EnemyFactory;
 import model.gameobject.dynamicobject.enemy.EnemyFactoryImpl;
 import model.room.Room;
-import model.room.RoomImpl;
+import model.room.RoomBuilderImpl;
 import model.room.RoomManagerImpl;
 
 /**
@@ -40,7 +40,7 @@ public class TestEnemyFactory {
         assertEquals(sprout.getPosition(), new Point2D(100, 100));
         assertEquals((int) sprout.getLife(), (int) SPROUT_LIFE);
         assertEquals(sprout.getSpeed(), SPROUT_SPEED);
-        final Room room = new RoomImpl(new RoomManagerImpl());
+        final Room room = new RoomBuilderImpl(new RoomManagerImpl()).build();
         sprout.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
         room.addDynamicObject(sprout);
         sprout.tryToShoot();
@@ -60,7 +60,7 @@ public class TestEnemyFactory {
         assertEquals(soul.getPosition(), new Point2D(100, 100));
         assertEquals((int) soul.getLife(), (int) SOUL_LIFE);
         assertEquals(soul.getSpeed(), SOUL_SPEED);
-        final Room room = new RoomImpl(new RoomManagerImpl());
+        final Room room = new RoomBuilderImpl(new RoomManagerImpl()).build();
         soul.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
         room.addDynamicObject(soul);
         soul.tryToShoot();
@@ -80,7 +80,7 @@ public class TestEnemyFactory {
         assertEquals(skeleton.getPosition(), new Point2D(100, 100));
         assertEquals((int) skeleton.getLife(), (int) SKELETON_LIFE);
         assertEquals(skeleton.getSpeed(), SKELETON_SPEED);
-        final Room room = new RoomImpl(new RoomManagerImpl());
+        final Room room = new RoomBuilderImpl(new RoomManagerImpl()).build();
         skeleton.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
         room.addDynamicObject(skeleton);
         skeleton.tryToShoot();

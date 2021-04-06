@@ -20,13 +20,13 @@ public interface RoomBuilder {
      * add some obstacles to the room. obstacle can't be added if boss is already in the Room.
      * @return the builder object
      */
-    RoomBuilder addObstacle();
+    RoomBuilder addRandomObstacle();
 
     /**
      * add some enemy to the room. enemies can't be added if boss is already in the Room.
      * @return the builder object
      */
-    RoomBuilder addEnemy();
+    RoomBuilder addRandomEnemy();
 
     /**
      * add the boss in the room. Boss can't be added if obstacles or enemies are already in the Room.

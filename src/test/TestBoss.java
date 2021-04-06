@@ -9,7 +9,7 @@ import model.gameobject.dynamicobject.enemy.Enemy;
 import model.gameobject.dynamicobject.enemy.EnemyFactory;
 import model.gameobject.dynamicobject.enemy.EnemyFactoryImpl;
 import model.room.Room;
-import model.room.RoomImpl;
+import model.room.RoomBuilderImpl;
 import model.room.RoomManagerImpl;
 
 public class TestBoss {
@@ -28,7 +28,7 @@ public class TestBoss {
         assertEquals(boss.getPosition(), new Point2D(100 - 1, 100));
         assertEquals((int) boss.getLife(), (int) BOSS_LIFE);
         assertEquals(boss.getSpeed(), BOSS_SPEED);
-        final Room room = new RoomImpl(new RoomManagerImpl());
+        final Room room = new RoomBuilderImpl(new RoomManagerImpl()).build();
         boss.setBoundingBox(new BoundingBox(new Point2D(100, 100), 100, 100));
         room.addDynamicObject(boss);
         boss.tryToShoot();

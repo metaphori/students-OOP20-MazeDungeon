@@ -52,12 +52,6 @@ public interface Room {
     RoomManager getRoomManager();
 
     /**
-     * Add a door to the room.
-     * @param cardinalPoint : the CardinalPoint where add the door
-     */
-    void addDoor(CardinalPoint cardinalPoint);
-
-    /**
      * @return true if Doors are open. Doors are open if there are no enemy in the Room
      */
     boolean isDoorOpen();

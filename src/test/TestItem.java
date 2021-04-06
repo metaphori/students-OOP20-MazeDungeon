@@ -12,7 +12,7 @@ import model.gameobject.dynamicobject.bullet.BulletFactoryImpl;
 import model.gameobject.dynamicobject.maincharacter.MainCharacter;
 import model.gameobject.dynamicobject.maincharacter.MainCharacterImpl;
 import model.room.Room;
-import model.room.RoomImpl;
+import model.room.RoomBuilderImpl;
 import model.room.RoomManagerImpl;
 import model.shop.Item;
 import model.shop.ItemBuilder;
@@ -41,7 +41,7 @@ public class TestItem {
     public void newCharacter() {
         final int timeSleep = 400;
         c = new MainCharacterImpl(new Point2D(100, 100), GameObjectType.MAINCHARACTER);
-        room = new RoomImpl(new RoomManagerImpl());
+        room = new RoomBuilderImpl(new RoomManagerImpl()).build();
         room.addDynamicObject(c);
         c.setMoney(10);
         c.setLife(c.getLife() - c.getLife() / 2);

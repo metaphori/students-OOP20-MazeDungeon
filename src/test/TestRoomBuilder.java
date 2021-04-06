@@ -23,26 +23,26 @@ public class TestRoomBuilder {
 
     @org.junit.Test (expected = IllegalStateException.class)
     public void testBossAndObstacle() {
-        roomBuilder.addObstacle()
+        roomBuilder.addRandomObstacle()
                    .addBoss();
     }
 
     @org.junit.Test (expected = IllegalStateException.class)
     public void testBossAndEnemy() {
-        roomBuilder.addEnemy()
+        roomBuilder.addRandomEnemy()
                    .addBoss();
     }
 
     @org.junit.Test (expected = IllegalStateException.class)
     public void testObstacleWithBoss() {
         roomBuilder.addBoss()
-                   .addObstacle();
+                   .addRandomObstacle();
     }
 
     @org.junit.Test (expected = IllegalStateException.class)
     public void testEnemyWithBoss() {
         roomBuilder.addBoss()
-                   .addEnemy();
+                   .addRandomEnemy();
     }
 
     @org.junit.Test (expected = IllegalArgumentException.class)
@@ -58,7 +58,7 @@ public class TestRoomBuilder {
 
     @org.junit.Test (expected = IllegalStateException.class)
     public void testBuildTwice() {
-        roomBuilder.addObstacle();
+        roomBuilder.addRandomObstacle();
         final Room room1 = roomBuilder.build();
         room1.addSimpleObject(new Coin(new Point2D(0, 0)));
         final Room room2 = roomBuilder.build();
