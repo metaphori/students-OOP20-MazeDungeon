@@ -81,7 +81,7 @@ public class ObstaclesFactoryImpl implements ObstacleFactory {
         walls.add(tmp);
         //RIGHT
         tmp = new Wall(new Point2D(Rooms.BR_CORNER.getX(), Rooms.UL_CORNER.getY() - PERSPECTIVE_WALL_OFFSET), CardinalPoint.EAST, WallType.SOLID);
-        tmp.setBoundingBox(new BoundingBox(new Point2D(Rooms.BR_CORNER.getX(), Rooms.UL_CORNER.getY()), WALL_DEPTH, this.height + PERSPECTIVE_WALL_OFFSET));
+        tmp.setBoundingBox(new BoundingBox(new Point2D(Rooms.BR_CORNER.getX(), Rooms.UL_CORNER.getY() - PERSPECTIVE_WALL_OFFSET), WALL_DEPTH, this.height + PERSPECTIVE_WALL_OFFSET));
         walls.add(tmp);
         //BOTTOM
         tmp = new Wall(new Point2D(Rooms.UL_CORNER.getX(), Rooms.BR_CORNER.getY()), CardinalPoint.SOUTH, WallType.SOLID);
@@ -89,7 +89,7 @@ public class ObstaclesFactoryImpl implements ObstacleFactory {
         walls.add(tmp);
         //LEFT
         tmp = new Wall(Rooms.UL_CORNER.sum(new Vector2D(-WALL_DEPTH, -PERSPECTIVE_WALL_OFFSET)), CardinalPoint.WEST, WallType.SOLID);
-        tmp.setBoundingBox(new BoundingBox(Rooms.UL_CORNER.sum(new Vector2D(-WALL_DEPTH, 0)), WALL_DEPTH, this.height + PERSPECTIVE_WALL_OFFSET));
+        tmp.setBoundingBox(new BoundingBox(Rooms.UL_CORNER.sum(new Vector2D(-WALL_DEPTH, -PERSPECTIVE_WALL_OFFSET)), WALL_DEPTH, this.height + PERSPECTIVE_WALL_OFFSET));
         walls.add(tmp);
         //PERSPECTIVE
         tmp = new Wall(Rooms.UL_CORNER.sum(new Vector2D(0, -WALL_DEPTH - PERSPECTIVE_WALL_OFFSET)), CardinalPoint.NORTH, WallType.PERSPECTIVE);
