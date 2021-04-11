@@ -54,6 +54,14 @@ public class CommandImpl implements Command {
      * {@inheritDoc}
      */
     @Override
+    public List<Trio<Integer, Boolean, Optional<VectorDirection>>> getKeysList() {
+        return this.keysList;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void execute() {
         this.keysList.forEach(key -> {
             int keyCode;
@@ -85,9 +93,9 @@ public class CommandImpl implements Command {
      * {@inheritDoc}
      */
     @Override
-    public void setKey(final KeyEvent key, final boolean clicked) {
+    public void setKey(final int key, final boolean clicked) {
         final Optional<Trio<Integer, Boolean, Optional<VectorDirection>>> trio = this.keysList.stream()
-                                                                                              .filter(t -> t.getX() == key.getKeyCode())
+                                                                                              .filter(t -> t.getX() == key)
                                                                                               .findFirst();
         if (trio.isPresent()) {
             trio.get().setY(clicked);

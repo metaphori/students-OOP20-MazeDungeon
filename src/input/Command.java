@@ -1,6 +1,9 @@
 package input;
 
-import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.Optional;
+
+import model.common.VectorDirection;
 
 /**
  * 
@@ -11,10 +14,10 @@ public interface Command {
 
     /**
      * 
-     * @param key : the key pressed.
+     * @param key : the keyCode of key pressed.
      * @param clicked : true if the key is clicked.
      */
-    void setKey(KeyEvent key, boolean clicked);
+    void setKey(int key, boolean clicked);
 
     /**
      * execute the pressed keys.
@@ -25,5 +28,11 @@ public interface Command {
      * set all the command to false (not clicked).
      */
     void setAllInactive();
+
+    /**
+     * 
+     * @return the list of actual clicked keys.
+     */
+    List<Trio<Integer, Boolean, Optional<VectorDirection>>> getKeysList();
 
 }

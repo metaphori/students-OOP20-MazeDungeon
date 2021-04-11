@@ -206,7 +206,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void pressKey(final KeyEvent key) {
-        this.command.setKey(key, true);
+        this.command.setKey(key.getKeyCode(), true);
     }
 
     /**
@@ -214,7 +214,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void releaseKey(final KeyEvent key) {
-        this.command.setKey(key, false);
+        this.command.setKey(key.getKeyCode(), false);
     }
 
     /**

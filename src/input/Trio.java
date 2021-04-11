@@ -52,4 +52,13 @@ public class Trio<X, Y, Z> {
 
     }
 
+    /**
+     * @return the strings that represent the trio
+     */
+    @Override
+    public String toString() {
+        return "Trio [x=" + x + ", y=" + y + ", z=" + z + "]";
+    }
+
+
 }
