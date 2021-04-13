@@ -1,8 +1,8 @@
 package test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,13 +31,14 @@ public class TestCommand {
 
     @org.junit.Test
     public void testCommands() {
-        //Premo il pulsante A 
         final List<Trio<Integer, Boolean, Optional<VectorDirection>>> list = this.command.getKeysList();
-        final Trio<Integer, Boolean, Optional<VectorDirection>> trio;
-        this.command.setKey(KeyEvent.VK_A, true);
-        trio = list.stream().filter(t -> t.getX() == KeyEvent.VK_A).findFirst().get();
-        assertTrue(trio.getY());
+        list.stream().forEach(c -> {
+            this.command.setKey(c.getX(), true);
+            assertTrue(c.getY());
+            this.command.execute();
+            this.command.setKey(c.getX(), false);
+            assertFalse(c.getY());
+        });
     }
-
 }
 
