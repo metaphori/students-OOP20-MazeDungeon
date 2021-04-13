@@ -31,11 +31,10 @@ public class TestCommand {
 
     @org.junit.Test
     public void testCommands() {
-        final List<Trio<Integer, Boolean, Optional<VectorDirection>>> list = this.command.getKeysList();
+       final List<Trio<Integer, Boolean, Optional<VectorDirection>>> list = this.command.getKeysList();
         list.stream().forEach(c -> {
             this.command.setKey(c.getX(), true);
             assertTrue(c.getY());
-            this.command.execute();
             this.command.setKey(c.getX(), false);
             assertFalse(c.getY());
         });
