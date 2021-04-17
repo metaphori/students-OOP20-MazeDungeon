@@ -31,7 +31,7 @@ public class WindowUtilities {
      */
     public static final double HEIGHT_RATIO = 0.740_740;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-    private final double screenRatio = Math.min(screen.getWidth() / NATIVE_WIDTH, screen.getHeight() / NATIVE_HEIGHT);//screen.getWidth() / NATIVE_WIDTH;
+    private final double screenRatio = Math.min(screen.getWidth() / NATIVE_WIDTH, screen.getHeight() / NATIVE_HEIGHT);
 
     /**
      * @return the screen size
